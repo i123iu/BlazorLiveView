@@ -1,0 +1,14 @@
+<Project>
+
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="9.0.9" />
+
+		<PackageVersion Include="Lib.Harmony" Version="2.4.1" />
+		<PackageVersion Include="Scrutor" Version="6.1.0" />
+	</ItemGroup>
+
+</Project>

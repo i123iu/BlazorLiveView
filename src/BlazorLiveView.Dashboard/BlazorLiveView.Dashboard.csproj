@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<AssemblyName>BlazorLiveView.Dashboard</AssemblyName>
+		<RootNamespace>BlazorLiveView.Dashboard</RootNamespace>
+
+		<IsPackable>true</IsPackable>
+		<Authors>Adam Kundrat</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BlazorLiveView.Core\BlazorLiveView.Core.csproj" />
+	</ItemGroup>
+
+</Project>

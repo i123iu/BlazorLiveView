@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<AssemblyName>BlazorLiveView.Core</AssemblyName>
+		<RootNamespace>BlazorLiveView.Core</RootNamespace>
+
+		<IsPackable>true</IsPackable>
+		<Authors>Adam Kundrat</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+
+		<PackageReference Include="Lib.Harmony" />
+		<PackageReference Include="Scrutor" />
+	</ItemGroup>
+
+</Project>

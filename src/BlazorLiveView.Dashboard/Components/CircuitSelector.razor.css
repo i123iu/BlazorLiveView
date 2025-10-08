@@ -1,0 +1,14 @@
+.circuits-grid {
+    border-collapse: collapse;
+}
+
+.selected {
+    background-color: beige;
+}
+
+.circuits-grid,
+.circuits-grid th,
+.circuits-grid td {
+    border: 1px solid #ccc;
+    padding: .2em 1em;
+}

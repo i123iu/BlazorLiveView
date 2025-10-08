@@ -1,0 +1,124 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.Extensions.Options
+
+@implements IDisposable
+@inject ICircuitTracker circuitTracker
+@inject ILiveViewMirrorUriBuilder mirrorUriBuilder
+
+<div class="open-circuits-viewer">
+    <h4>Open circuits: </h4>
+    <table class="circuits-grid">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Location</th>
+                <th>Is Mirror</th>
+                <th>Mirror link</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var circuit in circuitTracker.ListRegularCircuits())
+            {
+                var isSelected = SelectedCircuitId == circuit.Id;
+                <tr class="circuit-row @(isSelected ? "selected" : null)"
+                    @onclick="() => CircuitSelected(circuit.Id)"
+                    style="cursor: pointer;"
+                    aria-selected="@isSelected">
+                    <td>@TruncateId(circuit.Id)</td>
+                    <td>@circuit.Uri</td>
+                    <td>@(circuit is IMirrorCircuit ? "Yes" : "No")</td>
+                    <td>
+                        @if (circuit is not IMirrorCircuit mirrorCircuit)
+                        {
+                            <a href="@(mirrorUriBuilder.GetPathAndQuery(new MirrorUri(circuit.Id)))"
+                               target="_blank">
+                                Open mirror
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    public string? SelectedCircuitId { get; set; }
+
+    [Parameter]
+    public EventCallback<string?> SelectedCircuitIdChanged { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        circuitTracker.CircuitOpenedEvent += OnCircuitOpenedEvent;
+        circuitTracker.CircuitClosedEvent += OnCircuitClosedEvent;
+        foreach (var circuit in circuitTracker.ListRegularCircuits())
+        {
+            circuit.UriChanged += OnAnyCircuitUriChanged;
+        }
+    }
+
+    private void OnCircuitOpenedEvent(TrackedCircuit circuit)
+    {
+        if (!circuit.IsMirror)
+        {
+            var regularCircuit = circuit.RegularCircuit;
+            regularCircuit.UriChanged += OnAnyCircuitUriChanged;
+        }
+        OnAnyCircuitChanged();
+    }
+
+    private void OnCircuitClosedEvent(TrackedCircuit circuit)
+    {
+        if (!circuit.IsMirror)
+        {
+            var regularCircuit = circuit.RegularCircuit;
+            regularCircuit.UriChanged -= OnAnyCircuitUriChanged;
+        }
+        OnAnyCircuitChanged();
+    }
+
+    private void OnAnyCircuitUriChanged(IRegularCircuit circuit)
+    {
+        OnAnyCircuitChanged();
+    }
+
+    private void OnAnyCircuitChanged()
+    {
+        InvokeAsync(async () =>
+        {
+            if (SelectedCircuitId is not null &&
+                circuitTracker.GetCircuit(SelectedCircuitId) is null)
+            {
+                SelectedCircuitId = null;
+                await SelectedCircuitIdChanged.InvokeAsync(SelectedCircuitId);
+            }
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        circuitTracker.CircuitOpenedEvent -= OnCircuitOpenedEvent;
+        circuitTracker.CircuitClosedEvent -= OnCircuitClosedEvent;
+    }
+
+    private async Task CircuitSelected(string circuitId)
+    {
+        SelectedCircuitId = (SelectedCircuitId == circuitId)
+            ? null
+            : circuitId;
+        await SelectedCircuitIdChanged.InvokeAsync(SelectedCircuitId);
+    }
+
+    private static string TruncateId(string? id)
+    {
+        const int maxLength = 16;
+        return string.IsNullOrEmpty(id)
+            ? string.Empty
+            : (id!.Length > maxLength ? id[..maxLength] + "..." : id);
+    }
+}
