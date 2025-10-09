@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace BlazorLiveView.Core.Circuits;
 
-internal sealed class RegularCircuit(
+internal sealed class UserCircuit(
     Circuit circuit
-) : IRegularCircuit
+) : IUserCircuit
 {
-    public event IRegularCircuit.UriChangedHandler? UriChanged;
-    private event IRegularCircuit.ComponentRerenderedHandler? ComponentRerendered;
-    event IRegularCircuit.ComponentRerenderedHandler? IRegularCircuit.ComponentRerendered
+    public event IUserCircuit.UriChangedHandler? UriChanged;
+    private event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
+    event IUserCircuit.ComponentRerenderedHandler? IUserCircuit.ComponentRerendered
     {
         add => ComponentRerendered += value;
         remove => ComponentRerendered -= value;
@@ -26,10 +26,10 @@ internal sealed class RegularCircuit(
         return _circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
     }
 
-    ComponentState? IRegularCircuit.GetComponentState(int componentId)
+    ComponentState? IUserCircuit.GetComponentState(int componentId)
         => GetComponentState(componentId);
 
-    int IRegularCircuit.SsrComponentIdToInteractiveComponentId(int ssrComponentId)
+    int IUserCircuit.SsrComponentIdToInteractiveComponentId(int ssrComponentId)
     {
         var renderer = _circuit.CircuitHost.Renderer;
         var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
@@ -37,7 +37,7 @@ internal sealed class RegularCircuit(
         return webRootComponent.InteractiveComponentId;
     }
 
-    void IRegularCircuit.NotifyComponentRerendered(int componentId)
+    void IUserCircuit.NotifyComponentRerendered(int componentId)
     {
         var componentState = GetComponentState(componentId)
             ?? throw new InvalidOperationException(
@@ -46,7 +46,7 @@ internal sealed class RegularCircuit(
         ComponentRerendered?.Invoke(this, componentId);
     }
 
-    void IRegularCircuit.NotifyUriChanged()
+    void IUserCircuit.NotifyUriChanged()
     {
         UriChanged?.Invoke(this);
     }

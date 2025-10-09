@@ -48,7 +48,7 @@ internal sealed class CircuitHostPatcher : IPatcher
         }
         if (!circuit.IsMirror)
         {
-            circuit.RegularCircuit.NotifyUriChanged();
+            circuit.UserCircuit.NotifyUriChanged();
         }
     }
 }

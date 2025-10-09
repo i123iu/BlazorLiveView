@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var circuit in circuitTracker.ListRegularCircuits())
+            @foreach (var circuit in circuitTracker.ListUserCircuits())
             {
                 var isSelected = SelectedCircuitId == circuit.Id;
                 <tr class="circuit-row @(isSelected ? "selected" : null)"
@@ -55,7 +55,7 @@
         base.OnInitialized();
         circuitTracker.CircuitOpenedEvent += OnCircuitOpenedEvent;
         circuitTracker.CircuitClosedEvent += OnCircuitClosedEvent;
-        foreach (var circuit in circuitTracker.ListRegularCircuits())
+        foreach (var circuit in circuitTracker.ListUserCircuits())
         {
             circuit.UriChanged += OnAnyCircuitUriChanged;
         }
@@ -65,8 +65,8 @@
     {
         if (!circuit.IsMirror)
         {
-            var regularCircuit = circuit.RegularCircuit;
-            regularCircuit.UriChanged += OnAnyCircuitUriChanged;
+            var userCircuit = circuit.UserCircuit;
+            userCircuit.UriChanged += OnAnyCircuitUriChanged;
         }
         OnAnyCircuitChanged();
     }
@@ -75,13 +75,13 @@
     {
         if (!circuit.IsMirror)
         {
-            var regularCircuit = circuit.RegularCircuit;
-            regularCircuit.UriChanged -= OnAnyCircuitUriChanged;
+            var userCircuit = circuit.UserCircuit;
+            userCircuit.UriChanged -= OnAnyCircuitUriChanged;
         }
         OnAnyCircuitChanged();
     }
 
-    private void OnAnyCircuitUriChanged(IRegularCircuit circuit)
+    private void OnAnyCircuitUriChanged(IUserCircuit circuit)
     {
         OnAnyCircuitChanged();
     }

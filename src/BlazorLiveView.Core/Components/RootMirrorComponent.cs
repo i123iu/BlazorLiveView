@@ -11,14 +11,14 @@ internal sealed class RootMirrorComponent : IComponent
 {
     private RenderHandle _renderHandle;
 
-    private IRegularCircuit _source = null!;
+    private IUserCircuit _source = null!;
     private int _ssrComponentId = 0;
 
     /// <summary>
     /// Initializes the parameters manually. 
     /// These parameters act as usual Blazor parameters. 
     /// </summary>
-    internal void Initialize(IRegularCircuit source, int ssrComponentId)
+    internal void Initialize(IUserCircuit source, int ssrComponentId)
     {
         _source = source;
         _ssrComponentId = ssrComponentId;

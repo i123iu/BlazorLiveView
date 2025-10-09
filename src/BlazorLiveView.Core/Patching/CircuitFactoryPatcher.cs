@@ -10,6 +10,12 @@ using System.Reflection;
 
 namespace BlazorLiveView.Core.Patching;
 
+/// <summary>
+/// This patcher is responsible for mirror circuit creation. To identify
+/// mirror circuits from user circuits, their request endpoint is set to
+/// the mirror endpoint and here it is fixed (overwritten/changed to the
+/// source circuit's endpoint).
+/// </summary>
 internal sealed class CircuitFactoryPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
@@ -46,6 +52,12 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         );
     }
 
+    private struct State
+    {
+        public bool isMirror;
+        public IUserCircuit? sourceCircuit;
+    }
+
     private static void CreateCircuitHostAsync_Prefix(
         string baseUri,
         ref string uri,
@@ -76,7 +88,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
         if (!_mirrorUriBuilder.TryParse(new Uri(uri), out var parsedUri))
         {
-            // Invalid path should have triggered an error in the endpoint controller
+            // Invalid path should have triggered an error in the mirror endpoint controller
             _logger.LogError("Failed to parse mirror URI: {Uri}", uri);
             return;
         }
@@ -84,6 +96,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         var sourceCircuit = _circuitTracker.GetCircuit(parsedUri.sourceCircuitId);
         if (sourceCircuit is null)
         {
+            // This should have been caught in the mirror endpoint controller
             _logger.LogWarning("No circuit found with ID: {CircuitId}",
                 parsedUri.sourceCircuitId);
             return;
@@ -96,15 +109,15 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             return;
         }
 
-        var sourceRegularCircuit = sourceCircuit.RegularCircuit;
+        var sourceUserCircuit = sourceCircuit.UserCircuit;
 
         // "Redirect" the mirror to the source's URI
-        uri = sourceRegularCircuit.Uri;
+        uri = sourceUserCircuit.Uri;
 
         __state = new State
         {
             isMirror = true,
-            sourceCircuit = sourceRegularCircuit
+            sourceCircuit = sourceUserCircuit
         };
     }
 
@@ -166,11 +179,5 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             );
             return task.Result!;
         }
-    }
-
-    private struct State
-    {
-        public bool isMirror;
-        public IRegularCircuit? sourceCircuit;
     }
 }

@@ -49,7 +49,7 @@ internal sealed class ComponentStatePatcher : IPatcher
         if (circuit is null)
         {
             _logger.LogWarning(
-                "No regular circuit found for RemoteRenderer {RemoteRenderer}.",
+                "No circuit found for RemoteRenderer {RemoteRenderer}.",
                 remoteRendererWrapped
             );
             return;
@@ -61,6 +61,6 @@ internal sealed class ComponentStatePatcher : IPatcher
             return;
         }
 
-        circuit.RegularCircuit.NotifyComponentRerendered(__instance.ComponentId);
+        circuit.UserCircuit.NotifyComponentRerendered(__instance.ComponentId);
     }
 }

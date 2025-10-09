@@ -22,7 +22,7 @@ internal sealed class CircuitTracker(
     /// Circuits that target the mirror endpoint, but are not yet opened. 
     /// Maps mirror's circuit id to the source circuit. 
     /// </summary>
-    private readonly Dictionary<string, IRegularCircuit> _pendingMirrorCircuits = new();
+    private readonly Dictionary<string, IUserCircuit> _pendingMirrorCircuits = new();
 
     public TrackedCircuit? GetCircuit(string circuitId)
     {
@@ -59,18 +59,18 @@ internal sealed class CircuitTracker(
         }
     }
 
-    public IReadOnlyCollection<IRegularCircuit> ListRegularCircuits()
+    public IReadOnlyCollection<IUserCircuit> ListUserCircuits()
     {
         lock (_lock)
         {
             return _circuitsById.Values
                 .Where(c => !c.IsMirror)
-                .Select(c => c.RegularCircuit!)
+                .Select(c => c.UserCircuit!)
                 .ToArray();
         }
     }
 
-    public void MirrorCircuitCreated(Circuit mirrorCircuit, IRegularCircuit sourceCircuit)
+    public void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit)
     {
         lock (_lock)
         {
@@ -104,11 +104,11 @@ internal sealed class CircuitTracker(
             }
             else
             {
-                _logger.LogInformation("Regular circuit opened: {CircuitId}",
+                _logger.LogInformation("User circuit opened: {CircuitId}",
                     circuit.Id);
 
-                RegularCircuit regularCircuit = new(circuit);
-                trackedCircuit = new TrackedCircuit(regularCircuit);
+                UserCircuit userCircuit = new(circuit);
+                trackedCircuit = new TrackedCircuit(userCircuit);
             }
 
             _circuitsById.Add(circuit.Id, trackedCircuit);

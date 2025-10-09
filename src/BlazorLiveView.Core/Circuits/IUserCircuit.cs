@@ -3,14 +3,15 @@
 namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
-/// A connection with a user that is using Blazor normally. 
+/// A connection with a user that is using Blazor 
+/// normally (without <c>BlazorLiveView</c>). 
 /// </summary>
-public interface IRegularCircuit
+public interface IUserCircuit
 {
-    public delegate void UriChangedHandler(IRegularCircuit circuit);
+    public delegate void UriChangedHandler(IUserCircuit circuit);
     event UriChangedHandler? UriChanged;
 
-    internal delegate void ComponentRerenderedHandler(IRegularCircuit circuit, int componentId);
+    internal delegate void ComponentRerenderedHandler(IUserCircuit circuit, int componentId);
     internal event ComponentRerenderedHandler? ComponentRerendered;
 
     string Id { get; }

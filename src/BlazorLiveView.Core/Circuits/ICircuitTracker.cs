@@ -19,9 +19,9 @@ public interface ICircuitTracker
 
     IReadOnlyCollection<TrackedCircuit> ListCircuits();
     IReadOnlyCollection<IMirrorCircuit> ListMirrorCircuits();
-    IReadOnlyCollection<IRegularCircuit> ListRegularCircuits();
+    IReadOnlyCollection<IUserCircuit> ListUserCircuits();
 
-    internal void MirrorCircuitCreated(Circuit mirrorCircuit, IRegularCircuit sourceCircuit);
+    internal void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit);
     internal void CircuitOpened(Circuit circuit);
     internal void CircuitClosed(Circuit circuit);
 }

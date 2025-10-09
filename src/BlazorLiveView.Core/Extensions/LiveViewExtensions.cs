@@ -84,7 +84,7 @@ public static class LiveViewExtensions
             return;
         }
 
-        var circuitUri = circuit.RegularCircuit.Uri;
+        var circuitUri = circuit.UserCircuit.Uri;
         using HttpClient httpClient = new();
         var response = await httpClient.GetAsync(circuitUri);
         var content = await response.Content.ReadAsStringAsync();

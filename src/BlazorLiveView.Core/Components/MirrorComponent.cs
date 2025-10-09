@@ -57,13 +57,13 @@ internal sealed class MirrorComponent(
         {
             throw new ArgumentException($"Cannot mirror a mirror circuit. Circuit ID: '{CircuitId}'.");
         }
-        circuit.RegularCircuit.ComponentRerendered += OriginalComponentRerendered;
+        circuit.UserCircuit.ComponentRerendered += OriginalComponentRerendered;
 
         Render();
         return Task.CompletedTask;
     }
 
-    private void OriginalComponentRerendered(IRegularCircuit circuit, int componentId)
+    private void OriginalComponentRerendered(IUserCircuit circuit, int componentId)
     {
         if (circuit.Id != CircuitId)
         {
@@ -92,7 +92,7 @@ internal sealed class MirrorComponent(
             return;
         }
 
-        var componentState = circuit.RegularCircuit.GetComponentState(ComponentId);
+        var componentState = circuit.UserCircuit.GetComponentState(ComponentId);
         if (componentState is null)
         {
             _renderHandle.Render(builder =>
@@ -140,7 +140,7 @@ internal sealed class MirrorComponent(
         }
         else
         {
-            BuildRegularView(frames, _builder);
+            BuildUserView(frames, _builder);
         }
 
         var view = _builder.ToArray();
@@ -149,7 +149,7 @@ internal sealed class MirrorComponent(
         return view;
     }
 
-    private void BuildRegularView(
+    private void BuildUserView(
         ReadOnlySpan<RenderTreeFrame> frames,
         List<RenderTreeFrame> result
     )
