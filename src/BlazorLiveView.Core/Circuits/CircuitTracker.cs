@@ -15,16 +15,16 @@ internal sealed class CircuitTracker(
     private readonly Lock _lock = new();
     private readonly ILogger<CircuitTracker> _logger = logger;
 
-    private readonly Dictionary<string, TrackedCircuit> _circuitsById = new();
-    private readonly Dictionary<Renderer, TrackedCircuit> _circuitsByRenderer = new();
+    private readonly Dictionary<string, ICircuit> _circuitsById = new();
+    private readonly Dictionary<Renderer, ICircuit> _circuitsByRenderer = new();
 
     /// <summary>
-    /// Circuits that target the mirror endpoint, but are not yet opened. 
-    /// Maps mirror's circuit id to the source circuit. 
+    /// Clients that have sent a HTTP request to the mirror endpoint, but are not yet opened. 
+    /// Maps mirror's id to the source circuit. 
     /// </summary>
     private readonly Dictionary<string, IUserCircuit> _pendingMirrorCircuits = new();
 
-    public TrackedCircuit? GetCircuit(string circuitId)
+    public ICircuit? GetCircuit(string circuitId)
     {
         lock (_lock)
         {
@@ -32,7 +32,7 @@ internal sealed class CircuitTracker(
         }
     }
 
-    TrackedCircuit? ICircuitTracker.GetCircuit(RemoteRendererWrapper remoteRenderer)
+    public ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer)
     {
         lock (_lock)
         {
@@ -40,33 +40,11 @@ internal sealed class CircuitTracker(
         }
     }
 
-    public IReadOnlyCollection<TrackedCircuit> ListCircuits()
+    public IReadOnlyCollection<ICircuit> ListCircuits()
     {
         lock (_lock)
         {
             return _circuitsById.Values.ToArray();
-        }
-    }
-
-    public IReadOnlyCollection<IMirrorCircuit> ListMirrorCircuits()
-    {
-        lock (_lock)
-        {
-            return _circuitsById.Values
-                .Where(c => c.IsMirror)
-                .Select(c => c.MirrorCircuit!)
-                .ToArray();
-        }
-    }
-
-    public IReadOnlyCollection<IUserCircuit> ListUserCircuits()
-    {
-        lock (_lock)
-        {
-            return _circuitsById.Values
-                .Where(c => !c.IsMirror)
-                .Select(c => c.UserCircuit!)
-                .ToArray();
         }
     }
 
@@ -82,63 +60,94 @@ internal sealed class CircuitTracker(
         }
     }
 
-    public void CircuitOpened(Circuit circuit)
+    public void CircuitOpened(Circuit blazorCircuit)
     {
         lock (_lock)
         {
-            if (_circuitsById.ContainsKey(circuit.Id))
+            if (_circuitsById.ContainsKey(blazorCircuit.Id))
             {
                 throw new InvalidOperationException(
-                    $"Circuit with id '{circuit.Id}' is already registered as open."
+                    $"Circuit with id '{blazorCircuit.Id}' is already tracked."
                 );
             }
 
-            TrackedCircuit trackedCircuit;
-            if (_pendingMirrorCircuits.Remove(circuit.Id, out var sourceCircuit))
+            ICircuit circuit;
+            if (_pendingMirrorCircuits.Remove(blazorCircuit.Id, out var sourceCircuit))
             {
                 _logger.LogInformation("Mirror circuit opened: {CircuitId}",
-                    circuit.Id);
+                    blazorCircuit.Id);
 
-                MirrorCircuit mirrorCircuit = new(circuit, sourceCircuit);
-                trackedCircuit = new TrackedCircuit(mirrorCircuit);
+                circuit = new MirrorCircuit(blazorCircuit, sourceCircuit, DateTime.UtcNow);
             }
             else
             {
                 _logger.LogInformation("User circuit opened: {CircuitId}",
-                    circuit.Id);
+                    blazorCircuit.Id);
 
-                UserCircuit userCircuit = new(circuit);
-                trackedCircuit = new TrackedCircuit(userCircuit);
+                circuit = new UserCircuit(blazorCircuit, DateTime.UtcNow);
             }
 
-            _circuitsById.Add(circuit.Id, trackedCircuit);
+            _circuitsById.Add(blazorCircuit.Id, circuit);
 
-            CircuitWrapper circuitWrapped = new(circuit);
+            CircuitWrapper circuitWrapped = new(blazorCircuit);
             Renderer renderer = circuitWrapped.CircuitHost.Renderer.Inner;
-            _circuitsByRenderer.Add(renderer, trackedCircuit);
+            _circuitsByRenderer.Add(renderer, circuit);
 
-            CircuitOpenedEvent?.Invoke(trackedCircuit);
+            CircuitOpenedEvent?.Invoke(circuit);
         }
     }
 
-    public void CircuitClosed(Circuit circuit)
+    public void CircuitUp(Circuit blazorCircuit)
     {
         lock (_lock)
         {
-            if (!_circuitsById.Remove(circuit.Id, out var trackedCircuit))
+            if (!_circuitsById.TryGetValue(blazorCircuit.Id, out var circuit))
             {
                 throw new InvalidOperationException(
-                    $"Circuit with id '{circuit.Id}' is not tracked as open."
+                    $"Circuit with id '{blazorCircuit.Id}' is not tracked or open."
                 );
             }
 
-            _logger.LogInformation("Circuit closed: {CircuitId}", circuit.Id);
+            _logger.LogInformation("Circuit up: {CircuitId}", blazorCircuit.Id);
+            circuit.SetUp();
+        }
+    }
 
-            CircuitWrapper circuitWrapped = new(circuit);
+    public void CircuitDown(Circuit blazorCircuit)
+    {
+        lock (_lock)
+        {
+            if (!_circuitsById.TryGetValue(blazorCircuit.Id, out var circuit))
+            {
+                throw new InvalidOperationException(
+                    $"Circuit with id '{blazorCircuit.Id}' is not tracked."
+                );
+            }
+
+            _logger.LogInformation("Circuit down: {CircuitId}", blazorCircuit.Id);
+            circuit.SetDown();
+        }
+    }
+
+    public void CircuitClosed(Circuit blazorCircuit)
+    {
+        lock (_lock)
+        {
+            if (!_circuitsById.Remove(blazorCircuit.Id, out var circuit))
+            {
+                throw new InvalidOperationException(
+                    $"Circuit with id '{blazorCircuit.Id}' is not tracked or open."
+                );
+            }
+
+            _logger.LogInformation("Circuit closed: {CircuitId}", blazorCircuit.Id);
+            circuit.SetClosed();
+
+            CircuitWrapper circuitWrapped = new(blazorCircuit);
             Renderer renderer = circuitWrapped.CircuitHost.Renderer.Inner;
             _circuitsByRenderer.Remove(renderer);
 
-            CircuitClosedEvent?.Invoke(trackedCircuit);
+            CircuitClosedEvent?.Invoke(circuit);
         }
     }
 }

@@ -4,24 +4,43 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
-/// Tracks all active circuits (SignalR connections) with users (their browser tabs). 
+/// Tracks all active SignalR connections with clients (their browser tabs).
 /// </summary>
-public interface ICircuitTracker
+internal interface ICircuitTracker
 {
-    public delegate void CircuitOpenedHandler(TrackedCircuit circuit);
-    public delegate void CircuitClosedHandler(TrackedCircuit circuit);
+    public delegate void CircuitOpenedHandler(ICircuit circuit);
+    public delegate void CircuitClosedHandler(ICircuit circuit);
 
     event CircuitOpenedHandler? CircuitOpenedEvent;
     event CircuitClosedHandler? CircuitClosedEvent;
 
-    TrackedCircuit? GetCircuit(string circuitId);
-    internal TrackedCircuit? GetCircuit(RemoteRendererWrapper remoteRenderer);
+    ICircuit? GetCircuit(string id);
+    ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer);
 
-    IReadOnlyCollection<TrackedCircuit> ListCircuits();
-    IReadOnlyCollection<IMirrorCircuit> ListMirrorCircuits();
-    IReadOnlyCollection<IUserCircuit> ListUserCircuits();
+    IReadOnlyCollection<ICircuit> ListCircuits();
 
-    internal void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit);
-    internal void CircuitOpened(Circuit circuit);
-    internal void CircuitClosed(Circuit circuit);
+    /// <summary>
+    /// Called when a mirror circuit's constructor was called.
+    /// </summary>
+    void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit);
+
+    /// <summary>
+    /// Called when any circuit's SignalR connection was initialized.
+    /// </summary>
+    void CircuitOpened(Circuit circuit);
+
+    /// <summary>
+    /// Called after <see cref="CircuitOpened"/>, or after reconnecting. 
+    /// </summary>
+    void CircuitUp(Circuit circuit);
+
+    /// <summary>
+    /// Called when a circuit's SignalR connection was lost (could still be reconnected.
+    /// </summary>
+    void CircuitDown(Circuit circuit);
+
+    /// <summary>
+    /// Called when a circuit's SignalR connection was closed.
+    /// </summary>
+    void CircuitClosed(Circuit circuit);
 }

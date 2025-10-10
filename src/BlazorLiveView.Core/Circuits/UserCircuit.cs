@@ -1,43 +1,32 @@
-﻿using BlazorLiveView.Core.Reflection.Wrappers;
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace BlazorLiveView.Core.Circuits;
 
 internal sealed class UserCircuit(
-    Circuit circuit
-) : IUserCircuit
+    Circuit circuit,
+    DateTime openedAt
+) : CircuitBase(circuit, openedAt), IUserCircuit
 {
     public event IUserCircuit.UriChangedHandler? UriChanged;
-    private event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
-    event IUserCircuit.ComponentRerenderedHandler? IUserCircuit.ComponentRerendered
+    public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
+
+    public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
+
+    public ComponentState? GetComponentState(int componentId)
     {
-        add => ComponentRerendered += value;
-        remove => ComponentRerendered -= value;
+        return Circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
     }
 
-    private readonly CircuitWrapper _circuit = new(circuit);
-
-    public string Id => _circuit.Inner.Id;
-    public string Uri => _circuit.CircuitHost.NavigationManager.Inner.Uri;
-
-    internal ComponentState? GetComponentState(int componentId)
+    public int SsrComponentIdToInteractiveComponentId(int ssrComponentId)
     {
-        return _circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
-    }
-
-    ComponentState? IUserCircuit.GetComponentState(int componentId)
-        => GetComponentState(componentId);
-
-    int IUserCircuit.SsrComponentIdToInteractiveComponentId(int ssrComponentId)
-    {
-        var renderer = _circuit.CircuitHost.Renderer;
+        var renderer = Circuit.CircuitHost.Renderer;
         var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
         var webRootComponent = webRootComponentManager.GetRequiredWebRootComponent(ssrComponentId);
         return webRootComponent.InteractiveComponentId;
     }
 
-    void IUserCircuit.NotifyComponentRerendered(int componentId)
+    public void NotifyComponentRerendered(int componentId)
     {
         var componentState = GetComponentState(componentId)
             ?? throw new InvalidOperationException(
@@ -46,7 +35,7 @@ internal sealed class UserCircuit(
         ComponentRerendered?.Invoke(this, componentId);
     }
 
-    void IUserCircuit.NotifyUriChanged()
+    public void NotifyUriChanged()
     {
         UriChanged?.Invoke(this);
     }

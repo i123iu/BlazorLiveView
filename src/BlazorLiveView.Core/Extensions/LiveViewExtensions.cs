@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits;
+using BlazorLiveView.Core.Connections;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Patching;
 using BlazorLiveView.Core.RenderTree;
@@ -27,6 +28,7 @@ public static class LiveViewExtensions
         builder.Services.Configure(configureOptions);
 
         builder.Services.AddSingleton<ICircuitTracker, CircuitTracker>();
+        builder.Services.AddSingleton<IConnectionTracker, ConnectionTracker>();
         builder.Services.AddSingleton<CircuitHandler, LiveViewCircuitHandler>();
         builder.Services.AddSingleton<IRenderTreeMirrorTranslatorFactory, RenderTreeMirrorTranslatorFactory>();
         builder.Services.AddSingleton<ILiveViewMirrorUriBuilder, LiveViewMirrorUriBuilder>();
@@ -77,14 +79,14 @@ public static class LiveViewExtensions
             return;
         }
 
-        if (circuit.IsMirror)
+        if (circuit is not IUserCircuit userCircuit)
         {
             context.Response.StatusCode = 400;
             await context.Response.WriteAsync($"Cannot mirror a mirror circuit. ");
             return;
         }
 
-        var circuitUri = circuit.UserCircuit.Uri;
+        var circuitUri = userCircuit.Uri;
         using HttpClient httpClient = new();
         var response = await httpClient.GetAsync(circuitUri);
         var content = await response.Content.ReadAsStringAsync();

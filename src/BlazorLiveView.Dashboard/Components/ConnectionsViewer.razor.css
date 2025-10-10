@@ -1,0 +1,10 @@
+.connections-table {
+    border-collapse: collapse;
+}
+
+.connections-table,
+.connections-table th,
+.connections-table td {
+    border: 1px solid #ccc;
+    padding: .2em 1em;
+}

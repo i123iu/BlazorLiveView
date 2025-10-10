@@ -55,12 +55,12 @@ internal sealed class ComponentStatePatcher : IPatcher
             return;
         }
 
-        if (circuit.IsMirror)
+        if (circuit is not IUserCircuit userCircuit)
         {
             // Mirrors cannot be mirrored again. 
             return;
         }
 
-        circuit.UserCircuit.NotifyComponentRerendered(__instance.ComponentId);
+        userCircuit.NotifyComponentRerendered(__instance.ComponentId);
     }
 }

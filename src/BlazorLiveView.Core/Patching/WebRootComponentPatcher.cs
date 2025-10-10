@@ -54,12 +54,10 @@ internal sealed class WebRootComponentPatcher : IPatcher
             return;
         }
 
-        if (!circuit.IsMirror)
+        if (circuit is not IMirrorCircuit mirrorCircuit)
         {
             return;
         }
-
-        var mirrorCircuit = circuit.MirrorCircuit;
 
         _logger.LogInformation("Overwriting root component {OriginalRootComponentType}" +
             $" to {nameof(RootMirrorComponent)} for MirrorCircuit {{CircuitId}}",

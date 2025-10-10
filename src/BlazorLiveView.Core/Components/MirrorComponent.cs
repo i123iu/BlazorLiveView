@@ -53,11 +53,11 @@ internal sealed class MirrorComponent(
 
         var circuit = _circuitTracker.GetCircuit(CircuitId)
             ?? throw new ArgumentException($"Circuit with ID '{CircuitId}' not found.");
-        if (circuit.IsMirror)
+        if (circuit is not IUserCircuit userCircuit)
         {
             throw new ArgumentException($"Cannot mirror a mirror circuit. Circuit ID: '{CircuitId}'.");
         }
-        circuit.UserCircuit.ComponentRerendered += OriginalComponentRerendered;
+        userCircuit.ComponentRerendered += OriginalComponentRerendered;
 
         Render();
         return Task.CompletedTask;
@@ -83,6 +83,10 @@ internal sealed class MirrorComponent(
         var circuit = _circuitTracker.GetCircuit(CircuitId);
         if (circuit is null)
         {
+            _logger.LogWarning(
+                "Circuit with ID '{CircuitId}' not found.",
+                CircuitId
+            );
             _renderHandle.Render(builder =>
             {
                 builder.OpenElement(0, "span");
@@ -92,9 +96,29 @@ internal sealed class MirrorComponent(
             return;
         }
 
-        var componentState = circuit.UserCircuit.GetComponentState(ComponentId);
+        if (circuit is not IUserCircuit userCircuit)
+        {
+            _logger.LogWarning(
+                "Circuit with ID '{CircuitId}' is not a user circuit.",
+                CircuitId
+            );
+            _renderHandle.Render(builder =>
+            {
+                builder.OpenElement(0, "span");
+                builder.AddContent(1, $"Not user circuit");
+                builder.CloseElement();
+            });
+            return;
+        }
+
+        var componentState = userCircuit.GetComponentState(ComponentId);
         if (componentState is null)
         {
+            _logger.LogWarning(
+                "Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
+                ComponentId,
+                CircuitId
+            );
             _renderHandle.Render(builder =>
             {
                 builder.OpenElement(0, "span");

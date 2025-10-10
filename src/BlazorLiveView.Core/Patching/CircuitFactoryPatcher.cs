@@ -102,14 +102,12 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             return;
         }
 
-        if (sourceCircuit.IsMirror)
+        if (sourceCircuit is not IUserCircuit sourceUserCircuit)
         {
             _logger.LogWarning("Cannot mirror a mirror circuit. Circuit ID: {CircuitId}",
                 parsedUri.sourceCircuitId);
             return;
         }
-
-        var sourceUserCircuit = sourceCircuit.UserCircuit;
 
         // "Redirect" the mirror to the source's URI
         uri = sourceUserCircuit.Uri;
