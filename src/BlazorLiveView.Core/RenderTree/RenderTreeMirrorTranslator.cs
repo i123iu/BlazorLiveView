@@ -1,20 +1,17 @@
 ﻿using BlazorLiveView.Core.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.RenderTree;
 
 internal sealed class RenderTreeMirrorTranslator(
     List<RenderTreeFrame> result,
-    string circuitId,
-    ILogger<RenderTreeMirrorTranslator> logger
+    string circuitId
 ) : IRenderTreeMirrorTranslator
 {
-    private const int SEQ_MUL = 10;
+    internal const int SEQ_MUL = 10;
 
     private readonly List<RenderTreeFrame> _result = result;
     private readonly string _circuitId = circuitId;
-    private readonly ILogger<RenderTreeMirrorTranslator> _logger = logger;
 
     public void TranslateAll(
         ReadOnlySpan<RenderTreeFrame> frames

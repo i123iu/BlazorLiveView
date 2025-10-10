@@ -16,7 +16,7 @@ internal sealed class LiveViewCircuitHandler(
     }
 
     public override Task OnConnectionUpAsync(
-        Circuit circuit, 
+        Circuit circuit,
         CancellationToken cancellationToken
     )
     {
@@ -25,7 +25,7 @@ internal sealed class LiveViewCircuitHandler(
     }
 
     public override Task OnConnectionDownAsync(
-        Circuit circuit, 
+        Circuit circuit,
         CancellationToken cancellationToken
     )
     {

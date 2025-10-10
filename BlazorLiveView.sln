@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiveView.Core.Tests", "tests\BlazorLiveView.Core.Tests\BlazorLiveView.Core.Tests.csproj", "{88A5D6A2-D4EB-4E8D-9314-77F6FB24324F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{EF4FB3D6-A7FA-4274-8101-AEB78BFD5C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF4FB3D6-A7FA-4274-8101-AEB78BFD5C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF4FB3D6-A7FA-4274-8101-AEB78BFD5C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A5D6A2-D4EB-4E8D-9314-77F6FB24324F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A5D6A2-D4EB-4E8D-9314-77F6FB24324F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A5D6A2-D4EB-4E8D-9314-77F6FB24324F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A5D6A2-D4EB-4E8D-9314-77F6FB24324F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
