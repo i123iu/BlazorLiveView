@@ -104,6 +104,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
         if (sourceCircuit is not IUserCircuit sourceUserCircuit)
         {
+            // Also should have been caught in the mirror endpoint controller
             _logger.LogWarning("Cannot mirror a mirror circuit. Circuit ID: {CircuitId}",
                 parsedUri.sourceCircuitId);
             return;
@@ -138,7 +139,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
     }
 
     private static void CreateCircuitHostAsync_Postfix(
-        object __result,
+        ref object __result,
         string uri,
         State __state
     )
@@ -148,10 +149,18 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             return;
         }
 
+        // The original `CreateCircuitHostAsync` method is async and returns
+        // a Task<CircuitHost>. We need to intercept the `CircuitHost` before it
+        // is returned and the connection is initialized. CircuitHost is an
+        // internal type so we need to use reflection.
+
         ValueTaskOfCircuitHostWrapper valueTask = new(__result);
         var task = valueTask.AsTask();
         var continuationDelegate = CreateDelegate(__state);
-        task.ContinueWith(continuationDelegate);
+
+        var newTask = task.ContinueWith(continuationDelegate);
+        var newValueTask = ValueTaskOfCircuitHostWrapper.Constructor(newTask)!;
+        __result = newValueTask.Inner;
     }
 
     private static Delegate CreateDelegate(State state)

@@ -38,8 +38,9 @@ internal class TaskOfCircuitHostWrapper
         Types.AssertIsInstanceOfType(WrappedType, wrapped);
     }
 
-    public Task ContinueWith(Delegate continuationDelegate)
+    public TaskOfCircuitHostWrapper ContinueWith(Delegate continuationDelegate)
     {
-        return (Task)_continueWith.Invoke(Inner, new[] { continuationDelegate })!;
+        object task = _continueWith.Invoke(Inner, new[] { continuationDelegate })!;
+        return new(task);
     }
 }

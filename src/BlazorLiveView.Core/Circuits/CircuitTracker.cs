@@ -52,6 +52,14 @@ internal sealed class CircuitTracker(
     {
         lock (_lock)
         {
+            if (_circuitsById.ContainsKey(mirrorCircuit.Id) ||
+                _pendingMirrorCircuits.ContainsKey(mirrorCircuit.Id))
+            {
+                throw new InvalidOperationException(
+                    $"Circuit with id '{mirrorCircuit.Id}' is already tracked."
+                );
+            }
+
             _logger.LogInformation(
                 "Mirror circuit created: {CircuitId}, source: {SourceCircuitId}",
                 mirrorCircuit.Id, sourceCircuit.Id

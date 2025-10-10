@@ -48,10 +48,8 @@ internal sealed class ComponentStatePatcher : IPatcher
 
         if (circuit is null)
         {
-            _logger.LogWarning(
-                "No circuit found for RemoteRenderer {RemoteRenderer}.",
-                remoteRendererWrapped
-            );
+            // This can happen if the circuit has been closed,
+            // but the component has not been disposed yet.
             return;
         }
 

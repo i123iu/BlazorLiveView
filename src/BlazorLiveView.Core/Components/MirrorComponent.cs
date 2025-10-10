@@ -35,7 +35,6 @@ internal sealed class MirrorComponent(
     public void Attach(RenderHandle renderHandle)
     {
         _renderHandle = renderHandle;
-        Render();
     }
 
     Task IComponent.SetParametersAsync(ParameterView parameters)
@@ -80,51 +79,22 @@ internal sealed class MirrorComponent(
 
     private void Render()
     {
-        var circuit = _circuitTracker.GetCircuit(CircuitId);
-        if (circuit is null)
-        {
-            _logger.LogWarning(
-                "Circuit with ID '{CircuitId}' not found.",
-                CircuitId
-            );
-            _renderHandle.Render(builder =>
-            {
-                builder.OpenElement(0, "span");
-                builder.AddContent(1, $"No circuit");
-                builder.CloseElement();
-            });
-            return;
-        }
+        var circuit = _circuitTracker.GetCircuit(CircuitId)
+            ?? throw new InvalidOperationException($"Circuit with ID '{CircuitId}' not found.");
 
         if (circuit is not IUserCircuit userCircuit)
         {
-            _logger.LogWarning(
-                "Circuit with ID '{CircuitId}' is not a user circuit.",
-                CircuitId
+            throw new InvalidOperationException(
+                $"Cannot mirror a mirror circuit. Circuit ID: '{CircuitId}'."
             );
-            _renderHandle.Render(builder =>
-            {
-                builder.OpenElement(0, "span");
-                builder.AddContent(1, $"Not user circuit");
-                builder.CloseElement();
-            });
-            return;
         }
 
         var componentState = userCircuit.GetComponentState(ComponentId);
         if (componentState is null)
         {
-            _logger.LogWarning(
-                "Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
-                ComponentId,
-                CircuitId
-            );
-            _renderHandle.Render(builder =>
-            {
-                builder.OpenElement(0, "span");
-                builder.AddContent(1, $"No component state");
-                builder.CloseElement();
-            });
+            _logger.LogWarning("Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
+                ComponentId, CircuitId);
+            _renderHandle.Render(builder => { });
             return;
         }
 
@@ -187,7 +157,7 @@ internal sealed class MirrorComponent(
         string log = result.Count == 0
             ? "<empty>"
             : string.Join("\n", result.Select(frame => $"- {frame}"));
-        _logger.LogInformation(
+        _logger.LogTrace(
             "Translated {CircuitId}{ComponentId} to: \n{Frames}",
             CircuitId,
             ComponentId,

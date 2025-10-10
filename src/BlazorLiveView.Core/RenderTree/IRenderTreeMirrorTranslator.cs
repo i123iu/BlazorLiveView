@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components.RenderTree;
+using BlazorLiveView.Core.Components;
 
 namespace BlazorLiveView.Core.RenderTree;
 
 internal interface IRenderTreeMirrorTranslator
 {
     /// <summary>
-    /// Replaces all component frames with <see cref="MirrorComponent"/> frames and adds the necessary parameters.
+    /// Translates the given frames (of an original component) into frames
+    /// for a <see cref="MirrorComponent"/>. 
     /// </summary>
     void TranslateAll(ReadOnlySpan<RenderTreeFrame> frames);
 }

@@ -42,7 +42,7 @@ internal sealed class CircuitHostPatcher : IPatcher
         var circuit = _circuitTracker.GetCircuit(circuitId);
         if (circuit is null)
         {
-            _logger.LogWarning("Circuit {CircuitId} not tracked",
+            _logger.LogError("Circuit {CircuitId} not found",
                 circuitId);
             return;
         }
