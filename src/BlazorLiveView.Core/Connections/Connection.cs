@@ -38,13 +38,13 @@ internal class Connection : IConnection, IDisposable
 
     private void OnCircuitUriChanged(IUserCircuit circuit)
     {
-        if (circuit != _circuit) throw new InvalidOperationException();
+        if (!ReferenceEquals(circuit, _circuit)) throw new InvalidOperationException();
         UriChanged?.Invoke(this);
     }
 
     private void OnCircuitStatusChanged(ICircuit circuit)
     {
-        if (circuit != _circuit) throw new InvalidOperationException();
+        if (!ReferenceEquals(circuit, _circuit)) throw new InvalidOperationException();
         ConnectionStatusChanged?.Invoke(this);
     }
 }

@@ -107,7 +107,7 @@ internal static class RenderTreeFrameBuilder
     /// </summary>
     public static RenderTreeFrame None(int sequence = 0)
     {
-        var frame = _defaultConstructor != null
+        var frame = _defaultConstructor is not null
             ? (RenderTreeFrame)_defaultConstructor.Invoke([])
             : new RenderTreeFrame();
 

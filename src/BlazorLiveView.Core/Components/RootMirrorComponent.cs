@@ -7,12 +7,16 @@ namespace BlazorLiveView.Core.Components;
 /// Root web component for mirror circuits. 
 /// Contains one child <see cref="MirrorComponent"/>. 
 /// </summary>
-internal sealed class RootMirrorComponent : IComponent
+internal sealed class RootMirrorComponent : IComponent, IDisposable
 {
-    private RenderHandle _renderHandle;
+    private struct Parameters
+    {
+        public IUserCircuit source;
+        public int ssrComponentId;
+    }
 
-    private IUserCircuit _source = null!;
-    private int _ssrComponentId = 0;
+    private RenderHandle _renderHandle;
+    private Parameters? _parameters = null;
 
     /// <summary>
     /// Initializes the parameters manually. 
@@ -20,8 +24,29 @@ internal sealed class RootMirrorComponent : IComponent
     /// </summary>
     internal void Initialize(IUserCircuit source, int ssrComponentId)
     {
-        _source = source;
-        _ssrComponentId = ssrComponentId;
+        _parameters = new Parameters
+        {
+            source = source,
+            ssrComponentId = ssrComponentId
+        };
+
+        source.CircuitStatusChanged += OnCircuitStatusChanged;
+    }
+
+    public void Dispose()
+    {
+        if (_parameters is not null)
+        {
+            _parameters.Value.source.CircuitStatusChanged -= OnCircuitStatusChanged;
+            _parameters = null;
+        }
+    }
+
+    private void OnCircuitStatusChanged(ICircuit circuit)
+    {
+        if (_parameters is null) throw new InvalidOperationException();
+        if (!ReferenceEquals(_parameters.Value.source, circuit)) throw new InvalidOperationException();
+        _renderHandle.Dispatcher.InvokeAsync(Render);
     }
 
     public void Attach(RenderHandle renderHandle)
@@ -37,29 +62,51 @@ internal sealed class RootMirrorComponent : IComponent
 
     private void Render()
     {
-        if (!_renderHandle.IsInitialized)
+        if (!_renderHandle.IsInitialized || _parameters is null)
         {
             return;
         }
 
-        if (_source is null)
+        switch (_parameters.Value.source.CircuitStatus)
         {
-            _renderHandle.Render(builder =>
-            {
-                builder.AddContent(0, "-");
-            });
-            return;
+            case CircuitStatus.Open:
+                RenderMessage("Target connection is starting...");
+                break;
+
+            case CircuitStatus.Up:
+                var ssrComponentId = _parameters.Value.ssrComponentId;
+                var sourceComponentId = _parameters.Value.source
+                    .SsrComponentIdToInteractiveComponentId(ssrComponentId);
+                RenderMirrorComponent(_parameters.Value.source.Id, sourceComponentId);
+                break;
+
+            case CircuitStatus.Down:
+                RenderMessage("Target connection is reconnecting...");
+                break;
+
+            case CircuitStatus.Closed:
+                RenderMessage("Target connection is closed.");
+                break;
         }
+    }
 
-        var sourceComponentId = _source.SsrComponentIdToInteractiveComponentId(_ssrComponentId);
-
+    private void RenderMirrorComponent(string sourceId, int sourceComponentId)
+    {
         _renderHandle.Render(builder =>
         {
             builder.OpenComponent<MirrorComponent>(0);
-            builder.AddAttribute(1, nameof(MirrorComponent.CircuitId), _source.Id);
+            builder.AddAttribute(1, nameof(MirrorComponent.CircuitId), sourceId);
             builder.AddAttribute(2, nameof(MirrorComponent.ComponentId), sourceComponentId);
             builder.AddAttribute(3, nameof(MirrorComponent.DebugView), false);
             builder.CloseComponent();
+        });
+    }
+
+    private void RenderMessage(string message)
+    {
+        _renderHandle.Render(builder =>
+        {
+            builder.AddContent(0, message);
         });
     }
 }
