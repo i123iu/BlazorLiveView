@@ -18,7 +18,7 @@ public static class LiveViewExtensions
     /// <summary>
     /// Registers services required for <c>BlazorLiveView</c>. 
     /// </summary>
-    public static WebApplicationBuilder AddLiveView(
+    public static WebApplicationBuilder AddLiveViewBackend(
         this WebApplicationBuilder builder,
         Action<LiveViewOptions>? configureOptions = null
     )

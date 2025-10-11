@@ -1,4 +1,5 @@
 using BlazorLiveView.Core.Extensions;
+using BlazorLiveView.Extensions;
 using BlazorLiveView.Sample.Components;
 
 namespace BlazorLiveView.Sample;
@@ -13,7 +14,7 @@ public class Program
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents();
 
-        builder.AddLiveView();
+        builder.AddLiveViewBackendAndDashboard();
 
         var app = builder.Build();
 
