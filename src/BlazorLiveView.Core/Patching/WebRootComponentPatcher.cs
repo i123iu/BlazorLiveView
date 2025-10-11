@@ -89,10 +89,10 @@ internal sealed class WebRootComponentPatcher : IPatcher
         WebRootComponentWrapper webRootComponent = new(__result);
         var interactiveComponentId = webRootComponent.InteractiveComponentId;
 
-        var component = __state.mirrorCircuit
-            .GetComponentState(interactiveComponentId)
-            .Component;
-        if (component is not RootMirrorComponent rootMirrorComponent)
+        var componentState = __state.mirrorCircuit
+            .GetOptionalComponentState(interactiveComponentId)
+            ?? throw new Exception($"Component with ID '{interactiveComponentId}' not found in circuit '{__state.mirrorCircuit.Id}'.");
+        if (componentState.Component is not RootMirrorComponent rootMirrorComponent)
         {
             throw new Exception($"Component is not {nameof(RootMirrorComponent)}.");
         }

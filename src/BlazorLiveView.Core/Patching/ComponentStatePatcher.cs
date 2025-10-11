@@ -55,7 +55,7 @@ internal sealed class ComponentStatePatcher : IPatcher
 
         if (circuit is not IUserCircuit userCircuit)
         {
-            // Mirrors cannot be mirrored again. 
+            // Mirrors cannot be mirrored again.
             return;
         }
 

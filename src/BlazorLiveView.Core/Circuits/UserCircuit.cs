@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Server.Circuits;
+﻿using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace BlazorLiveView.Core.Circuits;
 
@@ -13,11 +12,6 @@ internal sealed class UserCircuit(
 
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
 
-    public ComponentState? GetComponentState(int componentId)
-    {
-        return Circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
-    }
-
     public int SsrComponentIdToInteractiveComponentId(int ssrComponentId)
     {
         var renderer = Circuit.CircuitHost.Renderer;
@@ -28,7 +22,7 @@ internal sealed class UserCircuit(
 
     public void NotifyComponentRerendered(int componentId)
     {
-        var componentState = GetComponentState(componentId)
+        var componentState = GetOptionalComponentState(componentId)
             ?? throw new InvalidOperationException(
                 $"Component with ID '{componentId}' not found in circuit '{Id}'."
             );

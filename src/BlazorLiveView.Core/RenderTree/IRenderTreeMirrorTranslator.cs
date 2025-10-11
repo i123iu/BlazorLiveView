@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.RenderTree;
-using BlazorLiveView.Core.Components;
+﻿using BlazorLiveView.Core.Components;
+using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace BlazorLiveView.Core.RenderTree;
 

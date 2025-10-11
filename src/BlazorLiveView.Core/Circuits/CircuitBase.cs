@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Reflection.Wrappers;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace BlazorLiveView.Core.Circuits;
@@ -40,5 +41,10 @@ internal abstract class CircuitBase(
             return;
         _circuitStatus = CircuitStatus.Closed;
         CircuitStatusChanged?.Invoke(this);
+    }
+
+    public ComponentState? GetOptionalComponentState(int componentId)
+    {
+        return Circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
     }
 }

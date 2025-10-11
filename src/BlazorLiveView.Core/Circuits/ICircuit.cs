@@ -1,9 +1,11 @@
-﻿namespace BlazorLiveView.Core.Circuits;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+
+namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
 /// Connection to a client, either a <see cref="IUserCircuit"/> or a <see cref="IMirrorCircuit"/>.
 /// </summary>
-internal interface ICircuit
+public interface ICircuit
 {
     public delegate void CircuitStatusChangedHandler(ICircuit circuit);
 
@@ -13,7 +15,9 @@ internal interface ICircuit
     CircuitStatus CircuitStatus { get; }
     DateTime OpenedAt { get; }
 
-    void SetUp();
-    void SetDown();
-    void SetClosed();
+    internal void SetUp();
+    internal void SetDown();
+    internal void SetClosed();
+
+    internal ComponentState? GetOptionalComponentState(int componentId);
 }

@@ -89,7 +89,7 @@ internal sealed class MirrorComponent(
             );
         }
 
-        var componentState = userCircuit.GetComponentState(ComponentId);
+        var componentState = userCircuit.GetOptionalComponentState(ComponentId);
         if (componentState is null)
         {
             _logger.LogWarning("Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",

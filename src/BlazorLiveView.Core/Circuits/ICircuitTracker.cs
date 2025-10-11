@@ -6,7 +6,7 @@ namespace BlazorLiveView.Core.Circuits;
 /// <summary>
 /// Tracks all active SignalR connections with clients (their browser tabs).
 /// </summary>
-internal interface ICircuitTracker
+public interface ICircuitTracker
 {
     public delegate void CircuitOpenedHandler(ICircuit circuit);
     public delegate void CircuitClosedHandler(ICircuit circuit);
@@ -15,32 +15,32 @@ internal interface ICircuitTracker
     event CircuitClosedHandler? CircuitClosedEvent;
 
     ICircuit? GetCircuit(string id);
-    ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer);
+    internal ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer);
 
     IReadOnlyCollection<ICircuit> ListCircuits();
 
     /// <summary>
     /// Called when a mirror circuit's constructor was called.
     /// </summary>
-    void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit);
+    internal void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit);
 
     /// <summary>
     /// Called when any circuit's SignalR connection was initialized.
     /// </summary>
-    void CircuitOpened(Circuit circuit);
+    internal void CircuitOpened(Circuit circuit);
 
     /// <summary>
     /// Called after <see cref="CircuitOpened"/>, or after reconnecting. 
     /// </summary>
-    void CircuitUp(Circuit circuit);
+    internal void CircuitUp(Circuit circuit);
 
     /// <summary>
     /// Called when a circuit's SignalR connection was lost (could still be reconnected.
     /// </summary>
-    void CircuitDown(Circuit circuit);
+    internal void CircuitDown(Circuit circuit);
 
     /// <summary>
     /// Called when a circuit's SignalR connection was closed.
     /// </summary>
-    void CircuitClosed(Circuit circuit);
+    internal void CircuitClosed(Circuit circuit);
 }
