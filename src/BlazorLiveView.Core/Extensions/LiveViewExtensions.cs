@@ -45,7 +45,8 @@ public static class LiveViewExtensions
     /// endpoint to the path specified in <see cref="LiveViewOptions.MirrorUri"/>. 
     /// </summary>
     public static WebApplication MapLiveViewMirrorEndpoint(
-        this WebApplication app
+        this WebApplication app,
+        Action<IEndpointConventionBuilder>? configureEndpoint = null
     )
     {
         Harmony harmony = new("BlazorLiveView");
@@ -57,7 +58,11 @@ public static class LiveViewExtensions
 
         var options = app.Services.GetRequiredService<IOptions<LiveViewOptions>>().Value;
 
-        app.MapGet($"{options.MirrorUri.TrimEnd('/')}", MirrorEndpointController);
+        var mirrorEndpoint = app.MapGet(
+            $"{options.MirrorUri.TrimEnd('/')}", 
+            MirrorEndpointController
+        );
+        configureEndpoint?.Invoke(mirrorEndpoint);
 
         return app;
     }
