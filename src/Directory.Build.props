@@ -4,6 +4,7 @@
 		<Version>0.0.1</Version>
 		<PackageVersion>$(Version)</PackageVersion>
 		
+		<PackageProjectUrl>https://github.com/i123iu/BlazorLiveView</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/i123iu/BlazorLiveView</RepositoryUrl>
 		<Authors>Adam Kundrát</Authors>
 		
