@@ -8,6 +8,7 @@
 
 		<IsPackable>true</IsPackable>
 		<PackageId>BlazorLiveView</PackageId>
+		<Version>0.0.1</Version>
 		<Title>Blazor live view</Title>
 		<Authors>Adam Kundrat</Authors>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
