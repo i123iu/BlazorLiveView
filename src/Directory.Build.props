@@ -1,7 +1,7 @@
 <Project>
 
 	<PropertyGroup>
-		<Version>0.0.1</Version>
+		<Version>0.0.2-dev</Version>
 		<PackageVersion>$(Version)</PackageVersion>
 		
 		<PackageProjectUrl>https://github.com/i123iu/BlazorLiveView</PackageProjectUrl>
