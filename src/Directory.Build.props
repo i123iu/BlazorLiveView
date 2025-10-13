@@ -7,6 +7,7 @@
 		<PackageProjectUrl>https://github.com/i123iu/BlazorLiveView</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/i123iu/BlazorLiveView</RepositoryUrl>
 		<Authors>Adam Kundrát</Authors>
+		<PackageTags>blazor;liveview;screen-sharing;monitoring;real-time;blazor-server;asp.net;rendering;circuits;dashboard;admin;management</PackageTags>
 		
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
