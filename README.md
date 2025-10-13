@@ -1,6 +1,8 @@
-# BlazorLiveView
+# BlazorLiveView [![Tests status](https://img.shields.io/github/actions/workflow/status/i123iu/BlazorLiveView/test.yml?branch=main)](https://github.com/i123iu/BlazorLiveView/actions)
 
 BlazorLiveView is a real-time screen sharing and monitoring library for ASP.NET Blazor Server applications. It is similar to remote desktop tools like TeamViewer, but native to Blazor web applications.
+
+<img src="https://raw.githubusercontent.com/i123iu/BlazorLiveView/main/icon.png" alt="BlazorLiveView" width="128" />
 
 ## Reference setup
 
