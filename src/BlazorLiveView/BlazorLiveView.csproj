@@ -4,15 +4,12 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<OutputType>Library</OutputType>
 
 		<IsPackable>true</IsPackable>
 		<PackageId>BlazorLiveView</PackageId>
-		<Version>0.0.1</Version>
-		<Title>Blazor live view</Title>
-		<Authors>Adam Kundrat</Authors>
+		<Title>Blazor LiveView</Title>
+		<Description>A real-time screen sharing and monitoring library for ASP.NET Blazor Server applications.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/i123iu/BlazorLiveView</RepositoryUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
@@ -36,4 +33,5 @@
 		<ProjectReference Include="..\BlazorLiveView.Core\BlazorLiveView.Core.csproj" />
 		<ProjectReference Include="..\BlazorLiveView.Dashboard\BlazorLiveView.Dashboard.csproj" />
 	</ItemGroup>
+	
 </Project>

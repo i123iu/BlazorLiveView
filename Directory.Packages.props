@@ -3,6 +3,9 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="BlazorLiveView.Core" Version="$(Version)" />
+    <PackageVersion Include="BlazorLiveView.Dashboard" Version="$(Version)" />
+
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.9" />
 
