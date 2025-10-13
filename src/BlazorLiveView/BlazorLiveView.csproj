@@ -6,16 +6,33 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<OutputType>Library</OutputType>
 
-		<AssemblyName>BlazorLiveView</AssemblyName>
-		<RootNamespace>BlazorLiveView</RootNamespace>
-
 		<IsPackable>true</IsPackable>
+		<PackageId>BlazorLiveView</PackageId>
+		<Title>Blazor live view</Title>
 		<Authors>Adam Kundrat</Authors>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/i123iu/BlazorLiveView</RepositoryUrl>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\BlazorLiveView.Core\BlazorLiveView.Core.csproj" />
 		<ProjectReference Include="..\BlazorLiveView.Dashboard\BlazorLiveView.Dashboard.csproj" />
 	</ItemGroup>
-
 </Project>

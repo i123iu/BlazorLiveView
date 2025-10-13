@@ -59,7 +59,7 @@ public static class LiveViewExtensions
         var options = app.Services.GetRequiredService<IOptions<LiveViewOptions>>().Value;
 
         var mirrorEndpoint = app.MapGet(
-            $"{options.MirrorUri.TrimEnd('/')}", 
+            $"{options.MirrorUri.TrimEnd('/')}",
             MirrorEndpointController
         );
         configureEndpoint?.Invoke(mirrorEndpoint);

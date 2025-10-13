@@ -4,12 +4,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-
-		<AssemblyName>BlazorLiveView.Core</AssemblyName>
-		<RootNamespace>BlazorLiveView.Core</RootNamespace>
-
-		<IsPackable>true</IsPackable>
-		<Authors>Adam Kundrat</Authors>
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
