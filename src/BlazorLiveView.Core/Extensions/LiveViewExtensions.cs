@@ -18,7 +18,7 @@ public static class LiveViewExtensions
     /// <summary>
     /// Registers services required for <c>BlazorLiveView</c>. 
     /// </summary>
-    public static WebApplicationBuilder AddLiveViewBackend(
+    public static WebApplicationBuilder AddLiveView(
         this WebApplicationBuilder builder,
         Action<LiveViewOptions>? configureOptions = null
     )
@@ -26,16 +26,19 @@ public static class LiveViewExtensions
         configureOptions ??= options => { };
         builder.Services.Configure(configureOptions);
 
-        builder.Services.AddSingleton<ICircuitTracker, CircuitTracker>();
-        builder.Services.AddSingleton<CircuitHandler, LiveViewCircuitHandler>();
-        builder.Services.AddSingleton<IRenderTreeMirrorTranslatorFactory, RenderTreeMirrorTranslatorFactory>();
-        builder.Services.AddSingleton<ILiveViewMirrorUriBuilder, LiveViewMirrorUriBuilder>();
-        builder.Services.Scan(scan => scan
-            .FromAssemblyOf<IPatcher>()
-            .AddClasses(classes => classes.AssignableTo<IPatcher>(), false)
-            .AsImplementedInterfaces()
-            .WithSingletonLifetime()
-        );
+        builder.Services
+            .AddSingleton<ICircuitTracker, CircuitTracker>()
+            .AddSingleton<CircuitHandler, LiveViewCircuitHandler>()
+            .AddSingleton<IRenderTreeMirrorTranslatorFactory, RenderTreeMirrorTranslatorFactory>()
+            .AddSingleton<ILiveViewMirrorUriBuilder, LiveViewMirrorUriBuilder>()
+            .AddScoped<CircuitHandler, CurrentCircuitHandler>()
+            .AddScoped<ICurrentCircuit, CurrentCircuit>()
+            .Scan(scan => scan
+                .FromAssemblyOf<IPatcher>()
+                .AddClasses(classes => classes.AssignableTo<IPatcher>(), false)
+                .AsImplementedInterfaces()
+                .WithSingletonLifetime()
+            );
 
         return builder;
     }

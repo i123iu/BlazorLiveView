@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Server.Circuits;
 
-namespace BlazorLiveView.Dashboard.Circuits;
+namespace BlazorLiveView.Core.Circuits;
 
 internal class CurrentCircuit : ICurrentCircuit
 {

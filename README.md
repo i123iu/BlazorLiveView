@@ -1,17 +1,34 @@
 # BlazorLiveView [![Tests status](https://img.shields.io/github/actions/workflow/status/i123iu/BlazorLiveView/test.yml?branch=main)](https://github.com/i123iu/BlazorLiveView/actions)
 
-BlazorLiveView is a real-time screen sharing and monitoring library for ASP.NET Blazor Server applications. It is similar to remote desktop tools like TeamViewer, but native to Blazor web applications.
+BlazorLiveView is a real-time screen sharing library for ASP.NET Blazor Server applications. It can be useful for debugging and remote assistance. It is similar to remote desktop tools like TeamViewer, but native to Blazor web applications.
 
 <img src="https://raw.githubusercontent.com/i123iu/BlazorLiveView/main/icon.png" alt="BlazorLiveView" width="128" />
 
+## Features
+
+- Real-time screen mirroring
+- Admin dashboard showing all active connections
+- Native performance using Blazor's internal rendering system
+- Minimal modifications to existing Blazor components
+
 ## Reference setup
+
+Create a new Blazor Web App project, select:
+- "Interactive render mode" -> "Server"
+- "Interactivity location" -> "Global"
+
+Install the [NuGet package](https://www.nuget.org/packages/BlazorLiveView):
+
+```
+dotnet add package BlazorLiveView
+```
 
 Register necessary services in `Program.cs`:
 
 ```csharp
 using BlazorLiveView.Extensions;
 WebApplicationBuilder builder;
-builder.AddLiveViewBackendAndDashboard();
+builder.AddLiveView();
 ```
 
 Map the mirror endpoint in `Program.cs`:
@@ -33,7 +50,7 @@ app.MapLiveViewMirrorEndpoint(endpoint =>
 });
 ```
 
-Include the `LiveViewDashboard` component to a Razor page:
+Include the `LiveViewDashboard` component in a Razor page:
 
 ```razor
 @page "/liveview-dashboard"
@@ -41,9 +58,9 @@ Include the `LiveViewDashboard` component to a Razor page:
 <LiveViewDashboard />
 ```
 
-## Features
+## Custom Dashboard
 
-- Real-time screen mirroring
-- Admin dashboard showing all active connections
-- Native performance using Blazor's internal rendering system
-- Minimal modifications to existing Blazor components
+You can create a custom dashboard by only installing the [`BlazorLiveView.Core` package](https://www.nuget.org/packages/BlazorLiveView.Core) and getting the necessary information by injecting these services:
+- `ICircuitTracker` - tracks and lists all active circuits (connections)
+- `ILiveViewMirrorUriBuilder` - builds URI for the mirror endpoint
+- `ICurrentCircuit` - provides id of the current circuit

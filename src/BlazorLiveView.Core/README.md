@@ -1,6 +1,7 @@
 # BlazorLiveView.Core
 
-Core functionality for the BlazorLiveView library. See the main package: `BlazorLiveView`.
+Core functionality for the BlazorLiveView library.
+See the main package: [`BlazorLiveView`](https://www.nuget.org/packages/BlazorLiveView/).
 
 ## Reference setup
 
@@ -9,7 +10,7 @@ Register necessary services in `Program.cs`:
 ```csharp
 using BlazorLiveView.Core.Extensions;
 WebApplicationBuilder builder;
-builder.AddLiveViewBackend();
+builder.AddLiveView();
 ```
 
 Map the mirror endpoint in `Program.cs`:
