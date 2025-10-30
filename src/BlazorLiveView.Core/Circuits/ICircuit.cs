@@ -3,7 +3,8 @@
 namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
-/// Connection to a client, either a <see cref="IUserCircuit"/> or a <see cref="IMirrorCircuit"/>.
+/// Connection to a client, either a <see cref="IUserCircuit"/> or a 
+/// <see cref="IMirrorCircuit"/>.
 /// </summary>
 public interface ICircuit
 {

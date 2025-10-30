@@ -1,8 +1,8 @@
 ﻿namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
-/// A connection with a user that is using Blazor 
-/// normally (without <c>BlazorLiveView</c>). 
+/// A connection with a user that is using Blazor normally (without 
+/// <c>BlazorLiveView</c>). 
 /// </summary>
 public interface IUserCircuit : ICircuit
 {

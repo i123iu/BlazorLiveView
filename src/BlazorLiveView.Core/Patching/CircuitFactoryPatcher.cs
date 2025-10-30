@@ -11,10 +11,10 @@ using System.Reflection;
 namespace BlazorLiveView.Core.Patching;
 
 /// <summary>
-/// This patcher is responsible for mirror circuit creation. To identify
-/// mirror circuits from user circuits, their request endpoint is set to
-/// the mirror endpoint and here it is fixed (overwritten/changed to the
-/// source circuit's endpoint).
+/// This patcher is responsible for mirror circuit creation. To identify mirror
+/// circuits from user circuits, their request endpoint is set to the mirror
+/// endpoint and here it is fixed (overwritten/changed to the source circuit's
+/// endpoint).
 /// </summary>
 internal sealed class CircuitFactoryPatcher : IPatcher
 {

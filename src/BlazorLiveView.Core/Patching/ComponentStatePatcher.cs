@@ -7,6 +7,10 @@ using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.Patching;
 
+/// <summary>
+/// This patcher is responsible for notifying user circuits about component
+/// rerenders (so that mirror circuits can trigger mirror component rerenders).
+/// </summary>
 internal sealed class ComponentStatePatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;

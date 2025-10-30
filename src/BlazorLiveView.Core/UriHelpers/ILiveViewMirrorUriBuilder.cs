@@ -2,6 +2,10 @@
 
 namespace BlazorLiveView.Core.UriHelpers;
 
+/// <summary>
+/// Defines helper methods for building and parsing URIs for the Mirror Endpoint. 
+/// See <see cref="MirrorUri"/>. 
+/// </summary>
 public interface ILiveViewMirrorUriBuilder
 {
     string GetPathAndQuery(MirrorUri mirrorUri);
