@@ -64,3 +64,11 @@ You can create a custom dashboard by only installing the [`BlazorLiveView.Core` 
 - `ICircuitTracker` - tracks and lists all active circuits (connections)
 - `ILiveViewMirrorUriBuilder` - builds URI for the mirror endpoint
 - `ICurrentCircuit` - provides id of the current circuit
+
+## TODO
+- robust patchers exceptions handling + logging
+- make mirror circuits really read-only
+- identification of users in dashboard
+- dashboard styling, filtering, ...
+- mirror page html skeleton
+- documentation/wiki

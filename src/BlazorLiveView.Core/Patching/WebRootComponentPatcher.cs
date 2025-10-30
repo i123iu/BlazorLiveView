@@ -8,6 +8,11 @@ using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.Patching;
 
+/// <summary>
+/// This patcher is responsible for creating RootMirrorComponent instead of the
+/// original root component for mirror circuits. These new root mirror
+/// components are then linked to their source circuit's root component.
+/// </summary>
 internal sealed class WebRootComponentPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
@@ -51,6 +56,7 @@ internal sealed class WebRootComponentPatcher : IPatcher
         var circuit = _circuitTracker.GetCircuit(remoteRenderer);
         if (circuit is null)
         {
+            _logger.LogError("Circuit for RemoteRenderer not found");
             return;
         }
 
@@ -60,7 +66,7 @@ internal sealed class WebRootComponentPatcher : IPatcher
         }
 
         _logger.LogInformation("Overwriting root component {OriginalRootComponentType}" +
-            $" to {nameof(RootMirrorComponent)} for MirrorCircuit {{CircuitId}}",
+            $" to {nameof(RootMirrorComponent)} for IMirrorCircuit with id={{CircuitId}}",
             componentType,
             mirrorCircuit.Id
         );

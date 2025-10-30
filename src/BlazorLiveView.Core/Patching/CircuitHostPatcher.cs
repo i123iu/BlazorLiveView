@@ -6,6 +6,10 @@ using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.Patching;
 
+/// <summary>
+/// This patcher is responsible for notifying user circuits about URI changes
+/// (so that mirror circuits can be updated). 
+/// </summary>
 internal sealed class CircuitHostPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;

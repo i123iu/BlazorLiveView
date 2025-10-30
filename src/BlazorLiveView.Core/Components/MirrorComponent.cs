@@ -9,8 +9,8 @@ using Microsoft.Extensions.Logging;
 namespace BlazorLiveView.Core.Components;
 
 /// <summary>
-/// Clones the render tree of another component. 
-/// Translates child components in the original tree to instances of <see cref="MirrorComponent"/>. 
+/// Clones the render tree of another component, while translating child
+/// components of the original tree to <see cref="MirrorComponent"/> instances.
 /// </summary>
 internal sealed class MirrorComponent(
     ICircuitTracker circuitTracker,
