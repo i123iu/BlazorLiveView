@@ -6,20 +6,20 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class RemoteRendererWrapper
     : RendererWrapper
 {
-    private static readonly Type WrappedType = Types.RemoteRenderer;
+    private static readonly Type InnerType = Types.RemoteRenderer;
     private static readonly MethodInfo _GetOrCreateWebRootComponentManager;
 
     static RemoteRendererWrapper()
     {
-        _GetOrCreateWebRootComponentManager = WrappedType.GetRequiredMethod(
+        _GetOrCreateWebRootComponentManager = InnerType.GetRequiredMethod(
             "GetOrCreateWebRootComponentManager", isPublic: true
         );
     }
 
-    public RemoteRendererWrapper(Renderer wrapped)
-        : base(wrapped)
+    public RemoteRendererWrapper(Renderer inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 
     public WebRootComponentManagerWrapper GetOrCreateWebRootComponentManager()

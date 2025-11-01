@@ -7,27 +7,28 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 
 internal class CircuitHostWrapper : WrapperBase
 {
-    private static readonly Type WrappedType = Types.CircuitHost;
+    private static readonly Type InnerType = Types.CircuitHost;
     private static readonly PropertyInfo _renderer;
     private static readonly PropertyInfo _Circuit;
     private static readonly FieldInfo _navigationManager;
 
     static CircuitHostWrapper()
     {
-        _renderer = WrappedType.GetRequiredProperty(
+        _renderer = InnerType.GetRequiredProperty(
             "Renderer", isPublic: true
         );
-        _Circuit = WrappedType.GetRequiredProperty(
+        _Circuit = InnerType.GetRequiredProperty(
             "Circuit", isPublic: true
         );
-        _navigationManager = WrappedType.GetRequiredField(
+        _navigationManager = InnerType.GetRequiredField(
             "_navigationManager", isPublic: false
         );
     }
 
-    public CircuitHostWrapper(object wrapped) : base(wrapped)
+    public CircuitHostWrapper(object inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 
     public RemoteRendererWrapper Renderer

@@ -7,22 +7,22 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class ArrayBuilderOfRenderTreeFrameWrapper
     : WrapperBase
 {
-    private static readonly Type WrappedType = Types.RenderTreeFrameArrayBuilder.BaseType!;
+    private static readonly Type InnerType = Types.RenderTreeFrameArrayBuilder.BaseType!;
     private static readonly MethodInfo _Append;
 
     static ArrayBuilderOfRenderTreeFrameWrapper()
     {
-        _Append = WrappedType.GetRequiredMethod(
+        _Append = InnerType.GetRequiredMethod(
             "Append",
             isPublic: false,
             parameters: [typeof(ReadOnlySpan<RenderTreeFrame>)]
         );
     }
 
-    public ArrayBuilderOfRenderTreeFrameWrapper(object wrapped)
-        : base(wrapped)
+    public ArrayBuilderOfRenderTreeFrameWrapper(object inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 
     public void Append(ReadOnlySpan<RenderTreeFrame> source)

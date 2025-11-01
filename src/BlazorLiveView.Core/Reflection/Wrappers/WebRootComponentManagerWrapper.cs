@@ -5,21 +5,21 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class WebRootComponentManagerWrapper
     : WrapperBase
 {
-    private static readonly Type WrappedType = Types.WebRootComponentManager;
+    private static readonly Type InnerType = Types.WebRootComponentManager;
     private static readonly MethodInfo _GetRequiredWebRootComponent;
 
     static WebRootComponentManagerWrapper()
     {
-        _GetRequiredWebRootComponent = WrappedType.GetRequiredMethod(
+        _GetRequiredWebRootComponent = InnerType.GetRequiredMethod(
            "GetRequiredWebRootComponent",
             isPublic: false
         );
     }
 
-    public WebRootComponentManagerWrapper(object wrapped)
-        : base(wrapped)
+    public WebRootComponentManagerWrapper(object inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 
     public WebRootComponentWrapper GetRequiredWebRootComponent(int ssrComponentId)

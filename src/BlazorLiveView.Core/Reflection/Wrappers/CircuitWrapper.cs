@@ -6,12 +6,12 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class CircuitWrapper(Circuit circuit)
     : WrapperBase<Circuit>(circuit)
 {
-    private static readonly Type WrappedType = Types.Circuit;
+    private static readonly Type InnerType = Types.Circuit;
     private static readonly FieldInfo _circuitHost;
 
     static CircuitWrapper()
     {
-        _circuitHost = WrappedType.GetRequiredField(
+        _circuitHost = InnerType.GetRequiredField(
             "_circuitHost", isPublic: false
         );
     }

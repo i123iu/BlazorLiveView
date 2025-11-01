@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using System.Reflection;
 
@@ -9,12 +10,12 @@ internal static class Types
 {
     #region Microsoft.AspNetCore.Components.Server.Circuits
     public static readonly Type Circuit = typeof(Circuit);
-    public static readonly Type CircuitHost = Circuit.GetTypeFromSameNamespace("CircuitHost");
-    public static readonly Type CircuitFactory = Circuit.GetTypeFromSameNamespace("CircuitFactory");
-    public static readonly Type RemoteRenderer = Circuit.GetTypeFromSameNamespace("RemoteRenderer");
-    public static readonly Type RemoteNavigationManager = Circuit.GetTypeFromSameNamespace("RemoteNavigationManager");
-    public static readonly Type WebRootComponentManager = Circuit.GetTypeFromSameNamespace("RemoteRenderer+WebRootComponentManager");
-    public static readonly Type WebRootComponent = Circuit.GetTypeFromSameNamespace("RemoteRenderer+WebRootComponentManager+WebRootComponent");
+    public static readonly Type CircuitHost = Circuit.GetTypeFromSameNamespace(nameof(CircuitHost));
+    public static readonly Type CircuitFactory = Circuit.GetTypeFromSameNamespace(nameof(CircuitFactory));
+    public static readonly Type RemoteRenderer = Circuit.GetTypeFromSameNamespace(nameof(RemoteRenderer));
+    public static readonly Type RemoteNavigationManager = Circuit.GetTypeFromSameNamespace(nameof(RemoteNavigationManager));
+    public static readonly Type WebRootComponentManager = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteRenderer)}+{nameof(WebRootComponentManager)}");
+    public static readonly Type WebRootComponent = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteRenderer)}+{nameof(WebRootComponentManager)}+{nameof(WebRootComponent)}");
 
     /// <summary>
     /// <see cref="ValueTask{CircuitHost}"></see>
@@ -34,12 +35,17 @@ internal static class Types
     #region Microsoft.AspNetCore.Components.RenderTree
     public static readonly Type Renderer = typeof(Renderer);
     public static readonly Type WebRenderer = typeof(WebRenderer);
-    public static readonly Type RenderTreeFrameArrayBuilder = Renderer.GetTypeFromSameNamespace("RenderTreeFrameArrayBuilder");
+    public static readonly Type RenderTreeFrameArrayBuilder = Renderer.GetTypeFromSameNamespace(nameof(RenderTreeFrameArrayBuilder));
     #endregion
 
     #region Microsoft.AspNetCore.Components.Rendering
     public static readonly Type ComponentState = typeof(ComponentState);
     public static readonly Type RenderTreeBuilder = typeof(RenderTreeBuilder);
+    #endregion
+
+    #region Microsoft.AspNetCore.Components.Server
+    public static readonly Type CircuitOptions = typeof(CircuitOptions);
+    public static readonly Type ComponentHub = CircuitOptions.GetTypeFromSameNamespace(nameof(ComponentHub));
     #endregion
 
     private static Type GetTypeFromSameNamespace(
@@ -93,12 +99,12 @@ internal static class Types
             ?? throw new Exception($"Method '{name}' not found on type '{type.FullName}'.");
     }
 
-    public static void AssertIsInstanceOfType(Type expected, object wrapped)
+    public static void AssertIsInstanceOfType(Type expected, object actual)
     {
-        if (!expected.IsInstanceOfType(wrapped))
+        if (!expected.IsInstanceOfType(actual))
         {
             throw new ArgumentException(
-                $"Expected type {expected}, but got {wrapped.GetType()}."
+                $"Expected type {expected}, but got {actual.GetType()}."
             );
         }
     }

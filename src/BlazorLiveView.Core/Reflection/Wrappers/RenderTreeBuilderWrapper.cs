@@ -3,15 +3,15 @@ using System.Reflection;
 
 namespace BlazorLiveView.Core.Reflection.Wrappers;
 
-internal class RenderTreeBuilderWrapper(RenderTreeBuilder wrapped)
-    : WrapperBase<RenderTreeBuilder>(wrapped)
+internal class RenderTreeBuilderWrapper(RenderTreeBuilder inner)
+    : WrapperBase<RenderTreeBuilder>(inner)
 {
-    private static readonly Type WrappedType = Types.RenderTreeBuilder;
+    private static readonly Type InnerType = Types.RenderTreeBuilder;
     private static readonly FieldInfo _entries;
 
     static RenderTreeBuilderWrapper()
     {
-        _entries = WrappedType.GetRequiredField("_entries", isPublic: false);
+        _entries = InnerType.GetRequiredField("_entries", isPublic: false);
     }
 
     public RenderTreeFrameArrayBuilderWrapper Entries

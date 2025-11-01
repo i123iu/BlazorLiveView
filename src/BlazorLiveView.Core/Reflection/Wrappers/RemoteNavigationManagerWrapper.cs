@@ -5,11 +5,11 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class RemoteNavigationManagerWrapper
     : WrapperBase<NavigationManager>
 {
-    public static readonly Type WrappedType = Types.RemoteNavigationManager;
+    public static readonly Type InnerType = Types.RemoteNavigationManager;
 
-    public RemoteNavigationManagerWrapper(NavigationManager wrapped)
-        : base(wrapped)
+    public RemoteNavigationManagerWrapper(NavigationManager inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 }

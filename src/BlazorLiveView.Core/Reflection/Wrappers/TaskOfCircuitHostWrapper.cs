@@ -5,12 +5,12 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class TaskOfCircuitHostWrapper
     : WrapperBase
 {
-    private static readonly Type WrappedType = Types.TaskOfCircuitHost;
+    private static readonly Type InnerType = Types.TaskOfCircuitHost;
     private static readonly MethodInfo _continueWith;
 
     static TaskOfCircuitHostWrapper()
     {
-        foreach (var m in WrappedType.GetMethods(BindingFlags.Instance | BindingFlags.Public))
+        foreach (var m in InnerType.GetMethods(BindingFlags.Instance | BindingFlags.Public))
         {
             if (m.Name != "ContinueWith" || !m.IsGenericMethodDefinition)
                 continue;
@@ -33,9 +33,10 @@ internal class TaskOfCircuitHostWrapper
         }
     }
 
-    public TaskOfCircuitHostWrapper(object wrapped) : base(wrapped)
+    public TaskOfCircuitHostWrapper(object inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 
     public TaskOfCircuitHostWrapper ContinueWith(Delegate continuationDelegate)
