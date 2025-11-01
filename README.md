@@ -66,9 +66,10 @@ You can create a custom dashboard by only installing the [`BlazorLiveView.Core` 
 - `ICurrentCircuit` - provides id of the current circuit
 
 ## TODO
-- robust patchers exceptions handling + logging
-- make mirror circuits really read-only
-- identification of users in dashboard
-- dashboard styling, filtering, ...
-- mirror page html skeleton
-- documentation/wiki
+1. make mirror circuits really read-only (maybe custom hub + modified html skeleton)
+2. patchers and reflection wrappers tests
+3. patchers exceptions handling + logging
+4. JS interop
+5. identification of users in dashboard
+6. dashboard UI upgrade: styling, filtering, ...
+7. documentation/wiki
