@@ -36,6 +36,8 @@ internal static class Types
     public static readonly Type Renderer = typeof(Renderer);
     public static readonly Type WebRenderer = typeof(WebRenderer);
     public static readonly Type RenderTreeFrameArrayBuilder = Renderer.GetTypeFromSameNamespace(nameof(RenderTreeFrameArrayBuilder));
+    public static readonly Type ArrayBuilderOfRenderTreeFrame = RenderTreeFrameArrayBuilder?.BaseType
+        ?? throw new Exception("ArrayBuilderOfRenderTreeFrame not found.");
     #endregion
 
     #region Microsoft.AspNetCore.Components.Rendering

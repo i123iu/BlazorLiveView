@@ -29,7 +29,8 @@ internal class ValueTaskOfCircuitHostWrapper
 
     public TaskOfCircuitHostWrapper AsTask()
     {
-        object task = _AsTask.Invoke(Inner, Array.Empty<object>())!;
+        object task = _AsTask.Invoke(Inner, Array.Empty<object>())
+            ?? throw new Exception("AsTask returned null");
         return new(task);
     }
 }

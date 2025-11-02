@@ -7,7 +7,7 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class ArrayBuilderOfRenderTreeFrameWrapper
     : WrapperBase
 {
-    private static readonly Type InnerType = Types.RenderTreeFrameArrayBuilder.BaseType!;
+    private static readonly Type InnerType = Types.ArrayBuilderOfRenderTreeFrame;
     private static readonly MethodInfo _Append;
 
     static ArrayBuilderOfRenderTreeFrameWrapper()
