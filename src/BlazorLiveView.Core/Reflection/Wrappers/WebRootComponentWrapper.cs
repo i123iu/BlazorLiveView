@@ -5,18 +5,18 @@ namespace BlazorLiveView.Core.Reflection.Wrappers;
 internal class WebRootComponentWrapper
     : WrapperBase
 {
-    private static readonly Type WrappedType = Types.WebRootComponent;
+    private static readonly Type InnerType = Types.WebRootComponent;
     private static readonly FieldInfo _interactiveComponentId;
 
     static WebRootComponentWrapper()
     {
-        _interactiveComponentId = WrappedType.GetRequiredField("_interactiveComponentId", isPublic: false);
+        _interactiveComponentId = InnerType.GetRequiredField("_interactiveComponentId", isPublic: false);
     }
 
-    public WebRootComponentWrapper(object wrapped)
-        : base(wrapped)
+    public WebRootComponentWrapper(object inner)
+        : base(inner)
     {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 
     public int InteractiveComponentId

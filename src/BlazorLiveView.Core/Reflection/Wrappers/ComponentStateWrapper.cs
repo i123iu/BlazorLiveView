@@ -4,27 +4,21 @@ using System.Reflection;
 
 namespace BlazorLiveView.Core.Reflection.Wrappers;
 
-internal class ComponentStateWrapper
-    : WrapperBase<ComponentState>
+internal class ComponentStateWrapper(ComponentState inner)
+    : WrapperBase<ComponentState>(inner)
 {
-    private static readonly Type WrappedType = Types.ComponentState;
+    private static readonly Type InnerType = Types.ComponentState;
     private static readonly PropertyInfo _CurrentRenderTree;
     private static readonly PropertyInfo _Renderer;
 
     static ComponentStateWrapper()
     {
-        _CurrentRenderTree = WrappedType.GetRequiredProperty(
+        _CurrentRenderTree = InnerType.GetRequiredProperty(
             "CurrentRenderTree", isPublic: false
         );
-        _Renderer = WrappedType.GetRequiredProperty(
+        _Renderer = InnerType.GetRequiredProperty(
             "Renderer", isPublic: false
         );
-    }
-
-    public ComponentStateWrapper(ComponentState wrapped)
-        : base(wrapped)
-    {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
     }
 
     public RenderTreeBuilder CurrentRenderTree

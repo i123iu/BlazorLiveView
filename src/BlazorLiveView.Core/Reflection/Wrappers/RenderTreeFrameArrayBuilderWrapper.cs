@@ -3,16 +3,11 @@
 internal class RenderTreeFrameArrayBuilderWrapper
     : ArrayBuilderOfRenderTreeFrameWrapper
 {
-    private static readonly Type WrappedType = Types.RenderTreeFrameArrayBuilder;
+    private static readonly Type InnerType = Types.RenderTreeFrameArrayBuilder;
 
-    static RenderTreeFrameArrayBuilderWrapper()
+    public RenderTreeFrameArrayBuilderWrapper(object inner)
+        : base(inner)
     {
-
-    }
-
-    public RenderTreeFrameArrayBuilderWrapper(object wrapped)
-        : base(wrapped)
-    {
-        Types.AssertIsInstanceOfType(WrappedType, wrapped);
+        Types.AssertIsInstanceOfType(InnerType, inner);
     }
 }
