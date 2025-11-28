@@ -21,6 +21,7 @@ public class TypesTests
 
         Assert.NotNull(Types.Renderer);
         Assert.NotNull(Types.WebRenderer);
+        Assert.NotNull(Types.ArrayBuilderOfRenderTreeFrame);
         Assert.NotNull(Types.RenderTreeFrameArrayBuilder);
 
         Assert.NotNull(Types.ComponentState);

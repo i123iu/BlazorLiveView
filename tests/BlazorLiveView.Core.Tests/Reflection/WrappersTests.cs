@@ -26,6 +26,7 @@ public class WrappersTests
         RunClassConstructor<ArrayBuilderOfRenderTreeFrameWrapper>();
         RunClassConstructor<CircuitHostWrapper>();
         RunClassConstructor<CircuitWrapper>();
+        RunClassConstructor<ComponentHubWrapper>();
         RunClassConstructor<ComponentStateWrapper>();
         RunClassConstructor<RemoteNavigationManagerWrapper>();
         RunClassConstructor<RemoteRendererWrapper>();

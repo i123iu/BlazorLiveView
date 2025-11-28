@@ -11,11 +11,17 @@ internal static class Types
     #region Microsoft.AspNetCore.Components.Server.Circuits
     public static readonly Type Circuit = typeof(Circuit);
     public static readonly Type CircuitHost = Circuit.GetTypeFromSameNamespace(nameof(CircuitHost));
+    public static readonly Type ICircuitFactory = Circuit.GetTypeFromSameNamespace(nameof(ICircuitFactory));
     public static readonly Type CircuitFactory = Circuit.GetTypeFromSameNamespace(nameof(CircuitFactory));
     public static readonly Type RemoteRenderer = Circuit.GetTypeFromSameNamespace(nameof(RemoteRenderer));
     public static readonly Type RemoteNavigationManager = Circuit.GetTypeFromSameNamespace(nameof(RemoteNavigationManager));
     public static readonly Type WebRootComponentManager = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteRenderer)}+{nameof(WebRootComponentManager)}");
     public static readonly Type WebRootComponent = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteRenderer)}+{nameof(WebRootComponentManager)}+{nameof(WebRootComponent)}");
+    public static readonly Type CircuitIdFactory = Circuit.GetTypeFromSameNamespace(nameof(CircuitIdFactory));
+    public static readonly Type CircuitRegistry = Circuit.GetTypeFromSameNamespace(nameof(CircuitRegistry));
+    public static readonly Type ICircuitHandleRegistry = Circuit.GetTypeFromSameNamespace(nameof(ICircuitHandleRegistry));
+
+    public static readonly Type ILoggerOfComponentHub;
 
     /// <summary>
     /// <see cref="ValueTask{CircuitHost}"></see>
@@ -48,7 +54,13 @@ internal static class Types
     #region Microsoft.AspNetCore.Components.Server
     public static readonly Type CircuitOptions = typeof(CircuitOptions);
     public static readonly Type ComponentHub = CircuitOptions.GetTypeFromSameNamespace(nameof(ComponentHub));
+    public static readonly Type IServerComponentDeserializer = CircuitOptions.GetTypeFromSameNamespace(nameof(IServerComponentDeserializer));
     #endregion
+
+    static Types()
+    {
+        ILoggerOfComponentHub = typeof(Microsoft.Extensions.Logging.ILogger<>).MakeGenericType([ComponentHub]);
+    }
 
     private static Type GetTypeFromSameNamespace(
         this Type typeFromSameNamespace,
