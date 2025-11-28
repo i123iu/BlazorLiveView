@@ -62,17 +62,29 @@ public static class LiveViewExtensions
         var options = app.Services.GetRequiredService<IOptions<LiveViewOptions>>().Value;
 
         var mirrorEndpoint = app.MapGet(
-            $"{options.MirrorUri.TrimEnd('/')}",
+            options.MirrorUri,
             MirrorEndpointController
         );
         configureEndpoint?.Invoke(mirrorEndpoint);
+
+        var jsMirrorEndpoint = app.MapGet(
+            options.JsMirrorUri,
+            JsMirrorEndpointController
+        );
+        configureEndpoint?.Invoke(jsMirrorEndpoint);
+
+        app.MapHub<LiveViewComponentHub>(
+            options.HubMirrorUri
+        // TODO
+        );
 
         return app;
     }
 
     private static async Task MirrorEndpointController(
         HttpContext context,
-        [FromQuery(Name = "circuitId")] string circuitId
+        [FromQuery(Name = "circuitId")] string circuitId,
+        IOptions<LiveViewOptions> options
     )
     {
         var circuitTracker = context.RequestServices.GetRequiredService<ICircuitTracker>();
@@ -96,6 +108,29 @@ public static class LiveViewExtensions
         using HttpClient httpClient = new();
         var response = await httpClient.GetAsync(circuitUri);
         var content = await response.Content.ReadAsStringAsync();
-        await context.Response.WriteAsync(content);
+
+        const string scriptTag = "<script src=\"_framework/blazor.web.js\"></script>";
+        var scriptIndex = content.IndexOf(scriptTag);
+        if (scriptIndex == -1)
+        {
+            context.Response.StatusCode = 500;
+            await context.Response.WriteAsync("Could not find blazor.web.js script tag in the response. ");
+            return;
+        }
+
+        string beforeScript = content.AsSpan(0, scriptIndex).ToString();
+        string afterScript = content.AsSpan(scriptIndex + scriptTag.Length).ToString();
+
+        await context.Response.WriteAsync(beforeScript.ToString());
+        await context.Response.WriteAsync($"<script src=\"{options.Value.JsMirrorUri}\"></script>");
+        await context.Response.WriteAsync(afterScript.ToString());
+    }
+
+    private static async Task JsMirrorEndpointController(
+        HttpContext context,
+        IOptions<LiveViewOptions> options
+    )
+    {
+
     }
 }

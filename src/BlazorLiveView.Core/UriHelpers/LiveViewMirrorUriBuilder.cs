@@ -24,7 +24,7 @@ internal class LiveViewMirrorUriBuilder(
     public bool TryParse(Uri uri, [NotNullWhen(true)] out MirrorUri mirrorUri)
     {
         var path = uri.AbsolutePath.AsSpan().TrimEnd('/');
-        var expectedPath = _options.MirrorUri.AsSpan().TrimEnd('/');
+        var expectedPath = _options.MirrorUri.AsSpan();
         if (!path.Equals(expectedPath, StringComparison.OrdinalIgnoreCase))
         {
             mirrorUri = default;
