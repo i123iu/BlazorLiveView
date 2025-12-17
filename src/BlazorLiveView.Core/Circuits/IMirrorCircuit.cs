@@ -7,4 +7,9 @@
 public interface IMirrorCircuit : ICircuit
 {
     IUserCircuit SourceCircuit { get; }
+ 
+    /// <summary>
+    /// Shoud the mirrored componets be in DebugView?
+    /// </summary>
+    bool DebugView { get; }
 }

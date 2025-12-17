@@ -62,7 +62,7 @@ public static class LiveViewExtensions
         var options = app.Services.GetRequiredService<IOptions<LiveViewOptions>>().Value;
 
         var mirrorEndpoint = app.MapGet(
-            $"{options.MirrorUri.TrimEnd('/')}",
+            options.MirrorUri,
             MirrorEndpointController
         );
         configureEndpoint?.Invoke(mirrorEndpoint);
@@ -72,7 +72,7 @@ public static class LiveViewExtensions
 
     private static async Task MirrorEndpointController(
         HttpContext context,
-        [FromQuery(Name = "circuitId")] string circuitId
+        [FromQuery(Name = nameof(MirrorUri.sourceCircuitId))] string circuitId
     )
     {
         var circuitTracker = context.RequestServices.GetRequiredService<ICircuitTracker>();

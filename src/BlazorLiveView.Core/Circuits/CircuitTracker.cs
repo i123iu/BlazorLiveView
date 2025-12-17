@@ -18,11 +18,17 @@ internal sealed class CircuitTracker(
     private readonly Dictionary<string, ICircuit> _circuitsById = new();
     private readonly Dictionary<Renderer, ICircuit> _circuitsByRenderer = new();
 
+    struct PendingMirrorCircuit
+    {
+        public IUserCircuit source;
+        public bool debugView;
+    }
+
     /// <summary>
     /// Clients that have sent a HTTP request to the mirror endpoint, but are not yet opened. 
     /// Maps mirror's id to the source circuit. 
     /// </summary>
-    private readonly Dictionary<string, IUserCircuit> _pendingMirrorCircuits = new();
+    private readonly Dictionary<string, PendingMirrorCircuit> _pendingMirrorCircuits = new();
 
     public ICircuit? GetCircuit(string circuitId)
     {
@@ -48,7 +54,7 @@ internal sealed class CircuitTracker(
         }
     }
 
-    public void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit)
+    public void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit, bool debugView)
     {
         lock (_lock)
         {
@@ -64,7 +70,12 @@ internal sealed class CircuitTracker(
                 "Mirror circuit created: {CircuitId}, source: {SourceCircuitId}",
                 mirrorCircuit.Id, sourceCircuit.Id
             );
-            _pendingMirrorCircuits.Add(mirrorCircuit.Id, sourceCircuit);
+            PendingMirrorCircuit pending = new()
+            {
+                source = sourceCircuit,
+                debugView = debugView
+            };
+            _pendingMirrorCircuits.Add(mirrorCircuit.Id, pending);
         }
     }
 
@@ -80,12 +91,12 @@ internal sealed class CircuitTracker(
             }
 
             ICircuit circuit;
-            if (_pendingMirrorCircuits.Remove(blazorCircuit.Id, out var sourceCircuit))
+            if (_pendingMirrorCircuits.Remove(blazorCircuit.Id, out var pending))
             {
                 _logger.LogInformation("Mirror circuit opened: {CircuitId}",
                     blazorCircuit.Id);
 
-                circuit = new MirrorCircuit(blazorCircuit, sourceCircuit, DateTime.UtcNow);
+                circuit = new MirrorCircuit(blazorCircuit, pending.source, DateTime.UtcNow, pending.debugView);
             }
             else
             {

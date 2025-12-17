@@ -56,6 +56,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
     {
         public bool isMirror;
         public IUserCircuit? sourceCircuit;
+        public bool debugView;
     }
 
     private static void CreateCircuitHostAsync_Prefix(
@@ -116,7 +117,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         __state = new State
         {
             isMirror = true,
-            sourceCircuit = sourceUserCircuit
+            sourceCircuit = sourceUserCircuit,
+            debugView = parsedUri.debugView
         };
     }
 
@@ -182,7 +184,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             var circuitHost = new CircuitHostWrapper(circuitHostObj!);
             _circuitTracker!.MirrorCircuitCreated(
                 circuitHost.Circuit.Inner,
-                _state.sourceCircuit ?? throw new Exception()
+                _state.sourceCircuit ?? throw new Exception(),
+                _state.debugView
             );
             return task.Result!;
         }

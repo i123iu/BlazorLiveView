@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.RenderTree;
+﻿ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace BlazorLiveView.Core.RenderTree;
 
@@ -13,6 +13,21 @@ internal sealed class RenderTreeMirrorTranslatorFactory
         return new RenderTreeMirrorTranslator(
             result,
             circuitId
+        );
+    }
+
+    public IRenderTreeMirrorTranslator CreateDebugTranslator(
+        List<RenderTreeFrame> result, 
+        string circuitId,
+        Type componentType,
+        int componentId
+    )
+    {
+        return new RenderTreeDebugMirrorTranslator(
+            result,
+            circuitId,
+            componentType,
+            componentId
         );
     }
 }
