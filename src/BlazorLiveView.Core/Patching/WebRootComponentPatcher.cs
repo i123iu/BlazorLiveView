@@ -105,7 +105,8 @@ internal sealed class WebRootComponentPatcher : IPatcher
 
         rootMirrorComponent.Initialize(
             __state.mirrorCircuit.SourceCircuit,
-            __state.mirrorSsrComponentId
+            __state.mirrorSsrComponentId,
+            __state.mirrorCircuit.DebugView
         );
     }
 

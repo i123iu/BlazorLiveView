@@ -34,11 +34,10 @@
                     else
                     {
                         var mirrorPath = mirrorUriBuilder.GetPathAndQuery(new MirrorUri(userCircuit.Id));
+                    var debugMirrorPath = mirrorUriBuilder.GetPathAndQuery(new MirrorUri(userCircuit.Id, debugView: true));
                         <td>
-                            <a href="@mirrorPath"
-                               target="_blank">
-                                Open mirror
-                            </a>
+                        <a href="@mirrorPath" target="_blank">Open mirror</a>
+                        (<a href="@debugMirrorPath" target="_blank">DEBUG</a>)
                         </td>
                     }
                 </tr>

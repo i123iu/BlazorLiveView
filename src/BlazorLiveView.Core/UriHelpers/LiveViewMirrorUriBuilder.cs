@@ -17,14 +17,19 @@ internal class LiveViewMirrorUriBuilder(
         var sb = new StringBuilder();
         sb.Append(_options.MirrorUri);
         sb.Append('?');
-        sb.Append($"circuitId={Uri.EscapeDataString(mirrorUri.sourceCircuitId)}");
+        sb.Append($"{nameof(MirrorUri.sourceCircuitId)}={Uri.EscapeDataString(mirrorUri.sourceCircuitId)}");
+        if (mirrorUri.debugView)
+        {
+            sb.Append('&');
+            sb.Append($"{nameof(MirrorUri.debugView)}=1");
+        }
         return sb.ToString();
     }
 
     public bool TryParse(Uri uri, [NotNullWhen(true)] out MirrorUri mirrorUri)
     {
         var path = uri.AbsolutePath.AsSpan().TrimEnd('/');
-        var expectedPath = _options.MirrorUri.AsSpan().TrimEnd('/');
+        var expectedPath = _options.MirrorUri.AsSpan();
         if (!path.Equals(expectedPath, StringComparison.OrdinalIgnoreCase))
         {
             mirrorUri = default;
@@ -32,14 +37,22 @@ internal class LiveViewMirrorUriBuilder(
         }
 
         var query = HttpUtility.ParseQueryString(uri.Query);
-        var circuitId = query.Get("circuitId");
+
+        var circuitId = query.Get(nameof(MirrorUri.sourceCircuitId));
         if (string.IsNullOrEmpty(circuitId))
         {
             mirrorUri = default;
             return false;
         }
 
-        mirrorUri = new MirrorUri(circuitId);
+        var debugViewStr = query.Get(nameof(MirrorUri.debugView));
+        var debugView = false;
+        if (!string.IsNullOrEmpty(debugViewStr) && debugViewStr.Equals("1"))
+        {
+            debugView = true;
+        }
+
+        mirrorUri = new MirrorUri(circuitId, debugView);
         return true;
     }
 }

@@ -37,6 +37,10 @@ internal sealed class CircuitHostPatcher : IPatcher
         );
     }
 
+    /// <summary>
+    /// Called when the location (URL) of the client's window has changed. 
+    /// Update its mirror circuits. 
+    /// </summary>
     private static void OnLocationChangedAsync_Postfix(
         object __instance
     )

@@ -14,12 +14,14 @@ namespace BlazorLiveView.Core.Components;
 /// </summary>
 internal sealed class MirrorComponent(
     ICircuitTracker circuitTracker,
-    IRenderTreeMirrorTranslatorFactory translatorFactory,
+    IRenderTreeTranslatorFactory translatorFactory,
     ILogger<MirrorComponent> logger
 ) : IComponent
 {
+    public const int NO_PARAMETERS = 3;
+
     private readonly ICircuitTracker _circuitTracker = circuitTracker;
-    private readonly IRenderTreeMirrorTranslatorFactory _translatorFactory = translatorFactory;
+    private readonly IRenderTreeTranslatorFactory _translatorFactory = translatorFactory;
     private readonly ILogger<MirrorComponent> _logger = logger;
     private RenderHandle _renderHandle;
 
@@ -30,7 +32,7 @@ internal sealed class MirrorComponent(
     public int ComponentId { get; set; } = 0;
 
     [Parameter]
-    public bool DebugView { get; set; } = true;
+    public bool DebugView { get; set; } = false;
 
     public void Attach(RenderHandle renderHandle)
     {
@@ -128,108 +130,33 @@ internal sealed class MirrorComponent(
         _builder.Clear();
         _builder.EnsureCapacity(frames.Length + 20);
 
-        if (DebugView)
-        {
-            BuildDebugView(componentState, frames, _builder);
-        }
-        else
-        {
-            BuildUserView(frames, _builder);
-        }
+        var translator = DebugView
+            ? _translatorFactory.CreateDebugTranslator(
+                _builder,
+                CircuitId,
+                componentState.Component.GetType(),
+                ComponentId
+            )
+            : _translatorFactory.CreateMirrorTranslator(
+                _builder, 
+                CircuitId
+            );
 
-        var view = _builder.ToArray();
-        _builder.Clear();
+        translator.TranslateRoot(frames);
 
-        return view;
-    }
-
-    private void BuildUserView(
-        ReadOnlySpan<RenderTreeFrame> frames,
-        List<RenderTreeFrame> result
-    )
-    {
-        var translator = _translatorFactory.CreateTranslator(
-            result,
-            CircuitId
-        );
-        translator.TranslateAll(frames);
-
-        string log = result.Count == 0
+        string log = _builder.Count == 0
             ? "<empty>"
-            : string.Join("\n", result.Select(frame => $"- {frame}"));
+            : string.Join("\n", _builder.Select(frame => $"- {frame}"));
         _logger.LogTrace(
             "Translated {CircuitId}{ComponentId} to: \n{Frames}",
             CircuitId,
             ComponentId,
             log
         );
-    }
 
-    private void BuildDebugView(
-        ComponentState componentState,
-        ReadOnlySpan<RenderTreeFrame> frames,
-        List<RenderTreeFrame> result
-    )
-    {
-        result.Add(RenderTreeFrameBuilder.Element(
-            0,
-            0, // Updated later
-            "div"
-        ));
-        result.Add(RenderTreeFrameBuilder.Attribute(
-            1,
-            "style",
-            "border: 1px solid black;"
-        ));
-        result.Add(RenderTreeFrameBuilder.Text(
-            2,
-            $"DEBUG VIEW OF '{componentState.Component.GetType().Name}'" +
-            $" componentId={ComponentId}"
-        ));
+        var view = _builder.ToArray();
+        _builder.Clear();
 
-        for (int i = 0; i < frames.Length; i++)
-        {
-            var frame = frames[i];
-
-            int startIndex = result.Count;
-            result.Add(RenderTreeFrameBuilder.Element(
-                3,
-                0, // Updated later
-                "div"
-            ));
-
-            switch (frame.FrameType)
-            {
-                case RenderTreeFrameType.None:
-                    // Skip
-                    break;
-
-                case RenderTreeFrameType.Component:
-                    result.Add(RenderTreeFrameBuilder.Text(
-                        4,
-                        $"{i}: {frame}, componentId={frame.ComponentId}"
-                    ));
-                    break;
-
-                default:
-                    result.Add(RenderTreeFrameBuilder.Text(
-                        4,
-                        $"{i}: {frame}"
-                    ));
-                    break;
-            }
-
-            result[startIndex] = RenderTreeFrameBuilder.Element(
-                3,
-                result.Count - startIndex,
-                "div"
-            );
-        }
-
-        result[0] = RenderTreeFrameBuilder.Element(
-            0,
-            result.Count,
-            "div"
-        );
+        return view;
     }
 }

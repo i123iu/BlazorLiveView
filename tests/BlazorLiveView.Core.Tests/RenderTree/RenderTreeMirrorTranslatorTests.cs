@@ -12,28 +12,28 @@ public class RenderTreeMirrorTranslatorTests
 
     class TestComponent : ComponentBase { }
 
-    private static List<RenderTreeFrame> TranslateAll(ReadOnlySpan<RenderTreeFrame> frames)
+    private static List<RenderTreeFrame> TranslateRoot(ReadOnlySpan<RenderTreeFrame> frames)
     {
         List<RenderTreeFrame> translated = new();
         RenderTreeMirrorTranslator translator = new(
             translated,
             CIRCUIT_ID
         );
-        translator.TranslateAll(frames);
+        translator.TranslateRoot(frames);
         return translated;
     }
 
     [Fact]
     public void Empty()
     {
-        var translated = TranslateAll(ReadOnlySpan<RenderTreeFrame>.Empty);
+        var translated = TranslateRoot(ReadOnlySpan<RenderTreeFrame>.Empty);
         Assert.Empty(translated);
     }
 
     [Fact]
     public void Text()
     {
-        var translated = TranslateAll([
+        var translated = TranslateRoot([
             RenderTreeFrameBuilder.Text(0, "text"),
         ]);
         var frame = Assert.Single(translated);
@@ -45,7 +45,7 @@ public class RenderTreeMirrorTranslatorTests
     [Fact]
     public void Element_Text()
     {
-        var translated = TranslateAll([
+        var translated = TranslateRoot([
             RenderTreeFrameBuilder.Element(0, 2, "div"),
             RenderTreeFrameBuilder.Text(1, "text"),
         ]);
@@ -69,7 +69,7 @@ public class RenderTreeMirrorTranslatorTests
     [Fact]
     public void Element_AttributeAndText()
     {
-        var translated = TranslateAll([
+        var translated = TranslateRoot([
             RenderTreeFrameBuilder.Element(0, 3, "div"),
             RenderTreeFrameBuilder.Attribute(1, "id", "the-id"),
             RenderTreeFrameBuilder.Text(2, "text"),
@@ -101,7 +101,7 @@ public class RenderTreeMirrorTranslatorTests
     [Fact]
     public void Component_Attributes()
     {
-        var translated = TranslateAll([
+        var translated = TranslateRoot([
             RenderTreeFrameBuilder.Component(0, 3, typeof(TestComponent)),
             RenderTreeFrameBuilder.Attribute(1, "Param1", "value1"),
             RenderTreeFrameBuilder.Attribute(2, "Param2", "value2"),
@@ -142,7 +142,7 @@ public class RenderTreeMirrorTranslatorTests
     [Fact]
     public void Region_MultipleChildren()
     {
-        var translated = TranslateAll([
+        var translated = TranslateRoot([
             RenderTreeFrameBuilder.Region(0, 5),
             RenderTreeFrameBuilder.Text(1, "text"),
             RenderTreeFrameBuilder.Element(2, 1, "div"),

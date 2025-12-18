@@ -13,6 +13,7 @@ internal sealed class RootMirrorComponent : IComponent, IDisposable
     {
         public IUserCircuit source;
         public int ssrComponentId;
+        public bool debugView;
     }
 
     private RenderHandle _renderHandle;
@@ -22,12 +23,13 @@ internal sealed class RootMirrorComponent : IComponent, IDisposable
     /// Initializes the parameters manually. 
     /// These parameters act as usual Blazor parameters. 
     /// </summary>
-    internal void Initialize(IUserCircuit source, int ssrComponentId)
+    internal void Initialize(IUserCircuit source, int ssrComponentId, bool debugView)
     {
         _parameters = new Parameters
         {
             source = source,
-            ssrComponentId = ssrComponentId
+            ssrComponentId = ssrComponentId,
+            debugView = debugView
         };
 
         source.CircuitStatusChanged += OnCircuitStatusChanged;
@@ -77,7 +79,11 @@ internal sealed class RootMirrorComponent : IComponent, IDisposable
                 var ssrComponentId = _parameters.Value.ssrComponentId;
                 var sourceComponentId = _parameters.Value.source
                     .SsrComponentIdToInteractiveComponentId(ssrComponentId);
-                RenderMirrorComponent(_parameters.Value.source.Id, sourceComponentId);
+                RenderMirrorComponent(
+                    _parameters.Value.source.Id,
+                    sourceComponentId,
+                    _parameters.Value.debugView
+                );
                 break;
 
             case CircuitStatus.Down:
@@ -90,14 +96,14 @@ internal sealed class RootMirrorComponent : IComponent, IDisposable
         }
     }
 
-    private void RenderMirrorComponent(string sourceId, int sourceComponentId)
+    private void RenderMirrorComponent(string sourceId, int sourceComponentId, bool debugView)
     {
         _renderHandle.Render(builder =>
         {
             builder.OpenComponent<MirrorComponent>(0);
             builder.AddAttribute(1, nameof(MirrorComponent.CircuitId), sourceId);
             builder.AddAttribute(2, nameof(MirrorComponent.ComponentId), sourceComponentId);
-            builder.AddAttribute(3, nameof(MirrorComponent.DebugView), false);
+            builder.AddAttribute(3, nameof(MirrorComponent.DebugView), debugView);
             builder.CloseComponent();
         });
     }
