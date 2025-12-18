@@ -14,12 +14,14 @@ namespace BlazorLiveView.Core.Components;
 /// </summary>
 internal sealed class MirrorComponent(
     ICircuitTracker circuitTracker,
-    IRenderTreeMirrorTranslatorFactory translatorFactory,
+    IRenderTreeTranslatorFactory translatorFactory,
     ILogger<MirrorComponent> logger
 ) : IComponent
 {
+    public const int NO_PARAMETERS = 3;
+
     private readonly ICircuitTracker _circuitTracker = circuitTracker;
-    private readonly IRenderTreeMirrorTranslatorFactory _translatorFactory = translatorFactory;
+    private readonly IRenderTreeTranslatorFactory _translatorFactory = translatorFactory;
     private readonly ILogger<MirrorComponent> _logger = logger;
     private RenderHandle _renderHandle;
 
@@ -135,9 +137,12 @@ internal sealed class MirrorComponent(
                 componentState.Component.GetType(),
                 ComponentId
             )
-            : _translatorFactory.CreateTranslator(_builder, CircuitId);
+            : _translatorFactory.CreateMirrorTranslator(
+                _builder, 
+                CircuitId
+            );
 
-        translator.TranslateAll(frames);
+        translator.TranslateRoot(frames);
 
         string log = _builder.Count == 0
             ? "<empty>"

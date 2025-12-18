@@ -1,51 +1,32 @@
-﻿using BlazorLiveView.Core.Components;
-using Microsoft.AspNetCore.Components.RenderTree;
+﻿using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace BlazorLiveView.Core.RenderTree;
 
 internal sealed class RenderTreeMirrorTranslator(
     List<RenderTreeFrame> result,
     string circuitId
-) : RenderTreeMirrorTranslatorBase(
+) : RenderTreeTranslatorBase(
     result
 )
 {
     private readonly string _circuitId = circuitId;
 
-    private void TranslateAttributes(
-        ReadOnlySpan<RenderTreeFrame> frames
-    )
+    protected override void TranslateNone(RenderTreeFrame none)
     {
-        foreach (var frame in frames)
-        {
-            if (frame.FrameType != RenderTreeFrameType.Attribute)
-                throw new ArgumentException("Expected only attribute frames.", nameof(frames));
-
-            _result.Add(RenderTreeFrameBuilder.Attribute(
-                frame.Sequence * SEQ_MUL,
-                frame.AttributeName,
-                frame.AttributeValue,
-                frame.AttributeEventHandlerId,
-                frame.AttributeEventUpdatesAttributeName
-            ));
-        }
+        // Skip
     }
 
     protected override void TranslateElement(
-        ReadOnlySpan<RenderTreeFrame> frames
+        RenderTreeFrame element,
+        ReadOnlySpan<RenderTreeFrame> attributes,
+        ReadOnlySpan<RenderTreeFrame> childFrames
     )
     {
-        var element = AssertFirstFrame(frames, RenderTreeFrameType.Element);
-        AssertEqualSubtreeLength(frames, element.ElementSubtreeLength);
+        // Replace the Element, but only change its ElementSubtreeLength, because
+        // it could have contained Components which would be replaced with
+        // MirrorComponents and so the subtree length would change. 
 
-        int newElementIndex = StartCaptureSubtreeLength();
-
-        var attributes = TakeAttributes(frames[1..]);
-        TranslateAttributes(attributes);
-
-        TranslateAll(frames[(1 + attributes.Length)..]);
-
-        StopCaptureSubtreeLength(newElementIndex, subtreeLength =>
+        SubtreeLengthCapture newElement = new(_result, subtreeLength =>
             RenderTreeFrameBuilder.Element(
                 element.Sequence * SEQ_MUL,
                 subtreeLength,
@@ -53,20 +34,42 @@ internal sealed class RenderTreeMirrorTranslator(
                 element.ElementKey
             )
         );
+
+        // Translate attributes
+        for (int i = 0; i < attributes.Length; i++)
+        {
+            var attribute = attributes[i];
+            _result.Add(RenderTreeFrameBuilder.Attribute(
+                attribute.Sequence * SEQ_MUL,
+                attribute.AttributeName,
+                attribute.AttributeValue,
+                attribute.AttributeEventHandlerId,
+                attribute.AttributeEventUpdatesAttributeName
+            ));
+        }
+
+        // Tranlate contents
+        TranslateAll(childFrames);
+
+        newElement.Dispose();
+    }
+
+    protected override void TranslateText(
+        RenderTreeFrame text
+    )
+    {
+        _result.Add(RenderTreeFrameBuilder.Text(
+            text.Sequence * SEQ_MUL,
+            text.TextContent
+        ));
     }
 
     protected override void TranslateComponent(
-        ReadOnlySpan<RenderTreeFrame> frames
+        RenderTreeFrame component,
+        ReadOnlySpan<RenderTreeFrame> attributes
     )
     {
-        var component = AssertFirstFrame(frames, RenderTreeFrameType.Component);
-        AssertEqualSubtreeLength(frames, component.ComponentSubtreeLength);
-
-        var originalAttributes = TakeAttributes(frames[1..]);
-        if (originalAttributes.Length != frames.Length - 1)
-        {
-            throw new Exception("Component contains more than just attributes");
-        }
+        // Ignore original Component and its Attributs and replace it with custom MirrorComponent
 
         AddMirrorComponent(
             component.Sequence * SEQ_MUL,
@@ -78,63 +81,31 @@ internal sealed class RenderTreeMirrorTranslator(
     }
 
     protected override void TranslateRegion(
-        ReadOnlySpan<RenderTreeFrame> frames
+        RenderTreeFrame region,
+        ReadOnlySpan<RenderTreeFrame> childFrames
     )
     {
-        var region = AssertFirstFrame(frames, RenderTreeFrameType.Region);
-        AssertEqualSubtreeLength(frames, region.RegionSubtreeLength);
+        // Change RegionSubtreeLength - same as with Elements
 
-        if (frames.Length > 2 && frames[1].FrameType == RenderTreeFrameType.Attribute)
-        {
-            throw new Exception("Region first frame should not be an attribute");
-        }
-
-        int newRegionIndex = StartCaptureSubtreeLength();
-
-        TranslateAll(frames[1..]);
-
-        StopCaptureSubtreeLength(newRegionIndex, subtreeLength =>
+        SubtreeLengthCapture newRegion = new(_result, subtreeLength =>
             RenderTreeFrameBuilder.Region(
                 region.Sequence * SEQ_MUL,
                 subtreeLength
             )
         );
+
+        TranslateAll(childFrames);
+
+        newRegion.Dispose();
     }
 
-    protected override void TranslateText(
-        RenderTreeFrame frame
+    protected override void TranslateMarkup(
+        RenderTreeFrame markup
     )
     {
-        if (frame.FrameType != RenderTreeFrameType.Text)
-            throw new ArgumentException($"Expected frame {frame.FrameType} to be of type Text.", nameof(frame));
-
-        _result.Add(RenderTreeFrameBuilder.Text(
-            frame.Sequence * SEQ_MUL,
-            frame.TextContent
-        ));
-    }
-
-    protected override void TranslateMarkup(RenderTreeFrame frame)
-    {
-        if (frame.FrameType != RenderTreeFrameType.Markup)
-            throw new ArgumentException($"Expected frame {frame.FrameType} to be of type Markup.", nameof(frame));
-
         _result.Add(RenderTreeFrameBuilder.Markup(
-            frame.Sequence * SEQ_MUL,
-            frame.MarkupContent
+            markup.Sequence * SEQ_MUL,
+            markup.MarkupContent
         ));
-    }
-
-    private static ReadOnlySpan<RenderTreeFrame> TakeAttributes(
-        ReadOnlySpan<RenderTreeFrame> frames
-    )
-    {
-        int count;
-        for (count = 0; count < frames.Length; count++)
-        {
-            if (frames[count].FrameType != RenderTreeFrameType.Attribute)
-                break;
-        }
-        return frames[..count];
     }
 }

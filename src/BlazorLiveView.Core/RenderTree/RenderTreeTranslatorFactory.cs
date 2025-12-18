@@ -2,10 +2,10 @@
 
 namespace BlazorLiveView.Core.RenderTree;
 
-internal sealed class RenderTreeMirrorTranslatorFactory
-    : IRenderTreeMirrorTranslatorFactory
+internal sealed class RenderTreeTranslatorFactory
+    : IRenderTreeTranslatorFactory
 {
-    public IRenderTreeMirrorTranslator CreateTranslator(
+    public IRenderTreeTranslator CreateMirrorTranslator(
         List<RenderTreeFrame> result,
         string circuitId
     )
@@ -16,14 +16,14 @@ internal sealed class RenderTreeMirrorTranslatorFactory
         );
     }
 
-    public IRenderTreeMirrorTranslator CreateDebugTranslator(
+    public IRenderTreeTranslator CreateDebugTranslator(
         List<RenderTreeFrame> result, 
         string circuitId,
         Type componentType,
         int componentId
     )
     {
-        return new RenderTreeDebugMirrorTranslator(
+        return new RenderTreeDebugTranslator(
             result,
             circuitId,
             componentType,

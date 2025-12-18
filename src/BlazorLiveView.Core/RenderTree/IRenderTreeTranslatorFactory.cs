@@ -2,14 +2,14 @@
 
 namespace BlazorLiveView.Core.RenderTree;
 
-internal interface IRenderTreeMirrorTranslatorFactory
+internal interface IRenderTreeTranslatorFactory
 {
-    IRenderTreeMirrorTranslator CreateTranslator(
+    IRenderTreeTranslator CreateMirrorTranslator(
         List<RenderTreeFrame> result,
         string circuitId
     );
 
-    IRenderTreeMirrorTranslator CreateDebugTranslator(
+    IRenderTreeTranslator CreateDebugTranslator(
         List<RenderTreeFrame> result,
         string circuitId,
         Type componentType,

@@ -29,7 +29,7 @@ public static class LiveViewExtensions
         builder.Services
             .AddSingleton<ICircuitTracker, CircuitTracker>()
             .AddSingleton<CircuitHandler, LiveViewCircuitHandler>()
-            .AddSingleton<IRenderTreeMirrorTranslatorFactory, RenderTreeMirrorTranslatorFactory>()
+            .AddSingleton<IRenderTreeTranslatorFactory, RenderTreeTranslatorFactory>()
             .AddSingleton<ILiveViewMirrorUriBuilder, LiveViewMirrorUriBuilder>()
             .AddScoped<CircuitHandler, CurrentCircuitHandler>()
             .AddScoped<ICurrentCircuit, CurrentCircuit>()
