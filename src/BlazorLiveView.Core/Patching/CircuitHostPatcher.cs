@@ -35,6 +35,16 @@ internal sealed class CircuitHostPatcher : IPatcher
                 OnLocationChangedAsync_Postfix
             )
         );
+
+        harmony.Patch(
+            AccessTools.Method(
+                Types.CircuitHost,
+                "BeginInvokeDotNetFromJS"
+            ),
+            prefix: new HarmonyMethod(
+                BeginInvokeDotNetFromJS_Prefix
+            )
+        );
     }
 
     /// <summary>
@@ -59,5 +69,31 @@ internal sealed class CircuitHostPatcher : IPatcher
         {
             userCircuit.NotifyUriChanged();
         }
+    }
+
+    private static bool BeginInvokeDotNetFromJS_Prefix(
+        object __instance
+    )
+    {
+        CircuitHostWrapper circuitHost = new(__instance);
+        var circuitId = circuitHost.Circuit.Inner.Id;
+        var circuit = _circuitTracker.GetCircuit(circuitId);
+        if (circuit is null)
+        {
+            _logger.LogError("Circuit {CircuitId} not found",
+                circuitId);
+            return true;
+        }
+
+        if (circuit is IMirrorCircuit)
+        {
+            // Skip the original function
+            // TODO?: passing e.g. button clicks to the original user circuit
+            _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ", 
+                circuit.Id);
+            return false;
+        }
+
+        return true;
     }
 }
