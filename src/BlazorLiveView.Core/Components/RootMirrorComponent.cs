@@ -1,5 +1,7 @@
 ﻿using BlazorLiveView.Core.Circuits;
+using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 
 namespace BlazorLiveView.Core.Components;
 
@@ -7,7 +9,9 @@ namespace BlazorLiveView.Core.Components;
 /// Root web component for mirror circuits. 
 /// Contains one child <see cref="MirrorComponent"/>. 
 /// </summary>
-internal sealed class RootMirrorComponent : IComponent, IDisposable
+internal sealed class RootMirrorComponent(
+    IOptions<LiveViewOptions> liveViewOptions
+) : IComponent, IDisposable
 {
     private struct Parameters
     {
@@ -16,6 +20,7 @@ internal sealed class RootMirrorComponent : IComponent, IDisposable
         public bool debugView;
     }
 
+    private readonly LiveViewOptions _liveViewOptions = liveViewOptions.Value;
     private RenderHandle _renderHandle;
     private Parameters? _parameters = null;
 
@@ -105,6 +110,21 @@ internal sealed class RootMirrorComponent : IComponent, IDisposable
             builder.AddAttribute(2, nameof(MirrorComponent.ComponentId), sourceComponentId);
             builder.AddAttribute(3, nameof(MirrorComponent.DebugView), debugView);
             builder.CloseComponent();
+
+            if (_liveViewOptions.UseScreenOverlay)
+            {
+                builder.OpenElement(4, "div");
+                builder.AddAttribute(5, "style",
+                    """
+                    position: fixed;
+                    left: 0px;
+                    right: 0px;
+                    top: 0px;
+                    bottom: 0px;
+                    z-index: 1000000;
+                    """);
+                builder.CloseElement();
+            }
         });
     }
 
