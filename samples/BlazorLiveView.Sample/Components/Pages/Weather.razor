@@ -1,10 +1,17 @@
 ﻿@page "/weather"
+@inject IJSRuntime JS
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
 <p>This component demonstrates showing data.</p>
+
+<script>
+function test() {
+    alert("test");
+}
+</script>
 
 @if (forecasts == null)
 {
@@ -51,6 +58,11 @@ else
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = summaries[Random.Shared.Next(summaries.Length)]
         }).ToArray();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("alert", "Weather data loaded");
     }
 
     private class WeatherForecast
