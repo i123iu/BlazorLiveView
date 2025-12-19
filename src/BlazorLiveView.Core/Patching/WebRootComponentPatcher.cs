@@ -55,7 +55,11 @@ internal sealed class WebRootComponentPatcher : IPatcher
         out State __state
     )
     {
-        __state = new State { overwritten = false };
+        __state = new State
+        {
+            overwritten = false,
+            errored = false
+        };
 
         try
         {
@@ -89,6 +93,7 @@ internal sealed class WebRootComponentPatcher : IPatcher
         }
         catch (Exception ex)
         {
+            __state.errored = true;
             _patchExceptionHandler.LogPrefixException(_logger, nameof(Create_Prefix), ex);
         }
     }
@@ -98,6 +103,11 @@ internal sealed class WebRootComponentPatcher : IPatcher
         State __state
     )
     {
+        if (__state.errored)
+        {
+            return;
+        }
+
         if (!__state.overwritten)
         {
             return;
@@ -131,6 +141,7 @@ internal sealed class WebRootComponentPatcher : IPatcher
 
     private struct State
     {
+        public bool errored;
         public bool overwritten;
         public int mirrorSsrComponentId;
         public IMirrorCircuit mirrorCircuit;
