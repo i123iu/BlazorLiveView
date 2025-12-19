@@ -31,6 +31,7 @@ public static class LiveViewExtensions
             .AddSingleton<CircuitHandler, LiveViewCircuitHandler>()
             .AddSingleton<IRenderTreeTranslatorFactory, RenderTreeTranslatorFactory>()
             .AddSingleton<ILiveViewMirrorUriBuilder, LiveViewMirrorUriBuilder>()
+            .AddSingleton<IPatchExceptionHandler, PatchExceptionHandler>()
             .AddScoped<CircuitHandler, CurrentCircuitHandler>()
             .AddScoped<ICurrentCircuit, CurrentCircuit>()
             .Scan(scan => scan

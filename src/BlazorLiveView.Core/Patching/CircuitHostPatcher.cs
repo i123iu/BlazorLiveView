@@ -14,14 +14,17 @@ internal sealed class CircuitHostPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
     private static ILogger<CircuitHostPatcher> _logger = null!;
+    private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public CircuitHostPatcher(
         ICircuitTracker circuitTracker,
-        ILogger<CircuitHostPatcher> logger
+        ILogger<CircuitHostPatcher> logger,
+        IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
         _logger = logger;
+        _patchExceptionHandler = patchExceptionHandler;
     }
 
     public void Patch(Harmony harmony)
@@ -54,28 +57,35 @@ internal sealed class CircuitHostPatcher : IPatcher
         object __instance
     )
     {
-        CircuitHostWrapper circuitHost = new(__instance);
-        var circuitId = circuitHost.Circuit.Inner.Id;
-        var circuit = _circuitTracker.GetCircuit(circuitId);
-        if (circuit is null)
+        try
         {
-            _logger.LogError("Circuit {CircuitId} not found",
-                circuitId);
-            return;
-        }
+            CircuitHostWrapper circuitHost = new(__instance);
+            var circuitId = circuitHost.Circuit.Inner.Id;
+            var circuit = _circuitTracker.GetCircuit(circuitId);
+            if (circuit is null)
+            {
+                _logger.LogError("Circuit {CircuitId} not found",
+                    circuitId);
+                return;
+            }
 
-        if (circuit is IUserCircuit userCircuit)
-        {
-            // Update the mirror circuits mirroring this user circuit
-            userCircuit.NotifyUriChanged();
+            if (circuit is IUserCircuit userCircuit)
+            {
+                // Update the mirror circuits mirroring this user circuit
+                userCircuit.NotifyUriChanged();
+            }
+            else if (circuit is IMirrorCircuit mirrorCircuit)
+            {
+                // The location of a mirror circuit should not change (it should
+                // always be <see cref="LiveViewOptions.MirrorUri"/>).
+                mirrorCircuit.SetBlocked(new MirrorCircuitBlockReason(
+                    "Mirror circuit's location changed. "
+                ));
+            }
         }
-        else if (circuit is IMirrorCircuit mirrorCircuit)
+        catch (Exception ex)
         {
-            // The location of a mirror circuit should not change (it should
-            // always be <see cref="LiveViewOptions.MirrorUri"/>).
-            mirrorCircuit.SetBlocked(new MirrorCircuitBlockReason(
-                "Mirror circuit's location changed. "
-            ));
+            _patchExceptionHandler.LogPostfixException(_logger, nameof(OnLocationChangedAsync_Postfix), ex);
         }
     }
 
@@ -87,30 +97,37 @@ internal sealed class CircuitHostPatcher : IPatcher
         object __instance
     )
     {
-        CircuitHostWrapper circuitHost = new(__instance);
-        var circuitId = circuitHost.Circuit.Inner.Id;
-        var circuit = _circuitTracker.GetCircuit(circuitId);
-        if (circuit is null)
+        try
         {
-            _logger.LogError("Circuit {CircuitId} not found",
-                circuitId);
-            return true;
+            CircuitHostWrapper circuitHost = new(__instance);
+            var circuitId = circuitHost.Circuit.Inner.Id;
+            var circuit = _circuitTracker.GetCircuit(circuitId);
+            if (circuit is null)
+            {
+                _logger.LogError("Circuit {CircuitId} not found",
+                    circuitId);
+                return true;
+            }
+
+            if (circuit is IMirrorCircuit)
+            {
+                // Skip the original function
+                // TODO?: passing e.g. button clicks to the original user circuit
+                _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
+                    circuit.Id);
+
+                // The original function BeginInvokeDotNetFromJS calls the requested
+                // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
+                // the function means also skipping the response. The web app will
+                // probably wait for the response indefinitely, but this should not
+                // be a problem as the mirror user should not interact with the app
+                // anyway. 
+                return false;
+            }
         }
-
-        if (circuit is IMirrorCircuit)
+        catch (Exception ex)
         {
-            // Skip the original function
-            // TODO?: passing e.g. button clicks to the original user circuit
-            _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
-                circuit.Id);
-
-            // The original function BeginInvokeDotNetFromJS calls the requested
-            // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
-            // the function means also skipping the response. The web app will
-            // probably wait for the response indefinitely, but this should not
-            // be a problem as the mirror user should not interact with the app
-            // anyway. 
-            return false;
+            _patchExceptionHandler.LogPrefixException(_logger, nameof(BeginInvokeDotNetFromJS_Prefix), ex);
         }
 
         return true;
