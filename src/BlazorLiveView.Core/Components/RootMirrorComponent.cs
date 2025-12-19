@@ -15,7 +15,7 @@ internal sealed class RootMirrorComponent(
 {
     private struct Parameters
     {
-        public IUserCircuit source;
+        public IMirrorCircuit mirrorCircuit;
         public int ssrComponentId;
         public bool debugView;
     }
@@ -28,31 +28,49 @@ internal sealed class RootMirrorComponent(
     /// Initializes the parameters manually. 
     /// These parameters act as usual Blazor parameters. 
     /// </summary>
-    internal void Initialize(IUserCircuit source, int ssrComponentId, bool debugView)
+    internal void Initialize(IMirrorCircuit mirrorCircuit, int ssrComponentId, bool debugView)
     {
+        if (_parameters != null)
+            throw new InvalidOperationException("Already initialized");
+
         _parameters = new Parameters
         {
-            source = source,
+            mirrorCircuit = mirrorCircuit,
             ssrComponentId = ssrComponentId,
             debugView = debugView
         };
 
-        source.CircuitStatusChanged += OnCircuitStatusChanged;
+        mirrorCircuit.MirrorCircuitBlocked += OnMirrorCircuitBlocked;
+        mirrorCircuit.SourceCircuit.CircuitStatusChanged += OnSourceCircuitStatusChanged;
     }
 
     public void Dispose()
     {
         if (_parameters is not null)
         {
-            _parameters.Value.source.CircuitStatusChanged -= OnCircuitStatusChanged;
+            _parameters.Value.mirrorCircuit.MirrorCircuitBlocked -= OnMirrorCircuitBlocked;
+            _parameters.Value.mirrorCircuit.SourceCircuit.CircuitStatusChanged -= OnSourceCircuitStatusChanged;
             _parameters = null;
         }
     }
 
-    private void OnCircuitStatusChanged(ICircuit circuit)
+    private void OnMirrorCircuitBlocked(IMirrorCircuit circuit)
     {
-        if (_parameters is null) throw new InvalidOperationException();
-        if (!ReferenceEquals(_parameters.Value.source, circuit)) throw new InvalidOperationException();
+        if (_parameters is null)
+            throw new InvalidOperationException();
+        if (_parameters.Value.mirrorCircuit.Id != circuit.Id)
+            throw new InvalidOperationException();
+
+        _renderHandle.Dispatcher.InvokeAsync(Render);
+    }
+
+    private void OnSourceCircuitStatusChanged(ICircuit circuit)
+    {
+        if (_parameters is null)
+            throw new InvalidOperationException();
+        if (_parameters.Value.mirrorCircuit.SourceCircuit.Id != circuit.Id)
+            throw new InvalidOperationException();
+
         _renderHandle.Dispatcher.InvokeAsync(Render);
     }
 
@@ -74,20 +92,30 @@ internal sealed class RootMirrorComponent(
             return;
         }
 
-        switch (_parameters.Value.source.CircuitStatus)
+        Parameters parameters = _parameters.Value;
+
+        if (parameters.mirrorCircuit.IsBlocked)
+        {
+            // This mirror circuit has been blocked - display the block message
+            var blockReason = parameters.mirrorCircuit.BlockReason;
+            RenderMessage(blockReason.message);
+            return;
+        }
+
+        switch (parameters.mirrorCircuit.SourceCircuit.CircuitStatus)
         {
             case CircuitStatus.Open:
                 RenderMessage("Target connection is starting...");
                 break;
 
             case CircuitStatus.Up:
-                var ssrComponentId = _parameters.Value.ssrComponentId;
-                var sourceComponentId = _parameters.Value.source
+                var ssrComponentId = parameters.ssrComponentId;
+                var sourceComponentId = parameters.mirrorCircuit.SourceCircuit
                     .SsrComponentIdToInteractiveComponentId(ssrComponentId);
                 RenderMirrorComponent(
-                    _parameters.Value.source.Id,
+                    parameters.mirrorCircuit.SourceCircuit.Id,
                     sourceComponentId,
-                    _parameters.Value.debugView
+                    parameters.debugView
                 );
                 break;
 
@@ -98,6 +126,8 @@ internal sealed class RootMirrorComponent(
             case CircuitStatus.Closed:
                 RenderMessage("Target connection is closed.");
                 break;
+
+            default: throw new NotImplementedException();
         }
     }
 

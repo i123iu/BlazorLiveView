@@ -69,6 +69,14 @@ internal sealed class CircuitHostPatcher : IPatcher
         {
             userCircuit.NotifyUriChanged();
         }
+        else if (circuit is IMirrorCircuit mirrorCircuit)
+        {
+            /// The location of a mirror circuit should not change (it should
+            /// always be <see cref="LiveViewOptions.MirrorUri"/>).
+            mirrorCircuit.SetBlocked(new MirrorCircuitBlockReason(
+                "Mirror circuit's location changed. "
+            ));
+        }
     }
 
     private static bool BeginInvokeDotNetFromJS_Prefix(
@@ -89,7 +97,7 @@ internal sealed class CircuitHostPatcher : IPatcher
         {
             // Skip the original function
             // TODO?: passing e.g. button clicks to the original user circuit
-            _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ", 
+            _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
                 circuit.Id);
             return false;
         }

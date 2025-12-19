@@ -6,7 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace BlazorLiveView.Core.Circuits;
 
 internal sealed class CircuitTracker(
-    ILogger<CircuitTracker> logger
+    ILogger<CircuitTracker> logger,
+    ILoggerFactory loggerFactory
 ) : ICircuitTracker
 {
     public event ICircuitTracker.CircuitOpenedHandler? CircuitOpenedEvent;
@@ -14,6 +15,7 @@ internal sealed class CircuitTracker(
 
     private readonly Lock _lock = new();
     private readonly ILogger<CircuitTracker> _logger = logger;
+    private readonly ILoggerFactory _loggerFactory = loggerFactory;
 
     private readonly Dictionary<string, ICircuit> _circuitsById = new();
     private readonly Dictionary<Renderer, ICircuit> _circuitsByRenderer = new();
@@ -96,14 +98,24 @@ internal sealed class CircuitTracker(
                 _logger.LogInformation("Mirror circuit opened: {CircuitId}",
                     blazorCircuit.Id);
 
-                circuit = new MirrorCircuit(blazorCircuit, pending.source, DateTime.UtcNow, pending.debugView);
+                circuit = new MirrorCircuit(
+                    blazorCircuit,
+                    pending.source,
+                    DateTime.UtcNow,
+                    pending.debugView,
+                    _loggerFactory.CreateLogger<MirrorCircuit>()
+                );
             }
             else
             {
                 _logger.LogInformation("User circuit opened: {CircuitId}",
                     blazorCircuit.Id);
 
-                circuit = new UserCircuit(blazorCircuit, DateTime.UtcNow);
+                circuit = new UserCircuit(
+                    blazorCircuit,
+                    DateTime.UtcNow,
+                    _loggerFactory.CreateLogger<UserCircuit>()
+                );
             }
 
             _circuitsById.Add(blazorCircuit.Id, circuit);
@@ -141,6 +153,12 @@ internal sealed class CircuitTracker(
                 throw new InvalidOperationException(
                     $"Circuit with id '{blazorCircuit.Id}' is not tracked."
                 );
+            }
+
+            if (circuit.CircuitStatus == CircuitStatus.Down)
+            {
+                // Blazor can call CircuitDown twice when closing
+                return;
             }
 
             _logger.LogInformation("Circuit down: {CircuitId}", blazorCircuit.Id);

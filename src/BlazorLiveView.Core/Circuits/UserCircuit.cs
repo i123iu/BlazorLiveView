@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.Circuits;
 
 internal sealed class UserCircuit(
     Circuit circuit,
-    DateTime openedAt
-) : CircuitBase(circuit, openedAt), IUserCircuit
+    DateTime openedAt,
+    ILogger<UserCircuit> logger
+) : CircuitBase(circuit, openedAt, logger), IUserCircuit
 {
     public event IUserCircuit.UriChangedHandler? UriChanged;
     public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
