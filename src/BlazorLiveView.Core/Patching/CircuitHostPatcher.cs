@@ -35,11 +35,20 @@ internal sealed class CircuitHostPatcher : IPatcher
                 OnLocationChangedAsync_Postfix
             )
         );
+
+        harmony.Patch(
+            AccessTools.Method(
+                Types.CircuitHost,
+                "BeginInvokeDotNetFromJS"
+            ),
+            prefix: new HarmonyMethod(
+                BeginInvokeDotNetFromJS_Prefix
+            )
+        );
     }
 
     /// <summary>
     /// Called when the location (URL) of the client's window has changed. 
-    /// Update its mirror circuits. 
     /// </summary>
     private static void OnLocationChangedAsync_Postfix(
         object __instance
@@ -57,7 +66,53 @@ internal sealed class CircuitHostPatcher : IPatcher
 
         if (circuit is IUserCircuit userCircuit)
         {
+            // Update the mirror circuits mirroring this user circuit
             userCircuit.NotifyUriChanged();
         }
+        else if (circuit is IMirrorCircuit mirrorCircuit)
+        {
+            // The location of a mirror circuit should not change (it should
+            // always be <see cref="LiveViewOptions.MirrorUri"/>).
+            mirrorCircuit.SetBlocked(new MirrorCircuitBlockReason(
+                "Mirror circuit's location changed. "
+            ));
+        }
+    }
+
+    /// <summary>
+    /// Called for example on events like "onclick". Mirror circuits should not
+    /// be able to interact with the app, so we skip the original function. 
+    /// </summary>
+    private static bool BeginInvokeDotNetFromJS_Prefix(
+        object __instance
+    )
+    {
+        CircuitHostWrapper circuitHost = new(__instance);
+        var circuitId = circuitHost.Circuit.Inner.Id;
+        var circuit = _circuitTracker.GetCircuit(circuitId);
+        if (circuit is null)
+        {
+            _logger.LogError("Circuit {CircuitId} not found",
+                circuitId);
+            return true;
+        }
+
+        if (circuit is IMirrorCircuit)
+        {
+            // Skip the original function
+            // TODO?: passing e.g. button clicks to the original user circuit
+            _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
+                circuit.Id);
+
+            // The original function BeginInvokeDotNetFromJS calls the requested
+            // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
+            // the function means also skipping the response. The web app will
+            // probably wait for the response indefinitely, but this should not
+            // be a problem as the mirror user should not interact with the app
+            // anyway. 
+            return false;
+        }
+
+        return true;
     }
 }

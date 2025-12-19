@@ -29,4 +29,12 @@ public sealed class LiveViewOptions
             _mirrorUri = value;
         }
     }
+
+    /// <summary>
+    /// If set to true, a div element will be placed over the screen of all
+    /// mirror circuits to disable interacting with the app. This is only a
+    /// precaution, as interactions should not do anything and be ignored. 
+    /// The user of the mirror circuit can still scroll normally. 
+    /// </summary>
+    public bool UseScreenOverlay { get; set; } = true;
 }
