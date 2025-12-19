@@ -49,7 +49,6 @@ internal sealed class CircuitHostPatcher : IPatcher
 
     /// <summary>
     /// Called when the location (URL) of the client's window has changed. 
-    /// Update its mirror circuits. 
     /// </summary>
     private static void OnLocationChangedAsync_Postfix(
         object __instance
@@ -67,18 +66,23 @@ internal sealed class CircuitHostPatcher : IPatcher
 
         if (circuit is IUserCircuit userCircuit)
         {
+            // Update the mirror circuits mirroring this user circuit
             userCircuit.NotifyUriChanged();
         }
         else if (circuit is IMirrorCircuit mirrorCircuit)
         {
-            /// The location of a mirror circuit should not change (it should
-            /// always be <see cref="LiveViewOptions.MirrorUri"/>).
+            // The location of a mirror circuit should not change (it should
+            // always be <see cref="LiveViewOptions.MirrorUri"/>).
             mirrorCircuit.SetBlocked(new MirrorCircuitBlockReason(
                 "Mirror circuit's location changed. "
             ));
         }
     }
 
+    /// <summary>
+    /// Called for example on events like "onclick". Mirror circuits should not
+    /// be able to interact with the app, so we skip the original function. 
+    /// </summary>
     private static bool BeginInvokeDotNetFromJS_Prefix(
         object __instance
     )
@@ -99,6 +103,13 @@ internal sealed class CircuitHostPatcher : IPatcher
             // TODO?: passing e.g. button clicks to the original user circuit
             _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
                 circuit.Id);
+
+            // The original function BeginInvokeDotNetFromJS calls the requested
+            // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
+            // the function means also skipping the response. The web app will
+            // probably wait for the response indefinitely, but this should not
+            // be a problem as the mirror user should not interact with the app
+            // anyway. 
             return false;
         }
 
