@@ -22,18 +22,21 @@ internal sealed class CircuitFactoryPatcher : IPatcher
     private static LiveViewOptions _liveViewOptions = null!;
     private static ILiveViewMirrorUriBuilder _mirrorUriBuilder = null!;
     private static ILogger<CircuitFactoryPatcher> _logger = null!;
+    private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public CircuitFactoryPatcher(
         ICircuitTracker circuitTracker,
         IOptions<LiveViewOptions> options,
         ILiveViewMirrorUriBuilder mirrorUriBuilder,
-        ILogger<CircuitFactoryPatcher> logger
+        ILogger<CircuitFactoryPatcher> logger,
+        IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
         _liveViewOptions = options.Value;
         _mirrorUriBuilder = mirrorUriBuilder;
         _logger = logger;
+        _patchExceptionHandler = patchExceptionHandler;
     }
 
     public void Patch(Harmony harmony)
@@ -54,6 +57,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
     private struct State
     {
+        public bool errored;
         public bool isMirror;
         public IUserCircuit? sourceCircuit;
         public bool debugView;
@@ -67,59 +71,68 @@ internal sealed class CircuitFactoryPatcher : IPatcher
     {
         __state = new State
         {
+            errored = false,
             isMirror = false,
             sourceCircuit = null,
         };
 
-        if (!TryGetUriPath(baseUri, uri, out var path))
+        try
         {
-            // Invalid URI
-            // Should be invalid for Blazor as well
-            _logger.LogWarning("Invalid URI: {Uri}", uri);
-            return;
+            if (!TryGetUriPath(baseUri, uri, out var path))
+            {
+                // Invalid URI
+                // Should be invalid for Blazor as well
+                _logger.LogWarning("Invalid URI: {Uri}", uri);
+                return;
+            }
+
+            path = path.TrimStart('/');
+            var liveViewPath = _liveViewOptions.MirrorUri.AsSpan().TrimStart('/');
+            if (!path.StartsWith(liveViewPath, StringComparison.OrdinalIgnoreCase))
+            {
+                // Not targeting mirror path
+                return;
+            }
+
+            if (!_mirrorUriBuilder.TryParse(new Uri(uri), out var parsedUri))
+            {
+                // Invalid path should have triggered an error in the mirror endpoint controller
+                _logger.LogError("Failed to parse mirror URI: {Uri}", uri);
+                return;
+            }
+
+            var sourceCircuit = _circuitTracker.GetCircuit(parsedUri.sourceCircuitId);
+            if (sourceCircuit is null)
+            {
+                // This should have been caught in the mirror endpoint controller
+                _logger.LogWarning("No circuit found with ID: {CircuitId}",
+                    parsedUri.sourceCircuitId);
+                return;
+            }
+
+            if (sourceCircuit is not IUserCircuit sourceUserCircuit)
+            {
+                // Also should have been caught in the mirror endpoint controller
+                _logger.LogWarning("Cannot mirror a mirror circuit. Circuit ID: {CircuitId}",
+                    parsedUri.sourceCircuitId);
+                return;
+            }
+
+            // "Redirect" the mirror to the source's URI
+            uri = sourceUserCircuit.Uri;
+
+            __state = new State
+            {
+                isMirror = true,
+                sourceCircuit = sourceUserCircuit,
+                debugView = parsedUri.debugView
+            };
         }
-
-        path = path.TrimStart('/');
-        var liveViewPath = _liveViewOptions.MirrorUri.AsSpan().TrimStart('/');
-        if (!path.StartsWith(liveViewPath, StringComparison.OrdinalIgnoreCase))
+        catch (Exception ex)
         {
-            // Not targeting mirror path
-            return;
+            __state.errored = true;
+            _patchExceptionHandler.LogPrefixException(_logger, nameof(CreateCircuitHostAsync_Prefix), ex);
         }
-
-        if (!_mirrorUriBuilder.TryParse(new Uri(uri), out var parsedUri))
-        {
-            // Invalid path should have triggered an error in the mirror endpoint controller
-            _logger.LogError("Failed to parse mirror URI: {Uri}", uri);
-            return;
-        }
-
-        var sourceCircuit = _circuitTracker.GetCircuit(parsedUri.sourceCircuitId);
-        if (sourceCircuit is null)
-        {
-            // This should have been caught in the mirror endpoint controller
-            _logger.LogWarning("No circuit found with ID: {CircuitId}",
-                parsedUri.sourceCircuitId);
-            return;
-        }
-
-        if (sourceCircuit is not IUserCircuit sourceUserCircuit)
-        {
-            // Also should have been caught in the mirror endpoint controller
-            _logger.LogWarning("Cannot mirror a mirror circuit. Circuit ID: {CircuitId}",
-                parsedUri.sourceCircuitId);
-            return;
-        }
-
-        // "Redirect" the mirror to the source's URI
-        uri = sourceUserCircuit.Uri;
-
-        __state = new State
-        {
-            isMirror = true,
-            sourceCircuit = sourceUserCircuit,
-            debugView = parsedUri.debugView
-        };
     }
 
     private static bool TryGetUriPath(
@@ -146,6 +159,11 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         State __state
     )
     {
+        if (__state.errored)
+        {
+            return;
+        }
+
         if (!__state.isMirror)
         {
             return;
@@ -156,13 +174,20 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         // is returned and the connection is initialized. CircuitHost is an
         // internal type so we need to use reflection.
 
-        ValueTaskOfCircuitHostWrapper valueTask = new(__result);
-        var task = valueTask.AsTask();
-        var continuationDelegate = CreateDelegate(__state);
+        try
+        {
+            ValueTaskOfCircuitHostWrapper valueTask = new(__result);
+            var task = valueTask.AsTask();
+            var continuationDelegate = CreateDelegate(__state);
 
-        var newTask = task.ContinueWith(continuationDelegate);
-        var newValueTask = ValueTaskOfCircuitHostWrapper.Constructor(newTask)!;
-        __result = newValueTask.Inner;
+            var newTask = task.ContinueWith(continuationDelegate);
+            var newValueTask = ValueTaskOfCircuitHostWrapper.Constructor(newTask)!;
+            __result = newValueTask.Inner;
+        }
+        catch (Exception ex)
+        {
+            _patchExceptionHandler.LogPostfixException(_logger, nameof(CreateCircuitHostAsync_Postfix), ex);
+        }
     }
 
     private static Delegate CreateDelegate(State state)
@@ -180,14 +205,35 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
         public T Continuation<T>(Task<T> task)
         {
-            var circuitHostObj = (object?)task.Result!;
-            var circuitHost = new CircuitHostWrapper(circuitHostObj!);
-            _circuitTracker!.MirrorCircuitCreated(
-                circuitHost.Circuit.Inner,
-                _state.sourceCircuit ?? throw new Exception(),
-                _state.debugView
-            );
-            return task.Result!;
+            T taskResult;
+            try
+            {
+                taskResult = task.Result;
+            }
+            catch (Exception ex)
+            {
+                _patchExceptionHandler.LogPostfixException(_logger, nameof(CreateCircuitHostAsync_Postfix), ex);
+                throw new Exception("Could not get result of task. ", ex);
+            }
+
+            try
+            {
+                object? circuitHostObj = (object?)taskResult
+                    ?? throw new InvalidCastException($"{nameof(circuitHostObj)} cannot be cast to object?. ");
+                var circuitHost = new CircuitHostWrapper(circuitHostObj);
+
+                _circuitTracker!.MirrorCircuitCreated(
+                    circuitHost.Circuit.Inner,
+                    _state.sourceCircuit ?? throw new Exception(),
+                    _state.debugView
+                );
+            }
+            catch (Exception ex)
+            {
+                _patchExceptionHandler.LogPostfixException(_logger, nameof(CreateCircuitHostAsync_Postfix), ex);
+            }
+
+            return taskResult;
         }
     }
 }
