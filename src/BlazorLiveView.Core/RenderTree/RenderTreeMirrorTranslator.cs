@@ -115,7 +115,8 @@ internal sealed class RenderTreeMirrorTranslator(
             return;
         }
 
-        if (LiveViewHideInMirrorAttribute.WillComponentBeHiddenInMirrorCircuits(component.ComponentType))
+        if (LiveViewHideInMirrorAttribute.WillComponentBeHiddenInMirrorCircuits(
+            component.ComponentType))
         {
             // This component is marked as hidden inside mirror circuits
             return;

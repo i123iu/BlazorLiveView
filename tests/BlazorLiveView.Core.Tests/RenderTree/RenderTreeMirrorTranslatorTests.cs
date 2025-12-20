@@ -142,6 +142,19 @@ public class RenderTreeMirrorTranslatorTests
     }
 
     [Fact]
+    public void Component_LiveViewHideInMirror()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Component(0, 2, typeof(LiveViewHideInMirror)),
+            RenderTreeFrameBuilder.Attribute(1, "ChildContent", (RenderFragment)(builder => {
+                builder.AddContent(0, "This content is hidden in the mirror.");
+            }))
+        ]);
+
+        Assert.Empty(translated);
+    }
+
+    [Fact]
     public void Region_MultipleChildren()
     {
         var translated = TranslateRoot([

@@ -6,8 +6,8 @@ using Microsoft.Extensions.Logging;
 namespace BlazorLiveView.Core.Components;
 
 /// <summary>
-/// The contents of this component will be hidden (removed) when rendering
-/// inside a mirror circuit. Also see <seealso cref="LiveViewHideInMirrorAttribute"/>.
+/// The contents of this component will be hidden (removed) when rendering inside
+/// a mirror circuit. Also see <seealso cref="LiveViewHideInMirrorAttribute"/>.
 /// </summary>
 [LiveViewHideInMirror]
 public class LiveViewHideInMirror(
