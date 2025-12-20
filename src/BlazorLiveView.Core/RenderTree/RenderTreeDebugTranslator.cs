@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.RenderTree;
+﻿using BlazorLiveView.Core.Attributes;
+using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.RenderTree;
 
 internal sealed class RenderTreeDebugTranslator(
+    ILogger<RenderTreeDebugTranslator> logger,
     List<RenderTreeFrame> result,
     string circuitId,
     Type componentType,
@@ -11,6 +14,7 @@ internal sealed class RenderTreeDebugTranslator(
     result
 )
 {
+    private readonly ILogger<RenderTreeDebugTranslator> _logger = logger;
     private readonly string _circuitId = circuitId;
 
     private int index = 0;
@@ -146,6 +150,20 @@ internal sealed class RenderTreeDebugTranslator(
         ReadOnlySpan<RenderTreeFrame> attributes
     )
     {
+        if (component.ComponentType is null)
+        {
+            _logger.LogWarning("Component has ComponentType == null");
+            return;
+        }
+
+        if (LiveViewHideInMirrorAttribute.WillComponentBeHiddenInMirrorCircuits(component.ComponentType))
+        {
+            // This component is marked as hidden inside mirror circuits, but
+            // this is debug view, so display at least the component name. 
+            AddFrameAsText(component);
+            return;
+        }
+
         var id = component.ComponentId;
         if (componentId != id)
         {

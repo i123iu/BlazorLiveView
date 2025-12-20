@@ -2,13 +2,14 @@
 using BlazorLiveView.Core.RenderTree;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace BlazorLiveView.Core.Tests.RenderTree;
 
 public class RenderTreeMirrorTranslatorTests
 {
     private const string CIRCUIT_ID = "test-circuit-id";
-    private const int SEQ_MUL = RenderTreeMirrorTranslator.SEQ_MUL;
+    private const int SEQ_MUL = RenderTreeTranslatorBase.SEQ_MUL;
 
     class TestComponent : ComponentBase { }
 
@@ -16,6 +17,7 @@ public class RenderTreeMirrorTranslatorTests
     {
         List<RenderTreeFrame> translated = new();
         RenderTreeMirrorTranslator translator = new(
+            NullLogger<RenderTreeMirrorTranslator>.Instance,
             translated,
             CIRCUIT_ID
         );

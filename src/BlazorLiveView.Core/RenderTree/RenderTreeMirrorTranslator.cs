@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Components.RenderTree;
+﻿using BlazorLiveView.Core.Attributes;
+using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.RenderTree;
 
 internal sealed class RenderTreeMirrorTranslator(
+    ILogger<RenderTreeMirrorTranslator> logger,
     List<RenderTreeFrame> result,
     string circuitId
 ) : RenderTreeTranslatorBase(
     result
 )
 {
+    private readonly ILogger<RenderTreeMirrorTranslator> _logger = logger;
     private readonly string _circuitId = circuitId;
 
     protected override void TranslateNone(RenderTreeFrame none)
@@ -105,8 +109,19 @@ internal sealed class RenderTreeMirrorTranslator(
         ReadOnlySpan<RenderTreeFrame> attributes
     )
     {
-        // Ignore original Component and its Attributs and replace it with custom MirrorComponent
+        if (component.ComponentType is null)
+        {
+            _logger.LogWarning("Component has ComponentType == null");
+            return;
+        }
 
+        if (LiveViewHideInMirrorAttribute.WillComponentBeHiddenInMirrorCircuits(component.ComponentType))
+        {
+            // This component is marked as hidden inside mirror circuits
+            return;
+        }
+
+        // Ignore the original Component and its Attributes and replace it with custom MirrorComponent
         AddMirrorComponent(
             component.Sequence * SEQ_MUL,
             component.ComponentKey,
