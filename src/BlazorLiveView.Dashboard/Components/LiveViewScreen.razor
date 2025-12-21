@@ -1,0 +1,17 @@
+﻿@inject ILiveViewMirrorUriBuilder mirrorUriBuilder
+
+<div style="display: flex; flex-direction: column; align-items: stretch; height: 100vh; width: 100vw; ">
+    <span>TODO: Status bar</span>
+    <iframe style="flex-grow: 1; border: 2px solid red; "
+        src="@mirrorUriBuilder.GetPathAndQuery(new MirrorUri(CircuitId))" />
+</div>
+
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public required string CircuitId { get; set; }
+
+    [Parameter]
+    public bool DebugView { get; set; } = false;
+}

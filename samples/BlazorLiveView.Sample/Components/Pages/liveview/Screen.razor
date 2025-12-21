@@ -1,0 +1,9 @@
+﻿@page "/liveview/{CircuitId}"
+@layout BlazorLiveView.Dashboard.Layouts.EmptyLayout
+
+<LiveViewScreen CircuitId="@CircuitId" />
+
+@code {
+    [Parameter]
+    public required string CircuitId { get; set; }
+}

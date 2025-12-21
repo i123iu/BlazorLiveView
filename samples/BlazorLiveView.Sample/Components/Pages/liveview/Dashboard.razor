@@ -1,0 +1,16 @@
+﻿@page "/liveview"
+
+@using BlazorLiveView.Dashboard.Components
+
+<PageTitle>LiveView</PageTitle>
+
+<h1>LiveView Dashboard</h1>
+
+<LiveViewDashboard CircuitIdToLink="@CircuitIdToLink" />
+
+@code {
+    private string CircuitIdToLink(string circuitId, bool debugView = false)
+    {
+        return $"/liveview/{circuitId}";
+    }
+}
