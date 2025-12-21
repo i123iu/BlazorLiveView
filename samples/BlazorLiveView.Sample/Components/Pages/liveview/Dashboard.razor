@@ -11,6 +11,6 @@
 @code {
     private string CircuitIdToLink(string circuitId, bool debugView = false)
     {
-        return $"/liveview/{circuitId}";
+        return $"/liveview/{circuitId}{(debugView ? "?DebugView=true" : "")}";
     }
 }
