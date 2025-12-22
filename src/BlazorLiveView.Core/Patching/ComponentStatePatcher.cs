@@ -15,14 +15,17 @@ internal sealed class ComponentStatePatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
     private static ILogger<ComponentStatePatcher> _logger = null!;
+    private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public ComponentStatePatcher(
         ICircuitTracker circuitTracker,
-        ILogger<ComponentStatePatcher> logger
+        ILogger<ComponentStatePatcher> logger,
+        IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
         _logger = logger;
+        _patchExceptionHandler = patchExceptionHandler;
     }
 
     public void Patch(Harmony harmony)
@@ -40,35 +43,39 @@ internal sealed class ComponentStatePatcher : IPatcher
 
     private static void RenderIntoBatch_Postfix(ComponentState __instance)
     {
-        ComponentStateWrapper wrapped = new(__instance);
-
-        if (wrapped.ComponentWasDisposed)
+        try
         {
-            return;
-        }
+            ComponentStateWrapper wrapped = new(__instance);
+    
+            if (wrapped.ComponentWasDisposed)
+            {
+                return;
+            }
 
-        var renderer = wrapped.Renderer;
-        if (!renderer.GetType().Equals(Types.RemoteRenderer))
+            var renderer = wrapped.Renderer;
+            if (!renderer.GetType().Equals(Types.RemoteRenderer))
+            {
+                return;
+            }
+
+            RemoteRendererWrapper remoteRendererWrapped = new(renderer);
+            var circuit = _circuitTracker.GetCircuit(remoteRendererWrapped);
+
+            if (circuit is null)
+            {
+                // This can happen if the circuit has been closed,
+                // but the component has not been disposed yet.
+                return;
+            }
+
+            if (circuit is IUserCircuit userCircuit)
+            {
+                userCircuit.NotifyComponentRerendered(__instance.ComponentId);
+            }
+        }
+        catch (Exception ex)
         {
-            return;
+            _patchExceptionHandler.LogPostfixException(_logger, nameof(RenderIntoBatch_Postfix), ex);
         }
-
-        RemoteRendererWrapper remoteRendererWrapped = new(renderer);
-        var circuit = _circuitTracker.GetCircuit(remoteRendererWrapped);
-
-        if (circuit is null)
-        {
-            // This can happen if the circuit has been closed,
-            // but the component has not been disposed yet.
-            return;
-        }
-
-        if (circuit is not IUserCircuit userCircuit)
-        {
-            // Mirrors cannot be mirrored again.
-            return;
-        }
-
-        userCircuit.NotifyComponentRerendered(__instance.ComponentId);
     }
 }

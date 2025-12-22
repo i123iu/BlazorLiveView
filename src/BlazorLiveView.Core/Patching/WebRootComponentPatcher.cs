@@ -19,14 +19,17 @@ internal sealed class WebRootComponentPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
     private static ILogger<WebRootComponentPatcher> _logger = null!;
+    private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public WebRootComponentPatcher(
         ICircuitTracker circuitTracker,
-        ILogger<WebRootComponentPatcher> logger
+        ILogger<WebRootComponentPatcher> logger,
+        IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
         _logger = logger;
+        _patchExceptionHandler = patchExceptionHandler;
     }
 
     public void Patch(Harmony harmony)
@@ -52,35 +55,47 @@ internal sealed class WebRootComponentPatcher : IPatcher
         out State __state
     )
     {
-        __state = new State { overwritten = false };
-
-        RemoteRendererWrapper remoteRenderer = new(renderer);
-        var circuit = _circuitTracker.GetCircuit(remoteRenderer);
-        if (circuit is null)
-        {
-            _logger.LogError("Circuit for RemoteRenderer not found");
-            return;
-        }
-
-        if (circuit is not IMirrorCircuit mirrorCircuit)
-        {
-            return;
-        }
-
-        _logger.LogInformation("Overwriting root component {OriginalRootComponentType}" +
-            $" to {nameof(RootMirrorComponent)} for IMirrorCircuit with id={{CircuitId}}",
-            componentType,
-            mirrorCircuit.Id
-        );
-
-        componentType = typeof(RootMirrorComponent);
-
         __state = new State
         {
-            overwritten = true,
-            mirrorSsrComponentId = ssrComponentId,
-            mirrorCircuit = mirrorCircuit
+            overwritten = false,
+            errored = false
         };
+
+        try
+        {
+            RemoteRendererWrapper remoteRenderer = new(renderer);
+            var circuit = _circuitTracker.GetCircuit(remoteRenderer);
+            if (circuit is null)
+            {
+                _logger.LogError("Circuit for RemoteRenderer not found");
+                return;
+            }
+
+            if (circuit is not IMirrorCircuit mirrorCircuit)
+            {
+                return;
+            }
+
+            _logger.LogInformation("Overwriting root component {OriginalRootComponentType}" +
+                $" to {nameof(RootMirrorComponent)} for IMirrorCircuit with id={{CircuitId}}",
+                componentType,
+                mirrorCircuit.Id
+            );
+
+            componentType = typeof(RootMirrorComponent);
+
+            __state = new State
+            {
+                overwritten = true,
+                mirrorSsrComponentId = ssrComponentId,
+                mirrorCircuit = mirrorCircuit
+            };
+        }
+        catch (Exception ex)
+        {
+            __state.errored = true;
+            _patchExceptionHandler.LogPrefixException(_logger, nameof(Create_Prefix), ex);
+        }
     }
 
     private static void Create_Postfix(
@@ -88,32 +103,45 @@ internal sealed class WebRootComponentPatcher : IPatcher
         State __state
     )
     {
+        if (__state.errored)
+        {
+            return;
+        }
+
         if (!__state.overwritten)
         {
             return;
         }
 
-        // This is the overwritten `RootMirrorComponent`
-        WebRootComponentWrapper webRootComponent = new(__result);
-        var interactiveComponentId = webRootComponent.InteractiveComponentId;
-
-        var componentState = __state.mirrorCircuit
-            .GetOptionalComponentState(interactiveComponentId)
-            ?? throw new Exception($"Component with ID '{interactiveComponentId}' not found in circuit '{__state.mirrorCircuit.Id}'.");
-        if (componentState.Component is not RootMirrorComponent rootMirrorComponent)
+        try
         {
-            throw new Exception($"Component is not {nameof(RootMirrorComponent)}.");
-        }
+            // This is the overwritten `RootMirrorComponent`
+            WebRootComponentWrapper webRootComponent = new(__result);
+            var interactiveComponentId = webRootComponent.InteractiveComponentId;
 
-        rootMirrorComponent.Initialize(
-            __state.mirrorCircuit,
-            __state.mirrorSsrComponentId,
-            __state.mirrorCircuit.DebugView
-        );
+            var componentState = __state.mirrorCircuit
+                .GetOptionalComponentState(interactiveComponentId)
+                ?? throw new Exception($"Component with ID '{interactiveComponentId}' not found in circuit '{__state.mirrorCircuit.Id}'.");
+            if (componentState.Component is not RootMirrorComponent rootMirrorComponent)
+            {
+                throw new Exception($"Component is not {nameof(RootMirrorComponent)}.");
+            }
+
+            rootMirrorComponent.Initialize(
+                __state.mirrorCircuit,
+                __state.mirrorSsrComponentId,
+                __state.mirrorCircuit.DebugView
+            );
+        }
+        catch (Exception ex)
+        {
+            _patchExceptionHandler.LogPostfixException(_logger, nameof(Create_Postfix), ex);
+        }
     }
 
     private struct State
     {
+        public bool errored;
         public bool overwritten;
         public int mirrorSsrComponentId;
         public IMirrorCircuit mirrorCircuit;
