@@ -122,6 +122,27 @@ internal sealed class RenderTreeMirrorTranslator(
             return;
         }
 
+        if (LiveViewDoNotTranslateAttribute.WillComponentBeExcludedFromTranslation(
+            component.ComponentType))
+        {
+            // This component is marked as excluded from translation = keep the original component type
+
+            if (attributes.Length > 0)
+            {
+                throw new RenderTreeTranslationException(
+                    $"Components marked with {nameof(LiveViewDoNotTranslateAttribute)} cannot have attributes (parameters). ");
+            }
+
+            _result.Add(RenderTreeFrameBuilder.Component(
+                component.Sequence * SEQ_MUL,
+                component.ComponentSubtreeLength,
+                component.ComponentType,
+                null,
+                component.ComponentKey
+            ));
+            return;
+        }
+
         // Ignore the original Component and its Attributes and replace it with custom MirrorComponent
         AddMirrorComponent(
             component.Sequence * SEQ_MUL,

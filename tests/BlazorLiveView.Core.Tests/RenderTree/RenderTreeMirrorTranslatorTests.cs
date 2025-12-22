@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Components;
+﻿using BlazorLiveView.Core.Attributes;
+using BlazorLiveView.Core.Components;
 using BlazorLiveView.Core.RenderTree;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
@@ -152,6 +153,37 @@ public class RenderTreeMirrorTranslatorTests
         ]);
 
         Assert.Empty(translated);
+    }
+
+    [LiveViewDoNotTranslate]
+    public class LiveViewDoNotTranslateTestComponent : ComponentBase
+    { }
+
+    [Fact]
+    public void Component_LiveViewDoNotTranslate()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Component(0, 1, typeof(LiveViewDoNotTranslateTestComponent)),
+        ]);
+
+        var frame = Assert.Single(translated);
+        Assert.Equal(RenderTreeFrameType.Component, frame.FrameType);
+        Assert.Equal(0 * SEQ_MUL, frame.Sequence);
+        Assert.Equal(typeof(LiveViewDoNotTranslateTestComponent), frame.ComponentType);
+        Assert.Equal(1, frame.ComponentSubtreeLength);
+    }
+
+    [Fact]
+    public void Component_LiveViewDoNotTranslate_Parameters()
+    {
+        Assert.Throws<RenderTreeTranslationException>(() =>
+        {
+            var translated = TranslateRoot([
+                RenderTreeFrameBuilder.Component(0, 3, typeof(LiveViewDoNotTranslateTestComponent)),
+                RenderTreeFrameBuilder.Attribute(1, "Param1", "value1"),
+                RenderTreeFrameBuilder.Attribute(2, "Param2", "value2"),
+            ]);
+        });
     }
 
     [Fact]
