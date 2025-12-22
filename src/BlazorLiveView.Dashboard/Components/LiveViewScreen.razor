@@ -1,7 +1,10 @@
 ﻿@using BlazorLiveView.Core.Options
+@using BlazorLiveView.Core.Attributes
 @using Microsoft.Extensions.Logging
 @using Microsoft.Extensions.Options
 @using Microsoft.JSInterop
+
+@attribute [LiveViewHideInMirror]
 
 @inject ILiveViewMirrorUriBuilder mirrorUriBuilder
 @inject ICircuitTracker circuitTracker
