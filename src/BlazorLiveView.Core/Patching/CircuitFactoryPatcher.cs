@@ -55,12 +55,65 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         );
     }
 
-    private struct State
+    private readonly struct State
     {
-        public bool errored;
-        public bool isMirror;
-        public IUserCircuit? sourceCircuit;
-        public bool debugView;
+        public readonly bool errored;
+        public readonly bool isMirror;
+        public readonly IUserCircuit? sourceCircuit;
+        public readonly IUserCircuit? parentCircuit;
+        public readonly bool debugView;
+
+        private State(
+            bool errored,
+            bool isMirror,
+            IUserCircuit? sourceCircuit,
+            IUserCircuit? parentCircuit,
+            bool debugView
+        )
+        {
+            this.errored = errored;
+            this.isMirror = isMirror;
+            this.sourceCircuit = sourceCircuit;
+            this.parentCircuit = parentCircuit;
+            this.debugView = debugView;
+        }
+
+        public static State Errored()
+        {
+            return new(
+                true,
+                default,
+                default,
+                default,
+                default
+            );
+        }
+
+        public static State NotMirror()
+        {
+            return new(
+                false,
+                false,
+                default,
+                default,
+                default
+            );
+        }
+
+        public static State Mirror(
+            IUserCircuit sourceCircuit,
+            IUserCircuit? parentCircuit,
+            bool debugView
+        )
+        {
+            return new(
+                false,
+                true,
+                sourceCircuit,
+                parentCircuit,
+                debugView
+            );
+        }
     }
 
     private static void CreateCircuitHostAsync_Prefix(
@@ -69,12 +122,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         out State __state
     )
     {
-        __state = new State
-        {
-            errored = false,
-            isMirror = false,
-            sourceCircuit = null,
-        };
+        __state = State.NotMirror();
 
         try
         {
@@ -118,19 +166,31 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 return;
             }
 
+            IUserCircuit? parentCircuit = null;
+            if (parsedUri.parentCircuitId is not null)
+            {
+                var parent = _circuitTracker.GetCircuit(parsedUri.parentCircuitId);
+                if (parent is not IUserCircuit parentUserCircuit)
+                {
+                    _logger.LogError("Parent circuit is not a user circuit. Circuit ID: {CircuitId}",
+                        parsedUri.parentCircuitId);
+                    return;
+                }
+                parentCircuit = parentUserCircuit;
+            }
+
             // "Redirect" the mirror to the source's URI
             uri = sourceUserCircuit.Uri;
 
-            __state = new State
-            {
-                isMirror = true,
-                sourceCircuit = sourceUserCircuit,
-                debugView = parsedUri.debugView
-            };
+            __state = State.Mirror(
+                sourceUserCircuit,
+                parentCircuit,
+                parsedUri.debugView
+            );
         }
         catch (Exception ex)
         {
-            __state.errored = true;
+            __state = State.Errored();
             _patchExceptionHandler.LogPrefixException(_logger, nameof(CreateCircuitHostAsync_Prefix), ex);
         }
     }
@@ -225,6 +285,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 _circuitTracker!.MirrorCircuitCreated(
                     circuitHost.Circuit.Inner,
                     _state.sourceCircuit ?? throw new Exception(),
+                    _state.parentCircuit,
                     _state.debugView
                 );
             }

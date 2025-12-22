@@ -11,6 +11,7 @@ public interface IMirrorCircuit : ICircuit
     event MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
 
     IUserCircuit SourceCircuit { get; }
+    IUserCircuit? ParentCircuit { get; }
 
     /// <summary>
     /// Shoud the mirrored componets be in DebugView?

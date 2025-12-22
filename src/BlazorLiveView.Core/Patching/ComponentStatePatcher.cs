@@ -46,6 +46,12 @@ internal sealed class ComponentStatePatcher : IPatcher
         try
         {
             ComponentStateWrapper wrapped = new(__instance);
+    
+            if (wrapped.ComponentWasDisposed)
+            {
+                return;
+            }
+
             var renderer = wrapped.Renderer;
             if (!renderer.GetType().Equals(Types.RemoteRenderer))
             {

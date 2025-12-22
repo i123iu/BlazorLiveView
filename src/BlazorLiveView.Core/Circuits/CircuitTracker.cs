@@ -20,10 +20,15 @@ internal sealed class CircuitTracker(
     private readonly Dictionary<string, ICircuit> _circuitsById = new();
     private readonly Dictionary<Renderer, ICircuit> _circuitsByRenderer = new();
 
-    struct PendingMirrorCircuit
+    private readonly struct PendingMirrorCircuit(
+        IUserCircuit source,
+        IUserCircuit? parent,
+        bool debugView
+    )
     {
-        public IUserCircuit source;
-        public bool debugView;
+        public readonly IUserCircuit source = source;
+        public readonly IUserCircuit? parent = parent;
+        public readonly bool debugView = debugView;
     }
 
     /// <summary>
@@ -56,7 +61,8 @@ internal sealed class CircuitTracker(
         }
     }
 
-    public void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit, bool debugView)
+    public void MirrorCircuitCreated(Circuit mirrorCircuit,
+        IUserCircuit sourceCircuit, IUserCircuit? parentCircuit, bool debugView)
     {
         lock (_lock)
         {
@@ -69,14 +75,10 @@ internal sealed class CircuitTracker(
             }
 
             _logger.LogInformation(
-                "Mirror circuit created: {CircuitId}, source: {SourceCircuitId}",
-                mirrorCircuit.Id, sourceCircuit.Id
+                "Mirror circuit created: {CircuitId}, source: {SourceCircuitId}, parent: {ParentCircuitId}",
+                mirrorCircuit.Id, sourceCircuit.Id, parentCircuit?.Id
             );
-            PendingMirrorCircuit pending = new()
-            {
-                source = sourceCircuit,
-                debugView = debugView
-            };
+            PendingMirrorCircuit pending = new(sourceCircuit, parentCircuit, debugView);
             _pendingMirrorCircuits.Add(mirrorCircuit.Id, pending);
         }
     }
@@ -101,6 +103,7 @@ internal sealed class CircuitTracker(
                 circuit = new MirrorCircuit(
                     blazorCircuit,
                     pending.source,
+                    pending.parent,
                     DateTime.UtcNow,
                     pending.debugView,
                     _loggerFactory.CreateLogger<MirrorCircuit>()

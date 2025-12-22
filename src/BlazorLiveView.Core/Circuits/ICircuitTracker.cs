@@ -22,7 +22,8 @@ public interface ICircuitTracker
     /// <summary>
     /// Called when a mirror circuit's constructor was called.
     /// </summary>
-    internal void MirrorCircuitCreated(Circuit mirrorCircuit, IUserCircuit sourceCircuit, bool debugView);
+    internal void MirrorCircuitCreated(Circuit mirrorCircuit, 
+        IUserCircuit sourceCircuit, IUserCircuit? parentCircuit, bool debugView);
 
     /// <summary>
     /// Called when any circuit's SignalR connection was initialized.

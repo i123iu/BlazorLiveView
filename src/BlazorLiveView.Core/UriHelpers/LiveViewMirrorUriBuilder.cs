@@ -18,6 +18,11 @@ internal class LiveViewMirrorUriBuilder(
         sb.Append(_options.MirrorUri);
         sb.Append('?');
         sb.Append($"{nameof(MirrorUri.sourceCircuitId)}={Uri.EscapeDataString(mirrorUri.sourceCircuitId)}");
+        if (mirrorUri.parentCircuitId is not null)
+        {
+            sb.Append('&');
+            sb.Append($"{nameof(MirrorUri.parentCircuitId)}={Uri.EscapeDataString(mirrorUri.parentCircuitId)}");
+        }
         if (mirrorUri.debugView)
         {
             sb.Append('&');
@@ -45,6 +50,12 @@ internal class LiveViewMirrorUriBuilder(
             return false;
         }
 
+        var parentCircuitId = query.Get(nameof(MirrorUri.parentCircuitId));
+        if (string.IsNullOrEmpty(parentCircuitId))
+        {
+            parentCircuitId = null;
+        }
+
         var debugViewStr = query.Get(nameof(MirrorUri.debugView));
         var debugView = false;
         if (!string.IsNullOrEmpty(debugViewStr) && debugViewStr.Equals("1"))
@@ -52,7 +63,11 @@ internal class LiveViewMirrorUriBuilder(
             debugView = true;
         }
 
-        mirrorUri = new MirrorUri(circuitId, debugView);
+        mirrorUri = new MirrorUri(
+            circuitId, 
+            parentCircuitId, 
+            debugView
+        );
         return true;
     }
 }
