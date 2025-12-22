@@ -1,21 +1,34 @@
 ﻿.liveview-screen {
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    height: 100vh;
-    width: 100%;
+    -webkit-align-items: stretch;
+}
+
+.liveview-screen-header {
+    padding: .5em;
+    text-align: center;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    gap: .2em;
+    align-items: center;
+    -webkit-align-items: center;
 }
 
 .liveview-screen-content {
     flex-grow: 1;
+    border: 2px solid red;
     text-align: center;
-
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    -webkit-align-items: stretch;
 }
 
 .liveview-screen-iframe {
     flex-grow: 1;
-    border: 2px solid red;
 }
