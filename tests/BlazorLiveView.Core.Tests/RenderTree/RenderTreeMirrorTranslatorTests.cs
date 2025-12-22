@@ -1,14 +1,16 @@
-﻿using BlazorLiveView.Core.Components;
+﻿using BlazorLiveView.Core.Attributes;
+using BlazorLiveView.Core.Components;
 using BlazorLiveView.Core.RenderTree;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace BlazorLiveView.Core.Tests.RenderTree;
 
 public class RenderTreeMirrorTranslatorTests
 {
     private const string CIRCUIT_ID = "test-circuit-id";
-    private const int SEQ_MUL = RenderTreeMirrorTranslator.SEQ_MUL;
+    private const int SEQ_MUL = RenderTreeTranslatorBase.SEQ_MUL;
 
     class TestComponent : ComponentBase { }
 
@@ -16,6 +18,7 @@ public class RenderTreeMirrorTranslatorTests
     {
         List<RenderTreeFrame> translated = new();
         RenderTreeMirrorTranslator translator = new(
+            NullLogger<RenderTreeMirrorTranslator>.Instance,
             translated,
             CIRCUIT_ID
         );
@@ -137,6 +140,50 @@ public class RenderTreeMirrorTranslatorTests
                 Assert.Equal(false, frame.AttributeValue);
             }
         );
+    }
+
+    [Fact]
+    public void Component_LiveViewHideInMirror()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Component(0, 2, typeof(LiveViewHideInMirror)),
+            RenderTreeFrameBuilder.Attribute(1, "ChildContent", (RenderFragment)(builder => {
+                builder.AddContent(0, "This content is hidden in the mirror.");
+            }))
+        ]);
+
+        Assert.Empty(translated);
+    }
+
+    [LiveViewDoNotTranslate]
+    public class LiveViewDoNotTranslateTestComponent : ComponentBase
+    { }
+
+    [Fact]
+    public void Component_LiveViewDoNotTranslate()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Component(0, 1, typeof(LiveViewDoNotTranslateTestComponent)),
+        ]);
+
+        var frame = Assert.Single(translated);
+        Assert.Equal(RenderTreeFrameType.Component, frame.FrameType);
+        Assert.Equal(0 * SEQ_MUL, frame.Sequence);
+        Assert.Equal(typeof(LiveViewDoNotTranslateTestComponent), frame.ComponentType);
+        Assert.Equal(1, frame.ComponentSubtreeLength);
+    }
+
+    [Fact]
+    public void Component_LiveViewDoNotTranslate_Parameters()
+    {
+        Assert.Throws<RenderTreeTranslationException>(() =>
+        {
+            var translated = TranslateRoot([
+                RenderTreeFrameBuilder.Component(0, 3, typeof(LiveViewDoNotTranslateTestComponent)),
+                RenderTreeFrameBuilder.Attribute(1, "Param1", "value1"),
+                RenderTreeFrameBuilder.Attribute(2, "Param2", "value2"),
+            ]);
+        });
     }
 
     [Fact]

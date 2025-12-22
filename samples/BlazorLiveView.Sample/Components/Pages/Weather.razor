@@ -1,10 +1,15 @@
 ﻿@page "/weather"
+@using BlazorLiveView.Core.Components
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
 <p>This component demonstrates showing data.</p>
+
+<LiveViewHideInMirror>
+    This text will not be visible in mirror circuits. 
+</LiveViewHideInMirror>
 
 @if (forecasts == null)
 {

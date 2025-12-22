@@ -1,9 +1,11 @@
-﻿ using Microsoft.AspNetCore.Components.RenderTree;
+﻿using Microsoft.AspNetCore.Components.RenderTree;
+using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.RenderTree;
 
-internal sealed class RenderTreeTranslatorFactory
-    : IRenderTreeTranslatorFactory
+internal sealed class RenderTreeTranslatorFactory(
+    ILoggerFactory loggerFactory
+) : IRenderTreeTranslatorFactory
 {
     public IRenderTreeTranslator CreateMirrorTranslator(
         List<RenderTreeFrame> result,
@@ -11,19 +13,21 @@ internal sealed class RenderTreeTranslatorFactory
     )
     {
         return new RenderTreeMirrorTranslator(
+            loggerFactory.CreateLogger<RenderTreeMirrorTranslator>(),
             result,
             circuitId
         );
     }
 
     public IRenderTreeTranslator CreateDebugTranslator(
-        List<RenderTreeFrame> result, 
+        List<RenderTreeFrame> result,
         string circuitId,
         Type componentType,
         int componentId
     )
     {
         return new RenderTreeDebugTranslator(
+            loggerFactory.CreateLogger<RenderTreeDebugTranslator>(),
             result,
             circuitId,
             componentType,
