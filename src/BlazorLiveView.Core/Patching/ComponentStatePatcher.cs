@@ -41,6 +41,12 @@ internal sealed class ComponentStatePatcher : IPatcher
     private static void RenderIntoBatch_Postfix(ComponentState __instance)
     {
         ComponentStateWrapper wrapped = new(__instance);
+
+        if (wrapped.ComponentWasDisposed)
+        {
+            return;
+        }
+
         var renderer = wrapped.Renderer;
         if (!renderer.GetType().Equals(Types.RemoteRenderer))
         {

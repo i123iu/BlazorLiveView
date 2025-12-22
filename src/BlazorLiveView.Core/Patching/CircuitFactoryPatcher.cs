@@ -52,11 +52,28 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         );
     }
 
-    private struct State
+    private readonly struct State
     {
-        public bool isMirror;
-        public IUserCircuit? sourceCircuit;
-        public bool debugView;
+        public readonly bool isMirror;
+        public readonly IUserCircuit? sourceCircuit;
+        public readonly IUserCircuit? parentCircuit;
+        public readonly bool debugView;
+
+        public State()
+        {
+            isMirror = false;
+            sourceCircuit = null;
+            parentCircuit = null;
+            debugView = false;
+        }
+
+        public State(IUserCircuit? sourceCircuit, IUserCircuit? parentCircuit, bool debugView)
+        {
+            isMirror = true;
+            this.sourceCircuit = sourceCircuit;
+            this.parentCircuit = parentCircuit;
+            this.debugView = debugView;
+        }
     }
 
     private static void CreateCircuitHostAsync_Prefix(
@@ -65,11 +82,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         out State __state
     )
     {
-        __state = new State
-        {
-            isMirror = false,
-            sourceCircuit = null,
-        };
+        __state = new State();
 
         if (!TryGetUriPath(baseUri, uri, out var path))
         {
@@ -111,15 +124,27 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             return;
         }
 
+        IUserCircuit? parentCircuit = null;
+        if (parsedUri.parentCircuitId is not null)
+        {
+            var parent = _circuitTracker.GetCircuit(parsedUri.parentCircuitId);
+            if (parent is not IUserCircuit parentUserCircuit)
+            {
+                _logger.LogError("Parent circuit is not a user circuit. Circuit ID: {CircuitId}",
+                    parsedUri.parentCircuitId);
+                return;
+            }
+            parentCircuit = parentUserCircuit;
+        }
+
         // "Redirect" the mirror to the source's URI
         uri = sourceUserCircuit.Uri;
 
-        __state = new State
-        {
-            isMirror = true,
-            sourceCircuit = sourceUserCircuit,
-            debugView = parsedUri.debugView
-        };
+        __state = new State(
+            sourceUserCircuit,
+            parentCircuit,
+            parsedUri.debugView
+        );
     }
 
     private static bool TryGetUriPath(
@@ -185,6 +210,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             _circuitTracker!.MirrorCircuitCreated(
                 circuitHost.Circuit.Inner,
                 _state.sourceCircuit ?? throw new Exception(),
+                _state.parentCircuit,
                 _state.debugView
             );
             return task.Result!;

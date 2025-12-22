@@ -1,17 +1,169 @@
-﻿@inject ILiveViewMirrorUriBuilder mirrorUriBuilder
+﻿@using Microsoft.Extensions.Logging
+@using Microsoft.JSInterop
 
-<div style="display: flex; flex-direction: column; align-items: stretch; height: 100vh; width: 100vw; ">
-    <span>TODO: Status bar</span>
-    <iframe style="flex-grow: 1; border: 2px solid red; "
-            src="@mirrorUriBuilder.GetPathAndQuery(new MirrorUri(CircuitId, debugView: DebugView))" />
+@inject ILiveViewMirrorUriBuilder mirrorUriBuilder
+@inject ICircuitTracker circuitTracker
+@inject ILogger<LiveViewScreen> logger
+@inject ICurrentCircuit currentCircuit
+
+@implements IDisposable
+
+@{
+    RenderState renderState = RenderState.Working;
+    if (_sourceCircuit is null)
+        renderState = RenderState.SourceCircuitNotFound;
+    else if (_sourceCircuit.CircuitStatus == CircuitStatus.Closed)
+        renderState = RenderState.SourceCircuitClosed;
+    else if (_mirrorCircuit is null)
+        renderState = RenderState.MirrorCircuitLoading;
+    else if (_mirrorCircuit.IsBlocked)
+        renderState = RenderState.MirrorCircuitBlocked;
+    else if (_mirrorCircuit.CircuitStatus == CircuitStatus.Closed)
+        renderState = RenderState.MirrorCircuitClosed;
+}
+
+<div class="liveview-screen">
+    <div class="liveview-screen-header">
+        @switch (renderState)
+        {
+            case RenderState.SourceCircuitNotFound:
+                <span>Source circuit not found</span>
+                break;
+            case RenderState.SourceCircuitClosed:
+                <span>Source circuit closed</span>
+                break;
+            case RenderState.MirrorCircuitLoading:
+                <span>Loading...</span>
+                break;
+            case RenderState.MirrorCircuitBlocked:
+                <span>Mirror circuit blocked</span>
+                break;
+            case RenderState.MirrorCircuitClosed:
+                <span>Mirror circuit closed</span>
+                break;
+            case RenderState.Working:
+                <span>Live</span>
+                break;
+            default: throw new Exception($"Unknown {nameof(LiveViewScreen)} state.");
+        }
+    </div>
+    <div class="liveview-screen-content">
+        @switch (renderState)
+        {
+            case RenderState.SourceCircuitNotFound:
+            case RenderState.SourceCircuitClosed:
+            case RenderState.MirrorCircuitBlocked:
+            case RenderState.MirrorCircuitClosed:
+                break;
+            case RenderState.MirrorCircuitLoading:
+            case RenderState.Working:
+                <iframe class="liveview-screen-iframe"
+                        @key="@CircuitId"
+                        src="@mirrorUriBuilder.GetPathAndQuery(new MirrorUri(CircuitId, parentCircuitId: currentCircuit.Current?.Id, debugView: DebugView))" />
+                break;
+        }
+    </div>
 </div>
 
-
 @code {
+    private enum RenderState
+    {
+        SourceCircuitNotFound,
+        SourceCircuitClosed,
+        MirrorCircuitLoading,
+        MirrorCircuitBlocked,
+        MirrorCircuitClosed,
+        Working
+    };
+
     [Parameter]
     [EditorRequired]
     public required string CircuitId { get; set; }
 
     [Parameter]
     public bool DebugView { get; set; } = false;
+
+    private IMirrorCircuit? _mirrorCircuit = null;
+    private IUserCircuit? _sourceCircuit = null;
+
+    protected override void OnInitialized()
+    {
+        circuitTracker.CircuitOpenedEvent += OnAnyCircuitOpened;
+    }
+
+    public void Dispose()
+    {
+        circuitTracker.CircuitOpenedEvent -= OnAnyCircuitOpened;
+        SetMirrorCircuit(null);
+        SetSourceCircuit(null);
+    }
+
+    protected override void OnParametersSet()
+    {
+        var sourceCircuit = circuitTracker.GetCircuit(CircuitId);
+        if (sourceCircuit is null)
+            return;
+        if (sourceCircuit is not IUserCircuit sourceUserCircuit)
+            return;
+
+        SetSourceCircuit(sourceUserCircuit);
+    }
+
+    private void OnAnyCircuitChanged(ICircuit circuit)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnAnyCircuitOpened(ICircuit circuit)
+    {
+        if (circuit is IMirrorCircuit mirrorCircuit &&
+            mirrorCircuit.ParentCircuit?.Id == currentCircuit.Current?.Id)
+        {
+            InvokeAsync(() => SetMirrorCircuit(mirrorCircuit));
+        }
+    }
+
+    private void SetMirrorCircuit(IMirrorCircuit? newMirrorCircuit)
+    {
+        if (_mirrorCircuit?.Id == newMirrorCircuit?.Id)
+            return;
+
+        if (_mirrorCircuit is not null)
+        {
+            _mirrorCircuit.CircuitStatusChanged -= OnAnyCircuitChanged;
+            _mirrorCircuit.MirrorCircuitBlocked -= OnAnyCircuitChanged;
+            _mirrorCircuit = null;
+        }
+
+        _mirrorCircuit = newMirrorCircuit;
+
+        if (_mirrorCircuit is not null)
+        {
+            _mirrorCircuit.CircuitStatusChanged += OnAnyCircuitChanged;
+            _mirrorCircuit.MirrorCircuitBlocked += OnAnyCircuitChanged;
+        }
+
+        StateHasChanged();
+    }
+
+    private void SetSourceCircuit(IUserCircuit? newSourceCircuit)
+    {
+        if (_sourceCircuit?.Id == newSourceCircuit?.Id)
+            return;
+
+        if (_sourceCircuit is not null)
+        {
+            _sourceCircuit.CircuitStatusChanged -= OnAnyCircuitChanged;
+            _sourceCircuit.UriChanged -= OnAnyCircuitChanged;
+            _sourceCircuit = null;
+        }
+
+        _sourceCircuit = newSourceCircuit;
+
+        if (_sourceCircuit is not null)
+        {
+            _sourceCircuit.CircuitStatusChanged += OnAnyCircuitChanged;
+            _sourceCircuit.UriChanged += OnAnyCircuitChanged;
+        }
+    }
 }

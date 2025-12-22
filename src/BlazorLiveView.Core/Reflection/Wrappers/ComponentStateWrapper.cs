@@ -10,6 +10,7 @@ internal class ComponentStateWrapper(ComponentState inner)
     private static readonly Type InnerType = Types.ComponentState;
     private static readonly PropertyInfo _CurrentRenderTree;
     private static readonly PropertyInfo _Renderer;
+    private static readonly FieldInfo _componentWasDisposed;
 
     static ComponentStateWrapper()
     {
@@ -19,6 +20,9 @@ internal class ComponentStateWrapper(ComponentState inner)
         _Renderer = InnerType.GetRequiredProperty(
             "Renderer", isPublic: false
         );
+        _componentWasDisposed = InnerType.GetRequiredField(
+            "_componentWasDisposed", isPublic: false
+        );
     }
 
     public RenderTreeBuilder CurrentRenderTree
@@ -26,4 +30,7 @@ internal class ComponentStateWrapper(ComponentState inner)
 
     public Renderer Renderer
         => (Renderer)_Renderer.GetValue(Inner)!;
+
+    public bool ComponentWasDisposed
+        => (bool)_componentWasDisposed.GetValue(Inner)!;
 }
