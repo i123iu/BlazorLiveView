@@ -66,8 +66,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         private State(
             bool errored,
             bool isMirror,
-            IUserCircuit? sourceCircuit, 
-            IUserCircuit? parentCircuit, 
+            IUserCircuit? sourceCircuit,
+            IUserCircuit? parentCircuit,
             bool debugView
         )
         {
@@ -78,7 +78,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             this.debugView = debugView;
         }
 
-        public static State Errored() {
+        public static State Errored()
+        {
             return new(
                 true,
                 default,
@@ -88,7 +89,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             );
         }
 
-        public static State NotMirror() {
+        public static State NotMirror()
+        {
             return new(
                 false,
                 false,
@@ -99,10 +101,11 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         }
 
         public static State Mirror(
-            IUserCircuit sourceCircuit, 
-            IUserCircuit? parentCircuit, 
+            IUserCircuit sourceCircuit,
+            IUserCircuit? parentCircuit,
             bool debugView
-        ) {
+        )
+        {
             return new(
                 false,
                 true,
@@ -155,35 +158,41 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 return;
             }
 
-        if (sourceCircuit is not IUserCircuit sourceUserCircuit)
-        {
-            // Also should have been caught in the mirror endpoint controller
-            _logger.LogWarning("Cannot mirror a mirror circuit. Circuit ID: {CircuitId}",
-                parsedUri.sourceCircuitId);
-            return;
-        }
-
-        IUserCircuit? parentCircuit = null;
-        if (parsedUri.parentCircuitId is not null)
-        {
-            var parent = _circuitTracker.GetCircuit(parsedUri.parentCircuitId);
-            if (parent is not IUserCircuit parentUserCircuit)
+            if (sourceCircuit is not IUserCircuit sourceUserCircuit)
             {
-                _logger.LogError("Parent circuit is not a user circuit. Circuit ID: {CircuitId}",
-                    parsedUri.parentCircuitId);
+                // Also should have been caught in the mirror endpoint controller
+                _logger.LogWarning("Cannot mirror a mirror circuit. Circuit ID: {CircuitId}",
+                    parsedUri.sourceCircuitId);
                 return;
             }
-            parentCircuit = parentUserCircuit;
-        }
+
+            IUserCircuit? parentCircuit = null;
+            if (parsedUri.parentCircuitId is not null)
+            {
+                var parent = _circuitTracker.GetCircuit(parsedUri.parentCircuitId);
+                if (parent is not IUserCircuit parentUserCircuit)
+                {
+                    _logger.LogError("Parent circuit is not a user circuit. Circuit ID: {CircuitId}",
+                        parsedUri.parentCircuitId);
+                    return;
+                }
+                parentCircuit = parentUserCircuit;
+            }
 
             // "Redirect" the mirror to the source's URI
             uri = sourceUserCircuit.Uri;
 
-        __state = State.Mirror(
-            sourceUserCircuit,
-            parentCircuit,
-            parsedUri.debugView
-        );
+            __state = State.Mirror(
+                sourceUserCircuit,
+                parentCircuit,
+                parsedUri.debugView
+            );
+        }
+        catch (Exception ex)
+        {
+            __state = State.Errored();
+            _patchExceptionHandler.LogPrefixException(_logger, nameof(CreateCircuitHostAsync_Prefix), ex);
+        }
     }
 
     private static bool TryGetUriPath(
