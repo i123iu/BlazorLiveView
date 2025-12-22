@@ -1,5 +1,10 @@
-﻿@using Microsoft.Extensions.Logging
+﻿@using BlazorLiveView.Core.Options
+@using BlazorLiveView.Core.Attributes
+@using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
 @using Microsoft.JSInterop
+
+@attribute [LiveViewHideInMirror]
 
 @inject ILiveViewMirrorUriBuilder mirrorUriBuilder
 @inject ICircuitTracker circuitTracker
@@ -46,6 +51,11 @@
                 break;
             default: throw new Exception($"Unknown {nameof(LiveViewScreen)} state.");
         }
+        @if (_sourceCircuit is not null)
+        {
+            <span>@_sourceCircuit?.Uri</span>
+        }
+        <span>ID: @CircuitId</span>
     </div>
     <div class="liveview-screen-content">
         @switch (renderState)

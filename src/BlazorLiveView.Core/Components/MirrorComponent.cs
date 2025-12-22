@@ -29,7 +29,7 @@ internal sealed class MirrorComponent(
     public string CircuitId { get; set; } = "";
 
     [Parameter]
-    public int ComponentId { get; set; } = 0;
+    public int ComponentId { get; set; } = -1;
 
     [Parameter]
     public bool DebugView { get; set; } = false;
@@ -41,16 +41,12 @@ internal sealed class MirrorComponent(
 
     Task IComponent.SetParametersAsync(ParameterView parameters)
     {
-        if (!parameters.TryGetValue<string>(nameof(CircuitId), out string? circuitId))
-            throw new ArgumentException($"Parameter '{nameof(CircuitId)}' is required.");
-        if (!parameters.TryGetValue(nameof(ComponentId), out int componentId))
-            throw new ArgumentException($"Parameter '{nameof(ComponentId)}' is required.");
-        if (!parameters.TryGetValue(nameof(DebugView), out bool debugView))
-            debugView = true;
+        parameters.SetParameterProperties(this);
 
-        CircuitId = circuitId;
-        ComponentId = componentId;
-        DebugView = debugView;
+        if (string.IsNullOrEmpty(CircuitId))
+            throw new ArgumentException($"Parameter '{nameof(CircuitId)}' is required.");
+        if (ComponentId == -1)
+            throw new ArgumentException($"Parameter '{nameof(ComponentId)}' is required.");
 
         var circuit = _circuitTracker.GetCircuit(CircuitId)
             ?? throw new ArgumentException($"Circuit with ID '{CircuitId}' not found.");
@@ -138,7 +134,7 @@ internal sealed class MirrorComponent(
                 ComponentId
             )
             : _translatorFactory.CreateMirrorTranslator(
-                _builder, 
+                _builder,
                 CircuitId
             );
 
