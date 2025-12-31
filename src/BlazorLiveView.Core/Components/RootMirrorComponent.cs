@@ -141,7 +141,7 @@ internal sealed class RootMirrorComponent(
             builder.AddAttribute(3, nameof(MirrorComponent.DebugView), debugView);
             builder.CloseComponent();
 
-            if (_liveViewOptions.UseScreenOverlay)
+            if (_liveViewOptions.UseScreenOverlay && !debugView)
             {
                 builder.OpenElement(4, "div");
                 builder.AddAttribute(5, "style",

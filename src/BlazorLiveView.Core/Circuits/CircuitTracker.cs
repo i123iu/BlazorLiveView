@@ -33,9 +33,8 @@ internal sealed class CircuitTracker(
 
     /// <summary>
     /// Clients that have sent a HTTP request to the mirror endpoint, but are not yet opened. 
-    /// Maps mirror's id to the source circuit. 
     /// </summary>
-    private readonly Dictionary<string, PendingMirrorCircuit> _pendingMirrorCircuits = new();
+    private readonly Dictionary<string, PendingMirrorCircuit> _pendingMirrorCircuitsById = new();
 
     public ICircuit? GetCircuit(string circuitId)
     {
@@ -67,7 +66,7 @@ internal sealed class CircuitTracker(
         lock (_lock)
         {
             if (_circuitsById.ContainsKey(mirrorCircuit.Id) ||
-                _pendingMirrorCircuits.ContainsKey(mirrorCircuit.Id))
+                _pendingMirrorCircuitsById.ContainsKey(mirrorCircuit.Id))
             {
                 throw new InvalidOperationException(
                     $"Circuit with id '{mirrorCircuit.Id}' is already tracked."
@@ -79,7 +78,7 @@ internal sealed class CircuitTracker(
                 mirrorCircuit.Id, sourceCircuit.Id, parentCircuit?.Id
             );
             PendingMirrorCircuit pending = new(sourceCircuit, parentCircuit, debugView);
-            _pendingMirrorCircuits.Add(mirrorCircuit.Id, pending);
+            _pendingMirrorCircuitsById.Add(mirrorCircuit.Id, pending);
         }
     }
 
@@ -95,7 +94,7 @@ internal sealed class CircuitTracker(
             }
 
             ICircuit circuit;
-            if (_pendingMirrorCircuits.Remove(blazorCircuit.Id, out var pending))
+            if (_pendingMirrorCircuitsById.Remove(blazorCircuit.Id, out var pending))
             {
                 _logger.LogInformation("Mirror circuit opened: {CircuitId}",
                     blazorCircuit.Id);
