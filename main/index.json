@@ -1,0 +1,177 @@
+{
+  "api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.html": {
+    "href": "api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.html",
+    "title": "Class LiveViewHideInMirrorAttribute | BlazorLiveView",
+    "summary": "Class LiveViewHideInMirrorAttribute Namespace BlazorLiveView.Core.Attributes Assembly BlazorLiveView.Core.dll Marks a Blazor component (IComponent) to be hidden (removed) when rendering inside a mirror circuit. Also see LiveViewHideInMirror. [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)] public class LiveViewHideInMirrorAttribute : Attribute Inheritance object Attribute LiveViewHideInMirrorAttribute Inherited Members Attribute.Equals(object) Attribute.GetCustomAttribute(Assembly, Type) Attribute.GetCustomAttribute(Assembly, Type, bool) Attribute.GetCustomAttribute(MemberInfo, Type) Attribute.GetCustomAttribute(MemberInfo, Type, bool) Attribute.GetCustomAttribute(Module, Type) Attribute.GetCustomAttribute(Module, Type, bool) Attribute.GetCustomAttribute(ParameterInfo, Type) Attribute.GetCustomAttribute(ParameterInfo, Type, bool) Attribute.GetCustomAttributes(Assembly) Attribute.GetCustomAttributes(Assembly, bool) Attribute.GetCustomAttributes(Assembly, Type) Attribute.GetCustomAttributes(Assembly, Type, bool) Attribute.GetCustomAttributes(MemberInfo) Attribute.GetCustomAttributes(MemberInfo, bool) Attribute.GetCustomAttributes(MemberInfo, Type) Attribute.GetCustomAttributes(MemberInfo, Type, bool) Attribute.GetCustomAttributes(Module) Attribute.GetCustomAttributes(Module, bool) Attribute.GetCustomAttributes(Module, Type) Attribute.GetCustomAttributes(Module, Type, bool) Attribute.GetCustomAttributes(ParameterInfo) Attribute.GetCustomAttributes(ParameterInfo, bool) Attribute.GetCustomAttributes(ParameterInfo, Type) Attribute.GetCustomAttributes(ParameterInfo, Type, bool) Attribute.GetHashCode() Attribute.IsDefaultAttribute() Attribute.IsDefined(Assembly, Type) Attribute.IsDefined(Assembly, Type, bool) Attribute.IsDefined(MemberInfo, Type) Attribute.IsDefined(MemberInfo, Type, bool) Attribute.IsDefined(Module, Type) Attribute.IsDefined(Module, Type, bool) Attribute.IsDefined(ParameterInfo, Type) Attribute.IsDefined(ParameterInfo, Type, bool) Attribute.Match(object) Attribute.TypeId object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods WillComponentBeHiddenInMirrorCircuits(Type) public static bool WillComponentBeHiddenInMirrorCircuits(Type componentType) Parameters componentType Type Returns bool"
+  },
+  "api/BlazorLiveView.Core.Attributes.html": {
+    "href": "api/BlazorLiveView.Core.Attributes.html",
+    "title": "Namespace BlazorLiveView.Core.Attributes | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.Attributes Classes LiveViewHideInMirrorAttribute Marks a Blazor component (IComponent) to be hidden (removed) when rendering inside a mirror circuit. Also see LiveViewHideInMirror."
+  },
+  "api/BlazorLiveView.Core.Circuits.CircuitStatus.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.CircuitStatus.html",
+    "title": "Enum CircuitStatus | BlazorLiveView",
+    "summary": "Enum CircuitStatus Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public enum CircuitStatus Fields Closed = 3 When the connection has been unrecoverably closed. Down = 2 When the connection has been lost (can still be reconnected). Open = 0 When the SignalR connection has be established. Up = 1 When the components have been initialized."
+  },
+  "api/BlazorLiveView.Core.Circuits.ICircuit.CircuitStatusChangedHandler.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.ICircuit.CircuitStatusChangedHandler.html",
+    "title": "Delegate ICircuit.CircuitStatusChangedHandler | BlazorLiveView",
+    "summary": "Delegate ICircuit.CircuitStatusChangedHandler Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public delegate void ICircuit.CircuitStatusChangedHandler(ICircuit circuit) Parameters circuit ICircuit"
+  },
+  "api/BlazorLiveView.Core.Circuits.ICircuit.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.ICircuit.html",
+    "title": "Interface ICircuit | BlazorLiveView",
+    "summary": "Interface ICircuit Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll Connection to a client, either a IUserCircuit or a IMirrorCircuit. public interface ICircuit Properties CircuitStatus CircuitStatus CircuitStatus { get; } Property Value CircuitStatus Id string Id { get; } Property Value string OpenedAt DateTime OpenedAt { get; } Property Value DateTime Events CircuitStatusChanged event ICircuit.CircuitStatusChangedHandler? CircuitStatusChanged Event Type ICircuit.CircuitStatusChangedHandler"
+  },
+  "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.html",
+    "title": "Delegate ICircuitTracker.CircuitClosedHandler | BlazorLiveView",
+    "summary": "Delegate ICircuitTracker.CircuitClosedHandler Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public delegate void ICircuitTracker.CircuitClosedHandler(ICircuit circuit) Parameters circuit ICircuit"
+  },
+  "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.html",
+    "title": "Delegate ICircuitTracker.CircuitOpenedHandler | BlazorLiveView",
+    "summary": "Delegate ICircuitTracker.CircuitOpenedHandler Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public delegate void ICircuitTracker.CircuitOpenedHandler(ICircuit circuit) Parameters circuit ICircuit"
+  },
+  "api/BlazorLiveView.Core.Circuits.ICircuitTracker.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.html",
+    "title": "Interface ICircuitTracker | BlazorLiveView",
+    "summary": "Interface ICircuitTracker Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll Tracks all active SignalR connections with clients (their browser tabs). public interface ICircuitTracker Methods GetCircuit(string) ICircuit? GetCircuit(string id) Parameters id string Returns ICircuit ListCircuits() IReadOnlyCollection<ICircuit> ListCircuits() Returns IReadOnlyCollection<ICircuit> Events CircuitClosedEvent event ICircuitTracker.CircuitClosedHandler? CircuitClosedEvent Event Type ICircuitTracker.CircuitClosedHandler CircuitOpenedEvent event ICircuitTracker.CircuitOpenedHandler? CircuitOpenedEvent Event Type ICircuitTracker.CircuitOpenedHandler"
+  },
+  "api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html",
+    "title": "Interface ICurrentCircuit | BlazorLiveView",
+    "summary": "Interface ICurrentCircuit Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public interface ICurrentCircuit Properties Current Circuit? Current { get; set; } Property Value Circuit"
+  },
+  "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler.html",
+    "title": "Delegate IMirrorCircuit.MirrorCircuitBlockedHandler | BlazorLiveView",
+    "summary": "Delegate IMirrorCircuit.MirrorCircuitBlockedHandler Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public delegate void IMirrorCircuit.MirrorCircuitBlockedHandler(IMirrorCircuit circuit) Parameters circuit IMirrorCircuit"
+  },
+  "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html",
+    "title": "Interface IMirrorCircuit | BlazorLiveView",
+    "summary": "Interface IMirrorCircuit Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll A connection with a user (admin) that is using BlazorLiveView to view another user's \"screen\" (browser tab). public interface IMirrorCircuit : ICircuit Inherited Members ICircuit.CircuitStatusChanged ICircuit.Id ICircuit.CircuitStatus ICircuit.OpenedAt Properties BlockReason Throws an exception if not blocked. MirrorCircuitBlockReason BlockReason { get; } Property Value MirrorCircuitBlockReason DebugView Shoud the mirrored componets be in DebugView? bool DebugView { get; } Property Value bool IsBlocked When a mirror circuit has been block by this library. E.g. when mirror circuit tries to change location, which is disallowed. See BlockReason for the reason. bool IsBlocked { get; } Property Value bool ParentCircuit IUserCircuit? ParentCircuit { get; } Property Value IUserCircuit SourceCircuit IUserCircuit SourceCircuit { get; } Property Value IUserCircuit Events MirrorCircuitBlocked event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked Event Type IMirrorCircuit.MirrorCircuitBlockedHandler"
+  },
+  "api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.html",
+    "title": "Delegate IUserCircuit.ComponentRerenderedHandler | BlazorLiveView",
+    "summary": "Delegate IUserCircuit.ComponentRerenderedHandler Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public delegate void IUserCircuit.ComponentRerenderedHandler(IUserCircuit circuit, int componentId) Parameters circuit IUserCircuit componentId int"
+  },
+  "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.html",
+    "title": "Delegate IUserCircuit.UriChangedHandler | BlazorLiveView",
+    "summary": "Delegate IUserCircuit.UriChangedHandler Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public delegate void IUserCircuit.UriChangedHandler(IUserCircuit circuit) Parameters circuit IUserCircuit"
+  },
+  "api/BlazorLiveView.Core.Circuits.IUserCircuit.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.IUserCircuit.html",
+    "title": "Interface IUserCircuit | BlazorLiveView",
+    "summary": "Interface IUserCircuit Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll A connection with a user that is using Blazor normally (without BlazorLiveView). public interface IUserCircuit : ICircuit Inherited Members ICircuit.CircuitStatusChanged ICircuit.Id ICircuit.CircuitStatus ICircuit.OpenedAt Properties Uri string Uri { get; } Property Value string Events UriChanged event IUserCircuit.UriChangedHandler? UriChanged Event Type IUserCircuit.UriChangedHandler"
+  },
+  "api/BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.html",
+    "title": "Struct MirrorCircuitBlockReason | BlazorLiveView",
+    "summary": "Struct MirrorCircuitBlockReason Namespace BlazorLiveView.Core.Circuits Assembly BlazorLiveView.Core.dll public readonly struct MirrorCircuitBlockReason Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors MirrorCircuitBlockReason(string) public MirrorCircuitBlockReason(string message) Parameters message string Fields message public readonly string message Field Value string"
+  },
+  "api/BlazorLiveView.Core.Circuits.html": {
+    "href": "api/BlazorLiveView.Core.Circuits.html",
+    "title": "Namespace BlazorLiveView.Core.Circuits | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.Circuits Structs MirrorCircuitBlockReason Interfaces ICircuit Connection to a client, either a IUserCircuit or a IMirrorCircuit. ICircuitTracker Tracks all active SignalR connections with clients (their browser tabs). ICurrentCircuit IMirrorCircuit A connection with a user (admin) that is using BlazorLiveView to view another user's \"screen\" (browser tab). IUserCircuit A connection with a user that is using Blazor normally (without BlazorLiveView). Enums CircuitStatus Delegates ICircuit.CircuitStatusChangedHandler ICircuitTracker.CircuitClosedHandler ICircuitTracker.CircuitOpenedHandler IMirrorCircuit.MirrorCircuitBlockedHandler IUserCircuit.ComponentRerenderedHandler IUserCircuit.UriChangedHandler"
+  },
+  "api/BlazorLiveView.Core.Components.LiveViewHideInMirror.html": {
+    "href": "api/BlazorLiveView.Core.Components.LiveViewHideInMirror.html",
+    "title": "Class LiveViewHideInMirror | BlazorLiveView",
+    "summary": "Class LiveViewHideInMirror Namespace BlazorLiveView.Core.Components Assembly BlazorLiveView.Core.dll The contents of this component will be hidden (removed) when rendering inside a mirror circuit. Also see LiveViewHideInMirrorAttribute. public class LiveViewHideInMirror : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender Inheritance object ComponentBase LiveViewHideInMirror Implements IComponent IHandleEvent IHandleAfterRender Inherited Members ComponentBase.OnInitialized() ComponentBase.OnInitializedAsync() ComponentBase.OnParametersSet() ComponentBase.OnParametersSetAsync() ComponentBase.StateHasChanged() ComponentBase.ShouldRender() ComponentBase.OnAfterRender(bool) ComponentBase.OnAfterRenderAsync(bool) ComponentBase.InvokeAsync(Action) ComponentBase.InvokeAsync(Func<Task>) ComponentBase.DispatchExceptionAsync(Exception) ComponentBase.SetParametersAsync(ParameterView) ComponentBase.RendererInfo ComponentBase.Assets ComponentBase.AssignedRenderMode object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors LiveViewHideInMirror(ILogger<LiveViewHideInMirror>) The contents of this component will be hidden (removed) when rendering inside a mirror circuit. Also see LiveViewHideInMirrorAttribute. public LiveViewHideInMirror(ILogger<LiveViewHideInMirror> logger) Parameters logger ILogger<LiveViewHideInMirror> Properties ChildContent [Parameter] public RenderFragment? ChildContent { get; set; } Property Value RenderFragment Methods BuildRenderTree(RenderTreeBuilder) Renders the component to the supplied RenderTreeBuilder. protected override void BuildRenderTree(RenderTreeBuilder builder) Parameters builder RenderTreeBuilder A RenderTreeBuilder that will receive the render output."
+  },
+  "api/BlazorLiveView.Core.Components.html": {
+    "href": "api/BlazorLiveView.Core.Components.html",
+    "title": "Namespace BlazorLiveView.Core.Components | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.Components Classes LiveViewHideInMirror The contents of this component will be hidden (removed) when rendering inside a mirror circuit. Also see LiveViewHideInMirrorAttribute."
+  },
+  "api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html": {
+    "href": "api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html",
+    "title": "Class LiveViewExtensions | BlazorLiveView",
+    "summary": "Class LiveViewExtensions Namespace BlazorLiveView.Core.Extensions Assembly BlazorLiveView.Core.dll public static class LiveViewExtensions Inheritance object LiveViewExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods AddLiveView(WebApplicationBuilder, Action<LiveViewOptions>?) Registers services required for BlazorLiveView. public static WebApplicationBuilder AddLiveView(this WebApplicationBuilder builder, Action<LiveViewOptions>? configureOptions = null) Parameters builder WebApplicationBuilder configureOptions Action<LiveViewOptions> Returns WebApplicationBuilder MapLiveViewMirrorEndpoint(WebApplication, Action<IEndpointConventionBuilder>?) Finishes the setup of BlazorLiveView and maps the mirror endpoint to the path specified in MirrorUri. public static WebApplication MapLiveViewMirrorEndpoint(this WebApplication app, Action<IEndpointConventionBuilder>? configureEndpoint = null) Parameters app WebApplication configureEndpoint Action<IEndpointConventionBuilder> Returns WebApplication"
+  },
+  "api/BlazorLiveView.Core.Extensions.html": {
+    "href": "api/BlazorLiveView.Core.Extensions.html",
+    "title": "Namespace BlazorLiveView.Core.Extensions | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.Extensions Classes LiveViewExtensions"
+  },
+  "api/BlazorLiveView.Core.Options.LiveViewOptions.html": {
+    "href": "api/BlazorLiveView.Core.Options.LiveViewOptions.html",
+    "title": "Class LiveViewOptions | BlazorLiveView",
+    "summary": "Class LiveViewOptions Namespace BlazorLiveView.Core.Options Assembly BlazorLiveView.Core.dll public sealed class LiveViewOptions Inheritance object LiveViewOptions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Fields DEFAULT_MIRROR_URI public const string DEFAULT_MIRROR_URI = \"/_mirror\" Field Value string Properties MirrorUri The URI path where users (admins) using BlazorLiveView can access the live view. public string MirrorUri { get; set; } Property Value string UseScreenOverlay If set to true, a div element will be placed over the screen of all mirror circuits to disable interacting with the app. This is only a precaution, as interactions should not do anything and be ignored. The user of the mirror circuit can still scroll normally. public bool UseScreenOverlay { get; set; } Property Value bool"
+  },
+  "api/BlazorLiveView.Core.Options.html": {
+    "href": "api/BlazorLiveView.Core.Options.html",
+    "title": "Namespace BlazorLiveView.Core.Options | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.Options Classes LiveViewOptions"
+  },
+  "api/BlazorLiveView.Core.RenderTree.RenderTreeTranslationException.html": {
+    "href": "api/BlazorLiveView.Core.RenderTree.RenderTreeTranslationException.html",
+    "title": "Class RenderTreeTranslationException | BlazorLiveView",
+    "summary": "Class RenderTreeTranslationException Namespace BlazorLiveView.Core.RenderTree Assembly BlazorLiveView.Core.dll [Serializable] public class RenderTreeTranslationException : Exception, ISerializable Inheritance object Exception RenderTreeTranslationException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors RenderTreeTranslationException() public RenderTreeTranslationException() RenderTreeTranslationException(string) public RenderTreeTranslationException(string message) Parameters message string RenderTreeTranslationException(string, Exception) public RenderTreeTranslationException(string message, Exception inner) Parameters message string inner Exception"
+  },
+  "api/BlazorLiveView.Core.RenderTree.html": {
+    "href": "api/BlazorLiveView.Core.RenderTree.html",
+    "title": "Namespace BlazorLiveView.Core.RenderTree | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.RenderTree Classes RenderTreeTranslationException"
+  },
+  "api/BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder.html": {
+    "href": "api/BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder.html",
+    "title": "Interface ILiveViewMirrorUriBuilder | BlazorLiveView",
+    "summary": "Interface ILiveViewMirrorUriBuilder Namespace BlazorLiveView.Core.UriHelpers Assembly BlazorLiveView.Core.dll Defines helper methods for building and parsing URIs for the Mirror Endpoint. See MirrorUri. public interface ILiveViewMirrorUriBuilder Methods GetPathAndQuery(MirrorUri) string GetPathAndQuery(MirrorUri mirrorUri) Parameters mirrorUri MirrorUri Returns string TryParse(Uri, out MirrorUri) bool TryParse(Uri uri, out MirrorUri mirrorUri) Parameters uri Uri mirrorUri MirrorUri Returns bool"
+  },
+  "api/BlazorLiveView.Core.UriHelpers.MirrorUri.html": {
+    "href": "api/BlazorLiveView.Core.UriHelpers.MirrorUri.html",
+    "title": "Struct MirrorUri | BlazorLiveView",
+    "summary": "Struct MirrorUri Namespace BlazorLiveView.Core.UriHelpers Assembly BlazorLiveView.Core.dll A URI path for an endpoint that mirrors a source circuit. See ILiveViewMirrorUriBuilder. public readonly struct MirrorUri Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors MirrorUri(string, string?, bool) A URI path for an endpoint that mirrors a source circuit. See ILiveViewMirrorUriBuilder. public MirrorUri(string sourceCircuitId, string? parentCircuitId = null, bool debugView = false) Parameters sourceCircuitId string parentCircuitId string debugView bool Fields debugView public readonly bool debugView Field Value bool parentCircuitId public readonly string? parentCircuitId Field Value string sourceCircuitId public readonly string sourceCircuitId Field Value string"
+  },
+  "api/BlazorLiveView.Core.UriHelpers.html": {
+    "href": "api/BlazorLiveView.Core.UriHelpers.html",
+    "title": "Namespace BlazorLiveView.Core.UriHelpers | BlazorLiveView",
+    "summary": "Namespace BlazorLiveView.Core.UriHelpers Structs MirrorUri A URI path for an endpoint that mirrors a source circuit. See ILiveViewMirrorUriBuilder. Interfaces ILiveViewMirrorUriBuilder Defines helper methods for building and parsing URIs for the Mirror Endpoint. See MirrorUri."
+  },
+  "articles/custom-dashboard.html": {
+    "href": "articles/custom-dashboard.html",
+    "title": "Custom Dashboard | BlazorLiveView",
+    "summary": "Custom Dashboard The pre-built dashboard components provided by BlazorLiveView.Dashboard only use services from the BlazorLiveView.Core package. See the current Dashboard Implementation for reference. Used Services Some of the more important services used by the dashboard are: ICircuitTracker: tracks and lists all active circuits (connections) ICurrentCircuit: provides context (id) of the current circuit ILiveViewMirrorUriBuilder: builds URIs for the mirror endpoint Note that LiveViewScreen and the mirror endpoint are different. LiveViewScreen is a component placed in a Razor page with a top status bar and an iframe pointing to the mirror endpoint."
+  },
+  "articles/index.html": {
+    "href": "articles/index.html",
+    "title": "BlazorLiveView Documentation | BlazorLiveView",
+    "summary": "BlazorLiveView Documentation BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Server applications. It enables remote viewing of user sessions for debugging or remote assistance purposes. It is similar to remote desktop tools like TeamViewer, but native to Blazor Server applications. It works by intercepting the Blazor Server rendering pipeline and replicating component states. Next Steps Begin with the Setup Guide to integrate BlazorLiveView into your application."
+  },
+  "articles/setup-dashboard.html": {
+    "href": "articles/setup-dashboard.html",
+    "title": "Setup: Dashboard | BlazorLiveView",
+    "summary": "Setup: Dashboard This is the third step of BlazorLiveView setup: Setting up the admin dashboard. This guide uses the pre-built dashboard components provided by the package BlazorLiveView.Dashboard (included in BlazorLiveView). To create custom dashboard components, see Custom Dashboard. LiveViewDashboard Component The LiveViewDashboard component displays a all active user circuits (connections) in a table. Create a new Razor Component page for the dashboard, e.g. Components/Pages/LiveViewDashboardPage.razor with the following code. @page \"/liveview\" @using BlazorLiveView.Dashboard.Components <PageTitle>LiveViewDashboardPage</PageTitle> <h1>LiveViewDashboardPage</h1> <LiveViewDashboard CircuitIdToLink=\"@CircuitIdToLink\" /> @code { private string CircuitIdToLink(string circuitId, bool debugView = false) { return $\"/liveview/{circuitId}\" + $\"{(debugView ? \"?DebugView=true\" : \"\")}\"; } } The LiveViewDashboard component expects a delegate CircuitIdToLink that generates a URL to the mirror view for a given circuit ID. You may pass this circuit ID in any way, but this guide uses a route parameter to pass the ID to a LiveViewScreen component. LiveViewScreen Component The LiveViewScreen component renders the actual mirrored view of a user's session in a red box along with a top status bar with additional information. Create a new Razor Component page for viewing individual sessions, e.g. Components/Pages/LiveViewScreenPage.razor with the following code. @page \"/liveview/{CircuitId}\" @using BlazorLiveView.Dashboard.Components @layout BlazorLiveView.Dashboard.Layouts.EmptyLayout <LiveViewScreen CircuitId=\"@CircuitId\" DebugView=\"@DebugView\" /> @code { [Parameter] public required string CircuitId { get; set; } [Parameter] [SupplyParameterFromQuery] public bool DebugView { get; set; } = false; } The @layout directive here is used to disable the default page layout so that the mirrored screen uses the full page width and height. Note that the red box contains an iframe pointing to the mirror endpoint mentioned in Setup: Registering Services. Therefore the mirror endpoint must be secured alongside this page, since it can be accessed outside of this component. Navigation For accessing the dashboard, add a link to your navigation menu, e.g. in Components/Layout/NavMenu.razor. <div class=\"nav-item px-3\"> <NavLink class=\"nav-link\" href=\"liveview\"> <span class=\"bi bi-list-nested-nav-menu\" aria-hidden=\"true\"></span> LiveView Dashboard </NavLink> </div> Security Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the [Authorize] attribute can be directly used like this: @attribute [Authorize(Roles = \"Administrator\")] Next Steps This completes the setup of BlazorLiveView. It should now work in your application. See Utilities for additional tools."
+  },
+  "articles/setup-installation.html": {
+    "href": "articles/setup-installation.html",
+    "title": "Setup: Installation | BlazorLiveView",
+    "summary": "Setup: Installation This is the first step of BlazorLiveView setup: Installing the NuGet package. Project Setup BlazorLiveView requires: ASP.NET Core Blazor Server .NET 9.0 or later Global interactivity mode Creating a New Project If starting a new project in Visual Studio, select a new Blazor Web App with the following settings: Interactive render mode to Server (WebAssembly components are not supported) Interactivity location to Global Package Installation Install the BlazorLiveView NuGet package via the NuGet UI or the .NET CLI: dotnet add package BlazorLiveView This is a meta-package that includes both: BlazorLiveView.Core - Core services and mirror endpoint. BlazorLiveView.Dashboard - Pre-built dashboard components. Custom Dashboard For custom dashboard implementations without the pre-built dashboard, you can install only the BlazorLiveView.Core package instead. See the Custom Dashboard guide for more information. Next Steps Continue with Setup: Registering Services."
+  },
+  "articles/setup-registering-services.html": {
+    "href": "articles/setup-registering-services.html",
+    "title": "Setup: Registering Services | BlazorLiveView",
+    "summary": "Setup: Registering Services This is the second step of BlazorLiveView setup: Registering the required services in Program.cs. Service Registration BlazorLiveView services need to be registered in your dependency injection container. Add the following code to Program.cs before building the application. using BlazorLiveView.Core.Extensions; builder.AddLiveView(); Configuration Options The method AddLiveView also accepts optional configuration options: builder.AddLiveView(options => { // The URI path for the mirror endpoint (default: \"/_mirror\") options.MirrorUri = \"/custom-mirror-path\"; // Whether to use a transparent overlay element on mirrors to prevent interaction options.UseScreenOverlay = true; }); Mapping the Mirror Endpoint To be able to view the mirrored sessions, the mirror endpoint must be mapped. Add the following code to Program.cs after building the application and before calling app.Run(). using BlazorLiveView.Core.Extensions; app.MapLiveViewMirrorEndpoint(); Note that the previous code is NOT SECURE by default. Anyone could access the mirror endpoint if they know the circuit ID. To add authentication and authorization, see the next section. Adding Authorization To secure the mirror endpoint, the method MapLiveViewMirrorEndpoint accepts a configuration action where you can configure the mirror endpoint. app.MapLiveViewMirrorEndpoint(mirrorEndpoint => { mirrorEndpoint.RequireAuthorization(\"PolicyName\"); }); Complete Program.cs Example The complete Program.cs file may look like this: using BlazorLiveView.Core.Extensions; var builder = WebApplication.CreateBuilder(args); // Other services builder.Services.AddRazorComponents() .AddInteractiveServerComponents(); // Register BlazorLiveView services builder.AddLiveView(); var app = builder.Build(); // Other middleware app.MapRazorComponents<App>() .AddInteractiveServerRenderMode(); // Map the mirror endpoint app.MapLiveViewMirrorEndpoint(); app.Run(); Next Steps Continue with Setup: Dashboard to add the admin user interface."
+  },
+  "articles/setup.html": {
+    "href": "articles/setup.html",
+    "title": "Setup Guide | BlazorLiveView",
+    "summary": "Setup Guide This section provides a guide for integrating BlazorLiveView into a Blazor Server web application. This consists of three steps: Installation - Installing necessary NuGet packages. Registering Services - Registering necessary BlazorLiveView services and endpoints. Dashboard - Adding the dashboard UI components. Next Steps Start with the first step Setup: Installation."
+  },
+  "articles/utilities.html": {
+    "href": "articles/utilities.html",
+    "title": "Utilities | BlazorLiveView",
+    "summary": "Utilities These are the attributes and components used to control how your application behaves when being mirrored in BlazorLiveView. Hiding Components in Mirror Views When working with sensitive data (like personal information) you may want to hide them from being visible in the mirrored views. Using the Component For hiding specific parts of the UI, you can wrap the content in a LiveViewHideInMirror component. For example: <div class=\"user-dashboard\"> <h1>Welcome, @UserName</h1> Email: @UserEmail <LiveViewHideInMirror> Social Security Number: @UserSSN </LiveViewHideInMirror> </div> Using the Attribute For hiding entire components from being mirrored on any page, you can apply the LiveViewHideInMirrorAttribute to the component class. For example: @* TwoFactorAuthComponent.razor *@ @using BlazorLiveView.Core.Attributes; @attribute [LiveViewHideInMirror] Your authentication code is: @AuthCode"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "BlazorLiveView | BlazorLiveView",
+    "summary": "BlazorLiveView BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Server applications. It enables remote viewing of user sessions for debugging or remote assistance purposes. It is similar to remote desktop tools like TeamViewer, but native to Blazor Server applications. Showcase Imagine the default Blazor Server application. There is a regular user on the counter page (URL /counter). Clicking on the button increases the count; the current state is 2. Using BlazorLiveView, administrators can view all active user connections (sessions) in the admin dashboard (URL /liveview). There are two connections shown: The user on the counter page with URL /counter The admin's own session with URL /liveview Clicking on \"Open mirror\" redirect the admin to a live mirror view of the user's session (URL /liveview/{circuitId}). Notice the original user's session shown in a red box (with the count 2). There is also a top status bar with additional information. When the user clicks the button (increasing the count to 3), the mirrored view updates in real-time. NuGet Packages BlazorLiveView provides three NuGet packages: BlazorLiveView - Complete meta-package BlazorLiveView.Core - Core functionality BlazorLiveView.Dashboard - Pre-built dashboard components to use with Core Links GitHub Repository Next Steps See Documentation to get started."
+  }
+}
