@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="">
       
       
-      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/blob/28/merge/docs/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/blob/main/docs/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -74,19 +74,19 @@
 <h1 id="blazorliveview">BlazorLiveView</h1>
 
 <p>BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Server applications. It enables remote viewing of user sessions for debugging or remote assistance purposes. It is similar to remote desktop tools like TeamViewer, but native to Blazor Server applications.</p>
-<p><img src="/images/icon.png" alt="BlazorLiveView"></p>
+<p><img src="images/icon.png" alt="BlazorLiveView"></p>
 <h2 id="showcase">Showcase</h2>
 <p>Imagine the default Blazor Server application.</p>
 <p>There is a regular user on the counter page (URL <code>/counter</code>). Clicking on the button increases the count; the current state is <strong>2</strong>.</p>
-<p><img src="/images/screenshot-source.png" alt="User session"></p>
+<p><img src="images/screenshot-source.png" alt="User session"></p>
 <p>Using BlazorLiveView, administrators can view all active user connections (sessions) in the admin dashboard (URL <code>/liveview</code>). There are two connections shown:</p>
 <ol>
 <li>The user on the counter page with URL <code>/counter</code></li>
 <li>The admin's own session with URL <code>/liveview</code></li>
 </ol>
-<p><img src="/images/screenshot-table.png" alt="Admin dashboard"></p>
+<p><img src="images/screenshot-table.png" alt="Admin dashboard"></p>
 <p>Clicking on &quot;Open mirror&quot; redirect the admin to a live mirror view of the user's session (URL <code>/liveview/{circuitId}</code>). Notice the original user's session shown in a red box (with the count <strong>2</strong>). There is also a top status bar with additional information. When the user clicks the button (increasing the count to <strong>3</strong>), the mirrored view updates in real-time.</p>
-<p><img src="/images/screenshot-mirror.png" alt="Mirror view of user's session"></p>
+<p><img src="images/screenshot-mirror.png" alt="Mirror view of user's session"></p>
 <h2 id="nuget-packages">NuGet Packages</h2>
 <p>BlazorLiveView provides three NuGet packages:</p>
 <ul>
