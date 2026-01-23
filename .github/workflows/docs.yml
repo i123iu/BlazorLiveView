@@ -3,7 +3,8 @@ name: Build and Deploy Documentation
 on:
   push:
     branches:
-    - main
+      - main
+      - dev
 
 jobs:
   build:
@@ -31,3 +32,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/_site
+        destination_dir: ${{ github.ref == 'refs/heads/main' && 'main' || 'dev' }}
