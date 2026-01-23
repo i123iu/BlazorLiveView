@@ -24,11 +24,11 @@ jobs:
     - name: Install DocFX
       run: dotnet tool install -g docfx
       
-    - name: Build Library
-      run: dotnet build -c Debug -f net35 .\Lib.Harmony\Lib.Harmony.csproj
+    - name: Build
+      run: dotnet build
       
     - name: Build Documentation
-      run: docfx Documentation/docfx.json
+      run: docfx .\docs\docfx.json
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
