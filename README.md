@@ -6,7 +6,7 @@ BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Ser
 
 ## Documentation
 
-See the [Documentation](TODO) for setup instructions and an API reference.
+See the [Documentation](https://i123iu.github.io/BlazorLiveView/) for setup instructions and an API reference.
 
 ## NuGet Packages
 
