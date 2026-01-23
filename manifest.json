@@ -1,0 +1,566 @@
+{
+  "source_base_path": "D:/a/BlazorLiveView/BlazorLiveView/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.yml\" sourcestartlinenumber=\"1\">Marks a Blazor component (IComponent) to be hidden (removed) when rendering\ninside a mirror circuit. Also see <xref href=\"BlazorLiveView.Core.Components.LiveViewHideInMirror\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Attributes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Attributes",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.CircuitStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.CircuitStatus.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.CircuitStatus",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuit.CircuitStatusChangedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuit.CircuitStatusChangedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.ICircuit.CircuitStatusChangedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.ICircuit",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.ICircuit.yml\" sourcestartlinenumber=\"1\">Connection to a client, either a <xref href=\"BlazorLiveView.Core.Circuits.IUserCircuit\" data-throw-if-not-resolved=\"false\"></xref> or a\n<xref href=\"BlazorLiveView.Core.Circuits.IMirrorCircuit\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.ICircuitTracker",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.ICircuitTracker.yml\" sourcestartlinenumber=\"1\">Tracks all active SignalR connections with clients (their browser tabs).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICurrentCircuit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.ICurrentCircuit",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IMirrorCircuit",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.IMirrorCircuit.yml\" sourcestartlinenumber=\"1\">A connection with a user (admin) that is using <code>BlazorLiveView</code> to view\nanother user's &quot;screen&quot; (browser tab).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.IUserCircuit.yml\" sourcestartlinenumber=\"1\">A connection with a user that is using Blazor normally (without\n<code>BlazorLiveView</code>).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Components.LiveViewHideInMirror.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Components.LiveViewHideInMirror.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Components.LiveViewHideInMirror",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Components.LiveViewHideInMirror.yml\" sourcestartlinenumber=\"1\">The contents of this component will be hidden (removed) when rendering inside\na mirror circuit. Also see <xref href=\"BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Components.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Components.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Components",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Extensions.LiveViewExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Extensions.LiveViewExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Options.LiveViewOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Options.LiveViewOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Options.LiveViewOptions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Options.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Options.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Options",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.RenderTree.RenderTreeTranslationException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.RenderTree.RenderTreeTranslationException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.RenderTree.RenderTreeTranslationException",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.RenderTree.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.RenderTree.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.RenderTree",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder.yml\" sourcestartlinenumber=\"1\">Defines helper methods for building and parsing URIs for the Mirror Endpoint.\nSee <xref href=\"BlazorLiveView.Core.UriHelpers.MirrorUri\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.UriHelpers.MirrorUri.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.UriHelpers.MirrorUri.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.UriHelpers.MirrorUri",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.UriHelpers.MirrorUri.yml\" sourcestartlinenumber=\"1\">A URI path for an endpoint that mirrors a source circuit.\nSee <xref href=\"BlazorLiveView.Core.UriHelpers.ILiveViewMirrorUriBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.UriHelpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.UriHelpers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.UriHelpers",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/custom-dashboard.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/custom-dashboard.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/setup-dashboard.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/setup-dashboard.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/setup-installation.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/setup-installation.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/setup-registering-services.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/setup-registering-services.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/setup.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/setup.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/utilities.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/utilities.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/icon.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/icon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/screenshot-mirror.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/screenshot-mirror.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/screenshot-source.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/screenshot-source.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/screenshot-table.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/screenshot-table.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
