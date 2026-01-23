@@ -2,7 +2,7 @@
 
 BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Server applications. It enables remote viewing of user sessions for debugging or remote assistance purposes. It is similar to remote desktop tools like TeamViewer, but native to Blazor Server applications.
 
-![BlazorLiveView](/images/icon.png)
+![BlazorLiveView](images/icon.png)
 
 ## Showcase
 
@@ -10,19 +10,18 @@ Imagine the default Blazor Server application.
 
 There is a regular user on the counter page (URL `/counter`). Clicking on the button increases the count; the current state is **2**.
 
-![User session](/images/screenshot-source.png)
+![User session](images/screenshot-source.png)
 
 Using BlazorLiveView, administrators can view all active user connections (sessions) in the admin dashboard (URL `/liveview`). There are two connections shown:
 
 1. The user on the counter page with URL `/counter`
 2. The admin's own session with URL `/liveview`
 
-![Admin dashboard](/images/screenshot-table.png)
+![Admin dashboard](images/screenshot-table.png)
 
 Clicking on "Open mirror" redirect the admin to a live mirror view of the user's session (URL `/liveview/{circuitId}`). Notice the original user's session shown in a red box (with the count **2**). There is also a top status bar with additional information. When the user clicks the button (increasing the count to **3**), the mirrored view updates in real-time.
 
-![Mirror view of user's session](/images/screenshot-mirror.png)
-
+![Mirror view of user's session](images/screenshot-mirror.png)
 ## NuGet Packages
 
 BlazorLiveView provides three NuGet packages:
