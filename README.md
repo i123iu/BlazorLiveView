@@ -18,7 +18,8 @@ BlazorLiveView provides three NuGet packages:
 
 ## Branches
 
-This repository uses two branches:
+This repository uses three core branches:
 
-- **`main`** - Stable release branch. Documentation is [here](https://i123iu.github.io/BlazorLiveView/main/)
-- **`dev`** - Development branch. Documentation is [here](https://i123iu.github.io/BlazorLiveView/dev/)
+- `main` - Stable release branch. Documentation is [here](https://i123iu.github.io/BlazorLiveView/main/)
+- `dev` - Development branch. Documentation is [here](https://i123iu.github.io/BlazorLiveView/dev/)
+- `gh-pages` - GitHub Pages branch for hosting documentation for both `main` and `dev` branches.
