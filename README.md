@@ -6,7 +6,7 @@ BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Ser
 
 ## Documentation
 
-See the [Documentation](https://i123iu.github.io/BlazorLiveView/) for setup instructions and an API reference.
+See the [Documentation](https://i123iu.github.io/BlazorLiveView/main/) for setup instructions and an API reference.
 
 ## NuGet Packages
 
@@ -15,3 +15,10 @@ BlazorLiveView provides three NuGet packages:
 - [**BlazorLiveView**](https://www.nuget.org/packages/BlazorLiveView) - Complete meta-package
 - [**BlazorLiveView.Core**](https://www.nuget.org/packages/BlazorLiveView.Core) - Core functionality
 - [**BlazorLiveView.Dashboard**](https://www.nuget.org/packages/BlazorLiveView.Dashboard) - Pre-built dashboard components to use with Core
+
+## Branches
+
+This repository uses two branches:
+
+- **`main`** - Stable release branch. Documentation is [here](https://i123iu.github.io/BlazorLiveView/main/)
+- **`dev`** - Development branch. Documentation is [here](https://i123iu.github.io/BlazorLiveView/dev/)
