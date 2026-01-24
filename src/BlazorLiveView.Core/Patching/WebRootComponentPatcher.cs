@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits;
+using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;

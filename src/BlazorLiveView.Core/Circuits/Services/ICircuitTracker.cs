@@ -1,7 +1,7 @@
 ﻿using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 
-namespace BlazorLiveView.Core.Circuits;
+namespace BlazorLiveView.Core.Circuits.Services;
 
 /// <summary>
 /// Tracks all active SignalR connections with clients (their browser tabs).

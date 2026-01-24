@@ -1,9 +1,9 @@
-﻿ using BlazorLiveView.Core.Reflection.Wrappers;
+﻿using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 
-namespace BlazorLiveView.Core.Circuits;
+namespace BlazorLiveView.Core.Circuits.Services;
 
 internal sealed class CircuitTracker(
     ILogger<CircuitTracker> logger,
