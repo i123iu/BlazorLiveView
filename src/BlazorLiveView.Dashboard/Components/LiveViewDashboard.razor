@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.Extensions.Options
+@using System.Security.Claims
 
 @implements IDisposable
 @inject ICircuitTracker circuitTracker
@@ -12,18 +13,21 @@
             <th>Id</th>
             <th>Location</th>
             <th>Connected at</th>
+            <th>User</th>
             <th>Mirror link</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var circuit in circuitTracker.ListCircuits())
         {
-            if (circuit is IUserCircuit userCircuit)
+            @if (circuit is IUserCircuit userCircuit)
             {
+                var user = userCircuit.User.FindFirst(ClaimTypes.Email)?.Value ?? "Anonymous";
                 <tr class="circuit-row">
                     <td>@TruncateId(userCircuit.Id)</td>
                     <td>@userCircuit.Uri</td>
                     <td>@userCircuit.OpenedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@user</td>
                     @if (currentCircuit.Current is not null && currentCircuit.Current.Id == userCircuit.Id)
                     {
                         <td>
@@ -63,6 +67,7 @@
             if (circuit is IUserCircuit userCircuit)
             {
                 userCircuit.UriChanged += OnAnyCircuitUriChanged;
+                userCircuit.AuthenticationStateChanged += OnAnyCircuitAuthStatusChanged;
             }
         }
     }
@@ -72,6 +77,7 @@
         if (circuit is IUserCircuit userCircuit)
         {
             userCircuit.UriChanged += OnAnyCircuitUriChanged;
+            userCircuit.AuthenticationStateChanged += OnAnyCircuitAuthStatusChanged;
             OnAnyCircuitChanged();
         }
     }
@@ -81,11 +87,17 @@
         if (circuit is IUserCircuit userCircuit)
         {
             userCircuit.UriChanged -= OnAnyCircuitUriChanged;
+            userCircuit.AuthenticationStateChanged -= OnAnyCircuitAuthStatusChanged;
             OnAnyCircuitChanged();
         }
     }
 
     private void OnAnyCircuitUriChanged(ICircuit circuit)
+    {
+        OnAnyCircuitChanged();
+    }
+
+    private void OnAnyCircuitAuthStatusChanged(ICircuit circuit)
     {
         OnAnyCircuitChanged();
     }
@@ -99,6 +111,14 @@
     {
         circuitTracker.CircuitOpenedEvent -= OnCircuitOpened;
         circuitTracker.CircuitClosedEvent -= OnCircuitClosed;
+        foreach (var circuit in circuitTracker.ListCircuits())
+        {
+            if (circuit is IUserCircuit userCircuit)
+            {
+                userCircuit.UriChanged -= OnAnyCircuitUriChanged;
+                userCircuit.AuthenticationStateChanged -= OnAnyCircuitAuthStatusChanged;
+            }
+        }
     }
 
     private static string TruncateId(string? id)

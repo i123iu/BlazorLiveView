@@ -69,7 +69,7 @@
             case RenderState.Working:
                 <iframe class="liveview-screen-iframe"
                         @key="@CircuitId"
-                        src="@mirrorUriBuilder.GetPathAndQuery(new MirrorUri(CircuitId, parentCircuitId: currentCircuit.Current?.Id, debugView: DebugView))" />
+                        src="@mirrorUriBuilder.GetPathAndQuery(CurrentMirrorUri)" />
                 break;
         }
     </div>
@@ -92,6 +92,12 @@
 
     [Parameter]
     public bool DebugView { get; set; } = false;
+
+    private MirrorUri CurrentMirrorUri => new MirrorUri(
+        CircuitId, 
+        parentCircuitId: currentCircuit.Current?.Id, 
+        debugView: DebugView
+    );
 
     private IMirrorCircuit? _mirrorCircuit = null;
     private IUserCircuit? _sourceCircuit = null;
