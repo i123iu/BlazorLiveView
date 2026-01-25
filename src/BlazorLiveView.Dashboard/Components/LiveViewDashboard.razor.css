@@ -1,10 +1,310 @@
-﻿.circuits-table {
-    border-collapse: collapse;
+﻿.dashboard {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  padding: 1em;
+  background-color: #f5f5f5;
+  border-radius: 1em;
 }
 
-.circuits-table,
-.circuits-table th,
-.circuits-table td {
-    border: 1px solid #ccc;
-    padding: .2em 1em;
+/* Sections: filter, circuits, pagination */
+.dashboard > .section {
+  background: white;
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+}
+
+/* Spacing between sections */
+.section.filters,
+.section.circuits {
+  margin-bottom: 1em;
+}
+
+/* Section headings */
+.section h3 {
+  margin: 0 0 0.5em 0;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #333;
+}
+
+/***** Filtering ******/
+.filters .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5em, 1fr));
+  gap: 1em;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item label {
+  font-size: 0.875em;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0.3125em;
+}
+
+.filter-item input,
+.filter-item select {
+  padding: 0.5em 0.75em;
+  border: 0.0625em solid #ddd;
+  border-radius: 0.25em;
+  font-size: 0.875em;
+  transition: border-color 0.2s;
+}
+
+.filter-item input:focus,
+.filter-item select:focus {
+  outline: none;
+  border-color: #0366d6;
+}
+
+/***** Circuits Table ******/
+.dashboard .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875em;
+}
+
+.table thead {
+  background-color: #f6f8fa;
+  border-bottom: 0.125em solid #e1e4e8;
+}
+
+.table th {
+  padding: 0.75em 1em;
+  text-align: left;
+  font-weight: 600;
+  color: #24292e;
+  white-space: nowrap;
+}
+
+/* Column widths */
+.table .col-id {
+  width: 8em;
+  max-width: 8em;
+}
+
+.table .col-location {
+  width: 35%;
+}
+
+.table .col-connected {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.table .col-status {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.table .col-user {
+  width: 35%;
+}
+
+.table .col-mirror {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.header-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.sort-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25em 0.5em;
+  color: #586069;
+  transition: color 0.2s;
+  border-radius: 0.25em;
+}
+
+.sort-button:hover {
+  color: #0366d6;
+  background-color: #f1f8ff;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #e1e4e8;
+  transition: background-color 0.15s;
+}
+
+.table tbody tr:hover {
+  background-color: #f6f8fa;
+}
+
+.table td {
+  padding: 0.75em 1em;
+  color: #24292e;
+}
+
+.circuit-id,
+.circuit-url {
+  font-family: "Courier New", monospace;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.2em 0.75em;
+  font-size: 0.875em;
+  border-radius: .5em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-open {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+.status-up {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+.status-down {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+.status-closed {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.mirror-links {
+  display: flex;
+  gap: 1em;
+}
+
+.mirror-link {
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.mirror-link:hover {
+  text-decoration: underline;
+}
+
+.mirror-link.user {
+  color: #0366d6;
+}
+.mirror-link.user:hover {
+  color: #0256c2;
+}
+
+.mirror-link.circuit {
+  color: #42c16e;
+}
+.mirror-link.circuit:hover {
+  color: #388e3c;
+}
+
+.current-circuit-label {
+  color: #6a737d;
+  font-style: italic;
+}
+
+/***** Pagination ******/
+.section.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9375em 1.25em;
+}
+
+.pagination-info {
+  color: #586069;
+  font-size: 0.875em;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.625em;
+}
+
+.pagination-button {
+  padding: 0.375em 0.75em;
+  background-color: white;
+  border: 0.0625em solid #e1e4e8;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-size: 1em;
+  color: #0366d6;
+  transition: all 0.2s;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #f6f8fa;
+  border-color: #0366d6;
+}
+
+.pagination-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  color: #6a737d;
+}
+
+.page-info {
+  color: #24292e;
+  font-size: 0.875em;
+  font-weight: 500;
+  margin: 0 0.3125em;
+}
+
+.page-size-select {
+  padding: 0.375em 0.625em;
+  border: 0.0625em solid #e1e4e8;
+  border-radius: 0.25em;
+  font-size: 0.875em;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.page-size-select:focus {
+  outline: none;
+  border-color: #0366d6;
+}
+
+@media (max-width: 64em) {
+  .dashboard .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 48em) {
+  .dashboard .grid {
+    grid-template-columns: 1fr;
+  }
+  .pagination {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .pagination-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .section.circuits {
+    overflow-x: auto;
+  }
+  .table {
+    font-size: 0.75em;
+  }
+  .table th,
+  .table td {
+    padding: 0.5em 0.75em;
+  }
 }

@@ -1,5 +1,6 @@
 ﻿@using System.Security.Claims
 @using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Dashboard.Models
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.Extensions.Options
@@ -8,47 +9,174 @@
 @inject ICircuitTracker circuitTracker
 @inject ICurrentCircuit currentCircuit
 
-<table class="circuits-table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Location</th>
-            <th>Connected at</th>
-            <th>User</th>
-            <th>Mirror link</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var circuit in circuitTracker.ListCircuits())
-        {
-            @if (circuit is IUserCircuit userCircuit)
-            {
-                var user = userCircuit.User.FindFirst(ClaimTypes.Email)?.Value ?? "Anonymous";
-                <tr class="circuit-row">
-                    <td>@TruncateId(userCircuit.Id)</td>
-                    <td>@userCircuit.Uri</td>
-                    <td>@userCircuit.OpenedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    <td>@user</td>
-                    @if (currentCircuit.Current is not null && currentCircuit.Current.Id == userCircuit.Id)
-                    {
-                        <td>
-                            Current circuit
-                        </td>
-                    }
-                    else
-                    {
-                        var mirrorPath = CircuitIdToLink(userCircuit.Id);
-                        var debugMirrorPath = CircuitIdToLink(userCircuit.Id, debugView: true);
-                        <td>
-                            <a href="@mirrorPath">Open mirror</a>
-                            (<a href="@debugMirrorPath">DEBUG</a>)
-                        </td>
-                    }
+<div class="dashboard">
+    <div class="section filters">
+        <h3>Filters</h3>
+        <div class="grid">
+            <div class="filter-item">
+                <label>Circuit ID</label>
+                <input type="text" @bind="filterCircuitId"
+                       @bind:event="oninput" @bind:after="ApplyFilters"
+                       placeholder="Filter by ID..." />
+            </div>
+            <div class="filter-item">
+                <label>Location</label>
+                <input type="text" @bind="filterLocation"
+                       @bind:event="oninput" @bind:after="ApplyFilters"
+                       placeholder="Filter by URL..." />
+            </div>
+            <div class="filter-item">
+                <label>User (Email)</label>
+                <input type="text" @bind="filterUser"
+                       @bind:event="oninput" @bind:after="ApplyFilters"
+                       placeholder="Filter by email..." />
+            </div>
+            <div class="filter-item">
+                <label>Status</label>
+                <select @bind="filterStatus" @bind:after="ApplyFilters">
+                    <option value="">All</option>
+                    <option value="Open">Open</option>
+                    <option value="Up">Up</option>
+                    <option value="Down">Down</option>
+                    <option value="Closed">Closed</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="section circuits">
+        <h3>Circuits</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-id">
+                        <div class="header-cell">
+                            Circuit ID
+                            <button class="sort-button"
+                                    @onclick="() => ToggleSort(SortColumn.CircuitId)">
+                                @GetSortIcon(SortColumn.CircuitId)
+                            </button>
+                        </div>
+                    </th>
+                    <th class="col-location">
+                        <div class="header-cell">
+                            Location (URL)
+                            <button class="sort-button"
+                                    @onclick="() => ToggleSort(SortColumn.Location)">
+                                @GetSortIcon(SortColumn.Location)
+                            </button>
+                        </div>
+                    </th>
+                    <th class="col-connected">
+                        <div class="header-cell">
+                            Connected at
+                            <button class="sort-button"
+                                    @onclick="() => ToggleSort(SortColumn.ConnectedAt)">
+                                @GetSortIcon(SortColumn.ConnectedAt)
+                            </button>
+                        </div>
+                    </th>
+                    <th class="col-status">
+                        <div class="header-cell">
+                            Status
+                            <button class="sort-button"
+                                    @onclick="() => ToggleSort(SortColumn.Status)">
+                                @GetSortIcon(SortColumn.Status)
+                            </button>
+                        </div>
+                    </th>
+                    <th class="col-user">
+                        <div class="header-cell">
+                            User
+                            <button class="sort-button"
+                                    @onclick="() => ToggleSort(SortColumn.User)">
+                                @GetSortIcon(SortColumn.User)
+                            </button>
+                        </div>
+                    </th>
+                    <th class="col-mirror">View Mirror</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @foreach (var userCircuit in paginatedResult.Items)
+                {
+                    var user = userCircuit.User.FindFirst(ClaimTypes.Email)?.Value;
+                    <tr class="circuit-row">
+                        <td class="col-id">
+                            <span class="circuit-id" title="@userCircuit.Id">@userCircuit.Id</span>
+                        </td>
+                        <td class="col-location">
+                            <span class="circuit-url" title="@userCircuit.Uri">@TruncateUrl(userCircuit.Uri)</span>
+                        </td>
+                        <td class="col-connected">@userCircuit.OpenedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td class="col-status">
+                            <span class="status-badge status-@userCircuit.CircuitStatus.ToString().ToLower()">
+                                @userCircuit.CircuitStatus
+                            </span>
+                        </td>
+                        <td class="col-user">@(user is null ? "-" : user)</td>
+                        <td class="col-mirror">
+                            @if (currentCircuit.Current is not null && currentCircuit.Current.Id == userCircuit.Id)
+                            {
+                                <span class="current-circuit-label">This session</span>
+                            }
+                            else
+                            {
+                                var circuitMirrorPath = CircuitIdToLink(userCircuit.Id);
+                                var userMirrorPath = CircuitIdToLink(userCircuit.Id);
+
+                                <div class="mirror-links">
+                                    <span>
+                                        <a href="@circuitMirrorPath" class="mirror-link circuit">Circuit</a>
+                                        @if (ShowDebugLinks)
+                                        {
+                                            var circuitDebugMirrorPath = CircuitIdToLink(userCircuit.Id, debugView: true);
+                                            <text>
+                                                (<a href="@circuitDebugMirrorPath" class="mirror-link circuit debug">DEBUG</a>)
+                                            </text>
+                                        }
+                                    </span>
+                                    @if (user is not null)
+                                    {
+                                        <span>
+                                            <a href="@userMirrorPath" class="mirror-link user">User</a>
+                                            @if (ShowDebugLinks)
+                                            {
+                                                var userDebugMirrorPath = CircuitIdToLink(userCircuit.Id, debugView: true);
+                                                <text>
+                                                    (<a href="@userDebugMirrorPath" class="mirror-link user debug">DEBUG</a>)
+                                                </text>
+                                            }
+                                        </span>
+                                    }
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section pagination">
+        <div class="pagination-info">
+            Showing @((currentPage - 1) * pageSize + 1) to @Math.Min(currentPage * pageSize, totalCircuits) of @totalCircuits circuits
+        </div>
+        <div class="pagination-controls">
+            <button @onclick="FirstPage" disabled="@(currentPage == 1)" class="pagination-button">«</button>
+            <button @onclick="PreviousPage" disabled="@(currentPage == 1)" class="pagination-button">‹</button>
+            <span class="page-info">Page @currentPage of @totalPages</span>
+            <button @onclick="NextPage" disabled="@(currentPage >= totalPages)" class="pagination-button">›</button>
+            <button @onclick="LastPage" disabled="@(currentPage >= totalPages)" class="pagination-button">»</button>
+        </div>
+        <select @bind="pageSize" @bind:after="OnPageSizeChanged" class="page-size-select">
+            <option value="10">10 per page</option>
+            <option value="25">25 per page</option>
+            <option value="50">50 per page</option>
+            <option value="100">100 per page</option>
+        </select>
+    </div>
+</div>
 
 @code
 {
@@ -58,75 +186,305 @@
     [EditorRequired]
     public required CircuitIdToLinkDelegate CircuitIdToLink { get; set; }
 
+    [Parameter]
+    public bool ShowDebugLinks { get; set; } = false;
+
+    [Parameter]
+    public bool ShowFullUrl { get; set; } = false;
+
+    // Pagination
+    private int currentPage = 1;
+    private int pageSize = 10;
+    private PaginatedResult<IUserCircuit> paginatedResult = new()
+    {
+        Items = Array.Empty<IUserCircuit>(),
+        TotalCount = 0,
+        PageNumber = 1,
+        PageSize = 10
+    };
+    private int totalCircuits => paginatedResult.TotalCount;
+    private int totalPages => paginatedResult.TotalPages;
+
+    // Filtering
+    private string filterCircuitId = string.Empty;
+    private string filterLocation = string.Empty;
+    private string filterUser = string.Empty;
+    private string filterStatus = string.Empty;
+
+    // Sorting
+    private SortColumn currentSortColumn = SortColumn.None;
+    private SortDirection currentSortDirection = SortDirection.Descending;
+
+    // Subscribed circuits
+    private readonly HashSet<string> subscribedCircuitIds = new();
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
         circuitTracker.CircuitOpenedEvent += OnCircuitOpened;
         circuitTracker.CircuitClosedEvent += OnCircuitClosed;
-        foreach (var circuit in circuitTracker.ListCircuits())
-        {
-            if (circuit is IUserCircuit userCircuit)
-            {
-                userCircuit.UriChanged += OnAnyCircuitUriChanged;
-                userCircuit.AuthenticationStateChanged += OnAnyCircuitAuthStatusChanged;
-            }
-        }
-    }
 
-    private void OnCircuitOpened(ICircuit circuit)
-    {
-        if (circuit is IUserCircuit userCircuit)
-        {
-            userCircuit.UriChanged += OnAnyCircuitUriChanged;
-            userCircuit.AuthenticationStateChanged += OnAnyCircuitAuthStatusChanged;
-            OnAnyCircuitChanged();
-        }
-    }
-
-    private void OnCircuitClosed(ICircuit circuit)
-    {
-        if (circuit is IUserCircuit userCircuit)
-        {
-            userCircuit.UriChanged -= OnAnyCircuitUriChanged;
-            userCircuit.AuthenticationStateChanged -= OnAnyCircuitAuthStatusChanged;
-            OnAnyCircuitChanged();
-        }
-    }
-
-    private void OnAnyCircuitUriChanged(ICircuit circuit)
-    {
-        OnAnyCircuitChanged();
-    }
-
-    private void OnAnyCircuitAuthStatusChanged(ICircuit circuit)
-    {
-        OnAnyCircuitChanged();
-    }
-
-    private void OnAnyCircuitChanged()
-    {
-        InvokeAsync(StateHasChanged);
+        RefreshCircuits();
+        UpdateSubscriptions();
     }
 
     public void Dispose()
     {
         circuitTracker.CircuitOpenedEvent -= OnCircuitOpened;
         circuitTracker.CircuitClosedEvent -= OnCircuitClosed;
+
         foreach (var circuit in circuitTracker.ListCircuits())
         {
-            if (circuit is IUserCircuit userCircuit)
-            {
-                userCircuit.UriChanged -= OnAnyCircuitUriChanged;
-                userCircuit.AuthenticationStateChanged -= OnAnyCircuitAuthStatusChanged;
-            }
+            UnsubscribeFromCircuit(circuit);
         }
     }
 
-    private static string TruncateId(string? id)
+    private void OnCircuitOpened(ICircuit circuit)
     {
-        const int maxLength = 16;
-        return string.IsNullOrEmpty(id)
-            ? string.Empty
-            : (id!.Length > maxLength ? id[..maxLength] + "..." : id);
+        OnAnyCircuitChanged(circuit);
+    }
+
+    private void OnCircuitClosed(ICircuit circuit)
+    {
+        UnsubscribeFromCircuit(circuit);
+        OnAnyCircuitChanged(circuit);
+    }
+
+    private void OnAnyCircuitChanged(ICircuit _)
+    {
+        InvokeAsync(() =>
+        {
+            RefreshCircuits();
+            StateHasChanged();
+        });
+    }
+
+    private void RefreshCircuits()
+    {
+        // Get all circuits and filter to user circuits
+        IEnumerable<IUserCircuit> circuits = circuitTracker.ListCircuits().OfType<IUserCircuit>();
+
+        // Apply filtering
+        if (!string.IsNullOrWhiteSpace(filterCircuitId))
+        {
+            circuits = circuits.Where(c => 
+                c.Id.Contains(filterCircuitId, StringComparison.OrdinalIgnoreCase)
+            );
+        }
+
+        if (!string.IsNullOrWhiteSpace(filterLocation))
+        {
+            circuits = circuits.Where(c =>
+                c.Uri.Contains(filterLocation, StringComparison.OrdinalIgnoreCase)
+            );
+        }
+
+        if (!string.IsNullOrWhiteSpace(filterUser))
+        {
+            circuits = circuits.Where(c =>
+            {
+                var email = c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+                return email is not null && 
+                    email.Contains(filterUser, StringComparison.OrdinalIgnoreCase);
+            });
+        }
+
+        if (!string.IsNullOrWhiteSpace(filterStatus))
+        {
+            var status = Enum.Parse<CircuitStatus>(filterStatus);
+            circuits = circuits.Where(c => c.CircuitStatus == status);
+        }
+
+        // Apply sorting
+        circuits = currentSortColumn switch
+        {
+            SortColumn.CircuitId => currentSortDirection == SortDirection.Ascending
+                ? circuits.OrderBy(c => c.Id)
+                : circuits.OrderByDescending(c => c.Id),
+            
+            SortColumn.Location => currentSortDirection == SortDirection.Ascending
+                ? circuits.OrderBy(c => c.Uri)
+                : circuits.OrderByDescending(c => c.Uri),
+            
+            SortColumn.ConnectedAt => currentSortDirection == SortDirection.Ascending
+                ? circuits.OrderBy(c => c.OpenedAt)
+                : circuits.OrderByDescending(c => c.OpenedAt),
+            
+            SortColumn.Status => currentSortDirection == SortDirection.Ascending
+                ? circuits.OrderBy(c => c.CircuitStatus)
+                : circuits.OrderByDescending(c => c.CircuitStatus),
+            
+            SortColumn.User => currentSortDirection == SortDirection.Ascending
+                ? circuits.OrderBy(c => c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "Anonymous")
+                : circuits.OrderByDescending(c => c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "Anonymous"),
+            
+            _ => currentSortDirection == SortDirection.Ascending
+                ? circuits.OrderBy(c => c.OpenedAt)
+                : circuits.OrderByDescending(c => c.OpenedAt)
+        };
+
+        // Get total count before pagination
+        var totalCount = circuits.Count();
+
+        // Apply pagination
+        var pageNumber = Math.Max(1, currentPage);
+        var effectivePageSize = Math.Max(1, pageSize);
+        
+        var paginatedCircuits = circuits
+            .Skip((pageNumber - 1) * effectivePageSize)
+            .Take(effectivePageSize)
+            .ToArray();
+
+        paginatedResult = new PaginatedResult<IUserCircuit>
+        {
+            Items = paginatedCircuits,
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = effectivePageSize
+        };
+
+        // Adjust current page if needed
+        if (currentPage > totalPages && totalPages > 0)
+        {
+            currentPage = totalPages;
+        }
+        else if (currentPage < 1)
+        {
+            currentPage = 1;
+        }
+
+        UpdateSubscriptions();
+    }
+
+    private void UpdateSubscriptions()
+    {
+        var currentPageCircuits = paginatedResult.Items.ToHashSet();
+        var currentPageCircuitIds = currentPageCircuits.Select(c => c.Id).ToHashSet();
+
+        // Unsubscribe from circuits not on current page
+        var toUnsubscribe = subscribedCircuitIds.Where(id => !currentPageCircuitIds.Contains(id)).ToList();
+        foreach (var circuitId in toUnsubscribe)
+        {
+            var circuit = circuitTracker.GetCircuit(circuitId);
+            if (circuit is not null)
+                UnsubscribeFromCircuit(circuit);
+        }
+
+        // Subscribe to circuits on current page
+        foreach (var circuit in currentPageCircuits)
+        {
+            SubscribeToCircuit(circuit);
+        }
+    }
+
+    private void SubscribeToCircuit(ICircuit circuit)
+    {
+        if (circuit is IUserCircuit userCircuit && subscribedCircuitIds.Add(circuit.Id))
+        {
+            userCircuit.UriChanged += OnAnyCircuitChanged;
+            userCircuit.AuthenticationStateChanged += OnAnyCircuitChanged;
+            userCircuit.CircuitStatusChanged += OnAnyCircuitChanged;
+        }
+    }
+
+    private void UnsubscribeFromCircuit(ICircuit circuit)
+    {
+        if (circuit is IUserCircuit userCircuit && subscribedCircuitIds.Remove(circuit.Id))
+        {
+            userCircuit.UriChanged -= OnAnyCircuitChanged;
+            userCircuit.AuthenticationStateChanged -= OnAnyCircuitChanged;
+            userCircuit.CircuitStatusChanged -= OnAnyCircuitChanged;
+        }
+    }
+
+    private void ApplyFilters()
+    {
+        currentPage = 1; // Reset to first page when filtering
+        RefreshCircuits();
+    }
+
+    private void ToggleSort(SortColumn column)
+    {
+        if (currentSortColumn == column)
+        {
+            // Cycle through: Asc -> Desc -> None
+            switch (currentSortDirection)
+            {
+                case SortDirection.Ascending:
+                    currentSortDirection = SortDirection.Descending;
+                    break;
+                case SortDirection.Descending:
+                    currentSortDirection = SortDirection.Ascending;
+                    currentSortColumn = SortColumn.None;
+                    break;
+            }
+        }
+        else
+        {
+            currentSortColumn = column;
+            currentSortDirection = SortDirection.Ascending;
+        }
+
+        RefreshCircuits();
+    }
+
+    private string GetSortIcon(SortColumn column)
+    {
+        if (currentSortColumn != column)
+        {
+            return "⇅"; // Unsorted
+        }
+
+        return currentSortDirection switch
+        {
+            SortDirection.Ascending => "▲",
+            SortDirection.Descending => "▼",
+            _ => "⇅"
+        };
+    }
+
+    private void FirstPage()
+    {
+        currentPage = 1;
+        RefreshCircuits();
+    }
+
+    private void PreviousPage()
+    {
+        if (currentPage > 1)
+        {
+            currentPage--;
+            RefreshCircuits();
+        }
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < totalPages)
+        {
+            currentPage++;
+            RefreshCircuits();
+        }
+    }
+
+    private void LastPage()
+    {
+        currentPage = totalPages;
+        RefreshCircuits();
+    }
+
+    private void OnPageSizeChanged()
+    {
+        currentPage = 1;
+        RefreshCircuits();
+    }
+
+    private string TruncateUrl(string url)
+    {
+        if (ShowFullUrl)
+            return url;
+        if (Uri.TryCreate(url, UriKind.Absolute, out var uriResult))
+            return uriResult.PathAndQuery;
+        return url;
     }
 }
