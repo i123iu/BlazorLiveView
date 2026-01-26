@@ -37,4 +37,6 @@ public sealed class LiveViewOptions
     /// The user of the mirror circuit can still scroll normally. 
     /// </summary>
     public bool UseScreenOverlay { get; set; } = true;
+
+    public bool ShowDebugOptions { get; set; } = false;
 }

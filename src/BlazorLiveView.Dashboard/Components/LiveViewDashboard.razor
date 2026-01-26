@@ -3,11 +3,13 @@
 @using BlazorLiveView.Dashboard.Models
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Web
+@using BlazorLiveView.Core.Options
 @using Microsoft.Extensions.Options
 
 @implements IDisposable
 @inject ICircuitTracker circuitTracker
 @inject ICurrentCircuit currentCircuit
+@inject IOptions<LiveViewOptions> liveViewOptions
 
 <div class="dashboard">
     <div class="section filters">
@@ -122,29 +124,28 @@
                             }
                             else
                             {
-                                var circuitMirrorPath = CircuitIdToLink(userCircuit.Id);
-                                var userMirrorPath = CircuitIdToLink(userCircuit.Id);
-
                                 <div class="mirror-links">
                                     <span>
-                                        <a href="@circuitMirrorPath" class="mirror-link circuit">Circuit</a>
-                                        @if (ShowDebugLinks)
+                                        <a href="@CircuitIdToLink(userCircuit.Id)"
+                                           class="mirror-link circuit">Circuit</a>
+                                        @if (liveViewOptions.Value.ShowDebugOptions)
                                         {
-                                            var circuitDebugMirrorPath = CircuitIdToLink(userCircuit.Id, debugView: true);
                                             <text>
-                                                (<a href="@circuitDebugMirrorPath" class="mirror-link circuit debug">DEBUG</a>)
+                                                (<a href="@CircuitIdToLink(userCircuit.Id, debugView: true)"
+                                                    class="mirror-link circuit debug">DEBUG</a>)
                                             </text>
                                         }
                                     </span>
                                     @if (user is not null)
                                     {
                                         <span>
-                                            <a href="@userMirrorPath" class="mirror-link user">User</a>
-                                            @if (ShowDebugLinks)
+                                            <a href="@UserSelectorToLink(user)"
+                                               class="mirror-link user">User</a>
+                                            @if (liveViewOptions.Value.ShowDebugOptions)
                                             {
-                                                var userDebugMirrorPath = CircuitIdToLink(userCircuit.Id, debugView: true);
                                                 <text>
-                                                    (<a href="@userDebugMirrorPath" class="mirror-link user debug">DEBUG</a>)
+                                                    (<a href="@UserSelectorToLink(user, debugView: true)"
+                                                        class="mirror-link user debug">DEBUG</a>)
                                                 </text>
                                             }
                                         </span>
@@ -181,13 +182,15 @@
 @code
 {
     public delegate string CircuitIdToLinkDelegate(string circuitId, bool debugView = false);
+    public delegate string UserSelectorToLinkDelegate(string userSelector, bool debugView = false);
 
     [Parameter]
     [EditorRequired]
     public required CircuitIdToLinkDelegate CircuitIdToLink { get; set; }
 
     [Parameter]
-    public bool ShowDebugLinks { get; set; } = false;
+    [EditorRequired]
+    public required UserSelectorToLinkDelegate UserSelectorToLink { get; set; }
 
     [Parameter]
     public bool ShowFullUrl { get; set; } = false;
@@ -221,8 +224,8 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        circuitTracker.CircuitOpenedEvent += OnCircuitOpened;
-        circuitTracker.CircuitClosedEvent += OnCircuitClosed;
+        circuitTracker.OnCircuitOpened += OnCircuitOpened;
+        circuitTracker.OnCircuitClosed += OnCircuitClosed;
 
         RefreshCircuits();
         UpdateSubscriptions();
@@ -230,8 +233,8 @@
 
     public void Dispose()
     {
-        circuitTracker.CircuitOpenedEvent -= OnCircuitOpened;
-        circuitTracker.CircuitClosedEvent -= OnCircuitClosed;
+        circuitTracker.OnCircuitOpened -= OnCircuitOpened;
+        circuitTracker.OnCircuitClosed -= OnCircuitClosed;
 
         foreach (var circuit in circuitTracker.ListCircuits())
         {
@@ -267,7 +270,7 @@
         // Apply filtering
         if (!string.IsNullOrWhiteSpace(filterCircuitId))
         {
-            circuits = circuits.Where(c => 
+            circuits = circuits.Where(c =>
                 c.Id.Contains(filterCircuitId, StringComparison.OrdinalIgnoreCase)
             );
         }
@@ -284,7 +287,7 @@
             circuits = circuits.Where(c =>
             {
                 var email = c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
-                return email is not null && 
+                return email is not null &&
                     email.Contains(filterUser, StringComparison.OrdinalIgnoreCase);
             });
         }
@@ -301,23 +304,23 @@
             SortColumn.CircuitId => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.Id)
                 : circuits.OrderByDescending(c => c.Id),
-            
+
             SortColumn.Location => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.Uri)
                 : circuits.OrderByDescending(c => c.Uri),
-            
+
             SortColumn.ConnectedAt => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.OpenedAt)
                 : circuits.OrderByDescending(c => c.OpenedAt),
-            
+
             SortColumn.Status => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.CircuitStatus)
                 : circuits.OrderByDescending(c => c.CircuitStatus),
-            
+
             SortColumn.User => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "Anonymous")
                 : circuits.OrderByDescending(c => c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "Anonymous"),
-            
+
             _ => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.OpenedAt)
                 : circuits.OrderByDescending(c => c.OpenedAt)
@@ -329,7 +332,7 @@
         // Apply pagination
         var pageNumber = Math.Max(1, currentPage);
         var effectivePageSize = Math.Max(1, pageSize);
-        
+
         var paginatedCircuits = circuits
             .Skip((pageNumber - 1) * effectivePageSize)
             .Take(effectivePageSize)

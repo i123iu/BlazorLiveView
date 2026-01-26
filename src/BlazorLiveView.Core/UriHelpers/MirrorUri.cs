@@ -6,11 +6,11 @@
 /// </summary>
 public readonly struct MirrorUri(
     string sourceCircuitId, 
-    string? parentCircuitId = null, 
+    Guid? state = null, 
     bool debugView = false
 )
 {
     public readonly string sourceCircuitId = sourceCircuitId;
-    public readonly string? parentCircuitId = parentCircuitId;
+    public readonly Guid? state = state;
     public readonly bool debugView = debugView;
 }

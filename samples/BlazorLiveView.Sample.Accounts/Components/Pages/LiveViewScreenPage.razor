@@ -1,12 +1,29 @@
-﻿@page "/liveview/{CircuitId}"
+﻿@page "/liveview/circuit/{CircuitId}"
+@page "/liveview/user/{UserSelector}"
 @using BlazorLiveView.Dashboard.Components
 @layout BlazorLiveView.Dashboard.Layouts.EmptyLayout
 
-<LiveViewScreen CircuitId="@CircuitId" DebugView="@DebugView" />
+@if (!string.IsNullOrEmpty(CircuitId))
+{
+    <LiveViewCircuitScreen SourceCircuitId="@CircuitId"
+                           DebugView="@DebugView" />
+}
+else if (!string.IsNullOrEmpty(UserSelector))
+{
+    <LiveViewUserScreen UserSelector="@UserSelector"
+                        DebugView="@DebugView" />
+}
+else
+{
+    <p>Invalid parameters. Either CircuitId or UserSelector must be provided.</p>
+}
 
 @code {
     [Parameter]
-    public required string CircuitId { get; set; }
+    public string? CircuitId { get; set; }
+
+    [Parameter]
+    public string? UserSelector { get; set; }
 
     [Parameter]
     [SupplyParameterFromQuery]

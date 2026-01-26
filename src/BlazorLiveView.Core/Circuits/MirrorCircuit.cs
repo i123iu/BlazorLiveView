@@ -6,21 +6,21 @@ namespace BlazorLiveView.Core.Circuits;
 internal sealed class MirrorCircuit(
     Circuit circuit,
     IUserCircuit source,
-    IUserCircuit? parent,
+    Guid? state,
     DateTime openedAt,
     bool debugView,
     ILogger<MirrorCircuit> logger
 ) : CircuitBase(circuit, openedAt, logger), IMirrorCircuit
 {
     private readonly IUserCircuit _source = source;
-    private readonly IUserCircuit? _parent = parent;
+    private readonly Guid? _state = state;
     private readonly bool _debugView = debugView;
     private MirrorCircuitBlockReason? _blockReason;
 
     public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
 
     public IUserCircuit SourceCircuit => _source;
-    public IUserCircuit? ParentCircuit => _parent;
+    public Guid? State => _state;
     public bool DebugView => _debugView;
 
     public bool IsBlocked => _blockReason != null;

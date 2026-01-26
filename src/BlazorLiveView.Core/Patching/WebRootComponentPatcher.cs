@@ -77,11 +77,14 @@ internal sealed class WebRootComponentPatcher : IPatcher
                 return;
             }
 
-            _logger.LogInformation("Overwriting root component {OriginalRootComponentType}" +
-                $" to {nameof(RootMirrorComponent)} for IMirrorCircuit with id={{CircuitId}}",
-                componentType,
-                mirrorCircuit.Id
-            );
+            if (_logger.IsEnabled(LogLevel.Debug))
+            {
+                _logger.LogDebug("Overwriting root component {OriginalRootComponentType}" +
+                    $" to {nameof(RootMirrorComponent)} for IMirrorCircuit with id={{CircuitId}}",
+                    componentType,
+                    mirrorCircuit.Id
+                );
+            }
 
             componentType = typeof(RootMirrorComponent);
 

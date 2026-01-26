@@ -11,8 +11,8 @@ internal sealed class CircuitTracker(
     ILoggerFactory loggerFactory
 ) : ICircuitTracker
 {
-    public event ICircuitTracker.CircuitOpenedHandler? CircuitOpenedEvent;
-    public event ICircuitTracker.CircuitClosedHandler? CircuitClosedEvent;
+    public event ICircuitTracker.CircuitOpenedHandler? OnCircuitOpened;
+    public event ICircuitTracker.CircuitClosedHandler? OnCircuitClosed;
 
     private readonly ILogger<CircuitTracker> _logger = logger;
     private readonly ILoggerFactory _loggerFactory = loggerFactory;
@@ -22,12 +22,12 @@ internal sealed class CircuitTracker(
 
     private readonly struct PendingMirrorCircuit(
         IUserCircuit source,
-        IUserCircuit? parent,
+        Guid? state,
         bool debugView
     )
     {
         public readonly IUserCircuit source = source;
-        public readonly IUserCircuit? parent = parent;
+        public readonly Guid? state = state;
         public readonly bool debugView = debugView;
     }
 
@@ -55,8 +55,8 @@ internal sealed class CircuitTracker(
 
     public void MirrorCircuitCreated(
         Circuit mirrorCircuit,
-        IUserCircuit sourceCircuit, 
-        IUserCircuit? parentCircuit, 
+        IUserCircuit sourceCircuit,
+        Guid? state,
         bool debugView
     )
     {
@@ -68,12 +68,15 @@ internal sealed class CircuitTracker(
             );
         }
 
-        _logger.LogDebug(
-            "Mirror circuit created: {CircuitId}, source: {SourceCircuitId}, parent: {ParentCircuitId}",
-            mirrorCircuit.Id, sourceCircuit.Id, parentCircuit?.Id
-        );
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(
+                "Mirror circuit created: {CircuitId}, source: {SourceCircuitId}, state: {State}",
+                mirrorCircuit.Id, sourceCircuit.Id, state
+            );
+        }
 
-        PendingMirrorCircuit pending = new(sourceCircuit, parentCircuit, debugView);
+        PendingMirrorCircuit pending = new(sourceCircuit, state, debugView);
         if (!_pendingMirrorCircuitsById.TryAdd(mirrorCircuit.Id, pending))
         {
             throw new InvalidOperationException(
@@ -94,13 +97,16 @@ internal sealed class CircuitTracker(
         ICircuit circuit;
         if (_pendingMirrorCircuitsById.TryRemove(blazorCircuit.Id, out var pending))
         {
-            _logger.LogDebug("Mirror circuit opened: {CircuitId}",
+            if (_logger.IsEnabled(LogLevel.Debug))
+            {
+                _logger.LogDebug("Mirror circuit opened: {CircuitId}",
                 blazorCircuit.Id);
+            }
 
             circuit = new MirrorCircuit(
                 blazorCircuit,
                 pending.source,
-                pending.parent,
+                pending.state,
                 DateTime.UtcNow,
                 pending.debugView,
                 _loggerFactory.CreateLogger<MirrorCircuit>()
@@ -108,8 +114,11 @@ internal sealed class CircuitTracker(
         }
         else
         {
-            _logger.LogDebug("User circuit opened: {CircuitId}",
+            if (_logger.IsEnabled(LogLevel.Debug))
+            {
+                _logger.LogDebug("User circuit opened: {CircuitId}",
                 blazorCircuit.Id);
+            }
 
             circuit = new UserCircuit(
                 blazorCircuit,
@@ -134,7 +143,7 @@ internal sealed class CircuitTracker(
             );
         }
 
-        CircuitOpenedEvent?.Invoke(circuit);
+        OnCircuitOpened?.Invoke(circuit);
     }
 
     public void CircuitUp(Circuit blazorCircuit)
@@ -146,7 +155,10 @@ internal sealed class CircuitTracker(
             );
         }
 
-        _logger.LogDebug("Circuit up: {CircuitId}", blazorCircuit.Id);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug("Circuit up: {CircuitId}", blazorCircuit.Id);
+        }
         circuit.SetUp();
     }
 
@@ -165,7 +177,11 @@ internal sealed class CircuitTracker(
             return;
         }
 
-        _logger.LogDebug("Circuit down: {CircuitId}", blazorCircuit.Id);
+
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug("Circuit down: {CircuitId}", blazorCircuit.Id);
+        }
         circuit.SetDown();
     }
 
@@ -178,13 +194,16 @@ internal sealed class CircuitTracker(
             );
         }
 
-        _logger.LogDebug("Circuit closed: {CircuitId}", blazorCircuit.Id);
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug("Circuit closed: {CircuitId}", blazorCircuit.Id);
+        }
         circuit.SetClosed();
 
         CircuitWrapper circuitWrapped = new(blazorCircuit);
         Renderer renderer = circuitWrapped.CircuitHost.Renderer.Inner;
         _circuitsByRenderer.TryRemove(renderer, out _);
 
-        CircuitClosedEvent?.Invoke(circuit);
+        OnCircuitClosed?.Invoke(circuit);
     }
 }

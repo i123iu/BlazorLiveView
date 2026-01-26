@@ -4,13 +4,22 @@
 <PageTitle>LiveViewDashboardPage</PageTitle>
 <h1>LiveViewDashboardPage</h1>
 
-<LiveViewDashboard CircuitIdToLink="@CircuitIdToLink" ShowDebugLinks="true" ShowFullUrl="true" />
+<LiveViewDashboard CircuitIdToLink="@CircuitIdToLink"
+                   UserSelectorToLink="@UserSelectorToLink"
+                   ShowFullUrl="true" />
 
 @code {
     private string CircuitIdToLink(string circuitId,
         bool debugView = false)
     {
-        return $"/liveview/{circuitId}"
+        return $"/liveview/circuit/{circuitId}"
+            + $"{(debugView ? "?DebugView=true" : "")}";
+    }
+    
+    private string UserSelectorToLink(string userSelector,
+        bool debugView = false)
+    {
+        return $"/liveview/user/{Uri.EscapeDataString(userSelector)}"
             + $"{(debugView ? "?DebugView=true" : "")}";
     }
 }

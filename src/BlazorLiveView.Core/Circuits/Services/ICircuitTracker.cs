@@ -11,8 +11,8 @@ public interface ICircuitTracker
     public delegate void CircuitOpenedHandler(ICircuit circuit);
     public delegate void CircuitClosedHandler(ICircuit circuit);
 
-    event CircuitOpenedHandler? CircuitOpenedEvent;
-    event CircuitClosedHandler? CircuitClosedEvent;
+    event CircuitOpenedHandler? OnCircuitOpened;
+    event CircuitClosedHandler? OnCircuitClosed;
 
     ICircuit? GetCircuit(string id);
     internal ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer);
@@ -23,7 +23,7 @@ public interface ICircuitTracker
     /// Called when a mirror circuit's constructor was called.
     /// </summary>
     internal void MirrorCircuitCreated(Circuit mirrorCircuit, 
-        IUserCircuit sourceCircuit, IUserCircuit? parentCircuit, bool debugView);
+        IUserCircuit sourceCircuit, Guid? state, bool debugView);
 
     /// <summary>
     /// Called when any circuit's SignalR connection was initialized.

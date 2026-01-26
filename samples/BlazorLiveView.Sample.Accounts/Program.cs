@@ -14,7 +14,10 @@ namespace BlazorLiveView.Sample.Accounts
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.AddLiveView();
+            builder.AddLiveView(options =>
+            {
+                options.ShowDebugOptions = true;
+            });
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
