@@ -60,7 +60,7 @@
 
     <div class="status-bar-item">
         <label class="item-name">User:</label>
-        <span class="item-value monospace">@UserEmail</span>
+        <span class="item-value monospace">@UserSelector</span>
     </div>
 
     <div class="status-bar-item location">
@@ -84,10 +84,8 @@
     [Parameter]
     public EventCallback<string?> SelectedCircuitIdChanged { get; set; }
 
-    private string UserEmail => SourceCircuit?.User.FindFirst(ClaimTypes.Email)?.Value
-                             ?? SourceCircuit?.User.FindFirst("email")?.Value
-                             ?? SourceCircuit?.User.FindFirst("preferred_username")?.Value
-                             ?? "-";
+    private string UserSelector => SourceCircuit is null ? "-" :
+        LiveViewOptions.Value.UserSelectorExtractor(SourceCircuit.User) ?? "-";
 
     private void OnSelectedCircuitIdChanged(ChangeEventArgs e)
     {

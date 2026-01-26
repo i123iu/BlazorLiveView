@@ -7,9 +7,9 @@
 @using Microsoft.Extensions.Options
 
 @implements IDisposable
-@inject ICircuitTracker circuitTracker
-@inject ICurrentCircuit currentCircuit
-@inject IOptions<LiveViewOptions> liveViewOptions
+@inject ICircuitTracker CircuitTracker
+@inject ICurrentCircuit CurrentCircuit
+@inject IOptions<LiveViewOptions> LiveViewOptions
 
 <div class="dashboard">
     <div class="section filters">
@@ -28,10 +28,10 @@
                        placeholder="Filter by URL..." />
             </div>
             <div class="filter-item">
-                <label>User (Email)</label>
+                <label>User</label>
                 <input type="text" @bind="filterUser"
                        @bind:event="oninput" @bind:after="ApplyFilters"
-                       placeholder="Filter by email..." />
+                       placeholder="Filter by user..." />
             </div>
             <div class="filter-item">
                 <label>Status</label>
@@ -118,7 +118,7 @@
                         </td>
                         <td class="col-user">@(user is null ? "-" : user)</td>
                         <td class="col-mirror">
-                            @if (currentCircuit.Current is not null && currentCircuit.Current.Id == userCircuit.Id)
+                            @if (CurrentCircuit.Current is not null && CurrentCircuit.Current.Id == userCircuit.Id)
                             {
                                 <span class="current-circuit-label">This session</span>
                             }
@@ -128,7 +128,7 @@
                                     <span>
                                         <a href="@CircuitIdToLink(userCircuit.Id)"
                                            class="mirror-link circuit">Circuit</a>
-                                        @if (liveViewOptions.Value.ShowDebugOptions)
+                                        @if (LiveViewOptions.Value.ShowDebugOptions)
                                         {
                                             <text>
                                                 (<a href="@CircuitIdToLink(userCircuit.Id, debugView: true)"
@@ -141,7 +141,7 @@
                                         <span>
                                             <a href="@UserSelectorToLink(user)"
                                                class="mirror-link user">User</a>
-                                            @if (liveViewOptions.Value.ShowDebugOptions)
+                                            @if (LiveViewOptions.Value.ShowDebugOptions)
                                             {
                                                 <text>
                                                     (<a href="@UserSelectorToLink(user, debugView: true)"
@@ -164,11 +164,15 @@
             Showing @((currentPage - 1) * pageSize + 1) to @Math.Min(currentPage * pageSize, totalCircuits) of @totalCircuits circuits
         </div>
         <div class="pagination-controls">
-            <button @onclick="FirstPage" disabled="@(currentPage == 1)" class="pagination-button">«</button>
-            <button @onclick="PreviousPage" disabled="@(currentPage == 1)" class="pagination-button">‹</button>
+            @{
+                bool disablePrev = currentPage == 1;
+                bool disableNext = currentPage >= totalPages;
+            }
+            <button @onclick="FirstPage" disabled="@disablePrev" class="pagination-button">«</button>
+            <button @onclick="PreviousPage" disabled="@disablePrev" class="pagination-button">‹</button>
             <span class="page-info">Page @currentPage of @totalPages</span>
-            <button @onclick="NextPage" disabled="@(currentPage >= totalPages)" class="pagination-button">›</button>
-            <button @onclick="LastPage" disabled="@(currentPage >= totalPages)" class="pagination-button">»</button>
+            <button @onclick="NextPage" disabled="@disableNext" class="pagination-button">›</button>
+            <button @onclick="LastPage" disabled="@disableNext" class="pagination-button">»</button>
         </div>
         <select @bind="pageSize" @bind:after="OnPageSizeChanged" class="page-size-select">
             <option value="10">10 per page</option>
@@ -224,8 +228,8 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        circuitTracker.OnCircuitOpened += OnCircuitOpened;
-        circuitTracker.OnCircuitClosed += OnCircuitClosed;
+        CircuitTracker.OnCircuitOpened += OnCircuitOpened;
+        CircuitTracker.OnCircuitClosed += OnCircuitClosed;
 
         RefreshCircuits();
         UpdateSubscriptions();
@@ -233,10 +237,10 @@
 
     public void Dispose()
     {
-        circuitTracker.OnCircuitOpened -= OnCircuitOpened;
-        circuitTracker.OnCircuitClosed -= OnCircuitClosed;
+        CircuitTracker.OnCircuitOpened -= OnCircuitOpened;
+        CircuitTracker.OnCircuitClosed -= OnCircuitClosed;
 
-        foreach (var circuit in circuitTracker.ListCircuits())
+        foreach (var circuit in CircuitTracker.ListCircuits())
         {
             UnsubscribeFromCircuit(circuit);
         }
@@ -265,7 +269,7 @@
     private void RefreshCircuits()
     {
         // Get all circuits and filter to user circuits
-        IEnumerable<IUserCircuit> circuits = circuitTracker.ListCircuits().OfType<IUserCircuit>();
+        IEnumerable<IUserCircuit> circuits = CircuitTracker.ListCircuits().OfType<IUserCircuit>();
 
         // Apply filtering
         if (!string.IsNullOrWhiteSpace(filterCircuitId))
@@ -286,9 +290,12 @@
         {
             circuits = circuits.Where(c =>
             {
-                var email = c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
-                return email is not null &&
-                    email.Contains(filterUser, StringComparison.OrdinalIgnoreCase);
+                var userSelector = LiveViewOptions.Value.UserSelectorExtractor(c.User);
+                return userSelector is not null &&
+                    userSelector.Contains(
+                        filterUser, 
+                        LiveViewOptions.Value.UserSelectorStringComparison
+                    );
             });
         }
 
@@ -368,7 +375,7 @@
         var toUnsubscribe = subscribedCircuitIds.Where(id => !currentPageCircuitIds.Contains(id)).ToList();
         foreach (var circuitId in toUnsubscribe)
         {
-            var circuit = circuitTracker.GetCircuit(circuitId);
+            var circuit = CircuitTracker.GetCircuit(circuitId);
             if (circuit is not null)
                 UnsubscribeFromCircuit(circuit);
         }

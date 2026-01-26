@@ -1,4 +1,6 @@
-﻿namespace BlazorLiveView.Core.Options;
+﻿using System.Security.Claims;
+
+namespace BlazorLiveView.Core.Options;
 
 public sealed class LiveViewOptions
 {
@@ -37,6 +39,23 @@ public sealed class LiveViewOptions
     /// The user of the mirror circuit can still scroll normally. 
     /// </summary>
     public bool UseScreenOverlay { get; set; } = true;
+
+    /// <summary>
+    /// Function to extract a unique user identifier (<c>UserSelector</c>) from
+    /// a <see cref="ClaimsPrincipal"/>. This user selector can be an email or
+    /// some unique login name. By default, it extracts the first email claim
+    /// (<see cref="ClaimTypes.Email"/>). Return null for users that are not
+    /// logged in.
+    /// </summary>
+    public Func<ClaimsPrincipal, string?> UserSelectorExtractor { get; set; } =
+        principal => principal.FindFirstValue(ClaimTypes.Email);
+
+    /// <summary>
+    /// How should user selectors be compared with each other. Default is
+    /// <see cref="StringComparison.OrdinalIgnoreCase"/>.
+    /// </summary>
+    public StringComparison UserSelectorStringComparison { get; set; } =
+        StringComparison.OrdinalIgnoreCase;
 
     public bool ShowDebugOptions { get; set; } = false;
 }

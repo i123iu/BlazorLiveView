@@ -51,6 +51,7 @@
 
 @code {
     [Parameter]
+    [EditorRequired]
     public string? UserSelector { get; set; }
 
     [Parameter]
@@ -70,7 +71,7 @@
         var allUserCircuit = CircuitTracker
             .ListCircuits()
             .OfType<IUserCircuit>()
-            .Where(c => IsUserEmailMatch(c.User, UserSelector))
+            .Where(c => IsUserSelectorMatch(c.User, UserSelector!))
             .OrderByDescending(c => c.OpenedAt)
             .ToList();
 
@@ -104,13 +105,14 @@
         StateHasChanged();
     }
 
-    private bool IsUserEmailMatch(ClaimsPrincipal user, string email)
+    private bool IsUserSelectorMatch(ClaimsPrincipal user, string userSelector)
     {
-        var userEmail = user.FindFirst(ClaimTypes.Email)?.Value
-                     ?? user.FindFirst("email")?.Value
-                     ?? user.FindFirst("preferred_username")?.Value;
-
-        return string.Equals(userEmail, email, StringComparison.OrdinalIgnoreCase);
+        var userSelector2 = LiveViewOptions.Value.UserSelectorExtractor(user);
+        return string.Equals(
+            userSelector2,
+            userSelector,
+            LiveViewOptions.Value.UserSelectorStringComparison
+        );
     }
 
     private Task OnSelectedCircuitIdChanged(string? newCircuitId)
@@ -138,7 +140,7 @@
     protected override void OnAnyCircuitOpened(ICircuit circuit)
     {
         if (circuit is IUserCircuit userCircuit &&
-            IsUserEmailMatch(userCircuit.User, UserSelector ?? ""))
+            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
         {
             InvokeAsync(UpdateCircuitsForUser);
         }
@@ -147,7 +149,7 @@
     protected override void OnAnyCircuitClosed(ICircuit circuit)
     {
         if (circuit is IUserCircuit userCircuit &&
-            IsUserEmailMatch(userCircuit.User, UserSelector ?? ""))
+            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
         {
             InvokeAsync(UpdateCircuitsForUser);
         }
