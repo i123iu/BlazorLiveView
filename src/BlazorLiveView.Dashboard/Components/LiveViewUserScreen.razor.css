@@ -1,0 +1,29 @@
+.liveview-screen {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    -webkit-align-items: stretch;
+}
+
+.liveview-screen-content {
+    flex-grow: 1;
+    border: 2px solid red;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    -webkit-align-items: stretch;
+}
+
+.liveview-screen-placeholder {
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    height: 100%;
+    color: #586069;
+    font-size: 1.125em;
+}

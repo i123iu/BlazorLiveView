@@ -1,0 +1,93 @@
+@using BlazorLiveView.Core.Attributes
+@using BlazorLiveView.Core.Circuits
+@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.Options
+@using BlazorLiveView.Dashboard.Models
+@using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
+
+@attribute [LiveViewHideInMirror]
+
+@inherits LiveViewScreenBase
+
+@inject ILiveViewMirrorUriBuilder MirrorUriBuilder
+@inject IOptions<LiveViewOptions> LiveViewOptions
+@inject ICircuitTracker CircuitTracker
+
+<div class="liveview-screen">
+    <LiveViewStatusBar RenderState="@GetRenderState()"
+                       SourceCircuit="@SourceCircuit"
+                       SelectedCircuitId="@SourceCircuitId" />
+
+    <div class="liveview-screen-content">
+        @{
+            var renderState = GetRenderState();
+        }
+        @switch (renderState)
+        {
+            case LiveViewRenderState.SourceCircuitNotFound:
+            case LiveViewRenderState.SourceCircuitClosed:
+            case LiveViewRenderState.MirrorCircuitBlocked:
+            case LiveViewRenderState.MirrorCircuitClosed:
+                break;
+            case LiveViewRenderState.MirrorCircuitLoading:
+            case LiveViewRenderState.Working:
+                if (SourceCircuitId is null)
+                {
+                    <div class="liveview-screen-placeholder">
+                        <span>No circuit selected.</span>
+                    </div>
+                    break;
+                }
+                <LiveViewScreenIFrame @ref="liveViewScreenIFrame"
+                                      SourceCircuitId="@SourceCircuitId"
+                                      MirrorCircuitChanged="MirrorCircuitChanged"
+                                      DebugView="@DebugView" />
+                break;
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? SourceCircuitId { get; set; }
+
+    [Parameter]
+    public bool DebugView { get; set; } = false;
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrEmpty(SourceCircuitId))
+        {
+            SourceCircuit = null;
+            return;
+        }
+
+        var sourceCircuit = CircuitTracker.GetCircuit(SourceCircuitId);
+        if (sourceCircuit is IUserCircuit userCircuit)
+        {
+            SourceCircuit = userCircuit;
+            SubscribeToCircuit(userCircuit);
+        }
+        else
+        {
+            SourceCircuit = null;
+        }
+    }
+
+    protected override void OnAnyCircuitOpened(ICircuit circuit)
+    {
+        if (circuit.Id == SourceCircuitId)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    protected override void OnAnyCircuitClosed(ICircuit circuit)
+    {
+        if (circuit.Id == SourceCircuitId)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    }
+}

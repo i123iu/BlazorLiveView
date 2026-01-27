@@ -18,10 +18,10 @@ internal class LiveViewMirrorUriBuilder(
         sb.Append(_options.MirrorUri);
         sb.Append('?');
         sb.Append($"{nameof(MirrorUri.sourceCircuitId)}={Uri.EscapeDataString(mirrorUri.sourceCircuitId)}");
-        if (mirrorUri.parentCircuitId is not null)
+        if (mirrorUri.state is not null)
         {
             sb.Append('&');
-            sb.Append($"{nameof(MirrorUri.parentCircuitId)}={Uri.EscapeDataString(mirrorUri.parentCircuitId)}");
+            sb.Append($"{nameof(MirrorUri.state)}={Uri.EscapeDataString(mirrorUri.state.Value.ToString())}");
         }
         if (mirrorUri.debugView)
         {
@@ -50,10 +50,11 @@ internal class LiveViewMirrorUriBuilder(
             return false;
         }
 
-        var parentCircuitId = query.Get(nameof(MirrorUri.parentCircuitId));
-        if (string.IsNullOrEmpty(parentCircuitId))
+        var stateStr = query.Get(nameof(MirrorUri.state));
+        Guid? state = null;
+        if (Guid.TryParse(stateStr, out Guid g))
         {
-            parentCircuitId = null;
+            state = g;
         }
 
         var debugViewStr = query.Get(nameof(MirrorUri.debugView));
@@ -64,8 +65,8 @@ internal class LiveViewMirrorUriBuilder(
         }
 
         mirrorUri = new MirrorUri(
-            circuitId, 
-            parentCircuitId, 
+            circuitId,
+            state,
             debugView
         );
         return true;

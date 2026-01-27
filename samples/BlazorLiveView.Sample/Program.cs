@@ -13,7 +13,10 @@ public class Program
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents();
 
-        builder.AddLiveView();
+        builder.AddLiveView(options =>
+        {
+            options.ShowDebugOptions = true;
+        });
 
         var app = builder.Build();
 

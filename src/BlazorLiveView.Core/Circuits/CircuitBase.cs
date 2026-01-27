@@ -21,6 +21,9 @@ internal abstract class CircuitBase(
     public DateTime OpenedAt { get; set; } = openedAt;
     public CircuitStatus CircuitStatus => _circuitStatus;
 
+    public virtual void Dispose()
+    { }
+
     public void SetUp()
     {
         switch (_circuitStatus)

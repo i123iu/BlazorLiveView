@@ -8,7 +8,7 @@ BlazorLiveView is a real-time screen sharing library for ASP.NET Core Blazor Ser
 
 Imagine the default Blazor Server application.
 
-There is a regular user on the counter page (URL `/counter`). Clicking on the button increases the count; the current state is **2**.
+There is a regular user `test@example.com` on the counter page (URL `/counter`). Clicking on the button increases the counter value; the current value is **2**.
 
 ![User session](images/screenshot-source.png)
 
@@ -19,9 +19,14 @@ Using BlazorLiveView, administrators can view all active user connections (sessi
 
 ![Admin dashboard](images/screenshot-table.png)
 
-Clicking on "Open mirror" redirect the admin to a live mirror view of the user's session (URL `/liveview/{circuitId}`). Notice the original user's session shown in a red box (with the count **2**). There is also a top status bar with additional information. When the user clicks the button (increasing the count to **3**), the mirrored view updates in real-time.
+Clicking on the link "Circuit" (in the column "View Mirror") redirects the admin to a page with a live mirror view of the user's session (URL `/liveview/circuit/{circuitId}`). Notice the original user's session shown in a red box (with the count **2**). There is also a top status bar with additional information. When the user clicks the button (increasing the count to **3**), the mirrored view updates in real-time.
 
-![Mirror view of user's session](images/screenshot-mirror.png)
+![Mirror view of user's session in circuit mode](images/screenshot-mirror-circuit.png)
+
+In the admin dashboard, there is also a link "User" (in the column "View Mirror"). This is very similar to the "Circuit" view, but can show all circuits of the selected logged in user. The admin can switch between them using the dropdown in the top status bar.It also automatically switches to a newer circuit if the original circuit is closed. In this example, the user has two tabs open - `/counter` and `/weather`. 
+
+![Mirror view of user's session in user mode](images/screenshot-mirror-user.png)
+
 ## NuGet Packages
 
 BlazorLiveView provides three NuGet packages:

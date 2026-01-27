@@ -1,0 +1,157 @@
+@using BlazorLiveView.Core.Attributes
+@using BlazorLiveView.Core.Circuits
+@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.Options
+@using BlazorLiveView.Dashboard.Models
+@using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
+@using System.Security.Claims
+
+@attribute [LiveViewHideInMirror]
+
+@inherits LiveViewScreenBase
+
+@inject ILiveViewMirrorUriBuilder MirrorUriBuilder
+@inject IOptions<LiveViewOptions> LiveViewOptions
+@inject ICircuitTracker CircuitTracker
+@inject ILogger<LiveViewUserScreen> Logger
+
+<div class="liveview-screen">
+    <LiveViewStatusBar RenderState="@GetRenderState()"
+                       SourceCircuit="@SourceCircuit"
+                       AvailableCircuits="@_availableUserCircuits"
+                       SelectedCircuitId="@_selectedCircuitId"
+                       SelectedCircuitIdChanged="OnSelectedCircuitIdChanged" />
+
+    <div class="liveview-screen-content">
+        @switch (GetRenderState())
+        {
+            case LiveViewRenderState.SourceCircuitNotFound:
+            case LiveViewRenderState.SourceCircuitClosed:
+            case LiveViewRenderState.MirrorCircuitBlocked:
+            case LiveViewRenderState.MirrorCircuitClosed:
+                break;
+            case LiveViewRenderState.MirrorCircuitLoading:
+            case LiveViewRenderState.Working:
+                if (_selectedCircuitId is null)
+                {
+                    <div class="liveview-screen-placeholder">
+                        <span>No circuit selected.</span>
+                    </div>
+                    break;
+                }
+                <LiveViewScreenIFrame @ref="liveViewScreenIFrame"
+                                      SourceCircuitId="@_selectedCircuitId"
+                                      MirrorCircuitChanged="MirrorCircuitChanged"
+                                      DebugView="@DebugView" />
+                break;
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public string? UserSelector { get; set; }
+
+    [Parameter]
+    public bool DebugView { get; set; } = false;
+
+    private string? _selectedCircuitId = null;
+
+    private Dictionary<string, IUserCircuit> _availableUserCircuits = new();
+
+    protected override void OnParametersSet()
+    {
+        UpdateCircuitsForUser();
+    }
+
+    private void UpdateCircuitsForUser()
+    {
+        var allUserCircuit = CircuitTracker
+            .ListCircuits()
+            .OfType<IUserCircuit>()
+            .Where(c => IsUserSelectorMatch(c.User, UserSelector!))
+            .OrderByDescending(c => c.OpenedAt)
+            .ToList();
+
+        foreach (var circuit in allUserCircuit)
+        {
+            UnsubscribeFromCircuit(circuit);
+        }
+
+        _availableUserCircuits = allUserCircuit.ToDictionary(c => c.Id, c => c);
+
+        foreach (var circuit in allUserCircuit)
+        {
+            SubscribeToCircuit(circuit);
+        }
+
+        if (_selectedCircuitId is not null &&
+            _availableUserCircuits.ContainsKey(_selectedCircuitId))
+        {
+            // Current circuit is still valid
+        }
+        else
+        {
+            // Auto-switch to the newest circuit
+            var newest = _availableUserCircuits.Values
+                .OrderByDescending(c => c.OpenedAt)
+                .FirstOrDefault();
+            _selectedCircuitId = newest?.Id;
+            SourceCircuit = newest;
+        }
+
+        StateHasChanged();
+    }
+
+    private bool IsUserSelectorMatch(ClaimsPrincipal user, string userSelector)
+    {
+        var userSelector2 = LiveViewOptions.Value.UserSelectorExtractor(user);
+        return string.Equals(
+            userSelector2,
+            userSelector,
+            LiveViewOptions.Value.UserSelectorStringComparison
+        );
+    }
+
+    private Task OnSelectedCircuitIdChanged(string? newCircuitId)
+    {
+        Logger.LogInformation("User screen circuit changed to {CircuitId}", newCircuitId);
+
+        _selectedCircuitId = newCircuitId;
+        if (newCircuitId is not null &&
+            _availableUserCircuits.TryGetValue(newCircuitId, out var circuit))
+        {
+            SourceCircuit = circuit;
+        }
+        else
+        {
+            SourceCircuit = null;
+        }
+
+        // Reset the IFrame when circuit changes
+        liveViewScreenIFrame?.ResetState();
+        StateHasChanged();
+
+        return Task.CompletedTask;
+    }
+
+    protected override void OnAnyCircuitOpened(ICircuit circuit)
+    {
+        if (circuit is IUserCircuit userCircuit &&
+            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
+        {
+            InvokeAsync(UpdateCircuitsForUser);
+        }
+    }
+
+    protected override void OnAnyCircuitClosed(ICircuit circuit)
+    {
+        if (circuit is IUserCircuit userCircuit &&
+            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
+        {
+            InvokeAsync(UpdateCircuitsForUser);
+        }
+    }
+}

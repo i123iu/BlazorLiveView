@@ -1,0 +1,116 @@
+@using BlazorLiveView.Core.Circuits
+@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Dashboard.Models
+@using Microsoft.Extensions.Logging
+
+@inject ICircuitTracker CircuitTracker
+@inject ILogger<LiveViewScreenBase> Logger
+
+@implements IDisposable
+
+@code {
+    protected LiveViewScreenIFrame? liveViewScreenIFrame;
+    protected HashSet<string> subscribedCircuitIds = new();
+
+    protected IUserCircuit? _sourceCircuit;
+    protected IUserCircuit? SourceCircuit
+    {
+        get => _sourceCircuit;
+        set
+        {
+            if (_sourceCircuit != value)
+            {
+                _sourceCircuit = value;
+                liveViewScreenIFrame?.ResetState();
+                StateHasChanged();
+            }
+        }
+    }
+
+    protected IMirrorCircuit? MirrorCircuit
+        => liveViewScreenIFrame?.MirrorCircuit;
+
+    protected LiveViewRenderState GetRenderState()
+    {
+        if (SourceCircuit is null)
+            return LiveViewRenderState.SourceCircuitNotFound;
+        else if (SourceCircuit.CircuitStatus == CircuitStatus.Closed)
+            return LiveViewRenderState.SourceCircuitClosed;
+        else if (MirrorCircuit is null)
+            return LiveViewRenderState.MirrorCircuitLoading;
+        else if (MirrorCircuit.IsBlocked)
+            return LiveViewRenderState.MirrorCircuitBlocked;
+        else if (MirrorCircuit.CircuitStatus == CircuitStatus.Closed)
+            return LiveViewRenderState.MirrorCircuitClosed;
+
+        return LiveViewRenderState.Working;
+    }
+
+    protected override void OnInitialized()
+    {
+        CircuitTracker.OnCircuitOpened += OnAnyCircuitOpened;
+        CircuitTracker.OnCircuitClosed += OnAnyCircuitClosed;
+    }
+
+    public virtual void Dispose()
+    {
+        CircuitTracker.OnCircuitOpened -= OnAnyCircuitOpened;
+        CircuitTracker.OnCircuitClosed -= OnAnyCircuitClosed;
+
+        foreach (var circuitId in subscribedCircuitIds.ToList())
+        {
+            var circuit = CircuitTracker.GetCircuit(circuitId);
+            if (circuit is not null)
+            {
+                UnsubscribeFromCircuit(circuit);
+            }
+        }
+    }
+
+    protected void SubscribeToCircuit(ICircuit circuit)
+    {
+        if (circuit is IUserCircuit userCircuit &&
+            subscribedCircuitIds.Add(circuit.Id))
+        {
+            userCircuit.UriChanged += OnAnyUserCircuitChanged;
+            userCircuit.AuthenticationStateChanged += OnAnyUserCircuitChanged;
+            userCircuit.CircuitStatusChanged += OnAnyCircuitChanged;
+        }
+    }
+
+    protected void UnsubscribeFromCircuit(ICircuit circuit)
+    {
+        if (circuit is IUserCircuit userCircuit &&
+            subscribedCircuitIds.Remove(circuit.Id))
+        {
+            userCircuit.UriChanged -= OnAnyUserCircuitChanged;
+            userCircuit.AuthenticationStateChanged -= OnAnyUserCircuitChanged;
+            userCircuit.CircuitStatusChanged -= OnAnyCircuitChanged;
+        }
+    }
+
+    protected void MirrorCircuitChanged(IMirrorCircuit m)
+    {
+        StateHasChanged();
+    }
+
+    protected void OnAnyCircuitChanged(ICircuit _)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected void OnAnyUserCircuitChanged(IUserCircuit _)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    protected virtual void OnAnyCircuitOpened(ICircuit circuit)
+    {
+        // Override in derived components
+    }
+
+    protected virtual void OnAnyCircuitClosed(ICircuit circuit)
+    {
+        // Override in derived components
+    }
+}

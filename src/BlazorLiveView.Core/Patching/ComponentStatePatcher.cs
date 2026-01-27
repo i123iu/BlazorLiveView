@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits;
+using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
@@ -46,7 +47,7 @@ internal sealed class ComponentStatePatcher : IPatcher
         try
         {
             ComponentStateWrapper wrapped = new(__instance);
-    
+
             if (wrapped.ComponentWasDisposed)
             {
                 return;

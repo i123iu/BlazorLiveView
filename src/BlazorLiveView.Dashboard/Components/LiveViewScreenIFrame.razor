@@ -1,0 +1,64 @@
+﻿@using BlazorLiveView.Core.Circuits.Services
+
+@implements IDisposable
+
+@inject ILiveViewMirrorUriBuilder MirrorUriBuilder
+@inject ICircuitTracker CircuitTracker
+
+<iframe class="liveview-screen-iframe"
+        @key="@_state"
+        src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)" />
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public string SourceCircuitId { get; set; } = default!;
+
+    [Parameter]
+    public bool DebugView { get; set; } = false;
+
+    [Parameter]
+    public EventCallback<IMirrorCircuit> MirrorCircuitChanged { get; set; }
+
+    private MirrorUri MirrorUri => new(SourceCircuitId, _state, DebugView);
+
+    public IMirrorCircuit? MirrorCircuit { get; private set; }
+
+    private Guid _state = Guid.NewGuid();
+
+    protected override void OnInitialized()
+    {
+        CircuitTracker.OnCircuitOpened += OnCircuitOpened;
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        CircuitTracker.OnCircuitOpened -= OnCircuitOpened;
+    }
+
+    protected override void OnParametersSet()
+    {
+        ResetState();
+        base.OnParametersSet();
+    }
+
+    private void OnCircuitOpened(ICircuit circuit)
+    {
+        if (circuit is not IMirrorCircuit mirrorCircuit)
+            return;
+        if (mirrorCircuit.State == _state)
+        {
+            MirrorCircuit = mirrorCircuit;
+            InvokeAsync(() => MirrorCircuitChanged.InvokeAsync(mirrorCircuit));
+        }
+    }
+
+    public void ResetState()
+    {
+        _state = Guid.NewGuid();
+        MirrorCircuit = null;
+        MirrorCircuitChanged.InvokeAsync();
+        StateHasChanged();
+    }
+}

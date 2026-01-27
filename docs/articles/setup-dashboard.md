@@ -4,7 +4,7 @@ This is the third step of BlazorLiveView setup: **Setting up the admin dashboard
 
 This guide uses the pre-built dashboard components provided by the package `BlazorLiveView.Dashboard` (included in `BlazorLiveView`). To create custom dashboard components, see [Custom Dashboard](custom-dashboard.md).
 
-## `LiveViewDashboard` Component
+## Circuits Table
 
 The `LiveViewDashboard` component displays a all active user circuits (connections) in a table.
 
@@ -16,41 +16,67 @@ Create a new Razor Component page for the dashboard, e.g. `Components/Pages/Live
 @page "/liveview"
 @using BlazorLiveView.Dashboard.Components
 
-<PageTitle>LiveViewDashboardPage</PageTitle>
-<h1>LiveViewDashboardPage</h1>
+<PageTitle>LiveView</PageTitle>
+<h1>LiveView Dashboard</h1>
 
-<LiveViewDashboard CircuitIdToLink="@CircuitIdToLink" />
+<LiveViewDashboard CircuitIdToLink="@CircuitIdToLink"
+                   UserSelectorToLink="@UserSelectorToLink"
+                   ShowFullUrl="true" />
 
 @code {
-    private string CircuitIdToLink(string circuitId, 
+    private string CircuitIdToLink(string circuitId,
         bool debugView = false)
     {
-        return $"/liveview/{circuitId}" 
+        return $"/liveview/circuit/{circuitId}"
+            + $"{(debugView ? "?DebugView=true" : "")}";
+    }
+
+    private string UserSelectorToLink(string userSelector,
+        bool debugView = false)
+    {
+        return $"/liveview/user/{Uri.EscapeDataString(userSelector)}"
             + $"{(debugView ? "?DebugView=true" : "")}";
     }
 }
 ```
 
-The `LiveViewDashboard` component expects a delegate `CircuitIdToLink` that generates a URL to the mirror view for a given circuit ID. You may pass this circuit ID in any way, but this guide uses a route parameter to pass the ID to a `LiveViewScreen` component.
+The `LiveViewDashboard` component expects two delegates: `CircuitIdToLink` and `UserSelectorToLink`. They both should generate URL adresses to the mirror view. `CircuitIdToLink` for a given circuit ID and `UserSelectorToLink` for a given user selector (for example email). This guide uses route parameters to pass them to a single live view screen page.
 
-## `LiveViewScreen` Component
+## Live View Screen
 
-The `LiveViewScreen` component renders the actual mirrored view of a user's session in a red box along with a top status bar with additional information.
+Viewing the mirrored user session can be done with `LiveViewCircuitScreen` using a circuit ID or with `LiveViewUserScreen` using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.
 
-![LiveViewScreen Example](../images/screenshot-mirror.png)
+![LiveViewCircuitScreen Example](../images/screenshot-mirror-circuit.png)
 
-Create a new Razor Component page for viewing individual sessions, e.g. `Components/Pages/LiveViewScreenPage.razor` with the following code.
+Create a new Razor Component page, e.g. `Components/Pages/LiveViewScreenPage.razor` with the following code.
 
 ```razor
-@page "/liveview/{CircuitId}"
+@page "/liveview/circuit/{CircuitId}"
+@page "/liveview/user/{UserSelector}"
 @using BlazorLiveView.Dashboard.Components
 @layout BlazorLiveView.Dashboard.Layouts.EmptyLayout
 
-<LiveViewScreen CircuitId="@CircuitId" DebugView="@DebugView" />
+@if (!string.IsNullOrEmpty(CircuitId))
+{
+    <LiveViewCircuitScreen SourceCircuitId="@CircuitId"
+                           DebugView="@DebugView" />
+}
+else if (!string.IsNullOrEmpty(UserSelector))
+{
+    <LiveViewUserScreen UserSelector="@UserSelector"
+                        DebugView="@DebugView" />
+}
+else
+{
+    <p>Invalid parameters. Either CircuitId or UserSelector must be provided.</p>
+}
 
 @code {
     [Parameter]
-    public required string CircuitId { get; set; }
+    public string? CircuitId { get; set; }
+
+    [Parameter]
+    public string? UserSelector { get; set; }
 
     [Parameter]
     [SupplyParameterFromQuery]
