@@ -1,6 +1,6 @@
 ﻿namespace BlazorLiveView.Dashboard.Models;
 
-internal enum LiveViewRenderState
+public enum LiveViewRenderState
 {
     SourceCircuitNotFound,
     SourceCircuitClosed,
