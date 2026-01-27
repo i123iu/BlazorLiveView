@@ -2,7 +2,7 @@ using BlazorLiveView.Core.Circuits;
 
 namespace BlazorLiveView.Dashboard.Models;
 
-public class CircuitFilterOptions
+internal class CircuitFilterOptions
 {
     public string? CircuitId { get; set; }
     public string? Location { get; set; }

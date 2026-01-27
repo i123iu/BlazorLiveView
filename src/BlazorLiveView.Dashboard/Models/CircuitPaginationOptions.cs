@@ -1,12 +1,12 @@
 namespace BlazorLiveView.Dashboard.Models;
 
-public class CircuitPaginationOptions
+internal class CircuitPaginationOptions
 {
     public int PageNumber { get; set; } = 1;
     public int PageSize { get; set; } = 10;
 }
 
-public class PaginatedResult<T>
+internal class PaginatedResult<T>
 {
     public required IReadOnlyCollection<T> Items { get; init; }
     public required int TotalCount { get; init; }

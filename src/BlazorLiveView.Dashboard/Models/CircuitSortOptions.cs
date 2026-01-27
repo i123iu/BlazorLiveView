@@ -1,12 +1,12 @@
 namespace BlazorLiveView.Dashboard.Models;
 
-public class CircuitSortOptions
+internal class CircuitSortOptions
 {
     public SortColumn Column { get; set; } = SortColumn.ConnectedAt;
     public SortDirection Direction { get; set; } = SortDirection.Descending;
 }
 
-public enum SortColumn
+internal enum SortColumn
 {
     None,
     CircuitId,
@@ -16,7 +16,7 @@ public enum SortColumn
     User
 }
 
-public enum SortDirection
+internal enum SortDirection
 {
     Ascending,
     Descending
