@@ -22,7 +22,7 @@ public interface ICircuitTracker
     /// <summary>
     /// Called when a mirror circuit's constructor was called.
     /// </summary>
-    internal void MirrorCircuitCreated(Circuit mirrorCircuit, 
+    internal void MirrorCircuitCreated(Circuit mirrorCircuit,
         IUserCircuit sourceCircuit, Guid? state, bool debugView);
 
     /// <summary>

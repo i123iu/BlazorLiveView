@@ -5,8 +5,8 @@
 /// See <see cref="ILiveViewMirrorUriBuilder"/>. 
 /// </summary>
 public readonly struct MirrorUri(
-    string sourceCircuitId, 
-    Guid? state = null, 
+    string sourceCircuitId,
+    Guid? state = null,
     bool debugView = false
 )
 {

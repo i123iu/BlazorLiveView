@@ -66,7 +66,7 @@ internal class LiveViewMirrorUriBuilder(
 
         mirrorUri = new MirrorUri(
             circuitId,
-            state, 
+            state,
             debugView
         );
         return true;

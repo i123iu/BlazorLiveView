@@ -13,7 +13,7 @@ public class LiveViewHideInMirrorAttribute : Attribute
     public static bool WillComponentBeHiddenInMirrorCircuits(Type componentType)
     {
         if (!typeof(IComponent).IsAssignableFrom(componentType))
-            throw new ArgumentException($"The given type {componentType.Name} is not an IComponent", 
+            throw new ArgumentException($"The given type {componentType.Name} is not an IComponent",
                 nameof(componentType));
 
         return IsDefined(
