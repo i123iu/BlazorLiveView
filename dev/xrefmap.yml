@@ -119,84 +119,6 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.ICircuit.OpenedAt
   nameWithType: ICircuit.OpenedAt
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker
-  name: ICircuitTracker
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html
-  commentId: T:BlazorLiveView.Core.Circuits.ICircuitTracker
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker
-  nameWithType: ICircuitTracker
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedEvent
-  name: CircuitClosedEvent
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html#BlazorLiveView_Core_Circuits_ICircuitTracker_CircuitClosedEvent
-  commentId: E:BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedEvent
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedEvent
-  nameWithType: ICircuitTracker.CircuitClosedEvent
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler
-  name: ICircuitTracker.CircuitClosedHandler
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler
-  nameWithType: ICircuitTracker.CircuitClosedHandler
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedEvent
-  name: CircuitOpenedEvent
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html#BlazorLiveView_Core_Circuits_ICircuitTracker_CircuitOpenedEvent
-  commentId: E:BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedEvent
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedEvent
-  nameWithType: ICircuitTracker.CircuitOpenedEvent
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler
-  name: ICircuitTracker.CircuitOpenedHandler
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler
-  nameWithType: ICircuitTracker.CircuitOpenedHandler
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit(System.String)
-  name: GetCircuit(string)
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html#BlazorLiveView_Core_Circuits_ICircuitTracker_GetCircuit_System_String_
-  commentId: M:BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit(System.String)
-  name.vb: GetCircuit(String)
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit(string)
-  fullName.vb: BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit(String)
-  nameWithType: ICircuitTracker.GetCircuit(string)
-  nameWithType.vb: ICircuitTracker.GetCircuit(String)
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit*
-  name: GetCircuit
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html#BlazorLiveView_Core_Circuits_ICircuitTracker_GetCircuit_
-  commentId: Overload:BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.GetCircuit
-  nameWithType: ICircuitTracker.GetCircuit
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.ListCircuits
-  name: ListCircuits()
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html#BlazorLiveView_Core_Circuits_ICircuitTracker_ListCircuits
-  commentId: M:BlazorLiveView.Core.Circuits.ICircuitTracker.ListCircuits
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.ListCircuits()
-  nameWithType: ICircuitTracker.ListCircuits()
-- uid: BlazorLiveView.Core.Circuits.ICircuitTracker.ListCircuits*
-  name: ListCircuits
-  href: api/BlazorLiveView.Core.Circuits.ICircuitTracker.html#BlazorLiveView_Core_Circuits_ICircuitTracker_ListCircuits_
-  commentId: Overload:BlazorLiveView.Core.Circuits.ICircuitTracker.ListCircuits
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.ICircuitTracker.ListCircuits
-  nameWithType: ICircuitTracker.ListCircuits
-- uid: BlazorLiveView.Core.Circuits.ICurrentCircuit
-  name: ICurrentCircuit
-  href: api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html
-  commentId: T:BlazorLiveView.Core.Circuits.ICurrentCircuit
-  fullName: BlazorLiveView.Core.Circuits.ICurrentCircuit
-  nameWithType: ICurrentCircuit
-- uid: BlazorLiveView.Core.Circuits.ICurrentCircuit.Current
-  name: Current
-  href: api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_ICurrentCircuit_Current
-  commentId: P:BlazorLiveView.Core.Circuits.ICurrentCircuit.Current
-  fullName: BlazorLiveView.Core.Circuits.ICurrentCircuit.Current
-  nameWithType: ICurrentCircuit.Current
-- uid: BlazorLiveView.Core.Circuits.ICurrentCircuit.Current*
-  name: Current
-  href: api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_ICurrentCircuit_Current_
-  commentId: Overload:BlazorLiveView.Core.Circuits.ICurrentCircuit.Current
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.ICurrentCircuit.Current
-  nameWithType: ICurrentCircuit.Current
 - uid: BlazorLiveView.Core.Circuits.IMirrorCircuit
   name: IMirrorCircuit
   href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html
@@ -254,19 +176,6 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler
   fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler
   nameWithType: IMirrorCircuit.MirrorCircuitBlockedHandler
-- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit
-  name: ParentCircuit
-  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_ParentCircuit
-  commentId: P:BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit
-  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit
-  nameWithType: IMirrorCircuit.ParentCircuit
-- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit*
-  name: ParentCircuit
-  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_ParentCircuit_
-  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit
-  nameWithType: IMirrorCircuit.ParentCircuit
 - uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.SourceCircuit
   name: SourceCircuit
   href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_SourceCircuit
@@ -280,12 +189,37 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.SourceCircuit
   nameWithType: IMirrorCircuit.SourceCircuit
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.State
+  name: State
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_State
+  commentId: P:BlazorLiveView.Core.Circuits.IMirrorCircuit.State
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.State
+  nameWithType: IMirrorCircuit.State
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.State*
+  name: State
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_State_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.State
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.State
+  nameWithType: IMirrorCircuit.State
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit
   name: IUserCircuit
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit
   nameWithType: IUserCircuit
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
+  name: AuthenticationStateChanged
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AuthenticationStateChanged
+  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
+  nameWithType: IUserCircuit.AuthenticationStateChanged
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler
+  name: IUserCircuit.AuthenticationStateChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler
+  nameWithType: IUserCircuit.AuthenticationStateChangedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler
   name: IUserCircuit.ComponentRerenderedHandler
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.html
@@ -317,6 +251,19 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler
   nameWithType: IUserCircuit.UriChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.User
+  name: User
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_User
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.User
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.User
+  nameWithType: IUserCircuit.User
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.User*
+  name: User
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_User_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.User
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.User
+  nameWithType: IUserCircuit.User
 - uid: BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason
   name: MirrorCircuitBlockReason
   href: api/BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.html
@@ -348,6 +295,90 @@ references:
   commentId: F:BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.message
   fullName: BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.message
   nameWithType: MirrorCircuitBlockReason.message
+- uid: BlazorLiveView.Core.Circuits.Services
+  name: BlazorLiveView.Core.Circuits.Services
+  href: api/BlazorLiveView.Core.Circuits.Services.html
+  commentId: N:BlazorLiveView.Core.Circuits.Services
+  fullName: BlazorLiveView.Core.Circuits.Services
+  nameWithType: BlazorLiveView.Core.Circuits.Services
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker
+  name: ICircuitTracker
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.ICircuitTracker
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker
+  nameWithType: ICircuitTracker
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler
+  name: ICircuitTracker.CircuitClosedHandler
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler
+  nameWithType: ICircuitTracker.CircuitClosedHandler
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler
+  name: ICircuitTracker.CircuitOpenedHandler
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler
+  nameWithType: ICircuitTracker.CircuitOpenedHandler
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit(System.String)
+  name: GetCircuit(string)
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html#BlazorLiveView_Core_Circuits_Services_ICircuitTracker_GetCircuit_System_String_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit(System.String)
+  name.vb: GetCircuit(String)
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit(string)
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit(String)
+  nameWithType: ICircuitTracker.GetCircuit(string)
+  nameWithType.vb: ICircuitTracker.GetCircuit(String)
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit*
+  name: GetCircuit
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html#BlazorLiveView_Core_Circuits_Services_ICircuitTracker_GetCircuit_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.GetCircuit
+  nameWithType: ICircuitTracker.GetCircuit
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.ListCircuits
+  name: ListCircuits()
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html#BlazorLiveView_Core_Circuits_Services_ICircuitTracker_ListCircuits
+  commentId: M:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.ListCircuits
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.ListCircuits()
+  nameWithType: ICircuitTracker.ListCircuits()
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.ListCircuits*
+  name: ListCircuits
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html#BlazorLiveView_Core_Circuits_Services_ICircuitTracker_ListCircuits_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.ListCircuits
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.ListCircuits
+  nameWithType: ICircuitTracker.ListCircuits
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.OnCircuitClosed
+  name: OnCircuitClosed
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html#BlazorLiveView_Core_Circuits_Services_ICircuitTracker_OnCircuitClosed
+  commentId: E:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.OnCircuitClosed
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.OnCircuitClosed
+  nameWithType: ICircuitTracker.OnCircuitClosed
+- uid: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.OnCircuitOpened
+  name: OnCircuitOpened
+  href: api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html#BlazorLiveView_Core_Circuits_Services_ICircuitTracker_OnCircuitOpened
+  commentId: E:BlazorLiveView.Core.Circuits.Services.ICircuitTracker.OnCircuitOpened
+  fullName: BlazorLiveView.Core.Circuits.Services.ICircuitTracker.OnCircuitOpened
+  nameWithType: ICircuitTracker.OnCircuitOpened
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
+  name: ICurrentCircuit
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
+  nameWithType: ICurrentCircuit
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
+  name: Current
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_Current
+  commentId: P:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
+  nameWithType: ICurrentCircuit.Current
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current*
+  name: Current
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_Current_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
+  nameWithType: ICurrentCircuit.Current
 - uid: BlazorLiveView.Core.Components
   name: BlazorLiveView.Core.Components
   href: api/BlazorLiveView.Core.Components.html
@@ -480,6 +511,19 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewOptions.MirrorUri
   nameWithType: LiveViewOptions.MirrorUri
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
+  name: ShowDebugOptions
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_ShowDebugOptions
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
+  nameWithType: LiveViewOptions.ShowDebugOptions
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions*
+  name: ShowDebugOptions
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_ShowDebugOptions_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
+  nameWithType: LiveViewOptions.ShowDebugOptions
 - uid: BlazorLiveView.Core.Options.LiveViewOptions.UseScreenOverlay
   name: UseScreenOverlay
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_UseScreenOverlay
@@ -493,6 +537,32 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewOptions.UseScreenOverlay
   nameWithType: LiveViewOptions.UseScreenOverlay
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor
+  name: UserSelectorExtractor
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorExtractor
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor
+  nameWithType: LiveViewOptions.UserSelectorExtractor
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor*
+  name: UserSelectorExtractor
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorExtractor_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor
+  nameWithType: LiveViewOptions.UserSelectorExtractor
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison
+  name: UserSelectorStringComparison
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorStringComparison
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison
+  nameWithType: LiveViewOptions.UserSelectorStringComparison
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison*
+  name: UserSelectorStringComparison
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorStringComparison_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison
+  nameWithType: LiveViewOptions.UserSelectorStringComparison
 - uid: BlazorLiveView.Core.RenderTree
   name: BlazorLiveView.Core.RenderTree
   href: api/BlazorLiveView.Core.RenderTree.html
@@ -589,15 +659,15 @@ references:
   commentId: T:BlazorLiveView.Core.UriHelpers.MirrorUri
   fullName: BlazorLiveView.Core.UriHelpers.MirrorUri
   nameWithType: MirrorUri
-- uid: BlazorLiveView.Core.UriHelpers.MirrorUri.#ctor(System.String,System.String,System.Boolean)
-  name: MirrorUri(string, string?, bool)
-  href: api/BlazorLiveView.Core.UriHelpers.MirrorUri.html#BlazorLiveView_Core_UriHelpers_MirrorUri__ctor_System_String_System_String_System_Boolean_
-  commentId: M:BlazorLiveView.Core.UriHelpers.MirrorUri.#ctor(System.String,System.String,System.Boolean)
-  name.vb: New(String, String, Boolean)
-  fullName: BlazorLiveView.Core.UriHelpers.MirrorUri.MirrorUri(string, string?, bool)
-  fullName.vb: BlazorLiveView.Core.UriHelpers.MirrorUri.New(String, String, Boolean)
-  nameWithType: MirrorUri.MirrorUri(string, string?, bool)
-  nameWithType.vb: MirrorUri.New(String, String, Boolean)
+- uid: BlazorLiveView.Core.UriHelpers.MirrorUri.#ctor(System.String,System.Nullable{System.Guid},System.Boolean)
+  name: MirrorUri(string, Guid?, bool)
+  href: api/BlazorLiveView.Core.UriHelpers.MirrorUri.html#BlazorLiveView_Core_UriHelpers_MirrorUri__ctor_System_String_System_Nullable_System_Guid__System_Boolean_
+  commentId: M:BlazorLiveView.Core.UriHelpers.MirrorUri.#ctor(System.String,System.Nullable{System.Guid},System.Boolean)
+  name.vb: New(String, Guid?, Boolean)
+  fullName: BlazorLiveView.Core.UriHelpers.MirrorUri.MirrorUri(string, System.Guid?, bool)
+  fullName.vb: BlazorLiveView.Core.UriHelpers.MirrorUri.New(String, System.Guid?, Boolean)
+  nameWithType: MirrorUri.MirrorUri(string, Guid?, bool)
+  nameWithType.vb: MirrorUri.New(String, Guid?, Boolean)
 - uid: BlazorLiveView.Core.UriHelpers.MirrorUri.#ctor*
   name: MirrorUri
   href: api/BlazorLiveView.Core.UriHelpers.MirrorUri.html#BlazorLiveView_Core_UriHelpers_MirrorUri__ctor_
@@ -614,15 +684,63 @@ references:
   commentId: F:BlazorLiveView.Core.UriHelpers.MirrorUri.debugView
   fullName: BlazorLiveView.Core.UriHelpers.MirrorUri.debugView
   nameWithType: MirrorUri.debugView
-- uid: BlazorLiveView.Core.UriHelpers.MirrorUri.parentCircuitId
-  name: parentCircuitId
-  href: api/BlazorLiveView.Core.UriHelpers.MirrorUri.html#BlazorLiveView_Core_UriHelpers_MirrorUri_parentCircuitId
-  commentId: F:BlazorLiveView.Core.UriHelpers.MirrorUri.parentCircuitId
-  fullName: BlazorLiveView.Core.UriHelpers.MirrorUri.parentCircuitId
-  nameWithType: MirrorUri.parentCircuitId
 - uid: BlazorLiveView.Core.UriHelpers.MirrorUri.sourceCircuitId
   name: sourceCircuitId
   href: api/BlazorLiveView.Core.UriHelpers.MirrorUri.html#BlazorLiveView_Core_UriHelpers_MirrorUri_sourceCircuitId
   commentId: F:BlazorLiveView.Core.UriHelpers.MirrorUri.sourceCircuitId
   fullName: BlazorLiveView.Core.UriHelpers.MirrorUri.sourceCircuitId
   nameWithType: MirrorUri.sourceCircuitId
+- uid: BlazorLiveView.Core.UriHelpers.MirrorUri.state
+  name: state
+  href: api/BlazorLiveView.Core.UriHelpers.MirrorUri.html#BlazorLiveView_Core_UriHelpers_MirrorUri_state
+  commentId: F:BlazorLiveView.Core.UriHelpers.MirrorUri.state
+  fullName: BlazorLiveView.Core.UriHelpers.MirrorUri.state
+  nameWithType: MirrorUri.state
+- uid: BlazorLiveView.Dashboard.Models
+  name: BlazorLiveView.Dashboard.Models
+  href: api/BlazorLiveView.Dashboard.Models.html
+  commentId: N:BlazorLiveView.Dashboard.Models
+  fullName: BlazorLiveView.Dashboard.Models
+  nameWithType: BlazorLiveView.Dashboard.Models
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState
+  name: LiveViewRenderState
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html
+  commentId: T:BlazorLiveView.Dashboard.Models.LiveViewRenderState
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState
+  nameWithType: LiveViewRenderState
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitBlocked
+  name: MirrorCircuitBlocked
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html#BlazorLiveView_Dashboard_Models_LiveViewRenderState_MirrorCircuitBlocked
+  commentId: F:BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitBlocked
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitBlocked
+  nameWithType: LiveViewRenderState.MirrorCircuitBlocked
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitClosed
+  name: MirrorCircuitClosed
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html#BlazorLiveView_Dashboard_Models_LiveViewRenderState_MirrorCircuitClosed
+  commentId: F:BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitClosed
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitClosed
+  nameWithType: LiveViewRenderState.MirrorCircuitClosed
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitLoading
+  name: MirrorCircuitLoading
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html#BlazorLiveView_Dashboard_Models_LiveViewRenderState_MirrorCircuitLoading
+  commentId: F:BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitLoading
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState.MirrorCircuitLoading
+  nameWithType: LiveViewRenderState.MirrorCircuitLoading
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState.SourceCircuitClosed
+  name: SourceCircuitClosed
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html#BlazorLiveView_Dashboard_Models_LiveViewRenderState_SourceCircuitClosed
+  commentId: F:BlazorLiveView.Dashboard.Models.LiveViewRenderState.SourceCircuitClosed
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState.SourceCircuitClosed
+  nameWithType: LiveViewRenderState.SourceCircuitClosed
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState.SourceCircuitNotFound
+  name: SourceCircuitNotFound
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html#BlazorLiveView_Dashboard_Models_LiveViewRenderState_SourceCircuitNotFound
+  commentId: F:BlazorLiveView.Dashboard.Models.LiveViewRenderState.SourceCircuitNotFound
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState.SourceCircuitNotFound
+  nameWithType: LiveViewRenderState.SourceCircuitNotFound
+- uid: BlazorLiveView.Dashboard.Models.LiveViewRenderState.Working
+  name: Working
+  href: api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html#BlazorLiveView_Dashboard_Models_LiveViewRenderState_Working
+  commentId: F:BlazorLiveView.Dashboard.Models.LiveViewRenderState.Working
+  fullName: BlazorLiveView.Dashboard.Models.LiveViewRenderState.Working
+  nameWithType: LiveViewRenderState.Working

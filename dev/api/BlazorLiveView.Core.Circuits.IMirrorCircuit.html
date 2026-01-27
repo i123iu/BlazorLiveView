@@ -103,7 +103,7 @@ another user's &quot;screen&quot; (browser tab).</p>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IMirrorCircuit : ICircuit</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IMirrorCircuit : ICircuit, IDisposable</code></pre>
   </div>
 
 
@@ -127,6 +127,9 @@ another user's &quot;screen&quot; (browser tab).</p>
     <div>
       <a class="xref" href="BlazorLiveView.Core.Circuits.ICircuit.html#BlazorLiveView_Core_Circuits_ICircuit_OpenedAt">ICircuit.OpenedAt</a>
     </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">IDisposable.Dispose()</a>
+    </div>
   </dd></dl>
 
 
@@ -142,7 +145,7 @@ another user's &quot;screen&quot; (browser tab).</p>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_BlockReason" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.BlockReason">
   BlockReason
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L36"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Throws an exception if not blocked.</p>
@@ -174,10 +177,10 @@ another user's &quot;screen&quot; (browser tab).</p>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_DebugView" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.DebugView">
   DebugView
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Shoud the mirrored componets be in DebugView?</p>
+  <div class="markdown level1 summary"><p>Should the mirrored componets be in DebugView?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -206,7 +209,7 @@ another user's &quot;screen&quot; (browser tab).</p>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_IsBlocked" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.IsBlocked">
   IsBlocked
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L31"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>When a mirror circuit has been block by this library. E.g. when mirror
@@ -226,37 +229,6 @@ circuit tries to change location, which is disallowed. See
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_ParentCircuit_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit*"></a>
-
-  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_ParentCircuit" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.ParentCircuit">
-  ParentCircuit
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L14"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IUserCircuit? ParentCircuit { get; }</code></pre>
-  </div>
-
-
-
-
-
-  <h4 class="section">Property Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a></dt>
     <dd></dd>
   </dl>
 
@@ -288,6 +260,39 @@ circuit tries to change location, which is disallowed. See
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
     <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_State_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.State*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_State" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.State">
+  State
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unique identifier that is passed as a query parameter to the mirror
+endpoint. This way the mirror circuit can be recognized when created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid? State { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>?</dt>
     <dd></dd>
   </dl>
 

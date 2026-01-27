@@ -89,7 +89,7 @@
 
 
   <h1 id="BlazorLiveView_Core_Options_LiveViewOptions" data-uid="BlazorLiveView.Core.Options.LiveViewOptions" class="text-break">
-Class LiveViewOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L3"><i class="bi bi-code-slash"></i></a>
+Class LiveViewOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -152,7 +152,7 @@ Class LiveViewOptions  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="BlazorLiveView_Core_Options_LiveViewOptions_DEFAULT_MIRROR_URI" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.DEFAULT_MIRROR_URI">
   DEFAULT_MIRROR_URI
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L7"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -187,7 +187,7 @@ Class LiveViewOptions  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="BlazorLiveView_Core_Options_LiveViewOptions_MirrorUri" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.MirrorUri">
   MirrorUri
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The URI path where users (admins) using <code>BlazorLiveView</code> can access the live view.</p>
@@ -215,11 +215,42 @@ Class LiveViewOptions  <a class="header-action link-secondary" title="View sourc
 
 
 
+  <a id="BlazorLiveView_Core_Options_LiveViewOptions_ShowDebugOptions_" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewOptions_ShowDebugOptions" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions">
+  ShowDebugOptions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowDebugOptions { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="BlazorLiveView_Core_Options_LiveViewOptions_UseScreenOverlay_" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.UseScreenOverlay*"></a>
 
   <h3 id="BlazorLiveView_Core_Options_LiveViewOptions_UseScreenOverlay" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.UseScreenOverlay">
   UseScreenOverlay
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>If set to true, a div element will be placed over the screen of all
@@ -240,6 +271,75 @@ The user of the mirror circuit can still scroll normally.</p>
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorExtractor_" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorExtractor" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorExtractor">
+  UserSelectorExtractor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Function to extract a unique user identifier (<code>UserSelector</code>) from
+a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.claims.claimsprincipal">ClaimsPrincipal</a>. This user selector can be an email or
+some unique login name. By default, it extracts the first email claim
+(<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.claims.claimtypes.email">Email</a>). Return null for users that are not
+logged in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;ClaimsPrincipal, string?&gt; UserSelectorExtractor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.claims.claimsprincipal">ClaimsPrincipal</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorStringComparison_" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewOptions_UserSelectorStringComparison" data-uid="BlazorLiveView.Core.Options.LiveViewOptions.UserSelectorStringComparison">
+  UserSelectorStringComparison
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewOptions.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>How should user selectors be compared with each other. Default is
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.stringcomparison#system-stringcomparison-ordinalignorecase">OrdinalIgnoreCase</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StringComparison UserSelectorStringComparison { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.stringcomparison">StringComparison</a></dt>
     <dd></dd>
   </dl>
 

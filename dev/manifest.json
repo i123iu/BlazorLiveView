@@ -82,62 +82,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitClosedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.ICircuitTracker.CircuitOpenedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.ICircuitTracker.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.ICircuitTracker",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.ICircuitTracker.yml\" sourcestartlinenumber=\"1\">Tracks all active SignalR connections with clients (their browser tabs).</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.ICurrentCircuit.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.ICurrentCircuit.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.ICurrentCircuit",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler.yml",
       "output": {
         ".html": {
@@ -163,6 +107,20 @@
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Circuits.IMirrorCircuit",
       "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.IMirrorCircuit.yml\" sourcestartlinenumber=\"1\">A connection with a user (admin) that is using <code>BlazorLiveView</code> to view\nanother user's &quot;screen&quot; (browser tab).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -218,6 +176,76 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.ICircuitTracker",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.Services.ICircuitTracker.yml\" sourcestartlinenumber=\"1\">Tracks all active SignalR connections with clients (their browser tabs).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.ICurrentCircuit",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services",
       "Summary": null
     },
     {
@@ -389,6 +417,34 @@
       "Summary": null
     },
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Models.LiveViewRenderState",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Models.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Models",
+      "Summary": null
+    },
+    {
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
@@ -506,10 +562,20 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "images/screenshot-mirror.png",
+      "source_relative_path": "images/screenshot-mirror-circuit.png",
       "output": {
         "resource": {
-          "relative_path": "images/screenshot-mirror.png"
+          "relative_path": "images/screenshot-mirror-circuit.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/screenshot-mirror-user.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/screenshot-mirror-user.png"
         }
       },
       "version": ""
