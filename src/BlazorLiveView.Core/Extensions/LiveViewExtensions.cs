@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Yarp.ReverseProxy.Forwarder;
 
 namespace BlazorLiveView.Core.Extensions;
 
@@ -41,6 +42,8 @@ public static class LiveViewExtensions
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime()
             );
+
+        builder.Services.AddHttpForwarder();
 
         return builder;
     }
@@ -94,10 +97,13 @@ public static class LiveViewExtensions
             return;
         }
 
-        var circuitUri = userCircuit.Uri;
-        using HttpClient httpClient = new();
-        var response = await httpClient.GetAsync(circuitUri);
-        var content = await response.Content.ReadAsStringAsync();
-        await context.Response.WriteAsync(content);
+        var httpForwarder = context.RequestServices.GetRequiredService<IHttpForwarder>();
+        var httpClient = new HttpMessageInvoker(new SocketsHttpHandler
+        {
+            UseCookies = true
+        });
+        
+        var reqUri = userCircuit.Uri.ToString();
+        await httpForwarder.SendAsync(context, reqUri, httpClient);
     }
 }
