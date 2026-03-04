@@ -1,5 +1,4 @@
-﻿using BlazorLiveView.Core.Circuits;
-using BlazorLiveView.Core.Circuits.Services;
+﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Patching;
 using BlazorLiveView.Core.RenderTree;
@@ -7,11 +6,8 @@ using BlazorLiveView.Core.UriHelpers;
 using HarmonyLib;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Server.Circuits;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Yarp.ReverseProxy.Forwarder;
 
 namespace BlazorLiveView.Core.Extensions;
 
@@ -68,42 +64,10 @@ public static class LiveViewExtensions
 
         var mirrorEndpoint = app.MapGet(
             options.MirrorUri,
-            MirrorEndpointController
+            MirrorEndpoint.HandleAsync
         );
         configureEndpoint?.Invoke(mirrorEndpoint);
 
         return app;
-    }
-
-    private static async Task MirrorEndpointController(
-        HttpContext context,
-        [FromQuery(Name = nameof(MirrorUri.sourceCircuitId))] string circuitId
-    )
-    {
-        var circuitTracker = context.RequestServices.GetRequiredService<ICircuitTracker>();
-
-        var circuit = circuitTracker.GetCircuit(circuitId);
-        if (circuit is null)
-        {
-            context.Response.StatusCode = 404;
-            await context.Response.WriteAsync($"Circuit with ID '{circuitId}' not found. ");
-            return;
-        }
-
-        if (circuit is not IUserCircuit userCircuit)
-        {
-            context.Response.StatusCode = 400;
-            await context.Response.WriteAsync($"Cannot mirror a mirror circuit. ");
-            return;
-        }
-
-        var httpForwarder = context.RequestServices.GetRequiredService<IHttpForwarder>();
-        var httpClient = new HttpMessageInvoker(new SocketsHttpHandler
-        {
-            UseCookies = true
-        });
-        
-        var reqUri = userCircuit.Uri.ToString();
-        await httpForwarder.SendAsync(context, reqUri, httpClient);
     }
 }

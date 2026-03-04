@@ -57,5 +57,19 @@ public sealed class LiveViewOptions
     public StringComparison UserSelectorStringComparison { get; set; } =
         StringComparison.OrdinalIgnoreCase;
 
+    /// <summary>
+    /// The <see cref="SocketsHttpHandler"/> used to forward requests from the
+    /// mirror endpoint to the page of the viewed user.
+    /// </summary>
+    public SocketsHttpHandler MirrorEndpointForwardSocketsHttpHandler
+    { get; set; } = new()
+    {
+        UseProxy = false,
+        UseCookies = false,
+        // Disables double compression
+        AutomaticDecompression = System.Net.DecompressionMethods.None,
+        ActivityHeadersPropagator = null
+    };
+
     public bool ShowDebugOptions { get; set; } = false;
 }
