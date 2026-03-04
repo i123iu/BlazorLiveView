@@ -32,7 +32,7 @@ internal abstract class RenderTreeTranslatorBase(
                         var subtreeLength = frame.ElementSubtreeLength;
                         var subtreeFrames = frames.Slice(i + 1, subtreeLength - 1);
 
-                        var attributes = TakeAttributes(subtreeFrames);
+                        var attributes = TakeElementParameters(subtreeFrames);
                         var childFrames = subtreeFrames[attributes.Length..];
 
                         TranslateElement(
@@ -59,9 +59,16 @@ internal abstract class RenderTreeTranslatorBase(
 
                         for (int j = 0; j < subtreeFrames.Length; j++)
                         {
-                            if (subtreeFrames[j].FrameType != RenderTreeFrameType.Attribute)
+                            switch (subtreeFrames[j].FrameType)
                             {
-                                throw new RenderTreeTranslationException("Component contains more than just attributes");
+                                case RenderTreeFrameType.Attribute:
+                                case RenderTreeFrameType.ComponentReferenceCapture:
+                                    continue;
+                                default:
+                                    throw new RenderTreeTranslationException(
+                                        $"Component contains invalid frame of type " +
+                                        $"{subtreeFrames[j].FrameType}"
+                                    );
                             }
                         }
 
@@ -89,10 +96,10 @@ internal abstract class RenderTreeTranslatorBase(
                     break;
 
                 case RenderTreeFrameType.ElementReferenceCapture:
-                    throw new RenderTreeTranslationException("Not implemented");
+                    throw new RenderTreeTranslationException("ElementReferenceCapture without parent");
 
                 case RenderTreeFrameType.ComponentReferenceCapture:
-                    throw new RenderTreeTranslationException("Not implemented");
+                    throw new RenderTreeTranslationException("ComponentReferenceCapture without parent");
 
                 case RenderTreeFrameType.Markup:
                     TranslateMarkup(frame);
@@ -104,7 +111,8 @@ internal abstract class RenderTreeTranslatorBase(
                 case RenderTreeFrameType.NamedEvent:
                     throw new RenderTreeTranslationException("Not implemented");
 
-                default: throw new RenderTreeTranslationException("Not implemented");
+                default:
+                    throw new RenderTreeTranslationException("Unknown RenderTreeFrame FrameType");
             }
         }
     }
@@ -113,9 +121,12 @@ internal abstract class RenderTreeTranslatorBase(
         RenderTreeFrame none
     );
 
+    /// <param name="parameters">Child frames of type
+    /// <see cref="RenderTreeFrameType.Attribute"/> or
+    /// <see cref="RenderTreeFrameType.ElementReferenceCapture"/></param>
     protected abstract void TranslateElement(
         RenderTreeFrame element,
-        ReadOnlySpan<RenderTreeFrame> attributes,
+        ReadOnlySpan<RenderTreeFrame> parameters,
         ReadOnlySpan<RenderTreeFrame> childFrames
     );
 
@@ -123,9 +134,12 @@ internal abstract class RenderTreeTranslatorBase(
         RenderTreeFrame text
     );
 
+    /// <param name="parameters">Child frames of type
+    /// <see cref="RenderTreeFrameType.Attribute"/> or
+    /// <see cref="RenderTreeFrameType.ComponentReferenceCapture"/></param>
     protected abstract void TranslateComponent(
         RenderTreeFrame component,
-        ReadOnlySpan<RenderTreeFrame> attributes
+        ReadOnlySpan<RenderTreeFrame> parameters
     );
 
     protected abstract void TranslateRegion(
@@ -138,16 +152,20 @@ internal abstract class RenderTreeTranslatorBase(
     );
 
     /// <summary>
-    /// Takes and returns all attributes from the beginning of <paramref name="frames"/>. 
+    /// Returns all frames of type <see cref="RenderTreeFrameType.Attribute"/> or
+    /// <see cref="RenderTreeFrameType.ElementReferenceCapture"/> from the
+    /// beginning of <paramref name="frames"/>. 
     /// </summary>
-    private static ReadOnlySpan<RenderTreeFrame> TakeAttributes(
+    private static ReadOnlySpan<RenderTreeFrame> TakeElementParameters(
         ReadOnlySpan<RenderTreeFrame> frames
     )
     {
         int count = 0;
         while (count < frames.Length)
         {
-            if (frames[count].FrameType != RenderTreeFrameType.Attribute)
+            var frameType = frames[count].FrameType;
+            if (frameType != RenderTreeFrameType.Attribute &&
+                frameType != RenderTreeFrameType.ElementReferenceCapture)
                 break;
             count++;
         }
