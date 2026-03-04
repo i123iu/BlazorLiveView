@@ -498,6 +498,19 @@ references:
   commentId: F:BlazorLiveView.Core.Options.LiveViewOptions.DEFAULT_MIRROR_URI
   fullName: BlazorLiveView.Core.Options.LiveViewOptions.DEFAULT_MIRROR_URI
   nameWithType: LiveViewOptions.DEFAULT_MIRROR_URI
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
+  name: MirrorEndpointForwardSocketsHttpHandler
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_MirrorEndpointForwardSocketsHttpHandler
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
+  nameWithType: LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler*
+  name: MirrorEndpointForwardSocketsHttpHandler
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_MirrorEndpointForwardSocketsHttpHandler_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
+  nameWithType: LiveViewOptions.MirrorEndpointForwardSocketsHttpHandler
 - uid: BlazorLiveView.Core.Options.LiveViewOptions.MirrorUri
   name: MirrorUri
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_MirrorUri
