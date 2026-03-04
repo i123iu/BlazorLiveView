@@ -129,13 +129,13 @@ internal sealed class RenderTreeDebugTranslator(
 
     protected override void TranslateElement(
         RenderTreeFrame element,
-        ReadOnlySpan<RenderTreeFrame> attributes,
+        ReadOnlySpan<RenderTreeFrame> parameters,
         ReadOnlySpan<RenderTreeFrame> childFrames
     )
     {
         AddFrameAsText(element);
         indent++;
-        AddFramesAsText(attributes);
+        AddFramesAsText(parameters);
         TranslateAll(childFrames);
         indent--;
     }
@@ -147,7 +147,7 @@ internal sealed class RenderTreeDebugTranslator(
 
     protected override void TranslateComponent(
         RenderTreeFrame component,
-        ReadOnlySpan<RenderTreeFrame> attributes
+        ReadOnlySpan<RenderTreeFrame> parameters
     )
     {
         if (component.ComponentType is null)
@@ -172,7 +172,7 @@ internal sealed class RenderTreeDebugTranslator(
 
         AddFrameAsText(component);
         indent++;
-        AddFramesAsText(attributes);
+        AddFramesAsText(parameters);
         indent--;
     }
 

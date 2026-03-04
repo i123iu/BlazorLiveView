@@ -7,7 +7,7 @@
 
 <p>This component demonstrates showing data.</p>
 
-<LiveViewHideInMirror>
+<LiveViewHideInMirror @ref="x">
     This text will not be visible in mirror circuits. 
 </LiveViewHideInMirror>
 
@@ -41,6 +41,8 @@ else
 }
 
 @code {
+    private LiveViewHideInMirror? x;
+
     private WeatherForecast[]? forecasts;
 
     protected override async Task OnInitializedAsync()

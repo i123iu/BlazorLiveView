@@ -22,7 +22,7 @@ internal sealed class RenderTreeMirrorTranslator(
 
     protected override void TranslateElement(
         RenderTreeFrame element,
-        ReadOnlySpan<RenderTreeFrame> attributes,
+        ReadOnlySpan<RenderTreeFrame> parameters,
         ReadOnlySpan<RenderTreeFrame> childFrames
     )
     {
@@ -43,9 +43,9 @@ internal sealed class RenderTreeMirrorTranslator(
         bool hasTargetBlank = false;
         if (isAnchor)
         {
-            for (int i = 0; i < attributes.Length; i++)
+            for (int i = 0; i < parameters.Length; i++)
             {
-                var attribute = attributes[i];
+                var attribute = parameters[i];
                 if (attribute.AttributeName == "target" &&
                     attribute.AttributeValue is string strAttrValue &&
                     strAttrValue == "_blank")
@@ -57,9 +57,15 @@ internal sealed class RenderTreeMirrorTranslator(
         }
 
         // Translate attributes
-        for (int i = 0; i < attributes.Length; i++)
+        for (int i = 0; i < parameters.Length; i++)
         {
-            var attribute = attributes[i];
+            var attribute = parameters[i];
+
+            if (attribute.FrameType == RenderTreeFrameType.ElementReferenceCapture)
+            {
+                continue;
+            }
+
             var attributeValue = attribute.AttributeValue;
 
             if (isAnchor && attribute.AttributeName == "href")
@@ -76,8 +82,6 @@ internal sealed class RenderTreeMirrorTranslator(
                     // because those links do not change the location. 
                     attributeValue = "javascript:void(0)";
                 }
-
-                // TODO?: redirect the original user circuit
             }
 
             _result.Add(RenderTreeFrameBuilder.Attribute(
@@ -106,7 +110,7 @@ internal sealed class RenderTreeMirrorTranslator(
 
     protected override void TranslateComponent(
         RenderTreeFrame component,
-        ReadOnlySpan<RenderTreeFrame> attributes
+        ReadOnlySpan<RenderTreeFrame> childFrames
     )
     {
         if (component.ComponentType is null)
@@ -127,7 +131,7 @@ internal sealed class RenderTreeMirrorTranslator(
         {
             // This component is marked as excluded from translation = keep the original component type
 
-            if (attributes.Length > 0)
+            if (childFrames.Length > 0)
             {
                 throw new RenderTreeTranslationException(
                     $"Components marked with {nameof(LiveViewDoNotTranslateAttribute)} cannot have attributes (parameters). ");
