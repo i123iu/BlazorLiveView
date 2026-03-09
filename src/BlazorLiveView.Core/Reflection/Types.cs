@@ -16,6 +16,7 @@ internal static class Types
     public static readonly Type RemoteNavigationManager = Circuit.GetTypeFromSameNamespace(nameof(RemoteNavigationManager));
     public static readonly Type WebRootComponentManager = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteRenderer)}+{nameof(WebRootComponentManager)}");
     public static readonly Type WebRootComponent = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteRenderer)}+{nameof(WebRootComponentManager)}+{nameof(WebRootComponent)}");
+    public static readonly Type RemoteJSRuntime = Circuit.GetTypeFromSameNamespace($"{nameof(RemoteJSRuntime)}");
 
     /// <summary>
     /// <see cref="ValueTask{CircuitHost}"></see>

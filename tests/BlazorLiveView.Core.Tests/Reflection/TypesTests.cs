@@ -14,6 +14,7 @@ public class TypesTests
         Assert.NotNull(Types.RemoteNavigationManager);
         Assert.NotNull(Types.WebRootComponentManager);
         Assert.NotNull(Types.WebRootComponent);
+        Assert.NotNull(Types.RemoteJSRuntime);
 
         Assert.NotNull(Types.ValueTaskOfCircuitHost);
         Assert.NotNull(Types.TaskOfCircuitHost);

@@ -11,6 +11,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.UriChangedHandler? UriChanged;
     public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
     public event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged;
+    public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
 
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
     public ClaimsPrincipal User => _authenticationStateProvider
@@ -65,5 +66,10 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public void NotifyUriChanged()
     {
         UriChanged?.Invoke(this);
+    }
+
+    public void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args)
+    {
+        JSRuntimeInvoked?.Invoke(this, identifier, cancellationToken, args);
     }
 }

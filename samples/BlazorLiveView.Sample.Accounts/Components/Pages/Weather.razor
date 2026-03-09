@@ -1,10 +1,28 @@
 ﻿@page "/weather"
+@using BlazorLiveView.Core.Components
+@using BlazorLiveView.Core.Circuits.Services
+
+@inject IJSRuntime JS
+@inject ILiveViewJSRuntime LiveViewJS
+
+<script>
+    window.test_function = function(text) {
+        let span = document.getElementById("test_span");
+        span.innerHTML += text;
+    }
+</script>
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
+<span id="test_span">ABCD</span>
+
 <p>This component demonstrates showing data.</p>
+
+<LiveViewHideInMirror>
+    This text will not be visible in mirror circuits.
+</LiveViewHideInMirror>
 
 @if (forecasts == null)
 {
@@ -17,7 +35,7 @@ else
             <tr>
                 <th>Date</th>
                 <th aria-label="Temperature in Celsius">Temp. (C)</th>
-                <th aria-label="Temperature in Fahrenheit">Temp. (F)</th>
+                <th aria-label="Temperature in Farenheit">Temp. (F)</th>
                 <th>Summary</th>
             </tr>
         </thead>
@@ -45,7 +63,7 @@ else
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        forecasts = Enumerable.Range(1, 50).Select(index => new WeatherForecast
         {
             Date = startDate.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
@@ -59,5 +77,15 @@ else
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+
+    private int x = 0;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //if (!firstRender)
+        {
+            await LiveViewJS.InvokeVoidAsync("test_function", x.ToString());
+            x++;
+        }
     }
 }

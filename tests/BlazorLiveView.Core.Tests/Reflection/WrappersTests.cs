@@ -27,6 +27,7 @@ public class WrappersTests
         RunClassConstructor<CircuitHostWrapper>();
         RunClassConstructor<CircuitWrapper>();
         RunClassConstructor<ComponentStateWrapper>();
+        RunClassConstructor<RemoteJSRuntimeWrapper>();
         RunClassConstructor<RemoteNavigationManagerWrapper>();
         RunClassConstructor<RemoteRendererWrapper>();
         RunClassConstructor<RendererWrapper>();

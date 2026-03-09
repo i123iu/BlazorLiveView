@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
+using Microsoft.JSInterop;
 using System.Collections.Concurrent;
 
 namespace BlazorLiveView.Core.Circuits.Services;
@@ -19,6 +20,7 @@ internal sealed class CircuitTracker(
 
     private readonly ConcurrentDictionary<string, ICircuit> _circuitsById = new();
     private readonly ConcurrentDictionary<Renderer, ICircuit> _circuitsByRenderer = new();
+    private readonly ConcurrentDictionary<JSRuntime, ICircuit> _circuitsByJsRuntime = new();
 
     private readonly struct PendingMirrorCircuit(
         IUserCircuit source,
@@ -45,6 +47,12 @@ internal sealed class CircuitTracker(
     public ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer)
     {
         _circuitsByRenderer.TryGetValue(remoteRenderer.Inner, out var circuit);
+        return circuit;
+    }
+
+    public ICircuit? GetCircuit(RemoteJSRuntimeWrapper remoteJsRuntime)
+    {
+        _circuitsByJsRuntime.TryGetValue(remoteJsRuntime.Inner, out var circuit);
         return circuit;
     }
 
@@ -135,11 +143,20 @@ internal sealed class CircuitTracker(
         }
 
         CircuitWrapper circuitWrapped = new(blazorCircuit);
+
         Renderer renderer = circuitWrapped.CircuitHost.Renderer.Inner;
         if (!_circuitsByRenderer.TryAdd(renderer, circuit))
         {
             throw new InvalidOperationException(
                 $"Circuit renderer is already tracked."
+            );
+        }
+
+        JSRuntime jsRuntime = circuitWrapped.CircuitHost.JSRuntime.Inner;
+        if (!_circuitsByJsRuntime.TryAdd(jsRuntime, circuit))
+        {
+            throw new InvalidOperationException(
+                $"Circuit JSRuntime is already tracked."
             );
         }
 
@@ -201,8 +218,24 @@ internal sealed class CircuitTracker(
         circuit.SetClosed();
 
         CircuitWrapper circuitWrapped = new(blazorCircuit);
+
         Renderer renderer = circuitWrapped.CircuitHost.Renderer.Inner;
-        _circuitsByRenderer.TryRemove(renderer, out _);
+        if (!_circuitsByRenderer.TryRemove(renderer, out _))
+        {
+            _logger.LogWarning(
+                "Circuit renderer was not tracked when closing circuit '{CircuitId}'.",
+                blazorCircuit.Id
+            );
+        }
+
+        JSRuntime jsRuntime = circuitWrapped.CircuitHost.JSRuntime.Inner;
+        if (!_circuitsByJsRuntime.TryRemove(jsRuntime, out _))
+        {
+            _logger.LogWarning(
+                "Circuit JSRuntime was not tracked when closing circuit '{CircuitId}'.",
+                blazorCircuit.Id
+            );
+        }
 
         OnCircuitClosed?.Invoke(circuit);
     }

@@ -32,6 +32,7 @@ public static class LiveViewExtensions
             .AddSingleton<IPatchExceptionHandler, PatchExceptionHandler>()
             .AddScoped<CircuitHandler, CurrentCircuitHandler>()
             .AddScoped<ICurrentCircuit, CurrentCircuit>()
+            .AddScoped<ILiveViewJSRuntime, LiveViewJSRuntime>()
             .Scan(scan => scan
                 .FromAssemblyOf<IPatcher>()
                 .AddClasses(classes => classes.AssignableTo<IPatcher>(), false)

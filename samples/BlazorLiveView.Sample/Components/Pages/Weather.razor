@@ -1,9 +1,22 @@
 ﻿@page "/weather"
 @using BlazorLiveView.Core.Components
+@using BlazorLiveView.Core.Circuits.Services
+
+@inject IJSRuntime JS
+@inject ILiveViewJSRuntime LiveViewJS
+
+<script>
+    window.test_function = function(text) {
+        let span = document.getElementById("test_span");
+        span.innerHTML += text;
+    }
+</script>
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
+
+<span id="test_span">ABCD</span>
 
 <p>This component demonstrates showing data.</p>
 
@@ -64,5 +77,15 @@ else
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
+
+    private int x = 0;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //if (!firstRender)
+        {
+            await LiveViewJS.InvokeVoidAsync("test_function", x.ToString());
+            x++;
+        }
     }
 }
