@@ -78,13 +78,13 @@ else
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 
-    private int x = 0;
+    private int jsCounter = 0;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         //if (!firstRender)
         {
-            await JS.InvokeVoidAsync("test_function", x.ToString());
-            x++;
+            await JS.InvokeVoidAsync("test_function", jsCounter.ToString());
+            jsCounter++;
         }
     }
 }
