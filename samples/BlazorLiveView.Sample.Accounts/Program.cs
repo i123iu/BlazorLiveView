@@ -14,15 +14,17 @@ namespace BlazorLiveView.Sample.Accounts
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.AddLiveView(options =>
-            {
-                options.ShowDebugOptions = true;
-            });
+            builder.Services.AddRazorComponents()
+                .AddInteractiveServerComponents(options =>
+                {
+                    options.DetailedErrors = true;
+                })
+                .AddLiveView(options =>
+                {
+                    options.ShowDebugOptions = true;
+                });
 
             // Add services to the container.
-            builder.Services.AddRazorComponents()
-                .AddInteractiveServerComponents();
-
             builder.Services.AddCascadingAuthenticationState();
             builder.Services.AddScoped<IdentityRedirectManager>();
             builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();

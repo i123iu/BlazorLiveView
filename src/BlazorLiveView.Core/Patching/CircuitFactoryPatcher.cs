@@ -8,6 +8,8 @@ using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -42,11 +44,13 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
     public void Patch(Harmony harmony)
     {
+        var method_CreateCircuitHostAsync = AccessTools.Method(
+            Types.CircuitFactory,
+            "CreateCircuitHostAsync"
+        );
+
         harmony.Patch(
-            AccessTools.Method(
-                Types.CircuitFactory,
-                "CreateCircuitHostAsync"
-            ),
+            method_CreateCircuitHostAsync,
             prefix: new HarmonyMethod(
                 CreateCircuitHostAsync_Prefix
             ),
@@ -54,6 +58,22 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 CreateCircuitHostAsync_Postfix
             )
         );
+
+        if (_liveViewOptions.InterceptJsInteropInvocations)
+        {
+            var stateMachineAttr = method_CreateCircuitHostAsync
+                .GetCustomAttribute<AsyncStateMachineAttribute>()
+                ?? throw new Exception("Invalid state machine attribute for CreateCircuitHostAsync");
+            var moveNextMethod = stateMachineAttr.StateMachineType
+                .GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            harmony.Patch(
+                moveNextMethod,
+                transpiler: new HarmonyMethod(
+                    CreateCircuitHostAsync_Transpiler
+                )
+            );
+        }
     }
 
     private readonly struct State
@@ -283,6 +303,45 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             }
 
             return taskResult;
+        }
+    }
+
+    private static IEnumerable<CodeInstruction> CreateCircuitHostAsync_Transpiler(
+        IEnumerable<CodeInstruction> instructions
+    )
+    {
+        // The original CreateCircuitHostAsync method contains the following line:
+        //   var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
+        // Since IJSRuntime is changed (decorated) to LiveViewJSRuntime, this line
+        // would throw an InvalidCastException. This transpiler swaps the cast
+        // to RemoteJSRuntime with a call to a helper method LiveViewJSRuntime.ToRemoteJSRuntime.
+
+        bool found = false;
+        foreach (CodeInstruction instruction in instructions)
+        {
+            // Looking for:
+            //   castclass Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime
+
+            if (!found &&
+                instruction.opcode == OpCodes.Castclass &&
+                (Type)instruction.operand == Types.RemoteJSRuntime)
+            {
+                found = true;
+                yield return new CodeInstruction(
+                    OpCodes.Call,
+                    typeof(LiveViewJSRuntime).GetMethod(
+                        nameof(LiveViewJSRuntime.ToRemoteJSRuntime)
+                    )
+                );
+                continue;
+            }
+
+            yield return instruction;
+        }
+
+        if (!found)
+        {
+            throw new Exception("Instruction castclass not found.");
         }
     }
 }

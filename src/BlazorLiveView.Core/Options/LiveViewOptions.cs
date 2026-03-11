@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using BlazorLiveView.Core.Circuits.Services;
+using Microsoft.JSInterop;
+using System.Security.Claims;
 
 namespace BlazorLiveView.Core.Options;
 
@@ -70,6 +72,13 @@ public sealed class LiveViewOptions
         AutomaticDecompression = System.Net.DecompressionMethods.None,
         ActivityHeadersPropagator = null
     };
+
+    /// <summary>
+    /// Whether to forward all JS interop invocations to mirror circuit from
+    /// any component that injects <see cref="IJSRuntime"/>. To forward only
+    /// specific invocations use <see cref="ILiveViewJSRuntime"/>.
+    /// </summary>
+    public bool InterceptJsInteropInvocations { get; set; } = false;
 
     public bool ShowDebugOptions { get; set; } = false;
 }

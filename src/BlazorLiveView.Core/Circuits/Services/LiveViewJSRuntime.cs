@@ -1,35 +1,18 @@
-﻿using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorLiveView.Core.Circuits.Services;
 
-internal class LiveViewJSRuntime : ILiveViewJSRuntime
+internal class LiveViewJSRuntime(
+    RemoteJSRuntimeWrapper remoteJSRuntime,
+    IServiceProvider sp
+) : ILiveViewJSRuntime
 {
-    private readonly ILogger<LiveViewJSRuntime> _logger;
-    private readonly ICircuitTracker _circuitTracker;
-    private readonly RemoteJSRuntimeWrapper _remoteJsRuntime;
-
-    public LiveViewJSRuntime(
-        ILogger<LiveViewJSRuntime> logger,
-        ICircuitTracker circuitTracker,
-        IJSRuntime jsRuntime
-    )
-    {
-        if (!Types.RemoteJSRuntime.IsInstanceOfType(jsRuntime))
-        {
-            throw new InvalidOperationException(
-                $"Using {nameof(LiveViewJSRuntime)} requires an instance of " +
-                $"{Types.RemoteJSRuntime.FullName} (which is provided by Blazor Server)."
-            );
-        }
-
-        _logger = logger;
-        _circuitTracker = circuitTracker;
-        _remoteJsRuntime = new RemoteJSRuntimeWrapper((JSRuntime)jsRuntime);
-    }
+    private readonly ILogger<LiveViewJSRuntime> _logger = sp.GetRequiredService<ILogger<LiveViewJSRuntime>>();
+    private readonly ICircuitTracker _circuitTracker = sp.GetRequiredService<ICircuitTracker>();
+    private readonly RemoteJSRuntimeWrapper _remoteJsRuntime = remoteJSRuntime;
 
     private void NotifyInvocation(string identifier, CancellationToken cancellationToken, object?[]? args)
     {
@@ -72,5 +55,12 @@ internal class LiveViewJSRuntime : ILiveViewJSRuntime
     {
         NotifyInvocation(identifier, cancellationToken, args);
         return _remoteJsRuntime.Inner.InvokeAsync<TValue>(identifier, cancellationToken, args);
+    }
+
+    public static object ToRemoteJSRuntime(
+        LiveViewJSRuntime liveViewJSRuntime
+    )
+    {
+        return liveViewJSRuntime._remoteJsRuntime.Inner;
     }
 }

@@ -3,7 +3,6 @@
 @using BlazorLiveView.Core.Circuits.Services
 
 @inject IJSRuntime JS
-@inject ILiveViewJSRuntime LiveViewJS
 
 <script>
     window.test_function = function(text) {
@@ -84,7 +83,7 @@ else
     {
         //if (!firstRender)
         {
-            await LiveViewJS.InvokeVoidAsync("test_function", x.ToString());
+            await JS.InvokeVoidAsync("test_function", x.ToString());
             x++;
         }
     }
