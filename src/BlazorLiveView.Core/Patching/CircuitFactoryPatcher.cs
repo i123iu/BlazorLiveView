@@ -23,20 +23,23 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
     private static LiveViewOptions _liveViewOptions = null!;
+    private static LiveViewJSInteropOptions _liveViewJSInteropOptions = null!;
     private static ILiveViewMirrorUriBuilder _mirrorUriBuilder = null!;
     private static ILogger<CircuitFactoryPatcher> _logger = null!;
     private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public CircuitFactoryPatcher(
         ICircuitTracker circuitTracker,
-        IOptions<LiveViewOptions> options,
+        IOptions<LiveViewOptions> liveViewOptions,
+        IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions,
         ILiveViewMirrorUriBuilder mirrorUriBuilder,
         ILogger<CircuitFactoryPatcher> logger,
         IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
-        _liveViewOptions = options.Value;
+        _liveViewOptions = liveViewOptions.Value;
+        _liveViewJSInteropOptions = liveViewJSInteropOptions.Value;
         _mirrorUriBuilder = mirrorUriBuilder;
         _logger = logger;
         _patchExceptionHandler = patchExceptionHandler;
@@ -59,7 +62,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             )
         );
 
-        if (_liveViewOptions.InterceptJsInteropInvocations)
+        if (_liveViewJSInteropOptions.InterceptIJSRuntime)
         {
             var stateMachineAttr = method_CreateCircuitHostAsync
                 .GetCustomAttribute<AsyncStateMachineAttribute>()

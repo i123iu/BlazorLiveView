@@ -1,7 +1,10 @@
-﻿using BlazorLiveView.Core.Reflection.Wrappers;
+﻿using BlazorLiveView.Core.Options;
+using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System.Collections.Concurrent;
 
@@ -9,6 +12,7 @@ namespace BlazorLiveView.Core.Circuits.Services;
 
 internal sealed class CircuitTracker(
     ILogger<CircuitTracker> logger,
+    IServiceProvider serviceProvider,
     ILoggerFactory loggerFactory
 ) : ICircuitTracker
 {
@@ -16,6 +20,7 @@ internal sealed class CircuitTracker(
     public event ICircuitTracker.CircuitClosedHandler? OnCircuitClosed;
 
     private readonly ILogger<CircuitTracker> _logger = logger;
+    private readonly IServiceProvider _serviceProvider = serviceProvider;
     private readonly ILoggerFactory _loggerFactory = loggerFactory;
 
     private readonly ConcurrentDictionary<string, ICircuit> _circuitsById = new();
@@ -117,7 +122,8 @@ internal sealed class CircuitTracker(
                 pending.state,
                 DateTime.UtcNow,
                 pending.debugView,
-                _loggerFactory.CreateLogger<MirrorCircuit>()
+                _loggerFactory.CreateLogger<MirrorCircuit>(),
+                _serviceProvider.GetRequiredService<IOptions<LiveViewJSInteropOptions>>()
             );
         }
         else

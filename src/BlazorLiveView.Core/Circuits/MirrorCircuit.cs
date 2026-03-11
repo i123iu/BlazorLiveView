@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Server.Circuits;
+﻿using BlazorLiveView.Core.Options;
+using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System.Threading.Channels;
 
@@ -8,6 +10,7 @@ namespace BlazorLiveView.Core.Circuits;
 internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 {
     private readonly ILogger _logger;
+    private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
     private readonly IUserCircuit _source;
     private readonly Guid? _state;
     private readonly bool _debugView;
@@ -20,7 +23,8 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     private readonly record struct JSInvocation(
         string Identifier,
         CancellationToken CancellationToken,
-        object?[]? Args
+        object?[]? Args,
+        long CreatedAtTicks
     );
 
     public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
@@ -39,13 +43,15 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         Guid? state,
         DateTime openedAt,
         bool debugView,
-        ILogger<MirrorCircuit> logger
+        ILogger<MirrorCircuit> logger,
+        IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions
     ) : base(circuit, openedAt, logger)
     {
         _logger = logger;
         _source = source;
         _state = state;
         _debugView = debugView;
+        _liveViewJSInteropOptions = liveViewJSInteropOptions;
         _cancellationTokenSource = new CancellationTokenSource();
         _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
         {
@@ -76,7 +82,9 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     {
         if (_cancellationTokenSource.IsCancellationRequested) return;
 
-        _jsInvocationQueue.Writer.TryWrite(new JSInvocation(identifier, cancellationToken, args));
+        _jsInvocationQueue.Writer.TryWrite(new JSInvocation(
+            identifier, cancellationToken, args, DateTime.UtcNow.Ticks
+        ));
     }
 
     private void OnCircuitStatusChanged(ICircuit circuit)
@@ -100,13 +108,22 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                         invocation.CancellationToken
                     );
 
+                    var elapsed = TimeSpan.FromTicks(
+                        DateTime.UtcNow.Ticks - invocation.CreatedAtTicks
+                    );
+                    var remainingDelay = _liveViewJSInteropOptions.Value
+                        .DefaultDelayForInvocationForward
+                        - elapsed;
+
+                    if (remainingDelay > TimeSpan.Zero)
+                    {
+                        // A short delay so that components can finish rendering.
+                        // For example when IJSRuntime.InvokeAsync is called in
+                        // OnAfterRenderAsync.
+                        await Task.Delay(remainingDelay, linkedCts.Token);
+                    }
+
                     var jsRuntime = Circuit.CircuitHost.JSRuntime;
-
-                    // A short delay so that components can finish rendering.
-                    // For example when IJSRuntime.InvokeAsync is called in
-                    // OnAfterRenderAsync.
-                    await Task.Delay(100, linkedCts.Token);
-
                     await jsRuntime.Inner.InvokeVoidAsync(
                         invocation.Identifier,
                         linkedCts.Token,
@@ -119,7 +136,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                 }
                 catch (Exception ex)
                 {
-                    // TODO:  Either block the mirror circuit or at least notify the mirror circuit's user (admin)
+                    // TODO:  At least notify the mirror circuit's user (admin)
                     _logger.LogError(
                         ex,
                         "Failed to invoke JS runtime method '{Identifier}' on mirror circuit id={Id}",

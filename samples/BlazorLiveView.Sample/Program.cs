@@ -18,8 +18,8 @@ public class Program
             .AddLiveView(options =>
             {
                 options.ShowDebugOptions = true;
-                options.InterceptJsInteropInvocations = true;
-            });
+            })
+            .InterceptJSInteropInvocations();
 
         var app = builder.Build();
 

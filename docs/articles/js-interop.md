@@ -29,10 +29,8 @@ BlazorLiveView also supports intercepting **all** JS interop invocations to the 
 ```csharp
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
-    .AddLiveView(options =>
-    {
-        options.InterceptJsInteropInvocations = true;
-    });
+    .AddLiveView()
+    .InterceptJSInteropInvocations();
 ```
 
 This way, the example in the previous section would work even when using the default `IJSRuntime`:
