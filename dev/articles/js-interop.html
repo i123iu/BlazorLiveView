@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace BlazorLiveView.Core.Extensions | BlazorLiveView </title>
+      <title>JS interop | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace BlazorLiveView.Core.Extensions | BlazorLiveView ">
+      <meta name="title" content="JS interop | BlazorLiveView ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/blob/dev/docs/articles/js-interop.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -39,7 +39,7 @@
 
   </head>
 
-  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
@@ -84,32 +84,49 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.Extensions">
+        <article data-uid="">
+<h1 id="js-interop">JS interop</h1>
 
-  <h1 id="BlazorLiveView_Core_Extensions" data-uid="BlazorLiveView.Core.Extensions" class="text-break">Namespace BlazorLiveView.Core.Extensions</h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
+<p>BlazorLiveView supports JavaScript interoperability <strong>experimentally</strong>. The DOM state of a page is first built when a mirror session is created, but JS function can be invoked at any time before creation. For this reason, the page state cannot be reconstructed completely. Any JS calls that happen before opening the mirror session will be lost.</p>
+<h2 id="iliveviewjsruntime"><code>ILiveViewJSRuntime</code></h2>
+<p>First option is to inject and use <code>ILiveViewJSRuntime</code> instead of <code>IJSRuntime</code>. That automatically forwards JavaScript invocations to all mirror circuits that are currently viewing that user's session.</p>
+<p>For example:</p>
+<pre><code class="lang-csharp">@using BlazorLiveView.Core.Circuits.Services
+@inject ILiveViewJSRuntime LiveViewJS
 
-    <h3 id="classes">
-Classes
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Extensions.LiveViewExtensions.html">LiveViewExtensions</a></dt>
-      <dd></dd>
-    </dl>
-    <h3 id="interfaces">
-Interfaces
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Extensions.ILiveViewBuilder.html">ILiveViewBuilder</a></dt>
-      <dd></dd>
-    </dl>
+&lt;button @onclick=&quot;DoAlert&quot;&gt;Click me&lt;/button&gt;
 
+@code {
+    private void DoAlert()
+    {
+        LiveViewJS.InvokeVoidAsync(&quot;alert&quot;, &quot;This will appear on user and all mirror circuits.&quot;);
+    }
+}
+</code></pre>
+<h2 id="intercepting-all-js-invocations">Intercepting all JS invocations</h2>
+<p>BlazorLiveView also supports intercepting <strong>all</strong> JS interop invocations to the default <code>IJSRuntime</code>. To enable this feature, set the flag <code>InterceptJsInteropInvocations</code> to <code>true</code> when registering BlazorLiveView services like this:</p>
+<pre><code class="lang-csharp">builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView()
+    .InterceptJSInteropInvocations();
+</code></pre>
+<p>This way, the example in the previous section would work even when using the default <code>IJSRuntime</code>:</p>
+<pre><code class="lang-csharp">@inject IJSRuntime JS
+
+&lt;button @onclick=&quot;DoAlert&quot;&gt;Click me&lt;/button&gt;
+
+@code {
+    private void DoAlert()
+    {
+        JS.InvokeVoidAsync(&quot;alert&quot;, &quot;This will appear on user and all mirror circuits.&quot;);
+    }
+}
+</code></pre>
 
 </article>
 
 
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
 
       </div>
 

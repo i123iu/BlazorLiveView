@@ -93,7 +93,7 @@
 <p>The <code>LiveViewDashboard</code> component displays a all active user circuits (connections) in a table.</p>
 <p><img src="../images/screenshot-table.png" alt="LiveViewDashboard Example"></p>
 <p>Create a new Razor Component page for the dashboard, e.g. <code>Components/Pages/LiveViewDashboardPage.razor</code> with the following code.</p>
-<pre><code class="lang-razor">@page &quot;/liveview&quot;
+<pre><code class="lang-csharp">@page &quot;/liveview&quot;
 @using BlazorLiveView.Dashboard.Components
 
 &lt;PageTitle&gt;LiveView&lt;/PageTitle&gt;
@@ -124,7 +124,7 @@
 <p>Viewing the mirrored user session can be done with <code>LiveViewCircuitScreen</code> using a circuit ID or with <code>LiveViewUserScreen</code> using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.</p>
 <p><img src="../images/screenshot-mirror-circuit.png" alt="LiveViewCircuitScreen Example"></p>
 <p>Create a new Razor Component page, e.g. <code>Components/Pages/LiveViewScreenPage.razor</code> with the following code.</p>
-<pre><code class="lang-razor">@page &quot;/liveview/circuit/{CircuitId}&quot;
+<pre><code class="lang-csharp">@page &quot;/liveview/circuit/{CircuitId}&quot;
 @page &quot;/liveview/user/{UserSelector}&quot;
 @using BlazorLiveView.Dashboard.Components
 @layout BlazorLiveView.Dashboard.Layouts.EmptyLayout
@@ -160,7 +160,7 @@ else
 <p>Note that the red box contains an <code>iframe</code> pointing to the <em>mirror endpoint</em> mentioned in <a href="setup-registering-services.html">Setup: Registering Services</a>. Therefore the mirror endpoint must be secured alongside this page, since it can be accessed outside of this component.</p>
 <h2 id="navigation">Navigation</h2>
 <p>For accessing the dashboard, add a link to your navigation menu, e.g. in <code>Components/Layout/NavMenu.razor</code>.</p>
-<pre><code class="lang-razor">&lt;div class=&quot;nav-item px-3&quot;&gt;
+<pre><code class="lang-html">&lt;div class=&quot;nav-item px-3&quot;&gt;
     &lt;NavLink class=&quot;nav-link&quot; href=&quot;liveview&quot;&gt;
         &lt;span class=&quot;bi bi-list-nested-nav-menu&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; LiveView Dashboard
     &lt;/NavLink&gt;
@@ -168,7 +168,7 @@ else
 </code></pre>
 <h2 id="security">Security</h2>
 <p>Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the <code>[Authorize]</code> attribute can be directly used like this:</p>
-<pre><code class="lang-razor">@attribute [Authorize(Roles = &quot;Administrator&quot;)]
+<pre><code class="lang-csharp">@attribute [Authorize(Roles = &quot;Administrator&quot;)]
 </code></pre>
 <h2 id="next-steps">Next Steps</h2>
 <p>This completes the setup of BlazorLiveView. It should now work in your application.<br>

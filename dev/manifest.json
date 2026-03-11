@@ -138,6 +138,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.yml",
       "output": {
         ".html": {
@@ -236,6 +250,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.yml\" sourcestartlinenumber=\"1\">A subtype of <xref href=\"Microsoft.JSInterop.IJSRuntime\" data-throw-if-not-resolved=\"false\"></xref> that automatically forwards all JS\ninterop invocations to all mirror circuits that mirror the current user.\nSee LiveViewOptions.InterceptJsInteropInvocations for\nforwarding JS invocations from all <code>IJSRuntime</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.yml",
       "output": {
         ".html": {
@@ -292,6 +320,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Extensions.ILiveViewBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Extensions.ILiveViewBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Extensions.ILiveViewBuilder",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Extensions.LiveViewExtensions.yml",
       "output": {
         ".html": {
@@ -316,6 +358,20 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Options.LiveViewJSInteropOptions",
       "Summary": null
     },
     {
@@ -655,6 +711,16 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/js-interop.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/js-interop.html"
         }
       },
       "version": ""

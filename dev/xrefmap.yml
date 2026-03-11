@@ -226,6 +226,12 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler
   nameWithType: IUserCircuit.ComponentRerenderedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler
+  name: IUserCircuit.JSRuntimeInvokedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler
+  nameWithType: IUserCircuit.JSRuntimeInvokedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.Uri
   name: Uri
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_Uri
@@ -379,6 +385,12 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
   nameWithType: ICurrentCircuit.Current
+- uid: BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime
+  name: ILiveViewJSRuntime
+  href: api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime
+  fullName: BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime
+  nameWithType: ILiveViewJSRuntime
 - uid: BlazorLiveView.Core.Components
   name: BlazorLiveView.Core.Components
   href: api/BlazorLiveView.Core.Components.html
@@ -442,21 +454,27 @@ references:
   commentId: N:BlazorLiveView.Core.Extensions
   fullName: BlazorLiveView.Core.Extensions
   nameWithType: BlazorLiveView.Core.Extensions
+- uid: BlazorLiveView.Core.Extensions.ILiveViewBuilder
+  name: ILiveViewBuilder
+  href: api/BlazorLiveView.Core.Extensions.ILiveViewBuilder.html
+  commentId: T:BlazorLiveView.Core.Extensions.ILiveViewBuilder
+  fullName: BlazorLiveView.Core.Extensions.ILiveViewBuilder
+  nameWithType: ILiveViewBuilder
 - uid: BlazorLiveView.Core.Extensions.LiveViewExtensions
   name: LiveViewExtensions
   href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html
   commentId: T:BlazorLiveView.Core.Extensions.LiveViewExtensions
   fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions
   nameWithType: LiveViewExtensions
-- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewOptions})
-  name: AddLiveView(WebApplicationBuilder, Action<LiveViewOptions>?)
-  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_AddLiveView_Microsoft_AspNetCore_Builder_WebApplicationBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewOptions__
-  commentId: M:BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.AspNetCore.Builder.WebApplicationBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewOptions})
-  name.vb: AddLiveView(WebApplicationBuilder, Action(Of LiveViewOptions))
-  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.AspNetCore.Builder.WebApplicationBuilder, System.Action<BlazorLiveView.Core.Options.LiveViewOptions>?)
-  fullName.vb: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.AspNetCore.Builder.WebApplicationBuilder, System.Action(Of BlazorLiveView.Core.Options.LiveViewOptions))
-  nameWithType: LiveViewExtensions.AddLiveView(WebApplicationBuilder, Action<LiveViewOptions>?)
-  nameWithType.vb: LiveViewExtensions.AddLiveView(WebApplicationBuilder, Action(Of LiveViewOptions))
+- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewOptions})
+  name: AddLiveView(IServerSideBlazorBuilder, Action<LiveViewOptions>?)
+  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_AddLiveView_Microsoft_Extensions_DependencyInjection_IServerSideBlazorBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewOptions__
+  commentId: M:BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewOptions})
+  name.vb: AddLiveView(IServerSideBlazorBuilder, Action(Of LiveViewOptions))
+  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder, System.Action<BlazorLiveView.Core.Options.LiveViewOptions>?)
+  fullName.vb: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder, System.Action(Of BlazorLiveView.Core.Options.LiveViewOptions))
+  nameWithType: LiveViewExtensions.AddLiveView(IServerSideBlazorBuilder, Action<LiveViewOptions>?)
+  nameWithType.vb: LiveViewExtensions.AddLiveView(IServerSideBlazorBuilder, Action(Of LiveViewOptions))
 - uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView*
   name: AddLiveView
   href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_AddLiveView_
@@ -464,6 +482,22 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView
   nameWithType: LiveViewExtensions.AddLiveView
+- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})
+  name: InterceptJSInteropInvocations(ILiveViewBuilder, Action<LiveViewJSInteropOptions>?)
+  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptJSInteropInvocations_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__
+  commentId: M:BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})
+  name.vb: InterceptJSInteropInvocations(ILiveViewBuilder, Action(Of LiveViewJSInteropOptions))
+  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder, System.Action<BlazorLiveView.Core.Options.LiveViewJSInteropOptions>?)
+  fullName.vb: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder, System.Action(Of BlazorLiveView.Core.Options.LiveViewJSInteropOptions))
+  nameWithType: LiveViewExtensions.InterceptJSInteropInvocations(ILiveViewBuilder, Action<LiveViewJSInteropOptions>?)
+  nameWithType.vb: LiveViewExtensions.InterceptJSInteropInvocations(ILiveViewBuilder, Action(Of LiveViewJSInteropOptions))
+- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations*
+  name: InterceptJSInteropInvocations
+  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptJSInteropInvocations_
+  commentId: Overload:BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations
+  nameWithType: LiveViewExtensions.InterceptJSInteropInvocations
 - uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.MapLiveViewMirrorEndpoint(Microsoft.AspNetCore.Builder.WebApplication,System.Action{Microsoft.AspNetCore.Builder.IEndpointConventionBuilder})
   name: MapLiveViewMirrorEndpoint(WebApplication, Action<IEndpointConventionBuilder>?)
   href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_MapLiveViewMirrorEndpoint_Microsoft_AspNetCore_Builder_WebApplication_System_Action_Microsoft_AspNetCore_Builder_IEndpointConventionBuilder__
@@ -486,6 +520,38 @@ references:
   commentId: N:BlazorLiveView.Core.Options
   fullName: BlazorLiveView.Core.Options
   nameWithType: BlazorLiveView.Core.Options
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
+  name: LiveViewJSInteropOptions
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html
+  commentId: T:BlazorLiveView.Core.Options.LiveViewJSInteropOptions
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
+  nameWithType: LiveViewJSInteropOptions
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+  name: DefaultDelayForInvocationForward
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward
+  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+  nameWithType: LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward*
+  name: DefaultDelayForInvocationForward
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+  nameWithType: LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
+  name: InterceptIJSRuntime
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptIJSRuntime
+  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
+  nameWithType: LiveViewJSInteropOptions.InterceptIJSRuntime
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime*
+  name: InterceptIJSRuntime
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptIJSRuntime_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
+  nameWithType: LiveViewJSInteropOptions.InterceptIJSRuntime
 - uid: BlazorLiveView.Core.Options.LiveViewOptions
   name: LiveViewOptions
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html
