@@ -15,6 +15,7 @@ namespace BlazorLiveView.Sample.BlazorLeaflet
                 .AddLiveView(options =>
                  {
                      options.ShowDebugOptions = true;
+                     options.UseScreenOverlay = false;
                      options.InterceptJsInteropInvocations = true;
                  });
 
