@@ -1,4 +1,7 @@
 ﻿@page "/counter"
+@using BlazorLiveView.Core.Circuits.Services
+
+@inject ILiveViewJSRuntime LiveViewJS
 
 <PageTitle>Counter</PageTitle>
 
@@ -14,5 +17,10 @@
     private void IncrementCount()
     {
         currentCount++;
+
+        if (currentCount % 5 == 0)
+        {
+            LiveViewJS.InvokeVoidAsync("alert", $"Current count is {currentCount}");
+        }
     }
 }

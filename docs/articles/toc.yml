@@ -9,9 +9,9 @@
       href: setup-registering-services.md
     - name: Dashboard
       href: setup-dashboard.md
-- name: Guides
-  items:
-    - name: Custom Dashboard
-      href: custom-dashboard.md
+- name: JS interop
+  href: js-interop.md
+- name: Custom Dashboard
+  href: custom-dashboard.md
 - name: Utilities
   href: utilities.md

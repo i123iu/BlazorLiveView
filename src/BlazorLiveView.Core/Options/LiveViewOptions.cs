@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using BlazorLiveView.Core.Circuits.Services;
+using Microsoft.JSInterop;
+using System.Security.Claims;
 
 namespace BlazorLiveView.Core.Options;
 

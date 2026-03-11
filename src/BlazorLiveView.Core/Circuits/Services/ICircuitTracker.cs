@@ -16,6 +16,7 @@ public interface ICircuitTracker
 
     ICircuit? GetCircuit(string id);
     internal ICircuit? GetCircuit(RemoteRendererWrapper remoteRenderer);
+    internal ICircuit? GetCircuit(RemoteJSRuntimeWrapper remoteJsRuntime);
 
     IReadOnlyCollection<ICircuit> ListCircuits();
 

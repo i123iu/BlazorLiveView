@@ -12,7 +12,7 @@ The `LiveViewDashboard` component displays a all active user circuits (connectio
 
 Create a new Razor Component page for the dashboard, e.g. `Components/Pages/LiveViewDashboardPage.razor` with the following code.
 
-```razor
+```csharp
 @page "/liveview"
 @using BlazorLiveView.Dashboard.Components
 
@@ -50,7 +50,7 @@ Viewing the mirrored user session can be done with `LiveViewCircuitScreen` using
 
 Create a new Razor Component page, e.g. `Components/Pages/LiveViewScreenPage.razor` with the following code.
 
-```razor
+```csharp
 @page "/liveview/circuit/{CircuitId}"
 @page "/liveview/user/{UserSelector}"
 @using BlazorLiveView.Dashboard.Components
@@ -92,7 +92,7 @@ Note that the red box contains an `iframe` pointing to the _mirror endpoint_ men
 
 For accessing the dashboard, add a link to your navigation menu, e.g. in `Components/Layout/NavMenu.razor`.
 
-```razor
+```html
 <div class="nav-item px-3">
     <NavLink class="nav-link" href="liveview">
         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> LiveView Dashboard
@@ -104,7 +104,7 @@ For accessing the dashboard, add a link to your navigation menu, e.g. in `Compon
 
 Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the `[Authorize]` attribute can be directly used like this:
 
-```razor
+```csharp
 @attribute [Authorize(Roles = "Administrator")]
 ```
 

@@ -81,7 +81,7 @@ internal sealed class MirrorComponent(
         var circuit = _circuitTracker.GetCircuit(CircuitId);
         if (circuit is null)
         {
-            // This can happen, if the user circuit was closed
+            // This can happen if the user circuit was closed
             return;
         }
 

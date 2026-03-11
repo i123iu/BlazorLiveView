@@ -17,6 +17,9 @@ public interface IUserCircuit : ICircuit
     public delegate void ComponentRerenderedHandler(IUserCircuit circuit, int componentId);
     internal event ComponentRerenderedHandler? ComponentRerendered;
 
+    public delegate void JSRuntimeInvokedHandler(IUserCircuit circuit, string identifier, CancellationToken cancellationToken, object?[]? args);
+    internal event JSRuntimeInvokedHandler? JSRuntimeInvoked;
+
     string Uri { get; }
     ClaimsPrincipal User { get; }
 
@@ -24,4 +27,5 @@ public interface IUserCircuit : ICircuit
 
     internal void NotifyUriChanged();
     internal void NotifyComponentRerendered(int componentId);
+    internal void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args);
 }

@@ -32,7 +32,7 @@ This is a meta-package that includes both:
 
 ### Custom Dashboard
 
-For custom dashboard implementations without the pre-built dashboard, you can install only the `BlazorLiveView.Core` package instead. See the [Custom Dashboard](custom-dashboard.md) guide for more information.
+For custom dashboard implementations without the pre-built dashboard, you can install only the `BlazorLiveView.Core` package instead. See [Custom Dashboard](custom-dashboard.md) for more information.
 
 ## Next Steps
 

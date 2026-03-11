@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.JSInterop;
 using System.Reflection;
 
 namespace BlazorLiveView.Core.Reflection.Wrappers;
@@ -9,6 +10,7 @@ internal class CircuitHostWrapper : WrapperBase
 {
     private static readonly Type InnerType = Types.CircuitHost;
     private static readonly PropertyInfo _Renderer;
+    private static readonly PropertyInfo _JSRuntime;
     private static readonly PropertyInfo _Circuit;
     private static readonly PropertyInfo _Services;
     private static readonly FieldInfo _navigationManager;
@@ -17,6 +19,9 @@ internal class CircuitHostWrapper : WrapperBase
     {
         _Renderer = InnerType.GetRequiredProperty(
             "Renderer", isPublic: true
+        );
+        _JSRuntime = InnerType.GetRequiredProperty(
+            "JSRuntime", isPublic: true
         );
         _Circuit = InnerType.GetRequiredProperty(
             "Circuit", isPublic: true
@@ -37,6 +42,9 @@ internal class CircuitHostWrapper : WrapperBase
 
     public RemoteRendererWrapper Renderer
         => new((Renderer)_Renderer.GetValue(Inner)!);
+
+    public RemoteJSRuntimeWrapper JSRuntime
+        => new((JSRuntime)_JSRuntime.GetValue(Inner)!);
 
     public CircuitWrapper Circuit
         => new((Circuit)_Circuit.GetValue(Inner)!);
