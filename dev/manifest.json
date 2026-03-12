@@ -474,6 +474,160 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewCircuitScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewCircuitScreen.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewCircuitScreen",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewDashboard.CircuitIdToLinkDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewDashboard.CircuitIdToLinkDelegate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewDashboard.CircuitIdToLinkDelegate",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewDashboard.UserSelectorToLinkDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewDashboard.UserSelectorToLinkDelegate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewDashboard.UserSelectorToLinkDelegate",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewDashboard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewDashboard.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewDashboard",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewScreenBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewScreenBase",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewScreenIFrame.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewScreenIFrame.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewScreenIFrame",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewStatusBar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewStatusBar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewStatusBar",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewUserScreen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.LiveViewUserScreen.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components.LiveViewUserScreen",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Components.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Components.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Components",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Layouts.EmptyLayout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Layouts.EmptyLayout.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Layouts.EmptyLayout",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.Layouts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.Layouts.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard.Layouts",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Dashboard.Models.LiveViewRenderState.yml",
       "output": {
         ".html": {
@@ -498,6 +652,34 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Dashboard.Models",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard._Imports.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard._Imports.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard._Imports",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Dashboard.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Dashboard.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Dashboard",
       "Summary": null
     },
     {
