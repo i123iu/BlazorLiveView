@@ -1,0 +1,96 @@
+@using BlazorLiveView.Core.Circuits
+@using BlazorLiveView.Core.Options
+@using BlazorLiveView.Dashboard.Models
+@using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
+@using System.Security.Claims
+
+@inject IOptions<LiveViewOptions> LiveViewOptions
+@inject ILogger<LiveViewStatusBar> Logger
+
+<div class="liveview-screen-status-bar">
+    <div class="status-bar-item status">
+        <label class="item-name">Status:</label>
+        @switch (RenderState)
+        {
+            case LiveViewRenderState.SourceCircuitNotFound:
+                <span class="item-value error">Not Found</span>
+                break;
+            case LiveViewRenderState.SourceCircuitClosed:
+                <span class="item-value closed">Closed</span>
+                break;
+            case LiveViewRenderState.MirrorCircuitLoading:
+                <span class="item-value loading">Loading</span>
+                break;
+            case LiveViewRenderState.MirrorCircuitBlocked:
+                <span class="item-value warning">Blocked</span>
+                break;
+            case LiveViewRenderState.MirrorCircuitClosed:
+                <span class="item-value closed">Mirror Closed</span>
+                break;
+            case LiveViewRenderState.Working:
+                <span class="item-value live">Live</span>
+                break;
+            default: throw new Exception($"Unknown {nameof(LiveViewStatusBar)} state.");
+        }
+    </div>
+
+    @if (AvailableCircuits is not null)
+    {
+        @* User mode status bar *@
+        <div class="status-bar-item circuit-selector-item">
+            <label class="item-name">Circuit:</label>
+            <select class="circuit-select" value="@SelectedCircuitId" @onchange="OnSelectedCircuitIdChanged">
+                @foreach (var (circuitId, circuit) in AvailableCircuits)
+                {
+                    var truncatedId = circuitId.Length > 8 ? circuitId[..8] + "..." : circuitId;
+                    <option @key="circuitId" value="@circuitId">@truncatedId @circuit.Uri</option>
+                }
+            </select>
+        </div>
+    }
+    else
+    {
+        @* Circuit mode status bar *@
+        <div class="status-bar-item">
+            <label class="item-name">Circuit ID:</label>
+            <span class="item-value monospace">@(SelectedCircuitId ?? "-")</span>
+        </div>
+    }
+
+    <div class="status-bar-item">
+        <label class="item-name">User:</label>
+        <span class="item-value monospace">@UserSelector</span>
+    </div>
+
+    <div class="status-bar-item location">
+        <label class="item-name">Location:</label>
+        <span class="item-value monospace" title="@(SourceCircuit?.Uri ?? "")">@(SourceCircuit?.Uri ?? "-")</span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public LiveViewRenderState RenderState { get; set; }
+
+    [Parameter]
+    public IUserCircuit? SourceCircuit { get; set; }
+
+    [Parameter]
+    public Dictionary<string, IUserCircuit>? AvailableCircuits { get; set; }
+
+    [Parameter]
+    public string? SelectedCircuitId { get; set; }
+    [Parameter]
+    public EventCallback<string?> SelectedCircuitIdChanged { get; set; }
+
+    private string UserSelector => SourceCircuit is null ? "-" :
+        LiveViewOptions.Value.UserSelectorExtractor(SourceCircuit.User) ?? "-";
+
+    private void OnSelectedCircuitIdChanged(ChangeEventArgs e)
+    {
+        Logger.LogWarning("OnSelectedCircuitIdChanged: {SelectedCircuitId}, {AvailableCircuits}", SelectedCircuitId, AvailableCircuits);
+        SelectedCircuitId = e.Value?.ToString();
+        SelectedCircuitIdChanged.InvokeAsync(SelectedCircuitId);
+    }
+}

@@ -11,9 +11,15 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddRazorComponents()
-            .AddInteractiveServerComponents();
-
-        builder.AddLiveView();
+            .AddInteractiveServerComponents(options =>
+            {
+                options.DetailedErrors = true;
+            })
+            .AddLiveView(options =>
+            {
+                options.ShowDebugOptions = true;
+            })
+            .InterceptJSInteropInvocations();
 
         var app = builder.Build();
 

@@ -1,0 +1,130 @@
+.liveview-screen-status-bar {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 0.75em 1em;
+    background: white;
+    box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+    align-items: center;
+    -webkit-align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 0.0625em solid #e1e4e8;
+}
+
+.status-bar-item {
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    gap: 0.5em;
+    font-size: 0.875em;
+}
+
+.status-bar-item > .item-name {
+    font-weight: 600;
+    color: #586069;
+    white-space: nowrap;
+}
+
+.status-bar-item > .item-value {
+    color: #24292e;
+    font-weight: 500;
+    background-color: #e9ecef;
+    padding: 0.25em 0.625em;
+    border-radius: 0.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    font-size: 0.875em;
+}
+
+.status-bar-item.status > .item-value {
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.item-value.monospace {
+    font-family: "Courier New", monospace;
+}
+
+.item-value.live {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.item-value.loading {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.item-value.warning {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.item-value.error,
+.item-value.closed {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.circuit-selector-item {
+    flex: 0 0 auto;
+}
+
+.circuit-select {
+    padding: 0.375em 0.625em;
+    border: 0.0625em solid #e1e4e8;
+    border-radius: 0.25em;
+    font-family: "Courier New", monospace;
+    font-size: 0.875em;
+    background-color: white;
+    cursor: pointer;
+    min-width: 15em;
+    max-width: 25em;
+}
+
+.circuit-select:focus {
+    outline: none;
+    border-color: #0366d6;
+}
+
+.auto-switch-item label {
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    gap: 0.375em;
+    cursor: pointer;
+    font-weight: 500;
+    color: #24292e;
+}
+
+.auto-switch-item input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.status-bar-item.location {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+@media (max-width: 48em) {
+    .liveview-screen-header {
+        gap: 0.75em;
+        padding: 0.5em 0.75em;
+    }
+
+    .status-bar-item {
+        font-size: 0.75em;
+    }
+
+    .circuit-select {
+        min-width: 12em;
+        font-size: 0.75em;
+    }
+
+    .location-item {
+        flex-basis: 100%;
+    }
+}

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using BlazorLiveView.Core.Components;
+﻿using BlazorLiveView.Core.Components;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorLiveView.Core.Attributes;
 

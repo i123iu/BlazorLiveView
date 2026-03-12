@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits;
+using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
@@ -7,6 +8,8 @@ using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -20,20 +23,23 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
     private static LiveViewOptions _liveViewOptions = null!;
+    private static LiveViewJSInteropOptions _liveViewJSInteropOptions = null!;
     private static ILiveViewMirrorUriBuilder _mirrorUriBuilder = null!;
     private static ILogger<CircuitFactoryPatcher> _logger = null!;
     private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public CircuitFactoryPatcher(
         ICircuitTracker circuitTracker,
-        IOptions<LiveViewOptions> options,
+        IOptions<LiveViewOptions> liveViewOptions,
+        IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions,
         ILiveViewMirrorUriBuilder mirrorUriBuilder,
         ILogger<CircuitFactoryPatcher> logger,
         IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
-        _liveViewOptions = options.Value;
+        _liveViewOptions = liveViewOptions.Value;
+        _liveViewJSInteropOptions = liveViewJSInteropOptions.Value;
         _mirrorUriBuilder = mirrorUriBuilder;
         _logger = logger;
         _patchExceptionHandler = patchExceptionHandler;
@@ -41,11 +47,13 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
     public void Patch(Harmony harmony)
     {
+        var method_CreateCircuitHostAsync = AccessTools.Method(
+            Types.CircuitFactory,
+            "CreateCircuitHostAsync"
+        );
+
         harmony.Patch(
-            AccessTools.Method(
-                Types.CircuitFactory,
-                "CreateCircuitHostAsync"
-            ),
+            method_CreateCircuitHostAsync,
             prefix: new HarmonyMethod(
                 CreateCircuitHostAsync_Prefix
             ),
@@ -53,6 +61,22 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 CreateCircuitHostAsync_Postfix
             )
         );
+
+        if (_liveViewJSInteropOptions.InterceptIJSRuntime)
+        {
+            var stateMachineAttr = method_CreateCircuitHostAsync
+                .GetCustomAttribute<AsyncStateMachineAttribute>()
+                ?? throw new Exception("Invalid state machine attribute for CreateCircuitHostAsync");
+            var moveNextMethod = stateMachineAttr.StateMachineType
+                .GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            harmony.Patch(
+                moveNextMethod,
+                transpiler: new HarmonyMethod(
+                    CreateCircuitHostAsync_Transpiler
+                )
+            );
+        }
     }
 
     private readonly struct State
@@ -60,21 +84,21 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         public readonly bool errored;
         public readonly bool isMirror;
         public readonly IUserCircuit? sourceCircuit;
-        public readonly IUserCircuit? parentCircuit;
+        public readonly Guid? state;
         public readonly bool debugView;
 
         private State(
             bool errored,
             bool isMirror,
             IUserCircuit? sourceCircuit,
-            IUserCircuit? parentCircuit,
+            Guid? state,
             bool debugView
         )
         {
             this.errored = errored;
             this.isMirror = isMirror;
             this.sourceCircuit = sourceCircuit;
-            this.parentCircuit = parentCircuit;
+            this.state = state;
             this.debugView = debugView;
         }
 
@@ -102,7 +126,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
 
         public static State Mirror(
             IUserCircuit sourceCircuit,
-            IUserCircuit? parentCircuit,
+            Guid? state,
             bool debugView
         )
         {
@@ -110,7 +134,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 false,
                 true,
                 sourceCircuit,
-                parentCircuit,
+                state,
                 debugView
             );
         }
@@ -150,6 +174,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             }
 
             var sourceCircuit = _circuitTracker.GetCircuit(parsedUri.sourceCircuitId);
+            
             if (sourceCircuit is null)
             {
                 // This should have been caught in the mirror endpoint controller
@@ -166,25 +191,12 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 return;
             }
 
-            IUserCircuit? parentCircuit = null;
-            if (parsedUri.parentCircuitId is not null)
-            {
-                var parent = _circuitTracker.GetCircuit(parsedUri.parentCircuitId);
-                if (parent is not IUserCircuit parentUserCircuit)
-                {
-                    _logger.LogError("Parent circuit is not a user circuit. Circuit ID: {CircuitId}",
-                        parsedUri.parentCircuitId);
-                    return;
-                }
-                parentCircuit = parentUserCircuit;
-            }
-
             // "Redirect" the mirror to the source's URI
             uri = sourceUserCircuit.Uri;
 
             __state = State.Mirror(
                 sourceUserCircuit,
-                parentCircuit,
+                parsedUri.state,
                 parsedUri.debugView
             );
         }
@@ -285,7 +297,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 _circuitTracker!.MirrorCircuitCreated(
                     circuitHost.Circuit.Inner,
                     _state.sourceCircuit ?? throw new Exception(),
-                    _state.parentCircuit,
+                    _state.state,
                     _state.debugView
                 );
             }
@@ -295,6 +307,45 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             }
 
             return taskResult;
+        }
+    }
+
+    private static IEnumerable<CodeInstruction> CreateCircuitHostAsync_Transpiler(
+        IEnumerable<CodeInstruction> instructions
+    )
+    {
+        // The original CreateCircuitHostAsync method contains the following line:
+        //   var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
+        // Since IJSRuntime is changed (decorated) to LiveViewJSRuntime, this line
+        // would throw an InvalidCastException. This transpiler swaps the cast
+        // to RemoteJSRuntime with a call to a helper method LiveViewJSRuntime.ToRemoteJSRuntime.
+
+        bool found = false;
+        foreach (CodeInstruction instruction in instructions)
+        {
+            // Looking for:
+            //   castclass Microsoft.AspNetCore.Components.Server.Circuits.RemoteJSRuntime
+
+            if (!found &&
+                instruction.opcode == OpCodes.Castclass &&
+                (Type)instruction.operand == Types.RemoteJSRuntime)
+            {
+                found = true;
+                yield return new CodeInstruction(
+                    OpCodes.Call,
+                    typeof(LiveViewJSRuntime).GetMethod(
+                        nameof(LiveViewJSRuntime.ToRemoteJSRuntime)
+                    )
+                );
+                continue;
+            }
+
+            yield return instruction;
+        }
+
+        if (!found)
+        {
+            throw new Exception("Instruction castclass not found.");
         }
     }
 }

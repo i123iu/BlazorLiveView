@@ -8,22 +8,24 @@ BlazorLiveView services need to be registered in your dependency injection conta
 
 ```csharp
 using BlazorLiveView.Core.Extensions;
-builder.AddLiveView();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView();
 ```
-
-### Configuration Options
 
 The method `AddLiveView` also accepts optional configuration options:
 
 ```csharp
-builder.AddLiveView(options =>
-{
-    // The URI path for the mirror endpoint (default: "/_mirror")
-    options.MirrorUri = "/custom-mirror-path";
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView(options =>
+    {
+        // The URI path for the mirror endpoint (default: "/_mirror")
+        options.MirrorUri = "/custom-mirror-path";
 
-    // Whether to use a transparent overlay element on mirrors to prevent interaction
-    options.UseScreenOverlay = true;
-});
+        // Whether to use a transparent overlay element on mirrors to prevent interaction
+        options.UseScreenOverlay = true;
+    });
 ```
 
 ## Mapping the Mirror Endpoint
@@ -57,20 +59,15 @@ using BlazorLiveView.Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Other services
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
-
-// Register BlazorLiveView services
-builder.AddLiveView();
+    .AddInteractiveServerComponents()
+    .AddLiveView();
 
 var app = builder.Build();
 
-// Other middleware
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-// Map the mirror endpoint
 app.MapLiveViewMirrorEndpoint();
 
 app.Run();

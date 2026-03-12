@@ -6,7 +6,7 @@ namespace BlazorLiveView.Core.Circuits;
 /// Connection to a client, either a <see cref="IUserCircuit"/> or a 
 /// <see cref="IMirrorCircuit"/>.
 /// </summary>
-public interface ICircuit
+public interface ICircuit : IDisposable
 {
     public delegate void CircuitStatusChangedHandler(ICircuit circuit);
 

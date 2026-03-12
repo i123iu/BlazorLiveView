@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits;
+using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using BlazorLiveView.Core.RenderTree;
 using Microsoft.AspNetCore.Components;
@@ -77,8 +78,12 @@ internal sealed class MirrorComponent(
 
     private void Render()
     {
-        var circuit = _circuitTracker.GetCircuit(CircuitId)
-            ?? throw new InvalidOperationException($"Circuit with ID '{CircuitId}' not found.");
+        var circuit = _circuitTracker.GetCircuit(CircuitId);
+        if (circuit is null)
+        {
+            // This can happen if the user circuit was closed
+            return;
+        }
 
         if (circuit is not IUserCircuit userCircuit)
         {
@@ -143,12 +148,15 @@ internal sealed class MirrorComponent(
         string log = _builder.Count == 0
             ? "<empty>"
             : string.Join("\n", _builder.Select(frame => $"- {frame}"));
-        _logger.LogTrace(
-            "Translated {CircuitId}{ComponentId} to: \n{Frames}",
-            CircuitId,
-            ComponentId,
-            log
-        );
+        if (_logger.IsEnabled(LogLevel.Trace))
+        {
+            _logger.LogTrace(
+                "Translated {CircuitId}{ComponentId} to: \n{Frames}",
+                CircuitId,
+                ComponentId,
+                log
+            );
+        }
 
         var view = _builder.ToArray();
         _builder.Clear();

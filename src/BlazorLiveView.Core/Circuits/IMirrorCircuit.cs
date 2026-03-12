@@ -11,10 +11,15 @@ public interface IMirrorCircuit : ICircuit
     event MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
 
     IUserCircuit SourceCircuit { get; }
-    IUserCircuit? ParentCircuit { get; }
 
     /// <summary>
-    /// Shoud the mirrored componets be in DebugView?
+    /// Unique identifier that is passed as a query parameter to the mirror
+    /// endpoint. This way the mirror circuit can be recognized when created.
+    /// </summary>
+    Guid? State { get; }
+
+    /// <summary>
+    /// Should the mirrored componets be in DebugView?
     /// </summary>
     bool DebugView { get; }
 
