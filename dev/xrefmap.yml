@@ -539,19 +539,6 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
   nameWithType: LiveViewJSInteropOptions.DefaultDelayForInvocationForward
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
-  name: InterceptIJSRuntime
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptIJSRuntime
-  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
-  nameWithType: LiveViewJSInteropOptions.InterceptIJSRuntime
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime*
-  name: InterceptIJSRuntime
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptIJSRuntime_
-  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptIJSRuntime
-  nameWithType: LiveViewJSInteropOptions.InterceptIJSRuntime
 - uid: BlazorLiveView.Core.Options.LiveViewOptions
   name: LiveViewOptions
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html
