@@ -89,41 +89,67 @@
 
 <p>This is the third step of BlazorLiveView setup: <strong>Setting up the admin dashboard</strong>.</p>
 <p>This guide uses the pre-built dashboard components provided by the package <code>BlazorLiveView.Dashboard</code> (included in <code>BlazorLiveView</code>). To create custom dashboard components, see <a href="custom-dashboard.html">Custom Dashboard</a>.</p>
-<h2 id="liveviewdashboard-component"><code>LiveViewDashboard</code> Component</h2>
+<h2 id="circuits-table">Circuits Table</h2>
 <p>The <code>LiveViewDashboard</code> component displays a all active user circuits (connections) in a table.</p>
 <p><img src="../images/screenshot-table.png" alt="LiveViewDashboard Example"></p>
 <p>Create a new Razor Component page for the dashboard, e.g. <code>Components/Pages/LiveViewDashboardPage.razor</code> with the following code.</p>
-<pre><code class="lang-razor">@page &quot;/liveview&quot;
+<pre><code class="lang-csharp">@page &quot;/liveview&quot;
 @using BlazorLiveView.Dashboard.Components
 
-&lt;PageTitle&gt;LiveViewDashboardPage&lt;/PageTitle&gt;
-&lt;h1&gt;LiveViewDashboardPage&lt;/h1&gt;
+&lt;PageTitle&gt;LiveView&lt;/PageTitle&gt;
+&lt;h1&gt;LiveView Dashboard&lt;/h1&gt;
 
-&lt;LiveViewDashboard CircuitIdToLink=&quot;@CircuitIdToLink&quot; /&gt;
+&lt;LiveViewDashboard CircuitIdToLink=&quot;@CircuitIdToLink&quot;
+                   UserSelectorToLink=&quot;@UserSelectorToLink&quot;
+                   ShowFullUrl=&quot;true&quot; /&gt;
 
 @code {
-    private string CircuitIdToLink(string circuitId, 
+    private string CircuitIdToLink(string circuitId,
         bool debugView = false)
     {
-        return $&quot;/liveview/{circuitId}&quot; 
+        return $&quot;/liveview/circuit/{circuitId}&quot;
+            + $&quot;{(debugView ? &quot;?DebugView=true&quot; : &quot;&quot;)}&quot;;
+    }
+
+    private string UserSelectorToLink(string userSelector,
+        bool debugView = false)
+    {
+        return $&quot;/liveview/user/{Uri.EscapeDataString(userSelector)}&quot;
             + $&quot;{(debugView ? &quot;?DebugView=true&quot; : &quot;&quot;)}&quot;;
     }
 }
 </code></pre>
-<p>The <code>LiveViewDashboard</code> component expects a delegate <code>CircuitIdToLink</code> that generates a URL to the mirror view for a given circuit ID. You may pass this circuit ID in any way, but this guide uses a route parameter to pass the ID to a <code>LiveViewScreen</code> component.</p>
-<h2 id="liveviewscreen-component"><code>LiveViewScreen</code> Component</h2>
-<p>The <code>LiveViewScreen</code> component renders the actual mirrored view of a user's session in a red box along with a top status bar with additional information.</p>
-<p><img src="../images/screenshot-mirror.png" alt="LiveViewScreen Example"></p>
-<p>Create a new Razor Component page for viewing individual sessions, e.g. <code>Components/Pages/LiveViewScreenPage.razor</code> with the following code.</p>
-<pre><code class="lang-razor">@page &quot;/liveview/{CircuitId}&quot;
+<p>The <code>LiveViewDashboard</code> component expects two delegates: <code>CircuitIdToLink</code> and <code>UserSelectorToLink</code>. They both should generate URL adresses to the mirror view. <code>CircuitIdToLink</code> for a given circuit ID and <code>UserSelectorToLink</code> for a given user selector (for example email). This guide uses route parameters to pass them to a single live view screen page.</p>
+<h2 id="live-view-screen">Live View Screen</h2>
+<p>Viewing the mirrored user session can be done with <code>LiveViewCircuitScreen</code> using a circuit ID or with <code>LiveViewUserScreen</code> using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.</p>
+<p><img src="../images/screenshot-mirror-circuit.png" alt="LiveViewCircuitScreen Example"></p>
+<p>Create a new Razor Component page, e.g. <code>Components/Pages/LiveViewScreenPage.razor</code> with the following code.</p>
+<pre><code class="lang-csharp">@page &quot;/liveview/circuit/{CircuitId}&quot;
+@page &quot;/liveview/user/{UserSelector}&quot;
 @using BlazorLiveView.Dashboard.Components
 @layout BlazorLiveView.Dashboard.Layouts.EmptyLayout
 
-&lt;LiveViewScreen CircuitId=&quot;@CircuitId&quot; DebugView=&quot;@DebugView&quot; /&gt;
+@if (!string.IsNullOrEmpty(CircuitId))
+{
+    &lt;LiveViewCircuitScreen SourceCircuitId=&quot;@CircuitId&quot;
+                           DebugView=&quot;@DebugView&quot; /&gt;
+}
+else if (!string.IsNullOrEmpty(UserSelector))
+{
+    &lt;LiveViewUserScreen UserSelector=&quot;@UserSelector&quot;
+                        DebugView=&quot;@DebugView&quot; /&gt;
+}
+else
+{
+    &lt;p&gt;Invalid parameters. Either CircuitId or UserSelector must be provided.&lt;/p&gt;
+}
 
 @code {
     [Parameter]
-    public required string CircuitId { get; set; }
+    public string? CircuitId { get; set; }
+
+    [Parameter]
+    public string? UserSelector { get; set; }
 
     [Parameter]
     [SupplyParameterFromQuery]
@@ -134,7 +160,7 @@
 <p>Note that the red box contains an <code>iframe</code> pointing to the <em>mirror endpoint</em> mentioned in <a href="setup-registering-services.html">Setup: Registering Services</a>. Therefore the mirror endpoint must be secured alongside this page, since it can be accessed outside of this component.</p>
 <h2 id="navigation">Navigation</h2>
 <p>For accessing the dashboard, add a link to your navigation menu, e.g. in <code>Components/Layout/NavMenu.razor</code>.</p>
-<pre><code class="lang-razor">&lt;div class=&quot;nav-item px-3&quot;&gt;
+<pre><code class="lang-html">&lt;div class=&quot;nav-item px-3&quot;&gt;
     &lt;NavLink class=&quot;nav-link&quot; href=&quot;liveview&quot;&gt;
         &lt;span class=&quot;bi bi-list-nested-nav-menu&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; LiveView Dashboard
     &lt;/NavLink&gt;
@@ -142,7 +168,7 @@
 </code></pre>
 <h2 id="security">Security</h2>
 <p>Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the <code>[Authorize]</code> attribute can be directly used like this:</p>
-<pre><code class="lang-razor">@attribute [Authorize(Roles = &quot;Administrator&quot;)]
+<pre><code class="lang-csharp">@attribute [Authorize(Roles = &quot;Administrator&quot;)]
 </code></pre>
 <h2 id="next-steps">Next Steps</h2>
 <p>This completes the setup of BlazorLiveView. It should now work in your application.<br>

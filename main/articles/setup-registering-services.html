@@ -91,18 +91,21 @@
 <h2 id="service-registration">Service Registration</h2>
 <p>BlazorLiveView services need to be registered in your dependency injection container. Add the following code to <code>Program.cs</code> before building the application.</p>
 <pre><code class="lang-csharp">using BlazorLiveView.Core.Extensions;
-builder.AddLiveView();
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView();
 </code></pre>
-<h3 id="configuration-options">Configuration Options</h3>
 <p>The method <code>AddLiveView</code> also accepts optional configuration options:</p>
-<pre><code class="lang-csharp">builder.AddLiveView(options =&gt;
-{
-    // The URI path for the mirror endpoint (default: &quot;/_mirror&quot;)
-    options.MirrorUri = &quot;/custom-mirror-path&quot;;
+<pre><code class="lang-csharp">builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView(options =&gt;
+    {
+        // The URI path for the mirror endpoint (default: &quot;/_mirror&quot;)
+        options.MirrorUri = &quot;/custom-mirror-path&quot;;
 
-    // Whether to use a transparent overlay element on mirrors to prevent interaction
-    options.UseScreenOverlay = true;
-});
+        // Whether to use a transparent overlay element on mirrors to prevent interaction
+        options.UseScreenOverlay = true;
+    });
 </code></pre>
 <h2 id="mapping-the-mirror-endpoint">Mapping the Mirror Endpoint</h2>
 <p>To be able to view the mirrored sessions, the <em>mirror endpoint</em> must be mapped. Add the following code to <code>Program.cs</code> after building the application and before calling <code>app.Run()</code>.</p>
@@ -123,20 +126,15 @@ app.MapLiveViewMirrorEndpoint();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Other services
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
-
-// Register BlazorLiveView services
-builder.AddLiveView();
+    .AddInteractiveServerComponents()
+    .AddLiveView();
 
 var app = builder.Build();
 
-// Other middleware
 app.MapRazorComponents&lt;App&gt;()
     .AddInteractiveServerRenderMode();
 
-// Map the mirror endpoint
 app.MapLiveViewMirrorEndpoint();
 
 app.Run();

@@ -89,7 +89,7 @@
 
 
   <h1 id="BlazorLiveView_Core_Circuits_IUserCircuit" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit" class="text-break">
-Interface IUserCircuit  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L7"><i class="bi bi-code-slash"></i></a>
+Interface IUserCircuit  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -103,7 +103,7 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IUserCircuit : ICircuit</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IUserCircuit : ICircuit, IDisposable</code></pre>
   </div>
 
 
@@ -127,6 +127,9 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
     <div>
       <a class="xref" href="BlazorLiveView.Core.Circuits.ICircuit.html#BlazorLiveView_Core_Circuits_ICircuit_OpenedAt">ICircuit.OpenedAt</a>
     </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">IDisposable.Dispose()</a>
+    </div>
   </dd></dl>
 
 
@@ -142,7 +145,7 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_Uri" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.Uri">
   Uri
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -169,14 +172,75 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
 
 
 
+  <a id="BlazorLiveView_Core_Circuits_IUserCircuit_User_" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.User*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_User" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.User">
+  User
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ClaimsPrincipal User { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.security.claims.claimsprincipal">ClaimsPrincipal</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h2 class="section" id="events">Events
 </h2>
 
 
 
+  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_AuthenticationStateChanged" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged">
+  AuthenticationStateChanged
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.html">AuthenticationStateChangedHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_UriChanged" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.UriChanged">
   UriChanged
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L12"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
