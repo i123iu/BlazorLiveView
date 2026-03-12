@@ -20,6 +20,7 @@ internal static class MirrorEndpoint
     )
     {
         var circuit = circuitTracker.GetCircuit(circuitId);
+        
         if (circuit is null)
         {
             context.Response.StatusCode = 404;

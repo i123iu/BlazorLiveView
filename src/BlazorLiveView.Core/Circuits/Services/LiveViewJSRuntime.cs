@@ -23,21 +23,20 @@ internal class LiveViewJSRuntime(
                 "No circuit found for the current JSRuntime. " +
                 "Skipping mirror circuit invocation. "
             );
+            return;
         }
-        else
-        {
-            if (_logger.IsEnabled(LogLevel.Debug))
-            {
-                _logger.LogDebug(
-                    "Invoking JS interop method '{Identifier}' on circuit '{CircuitId}' with args: {Args}",
-                    identifier, circuit.Id, args
-                );
-            }
 
-            if (circuit is IUserCircuit userCircuit)
-            {
-                userCircuit.NotifyJSRuntimeInvoked(identifier, cancellationToken, args);
-            }
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            _logger.LogDebug(
+                "Invoking JS interop method '{Identifier}' on circuit '{CircuitId}' with args: {Args}",
+                identifier, circuit.Id, args
+            );
+        }
+
+        if (circuit is IUserCircuit userCircuit)
+        {
+            userCircuit.NotifyJSRuntimeInvoked(identifier, cancellationToken, args);
         }
     }
 

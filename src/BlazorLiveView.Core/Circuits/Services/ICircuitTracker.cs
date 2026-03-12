@@ -42,7 +42,7 @@ public interface ICircuitTracker
     internal void CircuitDown(Circuit circuit);
 
     /// <summary>
-    /// Called when a circuit's SignalR connection was closed.
+    /// Called when a circuit's SignalR connection was irreversibly closed.
     /// </summary>
     internal void CircuitClosed(Circuit circuit);
 }

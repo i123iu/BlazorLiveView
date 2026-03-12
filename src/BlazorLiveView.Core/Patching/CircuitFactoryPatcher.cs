@@ -174,6 +174,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             }
 
             var sourceCircuit = _circuitTracker.GetCircuit(parsedUri.sourceCircuitId);
+            
             if (sourceCircuit is null)
             {
                 // This should have been caught in the mirror endpoint controller
