@@ -86,17 +86,16 @@ public static class LiveViewExtensions
     {
         configureOptions ??= options => { };
         builder.Services.Configure(configureOptions);
+        builder.Services.Configure<LiveViewJSInteropOptions>(options =>
+        {
+            options.InterceptIJSRuntime = true;
+        });
 
         builder.Services
             .Decorate<IJSRuntime>((origRemoteJSRuntime, sp) =>
             {
                 // Replace the default IJSRuntime implementation (RemoteJSRuntime)
                 // with a new intercepting implementation (LiveViewJSRuntime)
-
-                var jsInteropOptions = sp.GetRequiredService<IOptions<LiveViewJSInteropOptions>>();
-                if (!jsInteropOptions.Value.InterceptIJSRuntime)
-                    return origRemoteJSRuntime;
-
                 RemoteJSRuntimeWrapper jsRuntime = new((JSRuntime)origRemoteJSRuntime);
                 return new LiveViewJSRuntime(jsRuntime, sp);
             });
