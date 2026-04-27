@@ -72,16 +72,16 @@ internal sealed class MirrorComponent(
 
         if (componentId == ComponentId)
         {
-            _renderHandle.Dispatcher.InvokeAsync(Render);
+            Render(deferred: true);
         }
     }
 
-    private void Render()
+    private void Render(bool deferred = false)
     {
         var circuit = _circuitTracker.GetCircuit(CircuitId);
         if (circuit is null)
         {
-            // This can happen if the user circuit was closed
+            // This can happen if the user circuit has been closed
             return;
         }
 
@@ -101,13 +101,37 @@ internal sealed class MirrorComponent(
             return;
         }
 
-        Render(componentState);
+        if (deferred)
+        {
+            _renderHandle.Dispatcher.InvokeAsync(
+                () => Render(userCircuit, componentState)
+            );
+    }
+        else
+        {
+            Render(userCircuit, componentState);
+        }
     }
 
-    private void Render(ComponentState componentState)
+    private void Render(IUserCircuit userCircuit, ComponentState componentState)
     {
+        if (userCircuit.CircuitStatus == CircuitStatus.Closed)
+        {
+            // Circuit closed before we could mirror it.
+            _renderHandle.Render(builder => { });
+            return;
+        }
+
         ComponentStateWrapper componentStateWrapper =
             new(componentState);
+
+        if (componentStateWrapper.ComponentWasDisposed)
+        {
+            // Component disposed before we could mirror it.
+            _renderHandle.Render(builder => { });
+            return;
+        }
+
         var sourceBuilder = componentStateWrapper.CurrentRenderTree;
         var frames = sourceBuilder.GetFrames().Array.AsSpan();
         var view = BuildView(
