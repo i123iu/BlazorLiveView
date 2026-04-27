@@ -108,6 +108,14 @@ Both of the mentioned pages should be protected. They could be placed in the sec
 @attribute [Authorize(Roles = "Administrator")]
 ```
 
+## CSS Styles
+
+The default dashboard components use CSS styles that must be included using the Blazor's CSS bundling mechanism. Make sure to include the following line in `App.razor`:
+
+```
+<link href="@Assets["<ProjectName>.styles.css"]" rel="stylesheet" />
+```
+
 ## Next Steps
 
 This completes the setup of BlazorLiveView. It should now work in your application.<br>
