@@ -25,6 +25,7 @@ internal sealed class MirrorComponent(
     private readonly IRenderTreeTranslatorFactory _translatorFactory = translatorFactory;
     private readonly ILogger<MirrorComponent> _logger = logger;
     private RenderHandle _renderHandle;
+    private uint _lastAppliedRenderVersion = 0, _nextRenderVersion = 1;
 
     [Parameter]
     public string CircuitId { get; set; } = "";
@@ -101,20 +102,33 @@ internal sealed class MirrorComponent(
             return;
         }
 
+        var currentRenderVersion = Interlocked.Increment(ref _nextRenderVersion) - 1;
         if (deferred)
         {
             _renderHandle.Dispatcher.InvokeAsync(
-                () => Render(userCircuit, componentState)
+                () => Render(userCircuit, componentState, currentRenderVersion)
             );
-    }
+        }
         else
         {
-            Render(userCircuit, componentState);
+            Render(userCircuit, componentState, currentRenderVersion);
         }
     }
 
-    private void Render(IUserCircuit userCircuit, ComponentState componentState)
+    private void Render(IUserCircuit userCircuit, ComponentState componentState, uint renderVersion)
     {
+        uint currentApplied;
+        do
+        {
+            currentApplied = _lastAppliedRenderVersion;
+            if (renderVersion <= currentApplied)
+            {
+                // A newer render has already been applied
+                return;
+            }
+        }
+        while (Interlocked.CompareExchange(ref _lastAppliedRenderVersion, renderVersion, currentApplied) != currentApplied);
+
         if (userCircuit.CircuitStatus == CircuitStatus.Closed)
         {
             // Circuit closed before we could mirror it.
