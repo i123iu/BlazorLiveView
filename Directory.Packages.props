@@ -24,5 +24,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.2" />
     <!-- For BlazorLiveView.Sample.BlazorLeaflet -->
     <PackageVersion Include="BlazorLeaflet" Version="0.4.0-alpha" />
+    <!-- For BlazorLiveView.Sample.MudBlazor -->
+    <PackageVersion Include="MudBlazor" Version="9.2.0" />
   </ItemGroup>
 </Project>
