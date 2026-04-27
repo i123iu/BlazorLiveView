@@ -25,6 +25,7 @@ internal sealed class MirrorComponent(
     private readonly IRenderTreeTranslatorFactory _translatorFactory = translatorFactory;
     private readonly ILogger<MirrorComponent> _logger = logger;
     private RenderHandle _renderHandle;
+    private uint _lastAppliedRenderVersion = 0, _nextRenderVersion = 1;
 
     [Parameter]
     public string CircuitId { get; set; } = "";
@@ -72,16 +73,16 @@ internal sealed class MirrorComponent(
 
         if (componentId == ComponentId)
         {
-            _renderHandle.Dispatcher.InvokeAsync(Render);
+            Render(deferred: true);
         }
     }
 
-    private void Render()
+    private void Render(bool deferred = false)
     {
         var circuit = _circuitTracker.GetCircuit(CircuitId);
         if (circuit is null)
         {
-            // This can happen if the user circuit was closed
+            // This can happen if the user circuit has been closed
             return;
         }
 
@@ -101,13 +102,50 @@ internal sealed class MirrorComponent(
             return;
         }
 
-        Render(componentState);
+        var currentRenderVersion = Interlocked.Increment(ref _nextRenderVersion) - 1;
+        if (deferred)
+        {
+            _renderHandle.Dispatcher.InvokeAsync(
+                () => Render(userCircuit, componentState, currentRenderVersion)
+            );
+        }
+        else
+        {
+            Render(userCircuit, componentState, currentRenderVersion);
+        }
     }
 
-    private void Render(ComponentState componentState)
+    private void Render(IUserCircuit userCircuit, ComponentState componentState, uint renderVersion)
     {
+        uint currentApplied;
+        do
+        {
+            currentApplied = _lastAppliedRenderVersion;
+            if (renderVersion <= currentApplied)
+            {
+                // A newer render has already been applied
+                return;
+            }
+        }
+        while (Interlocked.CompareExchange(ref _lastAppliedRenderVersion, renderVersion, currentApplied) != currentApplied);
+
+        if (userCircuit.CircuitStatus == CircuitStatus.Closed)
+        {
+            // Circuit closed before we could mirror it.
+            _renderHandle.Render(builder => { });
+            return;
+        }
+
         ComponentStateWrapper componentStateWrapper =
             new(componentState);
+
+        if (componentStateWrapper.ComponentWasDisposed)
+        {
+            // Component disposed before we could mirror it.
+            _renderHandle.Render(builder => { });
+            return;
+        }
+
         var sourceBuilder = componentStateWrapper.CurrentRenderTree;
         var frames = sourceBuilder.GetFrames().Array.AsSpan();
         var view = BuildView(
