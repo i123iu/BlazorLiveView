@@ -1,5 +1,5 @@
-﻿using Microsoft.JSInterop;
-using BlazorLiveView.Core.Options;
+﻿using BlazorLiveView.Core.Options;
+using Microsoft.JSInterop;
 
 namespace BlazorLiveView.Core.Circuits.Services;
 

@@ -9,6 +9,6 @@ internal class CurrentCircuit(ICircuitTracker circuitTracker)
 
     public Circuit? Current { get; set; }
 
-    public IUserCircuit? AsUserCircuit() => Current is null ? null : 
+    public IUserCircuit? AsUserCircuit() => Current is null ? null :
         (IUserCircuit?)_circuitTracker.GetCircuit(Current.Id);
 }

@@ -9,8 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.Patching;
 
-// TODO: Removing web root components
-
 /// <summary>
 /// This patcher is responsible for creating RootMirrorComponent instead of the
 /// original root component for mirror circuits. These new root mirror

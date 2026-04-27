@@ -113,7 +113,6 @@ internal sealed class CircuitHostPatcher : IPatcher
             if (circuit is IMirrorCircuit)
             {
                 // Skip the original function
-                // TODO?: passing e.g. button clicks to the original user circuit
                 _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
                     circuit.Id);
 

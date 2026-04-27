@@ -174,7 +174,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
             }
 
             var sourceCircuit = _circuitTracker.GetCircuit(parsedUri.sourceCircuitId);
-            
+
             if (sourceCircuit is null)
             {
                 // This should have been caught in the mirror endpoint controller
@@ -203,7 +203,11 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         catch (Exception ex)
         {
             __state = State.Errored();
-            _patchExceptionHandler.LogPrefixException(_logger, nameof(CreateCircuitHostAsync_Prefix), ex);
+            _patchExceptionHandler.LogPrefixException(
+                _logger,
+                nameof(CreateCircuitHostAsync_Prefix),
+                ex
+            );
         }
     }
 

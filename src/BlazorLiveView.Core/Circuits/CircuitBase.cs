@@ -83,8 +83,6 @@ internal abstract class CircuitBase(
 
     private void InvalidStatusChange(CircuitStatus newStatus)
     {
-        // Only log a warning for now
-        // TODO: make this an exception
         logger.LogWarning(
             "Tried to change circuit's state state changed from {Old} to {New} (id={Id}) ",
             _circuitStatus, newStatus, Id
