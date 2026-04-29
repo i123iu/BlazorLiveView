@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using BlazorLiveView.Core.Components.Tools;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,20 +15,20 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
     public event IUserCircuit.WindowResizedHandler? WindowResized;
     public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
-    public event IUserCircuit.PointerShownHandler? PointerShown;
-    public event IUserCircuit.PointerHiddenHandler? PointerHidden;
+    public event IUserCircuit.WindowScrolledHandler? UserCursorChanged;
+    public event IUserCircuit.MirrorCursorChangedHandler? MirrorCursorChanged;
 
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
     public ClaimsPrincipal User => _authenticationStateProvider
         // Calling .Result should be fine, since the task is created in Blazor
         // Server using `Task.FromResult` (in `CircuitHost.cs`).
         .GetAuthenticationStateAsync().Result.User;
-    public (int width, int height)? WindowSize => _windowSize;
-    public (int scrollX, int scrollY)? ScrollPosition => _scrollPosition;
+    public Position? WindowSize { get; private set; }
+    public Position? ScrollPosition { get; private set; }
+    public Position? UserCursorPosition { get; private set; }
+    public Dictionary<string, Position> MirrorCursorPositions { get; private set; } = new();
 
     private readonly AuthenticationStateProvider _authenticationStateProvider;
-    private (int width, int height)? _windowSize;
-    private (int scrollX, int scrollY)? _scrollPosition;
 
     public UserCircuit(
         Circuit circuit,
@@ -81,25 +82,34 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         JSRuntimeInvoked?.Invoke(this, identifier, cancellationToken, args);
     }
 
-    public void NotifyWindowResized(int width, int height)
+    public void NotifyWindowResized(Position size)
     {
-        _windowSize = (width, height);
+        WindowSize = size;
         WindowResized?.Invoke(this);
     }
 
-    public void NotifyWindowScrolled(int scrollX, int scrollY)
+    public void NotifyWindowScrolled(Position scroll)
     {
-        _scrollPosition = (scrollX, scrollY);
+        ScrollPosition = scroll;
         WindowScrolled?.Invoke(this);
     }
 
-    public void ShowPointer(string pointerId, int x, int y)
+    public void NotifyUserCursorChanged(Position? position)
     {
-        PointerShown?.Invoke(this, pointerId, x, y);
+        UserCursorPosition = position;
+        UserCursorChanged?.Invoke(this);
     }
 
-    public void HidePointer(string pointerId)
+    public void NotifyMirrorCursorChanged(string identifier, Position? position)
     {
-        PointerHidden?.Invoke(this, pointerId);
+        if (position is null)
+        {
+            MirrorCursorPositions.Remove(identifier);
+        }
+        else
+        {
+            MirrorCursorPositions[identifier] = position.Value;
+        }
+        MirrorCursorChanged?.Invoke(this, identifier);
     }
 }

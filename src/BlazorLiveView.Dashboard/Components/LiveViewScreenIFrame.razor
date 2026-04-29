@@ -1,4 +1,5 @@
 ﻿@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.Components.Tools
 
 @implements IDisposable
 
@@ -8,8 +9,8 @@
 <iframe class="liveview-screen-iframe"
         @key="@_state"
         src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)"
-        width="@(WindowSize is null ? "100%" : WindowSize.Value.width + "px")" 
-        height="@(WindowSize is null ? "100%" : WindowSize.Value.height + "px")" />
+        width="@(WindowSize is null ? "100%" : WindowSize.Value.x + "px")" 
+        height="@(WindowSize is null ? "100%" : WindowSize.Value.y + "px")" />
 
 @code {
     [Parameter]
@@ -17,13 +18,13 @@
     public string SourceCircuitId { get; set; } = default!;
 
     [Parameter]
-    public (int width, int height)? WindowSize { get; set; } = null;
+    public Position? WindowSize { get; set; } = null;
 
     [Parameter]
     public bool DebugView { get; set; } = false;
 
     [Parameter]
-    public EventCallback<IMirrorCircuit> MirrorCircuitChanged { get; set; }
+    public EventCallback<IMirrorCircuit?> MirrorCircuitChanged { get; set; }
 
     private MirrorUri MirrorUri => new(SourceCircuitId, _state, DebugView);
 
@@ -64,7 +65,7 @@
     {
         _state = Guid.NewGuid();
         MirrorCircuit = null;
-        MirrorCircuitChanged.InvokeAsync();
+        MirrorCircuitChanged.InvokeAsync(null);
         StateHasChanged();
     }
 }

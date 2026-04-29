@@ -114,8 +114,8 @@ internal sealed class CircuitHostPatcher : IPatcher
 
             if (circuit is IMirrorCircuit)
             {
-                if (methodIdentifier == nameof(LiveViewMirrorSideTools.BlazorLiveView_MouseMoved) ||
-                    methodIdentifier == nameof(LiveViewMirrorSideTools.BlazorLiveView_MouseLeft))
+                if (methodIdentifier == nameof(LaserPointerTransmitter.OnCursorPosition) ||
+                    methodIdentifier == nameof(LaserPointerTransmitter.OnCursorExit))
                 {
                     return true;
                 }

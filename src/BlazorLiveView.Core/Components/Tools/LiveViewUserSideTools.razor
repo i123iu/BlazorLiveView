@@ -2,21 +2,28 @@
 @using BlazorLiveView.Core.Circuits
 @using BlazorLiveView.Core.Circuits.Services
 @using BlazorLiveView.Core.JSInterop
+@using BlazorLiveView.Core.Options
+@using Microsoft.Extensions.Logging
 @using Microsoft.JSInterop
 
 @attribute [LiveViewTranslateToAttribute(typeof(LiveViewMirrorSideTools))]
 
 @inject ICurrentCircuit currentCircuit
 @inject ILiveViewJSRuntime jsRuntime
+@inject ICircuitTracker circuitTracker
+@inject ILogger<LiveViewUserSideTools> logger
+@inject LiveViewOptions options
 
 <script type="text/javascript">
-    window.blazorLiveView_addResizeEvent = function(dotNetRef) {
+    window.blazorLiveView = window.blazorLiveView || {};
+    window.blazorLiveView.screen = window.blazorLiveView.screen || {};
+
+    window.blazorLiveView.screen.addResizeEvent = function (dotNetRef, throttleMs) {
         let lastResizeTime = 0;
-        const resizeThrottleMs = 100; // Max 10 calls per second
         
-        const throttledResize = function() {
+        const throttledResize = function () {
             const now = Date.now();
-            if (now - lastResizeTime >= resizeThrottleMs) {
+            if (now - lastResizeTime >= throttleMs) {
                 lastResizeTime = now;
                 dotNetRef.invokeMethodAsync("WindowSizeChanged", window.innerWidth, window.innerHeight);
             }
@@ -27,13 +34,12 @@
         throttledResize();
     }
 
-    window.blazorLiveView_addScrollEvent = function(dotNetRef) {
+    window.blazorLiveView.screen.addScrollEvent = function (dotNetRef, throttleMs) {
         let lastScrollTime = 0;
-        const scrollThrottleMs = 100; // Max 10 calls per second
         
-        const throttledScroll = function() {
+        const throttledScroll = function () {
             const now = Date.now();
-            if (now - lastScrollTime >= scrollThrottleMs) {
+            if (now - lastScrollTime >= throttleMs) {
                 lastScrollTime = now;
                 dotNetRef.invokeMethodAsync("WindowScrolled", window.scrollX, window.scrollY);
             }
@@ -43,92 +49,21 @@
         // Invoke once to set the initial scroll position.
         throttledScroll();
     }
-
-    // Pointer management
-    const pointers = {};
-    const pointerColors = {};
-    const pointerLastUpdateTime = {};
-    const pointerStaleTimeoutMs = 5000;
-
-    window.blazorLiveView_getPointerColor = function(pointerId) {
-        if (!pointerColors[pointerId]) {
-            // Generate a consistent color based on pointerId hash
-            let hash = 0;
-            for (let i = 0; i < pointerId.length; i++) {
-                hash = ((hash << 5) - hash) + pointerId.charCodeAt(i);
-                hash = hash & hash; // Convert to 32bit integer
-            }
-            const hue = Math.abs(hash) % 360;
-            pointerColors[pointerId] = `hsl(${hue}, 70%, 50%)`;
-        }
-        return pointerColors[pointerId];
-    };
-
-    window.blazorLiveView_cleanupStalePointers = function() {
-        const now = Date.now();
-        const stalePointerIds = [];
-        
-        for (const pointerId in pointerLastUpdateTime) {
-            if (now - pointerLastUpdateTime[pointerId] >= pointerStaleTimeoutMs) {
-                stalePointerIds.push(pointerId);
-            }
-        }
-        
-        stalePointerIds.forEach(pointerId => {
-            const pointer = pointers[pointerId];
-            if (pointer) {
-                pointer.style.display = 'none';
-                delete pointers[pointerId];
-                delete pointerLastUpdateTime[pointerId];
-            }
-        });
-    };
-
-    window.blazorLiveView_showPointer = function(pointerId, x, y) {
-        let pointer = pointers[pointerId];
-        if (!pointer) {
-            pointer = document.createElement('div');
-            pointer.id = `pointer-${pointerId}`;
-            pointer.style.position = 'fixed';
-            pointer.style.width = '24px';
-            pointer.style.height = '24px';
-            pointer.style.borderRadius = '50%';
-            pointer.style.pointerEvents = 'none';
-            pointer.style.zIndex = '10000';
-            pointer.style.opacity = '0.7';
-            pointer.style.border = '2px solid rgba(255, 255, 255, 0.8)';
-            document.body.appendChild(pointer);
-            pointers[pointerId] = pointer;
-        }
-        
-        pointerLastUpdateTime[pointerId] = Date.now();
-        const color = window.blazorLiveView_getPointerColor(pointerId);
-        pointer.style.backgroundColor = color;
-        pointer.style.left = (x - 12) + 'px';
-        pointer.style.top = (y - 12) + 'px';
-        pointer.style.display = 'block';
-        
-        window.blazorLiveView_cleanupStalePointers();
-    };
-
-    window.blazorLiveView_hidePointer = function(pointerId) {
-        const pointer = pointers[pointerId];
-        if (pointer) {
-            pointer.style.display = 'none';
-            delete pointers[pointerId];
-            delete pointerLastUpdateTime[pointerId];
-        }
-        
-        window.blazorLiveView_cleanupStalePointers();
-    };
 </script>
 
+<LaserPointerReceiver @ref="laserPointerReceiver" />
+<LaserPointerTransmitter @ref="laserPointerTransmitter"
+                         OnCursorMoved="@OnCursorMoved"
+                         OnCursorLeft="@OnCursorLeft" />
+
 @code {
+    private LaserPointerReceiver? laserPointerReceiver;
+    private LaserPointerTransmitter? laserPointerTransmitter;
+
     private DotNetObjectReference<LiveViewUserSideTools>? _dotNetRef;
     private long _lastWindowSizeChangedTime = 0;
     private long _lastWindowScrolledTime = 0;
-    private const long WindowSizeChangedThrottleMs = 100; // Max 10 calls per second
-    private const long WindowScrolledThrottleMs = 100; // Max 10 calls per second
+    private IUserCircuit _userCircuit = null!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -144,14 +79,41 @@
     {
         if (firstRender)
         {
-            await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addResizeEvent", _dotNetRef);
-            await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addScrollEvent", _dotNetRef);
-            
-            var userCircuit = currentCircuit.AsUserCircuit();
-            if (userCircuit is not null)
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.screen.addResizeEvent",
+                _dotNetRef,
+                options.ToolsUpdateIntervalMs
+            );
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.screen.addScrollEvent",
+                _dotNetRef,
+                options.ToolsUpdateIntervalMs
+            );
+
+            var circuit = circuitTracker.GetCircuit(currentCircuit.Current!.Id);
+            if (circuit is null)
             {
-                userCircuit.PointerShown += OnPointerShown;
-                userCircuit.PointerHidden += OnPointerHidden;
+                logger.LogError("Component {ComponentName} could not find the current circuit",
+                    nameof(LiveViewMirrorSideTools)
+                );
+            }
+            else if (circuit is IMirrorCircuit)
+            {
+
+                logger.LogError("Component {ComponentName} cannot be used on a user circuit",
+                    nameof(LiveViewMirrorSideTools)
+                );
+            }
+            else if (circuit is IUserCircuit userCircuit)
+            {
+                _userCircuit = userCircuit;
+                _userCircuit.MirrorCursorChanged += MirrorCursorChanged;
+            }
+
+            // Start capturing user cursor
+            if (laserPointerTransmitter is not null)
+            {
+                await laserPointerTransmitter.StartCaptureCursor();
             }
         }
     }
@@ -160,11 +122,11 @@
     public void WindowSizeChanged(int width, int height)
     {
         var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        if (now - _lastWindowSizeChangedTime >= WindowSizeChangedThrottleMs)
+        if (now - _lastWindowSizeChangedTime >= options.ToolsUpdateIntervalMs)
         {
             _lastWindowSizeChangedTime = now;
             currentCircuit.AsUserCircuit()?
-                .NotifyWindowResized(width, height);
+                .NotifyWindowResized(new(width, height));
         }
     }
 
@@ -172,21 +134,36 @@
     public void WindowScrolled(int scrollX, int scrollY)
     {
         var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        if (now - _lastWindowScrolledTime >= WindowScrolledThrottleMs)
+        if (now - _lastWindowScrolledTime >= options.ToolsUpdateIntervalMs)
         {
             _lastWindowScrolledTime = now;
             currentCircuit.AsUserCircuit()?
-                .NotifyWindowScrolled(scrollX, scrollY);
+                .NotifyWindowScrolled(new(scrollX, scrollY));
         }
     }
 
-    private async void OnPointerShown(IUserCircuit circuit, string pointerId, int x, int y)
+    private void MirrorCursorChanged(IUserCircuit userCircuit, string identifier)
     {
-        await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_showPointer", pointerId, x, y);
+        var mirrorCursorPositions = userCircuit.MirrorCursorPositions;
+        if (mirrorCursorPositions.TryGetValue(identifier, out Position pos))
+        {
+            laserPointerReceiver?.ShowPointer(identifier, pos);
+        }
+        else
+        {
+            laserPointerReceiver?.HidePointer(identifier);
+        }
     }
 
-    private async void OnPointerHidden(IUserCircuit circuit, string pointerId)
+    private void OnCursorMoved(Position pos)
     {
-        await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_hidePointer", pointerId);
+        currentCircuit.AsUserCircuit()?
+            .NotifyUserCursorChanged(pos);
+    }
+
+    private void OnCursorLeft()
+    {
+        currentCircuit.AsUserCircuit()?
+            .NotifyUserCursorChanged(null);
     }
 }

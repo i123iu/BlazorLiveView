@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using BlazorLiveView.Core.Components.Tools;
+using System.Security.Claims;
 
 namespace BlazorLiveView.Core.Circuits;
 
@@ -26,24 +27,26 @@ public interface IUserCircuit : ICircuit
     public delegate void WindowScrolledHandler(IUserCircuit circuit);
     event WindowScrolledHandler? WindowScrolled;
 
-    public delegate void PointerShownHandler(IUserCircuit circuit, string pointerId, int x, int y);
-    event PointerShownHandler? PointerShown;
+    public delegate void UserCursorChangedHandler(IUserCircuit circuit);
+    event WindowScrolledHandler? UserCursorChanged;
 
-    public delegate void PointerHiddenHandler(IUserCircuit circuit, string pointerId);
-    event PointerHiddenHandler? PointerHidden;
+    public delegate void MirrorCursorChangedHandler(IUserCircuit circuit, string identifier);
+    event MirrorCursorChangedHandler? MirrorCursorChanged;
 
     string Uri { get; }
     ClaimsPrincipal User { get; }
-    (int width, int height)? WindowSize { get; }
-    (int scrollX, int scrollY)? ScrollPosition { get; }
-
+    Position? WindowSize { get; }
+    Position? ScrollPosition { get; }
+    Position? UserCursorPosition { get; }
+    Dictionary<string, Position> MirrorCursorPositions { get; }
+    
     internal int SsrComponentIdToInteractiveComponentId(int ssrComponentId);
 
     internal void NotifyUriChanged();
     internal void NotifyComponentRerendered(int componentId);
     internal void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args);
-    internal void NotifyWindowResized(int width, int height);
-    internal void NotifyWindowScrolled(int scrollX, int scrollY);
-    public void ShowPointer(string pointerId, int x, int y);
-    public void HidePointer(string pointerId);
+    internal void NotifyWindowResized(Position size);
+    internal void NotifyWindowScrolled(Position scroll);
+    internal void NotifyUserCursorChanged(Position? position);
+    internal void NotifyMirrorCursorChanged(string identifier, Position? position);
 }

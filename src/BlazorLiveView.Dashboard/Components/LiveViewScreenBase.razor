@@ -97,8 +97,7 @@
 
     protected void MirrorCircuitChanged(IMirrorCircuit mirrorCircuit)
     {
-        mirrorCircuit.NotifyScrollSyncChanged(IsSyncScrollPositionActive);
-        mirrorCircuit.NotifyPointerSyncChanged(IsPointerActive);
+        mirrorCircuit?.NotifyScrollSyncChanged(IsSyncScrollPositionActive);
         StateHasChanged();
     }
 

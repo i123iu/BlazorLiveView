@@ -5,46 +5,26 @@
 @using Microsoft.Extensions.Logging
 @using Microsoft.JSInterop
 
-@attribute [LiveViewTranslateToAttribute(typeof(LiveViewMirrorSideTools))]
-
 @inject ICurrentCircuit currentCircuit
 @inject ICircuitTracker circuitTracker
 @inject ILiveViewJSRuntime jsRuntime
 @inject ILogger<LiveViewMirrorSideTools> logger
 
-<script type="text/javascript">
-    window.blazorLiveView_addMouseMoveEvent = function(dotNetRef) {
-        let lastMouseMoveTime = 0;
-        const mouseMoveThrottleMs = 50;
-        
-        const throttledMouseMove = function(e) {
-            const now = Date.now();
-            if (now - lastMouseMoveTime >= mouseMoveThrottleMs) {
-                lastMouseMoveTime = now;
-                dotNetRef.invokeMethodAsync("BlazorLiveView_MouseMoved", e.clientX, e.clientY);
-            }
-        };
-        
-        const onMouseLeave = function() {
-            dotNetRef.invokeMethodAsync("BlazorLiveView_MouseLeft");
-        };
-        
-        document.addEventListener("mousemove", throttledMouseMove);
-        document.addEventListener("mouseleave", onMouseLeave);
-    }
-</script>
+<LaserPointerReceiver @ref="laserPointerReceiver" />
+<LaserPointerTransmitter @ref="laserPointerTransmitter"
+                         OnCursorMoved="@OnCursorMoved"
+                         OnCursorLeft="@OnCursorLeft" />
 
 @code {
     private IMirrorCircuit _mirrorCircuit = null!;
-    private DotNetObjectReference<LiveViewMirrorSideTools>? _dotNetRef;
     private long _lastScrollTime = 0;
     private const long ScrollThrottleMs = 100;
-    private const long MouseMoveThrottleMs = 50;
 
-    protected override async Task OnInitializedAsync()
+    private LaserPointerReceiver? laserPointerReceiver;
+    private LaserPointerTransmitter? laserPointerTransmitter;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _dotNetRef = DotNetObjectReference.Create(this);
-        
         if (currentCircuit.Current is null)
         {
             logger.LogError("Component {ComponentName} must be used within a circuit",
@@ -70,30 +50,43 @@
         {
             _mirrorCircuit = mirrorCircuit;
             _mirrorCircuit.ScrollSyncChanged += MirrorCircuit_ScrollSyncChanged;
+            _mirrorCircuit.PointerSyncChanged += MirrorCircuit_PointerSyncChanged;
             _mirrorCircuit.SourceCircuit.WindowScrolled += SourceCircuit_WindowScrolled;
+            _mirrorCircuit.SourceCircuit.UserCursorChanged += SourceCircuit_UserCursorMoved;
             if (_mirrorCircuit.SourceCircuit.ScrollPosition.HasValue)
             {
                 SourceCircuit_WindowScrolled(_mirrorCircuit.SourceCircuit);
             }
-        }
-    }
+            if (_mirrorCircuit.SourceCircuit.UserCursorPosition.HasValue)
+            {
+                var cursorPos = _mirrorCircuit.SourceCircuit.UserCursorPosition.Value;
+                SourceCircuit_UserCursorMoved(_mirrorCircuit.SourceCircuit);
+            }
 
-    public void Dispose()
-    {
-        _dotNetRef?.Dispose();
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender && _mirrorCircuit is not null)
-        {
-            await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addMouseMoveEvent", _dotNetRef);
+            if (laserPointerTransmitter is not null && mirrorCircuit.PointerSyncEnabled)
+            {
+                await laserPointerTransmitter.StartCaptureCursor();
+            }
         }
     }
 
     private void MirrorCircuit_ScrollSyncChanged(IMirrorCircuit mirrorCircuit)
     {
         _ = Scroll(mirrorCircuit.SourceCircuit);
+        laserPointerReceiver?.HideAllPointers();
+    }
+
+    private void MirrorCircuit_PointerSyncChanged(IMirrorCircuit mirrorCircuit)
+    {
+        if (laserPointerTransmitter is null) return;
+        if (mirrorCircuit.PointerSyncEnabled)
+        {
+            _ = laserPointerTransmitter.StartCaptureCursor();
+        }
+        else
+        {
+            _ = laserPointerTransmitter.StopCaptureCursor();
+        }
     }
 
     private void SourceCircuit_WindowScrolled(IUserCircuit source)
@@ -111,29 +104,35 @@
             {
                 return jsRuntime.InvokeVoidAsyncNoMirror(
                     "window.scrollTo",
-                    source.ScrollPosition.Value.scrollX,
-                    source.ScrollPosition.Value.scrollY
+                    source.ScrollPosition.Value.x,
+                    source.ScrollPosition.Value.y
                 );
             }
         }
         return ValueTask.CompletedTask;
     }
 
-    [JSInvokable]
-    public void BlazorLiveView_MouseMoved(int x, int y)
+    private void SourceCircuit_UserCursorMoved(IUserCircuit source)
     {
-        if (_mirrorCircuit?.SourceCircuit is not null && _mirrorCircuit.PointerSyncEnabled)
+        if (!_mirrorCircuit.ScrollSyncEnabled) return;
+
+        if (source.UserCursorPosition.HasValue)
         {
-            _mirrorCircuit.SourceCircuit.ShowPointer(_mirrorCircuit.Id, x, y);
+            laserPointerReceiver?.ShowPointer(source.Id, source.UserCursorPosition.Value);
+        }
+        else
+        {
+            laserPointerReceiver?.HidePointer(source.Id);
         }
     }
 
-    [JSInvokable]
-    public void BlazorLiveView_MouseLeft()
+    private void OnCursorMoved(Position pos)
     {
-        if (_mirrorCircuit?.SourceCircuit is not null && _mirrorCircuit.PointerSyncEnabled)
-        {
-            _mirrorCircuit.SourceCircuit.HidePointer(_mirrorCircuit.Id);
-        }
+        _mirrorCircuit.NotifyMirrorCursorChanged(pos);
+    }
+
+    private void OnCursorLeft()
+    {
+        _mirrorCircuit.NotifyMirrorCursorChanged(null);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BlazorLiveView.Core.Circuits;
+﻿using BlazorLiveView.Core.Components.Tools;
+
+namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
 /// A connection with a user (admin) that is using <c>BlazorLiveView</c> to view
@@ -45,5 +47,6 @@ public interface IMirrorCircuit : ICircuit
 
     internal void SetBlocked(MirrorCircuitBlockReason blockReason);
     public void NotifyScrollSyncChanged(bool enabled);
+    internal void NotifyMirrorCursorChanged(Position? position);
     public void NotifyPointerSyncChanged(bool enabled);
 }

@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Options;
+﻿using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -176,9 +177,16 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         ScrollSyncChanged?.Invoke(this);
     }
 
+    public void NotifyMirrorCursorChanged(Position? position)
+    {
+        if (!PointerSyncEnabled) return;
+        SourceCircuit.NotifyMirrorCursorChanged(Id, position);
+    }
+
     public void NotifyPointerSyncChanged(bool enabled)
     {
         PointerSyncEnabled = enabled;
+        SourceCircuit.NotifyMirrorCursorChanged(Id, null);
         PointerSyncChanged?.Invoke(this);
     }
 }
