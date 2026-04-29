@@ -17,7 +17,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     private MirrorCircuitBlockReason? _blockReason = null;
 
     private readonly Channel<JSInvocation> _jsInvocationQueue;
-    private readonly Task _processingTask;
+    private readonly Task? _processingTask;
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly record struct JSInvocation(
@@ -61,7 +61,12 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 
         _source.JSRuntimeInvoked += Source_JSRuntimeInvoked;
         CircuitStatusChanged += OnCircuitStatusChanged;
-        _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
+
+        if (!_debugView)
+        {
+            // Do not forward JS invocations to debug views, since all will fail anyway.
+            _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
+        }
     }
 
     public override void Dispose()

@@ -92,7 +92,7 @@ internal sealed class CircuitHostPatcher : IPatcher
 
     /// <summary>
     /// Called for example on events like "onclick". Mirror circuits should not
-    /// be able to interact with the app, so we skip the original function. 
+    /// be able to interact with the app, so the original function is skipped.
     /// </summary>
     private static bool BeginInvokeDotNetFromJS_Prefix(
         object __instance
@@ -113,8 +113,11 @@ internal sealed class CircuitHostPatcher : IPatcher
             if (circuit is IMirrorCircuit)
             {
                 // Skip the original function
-                _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
-                    circuit.Id);
+                if (_logger.IsEnabled(LogLevel.Debug))
+                {
+                    _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
+                        circuit.Id);
+                }
 
                 // The original function BeginInvokeDotNetFromJS calls the requested
                 // method and sends "JS.EndInvokeDotNet" after finishing. Skipping

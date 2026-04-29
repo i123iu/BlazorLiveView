@@ -1,9 +1,7 @@
 ﻿@page "/liveview/circuit/{CircuitId}"
 @page "/liveview/user/{UserSelector}"
 @using BlazorLiveView.Dashboard.Components
-@using Microsoft.AspNetCore.Authorization
 @layout BlazorLiveView.Dashboard.Layouts.EmptyLayout
-@attribute [Authorize]
 
 @if (!string.IsNullOrEmpty(CircuitId))
 {

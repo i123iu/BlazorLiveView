@@ -58,7 +58,7 @@ internal sealed class MirrorComponent(
         }
         userCircuit.ComponentRerendered += OriginalComponentRerendered;
 
-        Render();
+        Render(is_first_render: true);
         return Task.CompletedTask;
     }
 
@@ -73,11 +73,11 @@ internal sealed class MirrorComponent(
 
         if (componentId == ComponentId)
         {
-            Render(deferred: true);
+            Render(is_first_render: false);
         }
     }
 
-    private void Render(bool deferred = false)
+    private void Render(bool is_first_render)
     {
         var circuit = _circuitTracker.GetCircuit(CircuitId);
         if (circuit is null)
@@ -96,22 +96,29 @@ internal sealed class MirrorComponent(
         var componentState = userCircuit.GetOptionalComponentState(ComponentId);
         if (componentState is null)
         {
-            _logger.LogWarning("Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
-                ComponentId, CircuitId);
-            _renderHandle.Render(builder => { });
+            // Other renders (not the first one after setting parameters to this MirrorComponent) are invoked
+            // by RenderIntoBatch (see ComponentStatePatcher) which makes sure that the target component
+            // exists. First renders can have a delay (Blazor needs to instantiate this MirrorComponent),
+            // after which the target component could have already been disposed.
+            if (!is_first_render)
+            {
+                _logger.LogWarning("Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
+                    ComponentId, CircuitId);
+                _renderHandle.Render(builder => { });
+            }
             return;
         }
 
         var currentRenderVersion = Interlocked.Increment(ref _nextRenderVersion) - 1;
-        if (deferred)
+        if (is_first_render)
+        {
+            Render(userCircuit, componentState, currentRenderVersion);
+        }
+        else
         {
             _renderHandle.Dispatcher.InvokeAsync(
                 () => Render(userCircuit, componentState, currentRenderVersion)
             );
-        }
-        else
-        {
-            Render(userCircuit, componentState, currentRenderVersion);
         }
     }
 
@@ -131,7 +138,7 @@ internal sealed class MirrorComponent(
 
         if (userCircuit.CircuitStatus == CircuitStatus.Closed)
         {
-            // Circuit closed before we could mirror it.
+            // Circuit closed before it could be mirrored.
             _renderHandle.Render(builder => { });
             return;
         }
@@ -141,7 +148,7 @@ internal sealed class MirrorComponent(
 
         if (componentStateWrapper.ComponentWasDisposed)
         {
-            // Component disposed before we could mirror it.
+            // Component disposed before it could be mirrored.
             _renderHandle.Render(builder => { });
             return;
         }
@@ -183,13 +190,13 @@ internal sealed class MirrorComponent(
 
         translator.TranslateRoot(frames);
 
-        string log = _builder.Count == 0
-            ? "<empty>"
-            : string.Join("\n", _builder.Select(frame => $"- {frame}"));
         if (_logger.IsEnabled(LogLevel.Trace))
         {
+            string log = _builder.Count == 0
+                ? "<empty>"
+                : string.Join("\n", _builder.Select(frame => $"- {frame}"));
             _logger.LogTrace(
-                "Translated {CircuitId}{ComponentId} to: \n{Frames}",
+                "Translated {CircuitId} {ComponentId} to: \n{Frames}",
                 CircuitId,
                 ComponentId,
                 log

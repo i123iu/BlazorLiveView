@@ -1,4 +1,5 @@
 using BlazorLiveView.Core.Extensions;
+using BlazorLiveView.Core.JSInterop;
 using BlazorLiveView.Sample.Components;
 
 namespace BlazorLiveView.Sample;
@@ -19,7 +20,13 @@ public class Program
             {
                 options.ShowDebugOptions = true;
             })
-            .InterceptJSInteropInvocations();
+            .InterceptIJSRuntime(options =>
+            {
+                options.DefaultInterceptionBehaviour = InterceptionBehavior.Intercept;
+                options.AddInterceptionRule(new ExactJSInteropInterceptionRule(
+                    "not_intercepted_function", InterceptionBehavior.SkipInterception
+                ));
+            });
 
         var app = builder.Build();
 
