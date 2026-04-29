@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.JSInterop;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Patching;
 using BlazorLiveView.Core.Reflection;
@@ -18,7 +19,7 @@ namespace BlazorLiveView.Core.Extensions;
 public static class LiveViewExtensions
 {
     /// <summary>
-    /// Registers services required for <c>BlazorLiveView</c>. 
+    /// Registers services required for BlazorLiveView.
     /// </summary>
     public static ILiveViewBuilder AddLiveView(
         this IServerSideBlazorBuilder builder,
@@ -39,15 +40,20 @@ public static class LiveViewExtensions
             .AddScoped<ILiveViewJSRuntime>(sp =>
             {
                 var ijsRuntime = sp.GetRequiredService<IJSRuntime>();
-
-                if (ijsRuntime is ILiveViewJSRuntime liveViewJSRuntime)
+                RemoteJSRuntimeWrapper remoteJSRuntime;
+                if (ijsRuntime is InterceptingRemoteJSRuntime intercepted)
                 {
-                    // already wrapped
-                    return liveViewJSRuntime;
+                    // The IJSRuntime has been wrapped (intercepted) by
+                    // InterceptIJSRuntime.
+                    remoteJSRuntime = intercepted.Inner;
                 }
-
-                if (ijsRuntime is not JSRuntime jsRuntime ||
-                    !Types.RemoteJSRuntime.IsInstanceOfType(ijsRuntime))
+                else if (ijsRuntime is JSRuntime jsRuntime &&
+                    Types.RemoteJSRuntime.IsInstanceOfType(ijsRuntime))
+                {
+                    // The IJSRuntime is the default RemoteJSRuntime.
+                    remoteJSRuntime = new RemoteJSRuntimeWrapper(jsRuntime);
+                }
+                else
                 {
                     throw new InvalidOperationException(
                         $"Expected IJSRuntime to be of type RemoteJSRuntime, " +
@@ -56,8 +62,9 @@ public static class LiveViewExtensions
                 }
 
                 return new LiveViewJSRuntime(
-                    new(jsRuntime),
-                    sp
+                    remoteJSRuntime,
+                    sp.GetRequiredService<ICircuitTracker>(),
+                    sp.GetRequiredService<ILogger<LiveViewJSRuntime>>()
                 );
             })
             .Scan(scan => scan
@@ -73,13 +80,15 @@ public static class LiveViewExtensions
     }
 
     /// <summary>
-    /// BlazorLiveView will intercept all JS interop invocations passed to
-    /// <see cref="IJSRuntime"/> and will forward them to mirror circuits that
-    /// are viewing the current user. To forward only specific invocations
-    /// see <see cref="ILiveViewJSRuntime"/> (which does not require calling
-    /// this extension method).
+    /// BlazorLiveView will intercept all <see cref="IJSRuntime"/> instances. 
+    /// JS interop invocations passed to them will be forwarded to mirror
+    /// circuits that are viewing the current user. To filter which invocations
+    /// are forwarded, see <see cref="LiveViewJSInteropOptions.DefaultInterceptionBehaviour"/>
+    /// and <see cref="LiveViewJSInteropOptions.InterceptionRules"/>.
+    /// To forward only specific invocations use <see cref="ILiveViewJSRuntime"/>
+    /// (which does not require calling this extension method).
     /// </summary>
-    public static ILiveViewBuilder InterceptJSInteropInvocations(
+    public static ILiveViewBuilder InterceptIJSRuntime(
         this ILiveViewBuilder builder,
         Action<LiveViewJSInteropOptions>? configureOptions = null
     )
@@ -94,10 +103,15 @@ public static class LiveViewExtensions
         builder.Services
             .Decorate<IJSRuntime>((origRemoteJSRuntime, sp) =>
             {
-                // Replace the default IJSRuntime implementation (RemoteJSRuntime)
-                // with a new intercepting implementation (LiveViewJSRuntime)
-                RemoteJSRuntimeWrapper jsRuntime = new((JSRuntime)origRemoteJSRuntime);
-                return new LiveViewJSRuntime(jsRuntime, sp);
+                // Decorate the default IJSRuntime implementation (RemoteJSRuntime)
+                // with a new (intercepting) implementation (InterceptingRemoteJSRuntime).
+                RemoteJSRuntimeWrapper remoteJSRuntime = new((JSRuntime)origRemoteJSRuntime);
+                return new InterceptingRemoteJSRuntime(
+                    remoteJSRuntime,
+                    sp.GetRequiredService<ICircuitTracker>(),
+                    sp.GetRequiredService<ILogger<InterceptingRemoteJSRuntime>>(),
+                    sp.GetRequiredService<IOptions<LiveViewJSInteropOptions>>()
+                );
             });
 
         return builder;

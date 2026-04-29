@@ -1,5 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.JSInterop;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
@@ -246,9 +247,9 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         }
 
         // The original `CreateCircuitHostAsync` method is async and returns
-        // a Task<CircuitHost>. We need to intercept the `CircuitHost` before it
+        // a Task<CircuitHost>. The `CircuitHost` needs to be intercepted before it
         // is returned and the connection is initialized. CircuitHost is an
-        // internal type so we need to use reflection.
+        // internal type so reflection is necessary.
 
         try
         {
@@ -320,9 +321,10 @@ internal sealed class CircuitFactoryPatcher : IPatcher
     {
         // The original CreateCircuitHostAsync method contains the following line:
         //   var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
-        // Since IJSRuntime is changed (decorated) to LiveViewJSRuntime, this line
-        // would throw an InvalidCastException. This transpiler swaps the cast
-        // to RemoteJSRuntime with a call to a helper method LiveViewJSRuntime.ToRemoteJSRuntime.
+        // Since IJSRuntime is changed (decorated) to InterceptingRemoteJSRuntime,
+        // this line would throw an InvalidCastException. This transpiler swaps
+        // the cast to RemoteJSRuntime with a call to a helper method
+        // InterceptingRemoteJSRuntime.ToRemoteJSRuntime.
 
         bool found = false;
         foreach (CodeInstruction instruction in instructions)
@@ -337,8 +339,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 found = true;
                 yield return new CodeInstruction(
                     OpCodes.Call,
-                    typeof(LiveViewJSRuntime).GetMethod(
-                        nameof(LiveViewJSRuntime.ToRemoteJSRuntime)
+                    typeof(InterceptingRemoteJSRuntime).GetMethod(
+                        nameof(InterceptingRemoteJSRuntime.ToRemoteJSRuntime)
                     )
                 );
                 continue;
