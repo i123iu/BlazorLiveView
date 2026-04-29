@@ -89,7 +89,7 @@
 
 
   <h1 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions" class="text-break">
-Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L3"><i class="bi bi-code-slash"></i></a>
+Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -153,7 +153,7 @@ Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="V
 
   <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward">
   DefaultDelayForInvocationForward
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>How long to wait before forwarding a JS interop invocation to mirror
@@ -176,6 +176,145 @@ have a delay).</p>
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
     <dd></dd>
   </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour">
+  DefaultInterceptionBehaviour
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Default behaviour of JS interop invocations interception when no
+interception rule matches.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InterceptionBehavior DefaultInterceptionBehaviour { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.InterceptionBehavior.html">InterceptionBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules">
+  InterceptionRules
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Rules for intercepting JS interop invocations. Each rule can specify
+whether to intercept, skip interception, or do nothing and let other
+rules choose (or the default). Rules are evaluated in the order of this
+list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;IJSInteropInterceptionRule&gt; InterceptionRules { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html">IJSInteropInterceptionRule</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddInterceptionRule_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddInterceptionRule_BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)">
+  AddInterceptionRule(IJSInteropInterceptionRule)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LiveViewJSInteropOptions AddInterceptionRule(IJSInteropInterceptionRule rule)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rule</code> <a class="xref" href="BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html">IJSInteropInterceptionRule</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html">LiveViewJSInteropOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorInterceptionRules_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules*"></a>
+
+  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorInterceptionRules" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules">
+  AddMudBlazorInterceptionRules()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LiveViewJSInteropOptions AddMudBlazorInterceptionRules()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html">LiveViewJSInteropOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
 
 
 

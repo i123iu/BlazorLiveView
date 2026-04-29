@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface ILiveViewJSRuntime | BlazorLiveView </title>
+      <title>Class InterceptionBehaviorExtensions | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface ILiveViewJSRuntime | BlazorLiveView ">
+      <meta name="title" content="Class InterceptionBehaviorExtensions | BlazorLiveView ">
       
-      <meta name="description" content="A subtype of  that automatically forwards all JS interop invocations to all mirror circuits that mirror the current user. See LiveViewOptions.InterceptJsInteropInvocations for forwarding JS invocations from all IJSRuntime.">
+      
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/dev/apiSpec/new?filename=BlazorLiveView_Core_Circuits_Services_ILiveViewJSRuntime.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/dev/apiSpec/new?filename=BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,33 +84,36 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime">
+        <article data-uid="BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions">
 
 
 
-  <h1 id="BlazorLiveView_Core_Circuits_Services_ILiveViewJSRuntime" data-uid="BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime" class="text-break">
-Interface ILiveViewJSRuntime  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Circuits/Services/ILiveViewJSRuntime.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <h1 id="BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions" data-uid="BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions" class="text-break">
+Class InterceptionBehaviorExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/IJSInteropInterceptionRule.cs/#L42"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.html">Circuits</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.Services.html">Services</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.JSInterop.html">JSInterop</a></dd></dl>
   <dl><dt>Assembly</dt><dd>BlazorLiveView.Core.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>A subtype of <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> that automatically forwards all JS
-interop invocations to all mirror circuits that mirror the current user.
-See LiveViewOptions.InterceptJsInteropInvocations for
-forwarding JS invocations from all <code>IJSRuntime</code>.</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ILiveViewJSRuntime : IJSRuntime</code></pre>
+    <pre><code class="lang-csharp hljs">public static class InterceptionBehaviorExtensions</code></pre>
   </div>
 
 
 
 
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">InterceptionBehaviorExtensions</span></div>
+    </dd>
+  </dl>
 
 
 
@@ -118,30 +121,67 @@ forwarding JS invocations from all <code>IJSRuntime</code>.</p>
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeasync#microsoft-jsinterop-ijsruntime-invokeasync-1(system-string-system-object())">IJSRuntime.InvokeAsync&lt;TValue&gt;(string, object[])</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeasync#microsoft-jsinterop-ijsruntime-invokeasync-1(system-string-system-threading-cancellationtoken-system-object())">IJSRuntime.InvokeAsync&lt;TValue&gt;(string, CancellationToken, object[])</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeconstructorasync#microsoft-jsinterop-ijsruntime-invokeconstructorasync(system-string-system-object())">IJSRuntime.InvokeConstructorAsync(string, object[])</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeconstructorasync#microsoft-jsinterop-ijsruntime-invokeconstructorasync(system-string-system-threading-cancellationtoken-system-object())">IJSRuntime.InvokeConstructorAsync(string, CancellationToken, object[])</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.getvalueasync#microsoft-jsinterop-ijsruntime-getvalueasync-1(system-string)">IJSRuntime.GetValueAsync&lt;TValue&gt;(string)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.getvalueasync#microsoft-jsinterop-ijsruntime-getvalueasync-1(system-string-system-threading-cancellationtoken)">IJSRuntime.GetValueAsync&lt;TValue&gt;(string, CancellationToken)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.setvalueasync#microsoft-jsinterop-ijsruntime-setvalueasync-1(system-string-0)">IJSRuntime.SetValueAsync&lt;TValue&gt;(string, TValue)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.setvalueasync#microsoft-jsinterop-ijsruntime-setvalueasync-1(system-string-0-system-threading-cancellationtoken)">IJSRuntime.SetValueAsync&lt;TValue&gt;(string, TValue, CancellationToken)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions_ToRuleInterceptionBehavior_" data-uid="BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior*"></a>
+
+  <h3 id="BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions_ToRuleInterceptionBehavior_BlazorLiveView_Core_JSInterop_InterceptionBehavior_" data-uid="BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)">
+  ToRuleInterceptionBehavior(InterceptionBehavior)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/IJSInteropInterceptionRule.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static RuleInterceptionBehavior ToRuleInterceptionBehavior(this InterceptionBehavior interceptionBehavior)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>interceptionBehavior</code> <a class="xref" href="BlazorLiveView.Core.JSInterop.InterceptionBehavior.html">InterceptionBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html">RuleInterceptionBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
 
 
 

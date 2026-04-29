@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace BlazorLiveView.Core.Circuits.Services | BlazorLiveView </title>
+      <title>Namespace BlazorLiveView.Core.JSInterop | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace BlazorLiveView.Core.Circuits.Services | BlazorLiveView ">
+      <meta name="title" content="Namespace BlazorLiveView.Core.JSInterop | BlazorLiveView ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -84,34 +84,57 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.Circuits.Services">
+        <article data-uid="BlazorLiveView.Core.JSInterop">
 
-  <h1 id="BlazorLiveView_Core_Circuits_Services" data-uid="BlazorLiveView.Core.Circuits.Services" class="text-break">Namespace BlazorLiveView.Core.Circuits.Services</h1>
+  <h1 id="BlazorLiveView_Core_JSInterop" data-uid="BlazorLiveView.Core.JSInterop" class="text-break">Namespace BlazorLiveView.Core.JSInterop</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
 
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html">ExactJSInteropInterceptionRule</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html">InterceptionBehaviorExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html">LiveViewJSRuntimeExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html">MudBlazorJSInteropInterceptionRule</a></dt>
+      <dd></dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
     <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.ICircuitTracker.html">ICircuitTracker</a></dt>
-      <dd><p>Tracks all active SignalR connections with clients (their browser tabs).</p>
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html">IJSInteropInterceptionRule</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html">ILiveViewJSRuntime</a></dt>
+      <dd><p>A subtype of <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> that automatically forwards all JS
+interop invocations (<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeasync#microsoft-jsinterop-ijsruntime-invokeasync-1(system-string-system-object())">InvokeAsync&lt;TValue&gt;(string, object[])</a>) to all mirror
+circuits that are viewing the current session.
+See <a class="xref" href="BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__">InterceptIJSRuntime(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)</a> for
+forwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>
 </dd>
     </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html">ICurrentCircuit</a></dt>
-      <dd></dd>
-    </dl>
-    <h3 id="delegates">
-Delegates
+    <h3 id="enums">
+Enums
 </h3>
     <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitClosedHandler.html">ICircuitTracker.CircuitClosedHandler</a></dt>
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.InterceptionBehavior.html">InterceptionBehavior</a></dt>
       <dd></dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.ICircuitTracker.CircuitOpenedHandler.html">ICircuitTracker.CircuitOpenedHandler</a></dt>
+      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html">RuleInterceptionBehavior</a></dt>
       <dd></dd>
     </dl>
 

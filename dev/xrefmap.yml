@@ -398,12 +398,6 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
   nameWithType: ICurrentCircuit.Current
-- uid: BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime
-  name: ILiveViewJSRuntime
-  href: api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.html
-  commentId: T:BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime
-  fullName: BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime
-  nameWithType: ILiveViewJSRuntime
 - uid: BlazorLiveView.Core.Components
   name: BlazorLiveView.Core.Components
   href: api/BlazorLiveView.Core.Components.html
@@ -495,22 +489,22 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView
   nameWithType: LiveViewExtensions.AddLiveView
-- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})
-  name: InterceptJSInteropInvocations(ILiveViewBuilder, Action<LiveViewJSInteropOptions>?)
-  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptJSInteropInvocations_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__
-  commentId: M:BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})
-  name.vb: InterceptJSInteropInvocations(ILiveViewBuilder, Action(Of LiveViewJSInteropOptions))
-  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder, System.Action<BlazorLiveView.Core.Options.LiveViewJSInteropOptions>?)
-  fullName.vb: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder, System.Action(Of BlazorLiveView.Core.Options.LiveViewJSInteropOptions))
-  nameWithType: LiveViewExtensions.InterceptJSInteropInvocations(ILiveViewBuilder, Action<LiveViewJSInteropOptions>?)
-  nameWithType.vb: LiveViewExtensions.InterceptJSInteropInvocations(ILiveViewBuilder, Action(Of LiveViewJSInteropOptions))
-- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations*
-  name: InterceptJSInteropInvocations
-  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptJSInteropInvocations_
-  commentId: Overload:BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations
+- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})
+  name: InterceptIJSRuntime(ILiveViewBuilder, Action<LiveViewJSInteropOptions>?)
+  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__
+  commentId: M:BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})
+  name.vb: InterceptIJSRuntime(ILiveViewBuilder, Action(Of LiveViewJSInteropOptions))
+  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder, System.Action<BlazorLiveView.Core.Options.LiveViewJSInteropOptions>?)
+  fullName.vb: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder, System.Action(Of BlazorLiveView.Core.Options.LiveViewJSInteropOptions))
+  nameWithType: LiveViewExtensions.InterceptIJSRuntime(ILiveViewBuilder, Action<LiveViewJSInteropOptions>?)
+  nameWithType.vb: LiveViewExtensions.InterceptIJSRuntime(ILiveViewBuilder, Action(Of LiveViewJSInteropOptions))
+- uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime*
+  name: InterceptIJSRuntime
+  href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_
+  commentId: Overload:BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations
-  nameWithType: LiveViewExtensions.InterceptJSInteropInvocations
+  fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime
+  nameWithType: LiveViewExtensions.InterceptIJSRuntime
 - uid: BlazorLiveView.Core.Extensions.LiveViewExtensions.MapLiveViewMirrorEndpoint(Microsoft.AspNetCore.Builder.WebApplication,System.Action{Microsoft.AspNetCore.Builder.IEndpointConventionBuilder})
   name: MapLiveViewMirrorEndpoint(WebApplication, Action<IEndpointConventionBuilder>?)
   href: api/BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_MapLiveViewMirrorEndpoint_Microsoft_AspNetCore_Builder_WebApplication_System_Action_Microsoft_AspNetCore_Builder_IEndpointConventionBuilder__
@@ -527,6 +521,246 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Extensions.LiveViewExtensions.MapLiveViewMirrorEndpoint
   nameWithType: LiveViewExtensions.MapLiveViewMirrorEndpoint
+- uid: BlazorLiveView.Core.JSInterop
+  name: BlazorLiveView.Core.JSInterop
+  href: api/BlazorLiveView.Core.JSInterop.html
+  commentId: N:BlazorLiveView.Core.JSInterop
+  fullName: BlazorLiveView.Core.JSInterop
+  nameWithType: BlazorLiveView.Core.JSInterop
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule
+  name: ExactJSInteropInterceptionRule
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule
+  nameWithType: ExactJSInteropInterceptionRule
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  name: ExactJSInteropInterceptionRule(string, InterceptionBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule__ctor_System_String_BlazorLiveView_Core_JSInterop_InterceptionBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  name.vb: New(String, InterceptionBehavior)
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule(string, BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.New(String, BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  nameWithType: ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule(string, InterceptionBehavior)
+  nameWithType.vb: ExactJSInteropInterceptionRule.New(String, InterceptionBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor*
+  name: ExactJSInteropInterceptionRule
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.New
+  nameWithType: ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule
+  nameWithType.vb: ExactJSInteropInterceptionRule.New
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  name: BehaviourOnMatch
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_BehaviourOnMatch
+  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  nameWithType: ExactJSInteropInterceptionRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch*
+  name: BehaviourOnMatch
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_BehaviourOnMatch_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  nameWithType: ExactJSInteropInterceptionRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
+  name: GetInterceptionBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_GetInterceptionBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
+  name.vb: GetInterceptionBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(String)
+  nameWithType: ExactJSInteropInterceptionRule.GetInterceptionBehaviour(string)
+  nameWithType.vb: ExactJSInteropInterceptionRule.GetInterceptionBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour*
+  name: GetInterceptionBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_GetInterceptionBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour
+  nameWithType: ExactJSInteropInterceptionRule.GetInterceptionBehaviour
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  name: Identifier
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_Identifier
+  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  nameWithType: ExactJSInteropInterceptionRule.Identifier
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier*
+  name: Identifier
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_Identifier_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  nameWithType: ExactJSInteropInterceptionRule.Identifier
+- uid: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule
+  name: IJSInteropInterceptionRule
+  href: api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule
+  fullName: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule
+  nameWithType: IJSInteropInterceptionRule
+- uid: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
+  name: GetInterceptionBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_GetInterceptionBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
+  name.vb: GetInterceptionBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(String)
+  nameWithType: IJSInteropInterceptionRule.GetInterceptionBehaviour(string)
+  nameWithType.vb: IJSInteropInterceptionRule.GetInterceptionBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour*
+  name: GetInterceptionBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_GetInterceptionBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour
+  nameWithType: IJSInteropInterceptionRule.GetInterceptionBehaviour
+- uid: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime
+  name: ILiveViewJSRuntime
+  href: api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime
+  fullName: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime
+  nameWithType: ILiveViewJSRuntime
+- uid: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror*
+  name: InvokeAsyncNoMirror
+  href: api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html#BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror
+  nameWithType: ILiveViewJSRuntime.InvokeAsyncNoMirror
+- uid: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror``1(System.String,System.Object[])
+  name: InvokeAsyncNoMirror<TValue>(string, object?[]?)
+  href: api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html#BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror__1_System_String_System_Object___
+  commentId: M:BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror``1(System.String,System.Object[])
+  name.vb: InvokeAsyncNoMirror(Of TValue)(String, Object())
+  fullName: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror<TValue>(string, object?[]?)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror(Of TValue)(String, Object())
+  nameWithType: ILiveViewJSRuntime.InvokeAsyncNoMirror<TValue>(string, object?[]?)
+  nameWithType.vb: ILiveViewJSRuntime.InvokeAsyncNoMirror(Of TValue)(String, Object())
+- uid: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror``1(System.String,System.Threading.CancellationToken,System.Object[])
+  name: InvokeAsyncNoMirror<TValue>(string, CancellationToken, object?[]?)
+  href: api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html#BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror__1_System_String_System_Threading_CancellationToken_System_Object___
+  commentId: M:BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror``1(System.String,System.Threading.CancellationToken,System.Object[])
+  name.vb: InvokeAsyncNoMirror(Of TValue)(String, CancellationToken, Object())
+  fullName: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror<TValue>(string, System.Threading.CancellationToken, object?[]?)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror(Of TValue)(String, System.Threading.CancellationToken, Object())
+  nameWithType: ILiveViewJSRuntime.InvokeAsyncNoMirror<TValue>(string, CancellationToken, object?[]?)
+  nameWithType.vb: ILiveViewJSRuntime.InvokeAsyncNoMirror(Of TValue)(String, CancellationToken, Object())
+- uid: BlazorLiveView.Core.JSInterop.InterceptionBehavior
+  name: InterceptionBehavior
+  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html
+  commentId: T:BlazorLiveView.Core.JSInterop.InterceptionBehavior
+  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehavior
+  nameWithType: InterceptionBehavior
+- uid: BlazorLiveView.Core.JSInterop.InterceptionBehavior.Intercept
+  name: Intercept
+  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html#BlazorLiveView_Core_JSInterop_InterceptionBehavior_Intercept
+  commentId: F:BlazorLiveView.Core.JSInterop.InterceptionBehavior.Intercept
+  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehavior.Intercept
+  nameWithType: InterceptionBehavior.Intercept
+- uid: BlazorLiveView.Core.JSInterop.InterceptionBehavior.SkipInterception
+  name: SkipInterception
+  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html#BlazorLiveView_Core_JSInterop_InterceptionBehavior_SkipInterception
+  commentId: F:BlazorLiveView.Core.JSInterop.InterceptionBehavior.SkipInterception
+  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehavior.SkipInterception
+  nameWithType: InterceptionBehavior.SkipInterception
+- uid: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions
+  name: InterceptionBehaviorExtensions
+  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html
+  commentId: T:BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions
+  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions
+  nameWithType: InterceptionBehaviorExtensions
+- uid: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  name: ToRuleInterceptionBehavior(InterceptionBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions_ToRuleInterceptionBehavior_BlazorLiveView_Core_JSInterop_InterceptionBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)
+  nameWithType: InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(InterceptionBehavior)
+- uid: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior*
+  name: ToRuleInterceptionBehavior
+  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions_ToRuleInterceptionBehavior_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior
+  nameWithType: InterceptionBehaviorExtensions.ToRuleInterceptionBehavior
+- uid: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions
+  name: LiveViewJSRuntimeExtensions
+  href: api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html
+  commentId: T:BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions
+  fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions
+  nameWithType: LiveViewJSRuntimeExtensions
+- uid: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime,System.String,System.Object[])
+  name: InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, string, params object?[]?)
+  href: api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html#BlazorLiveView_Core_JSInterop_LiveViewJSRuntimeExtensions_InvokeVoidAsyncNoMirror_BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_System_String_System_Object___
+  commentId: M:BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime,System.String,System.Object[])
+  name.vb: InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, String, ParamArray Object())
+  fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime, string, params object?[]?)
+  fullName.vb: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime, String, ParamArray Object())
+  nameWithType: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, string, params object?[]?)
+  nameWithType.vb: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, String, ParamArray Object())
+- uid: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])
+  name: InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, string, CancellationToken, params object?[]?)
+  href: api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html#BlazorLiveView_Core_JSInterop_LiveViewJSRuntimeExtensions_InvokeVoidAsyncNoMirror_BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_System_String_System_Threading_CancellationToken_System_Object___
+  commentId: M:BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])
+  name.vb: InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, String, CancellationToken, ParamArray Object())
+  fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime, string, System.Threading.CancellationToken, params object?[]?)
+  fullName.vb: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime, String, System.Threading.CancellationToken, ParamArray Object())
+  nameWithType: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, string, CancellationToken, params object?[]?)
+  nameWithType.vb: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, String, CancellationToken, ParamArray Object())
+- uid: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror*
+  name: InvokeVoidAsyncNoMirror
+  href: api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html#BlazorLiveView_Core_JSInterop_LiveViewJSRuntimeExtensions_InvokeVoidAsyncNoMirror_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
+  nameWithType: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule
+  name: MudBlazorJSInteropInterceptionRule
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule
+  nameWithType: MudBlazorJSInteropInterceptionRule
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
+  name: GetInterceptionBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropInterceptionRule_GetInterceptionBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
+  name.vb: GetInterceptionBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(String)
+  nameWithType: MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(string)
+  nameWithType.vb: MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour*
+  name: GetInterceptionBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropInterceptionRule_GetInterceptionBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour
+  nameWithType: MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour
+- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior
+  name: RuleInterceptionBehavior
+  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html
+  commentId: T:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior
+  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior
+  nameWithType: RuleInterceptionBehavior
+- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.Intercept
+  name: Intercept
+  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html#BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_Intercept
+  commentId: F:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.Intercept
+  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.Intercept
+  nameWithType: RuleInterceptionBehavior.Intercept
+- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.None
+  name: None
+  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html#BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_None
+  commentId: F:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.None
+  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.None
+  nameWithType: RuleInterceptionBehavior.None
+- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.SkipInterception
+  name: SkipInterception
+  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html#BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_SkipInterception
+  commentId: F:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.SkipInterception
+  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.SkipInterception
+  nameWithType: RuleInterceptionBehavior.SkipInterception
 - uid: BlazorLiveView.Core.Options
   name: BlazorLiveView.Core.Options
   href: api/BlazorLiveView.Core.Options.html
@@ -539,6 +773,32 @@ references:
   commentId: T:BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   nameWithType: LiveViewJSInteropOptions
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)
+  name: AddInterceptionRule(IJSInteropInterceptionRule)
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddInterceptionRule_BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_
+  commentId: M:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)
+  nameWithType: LiveViewJSInteropOptions.AddInterceptionRule(IJSInteropInterceptionRule)
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule*
+  name: AddInterceptionRule
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddInterceptionRule_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule
+  nameWithType: LiveViewJSInteropOptions.AddInterceptionRule
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
+  name: AddMudBlazorInterceptionRules()
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorInterceptionRules
+  commentId: M:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules()
+  nameWithType: LiveViewJSInteropOptions.AddMudBlazorInterceptionRules()
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules*
+  name: AddMudBlazorInterceptionRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorInterceptionRules_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
+  nameWithType: LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
 - uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
   name: DefaultDelayForInvocationForward
   href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward
@@ -552,6 +812,32 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
   nameWithType: LiveViewJSInteropOptions.DefaultDelayForInvocationForward
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+  name: DefaultInterceptionBehaviour
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour
+  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+  nameWithType: LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour*
+  name: DefaultInterceptionBehaviour
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+  nameWithType: LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
+  name: InterceptionRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules
+  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
+  nameWithType: LiveViewJSInteropOptions.InterceptionRules
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules*
+  name: InterceptionRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
+  nameWithType: LiveViewJSInteropOptions.InterceptionRules
 - uid: BlazorLiveView.Core.Options.LiveViewOptions
   name: LiveViewOptions
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html

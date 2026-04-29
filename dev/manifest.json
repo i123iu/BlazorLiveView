@@ -250,20 +250,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.yml\" sourcestartlinenumber=\"1\">A subtype of <xref href=\"Microsoft.JSInterop.IJSRuntime\" data-throw-if-not-resolved=\"false\"></xref> that automatically forwards all JS\ninterop invocations to all mirror circuits that mirror the current user.\nSee LiveViewOptions.InterceptJsInteropInvocations for\nforwarding JS invocations from all <code>IJSRuntime</code>.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.yml",
       "output": {
         ".html": {
@@ -358,6 +344,132 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Extensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.yml\" sourcestartlinenumber=\"1\">A subtype of <xref href=\"Microsoft.JSInterop.IJSRuntime\" data-throw-if-not-resolved=\"false\"></xref> that automatically forwards all JS\ninterop invocations (<xref href=\"Microsoft.JSInterop.IJSRuntime.InvokeAsync%60%601(System.String%2cSystem.Object%5b%5d)\" data-throw-if-not-resolved=\"false\"></xref>) to all mirror\ncircuits that are viewing the current session.\nSee <xref href=\"BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder%2cSystem.Action%7bBlazorLiveView.Core.Options.LiveViewJSInteropOptions%7d)\" data-throw-if-not-resolved=\"false\"></xref> for\nforwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.InterceptionBehavior",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop",
       "Summary": null
     },
     {
@@ -539,6 +651,16 @@
       "output": {
         ".html": {
           "relative_path": "articles/js-interop.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/mudblazor.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/mudblazor.html"
         }
       },
       "version": ""
