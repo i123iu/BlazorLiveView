@@ -7,12 +7,17 @@
 
 <iframe class="liveview-screen-iframe"
         @key="@_state"
-        src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)" />
+        src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)"
+        width="@(WindowSize is null ? "100%" : WindowSize.Value.width + "px")" 
+        height="@(WindowSize is null ? "100%" : WindowSize.Value.height + "px")" />
 
 @code {
     [Parameter]
     [EditorRequired]
     public string SourceCircuitId { get; set; } = default!;
+
+    [Parameter]
+    public (int width, int height)? WindowSize { get; set; } = null;
 
     [Parameter]
     public bool DebugView { get; set; } = false;
@@ -39,8 +44,9 @@
 
     protected override void OnParametersSet()
     {
-        ResetState();
         base.OnParametersSet();
+        //ResetState();
+        StateHasChanged();
     }
 
     private void OnCircuitOpened(ICircuit circuit)

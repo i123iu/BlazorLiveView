@@ -1,0 +1,82 @@
+﻿@using BlazorLiveView.Core.Attributes
+@using BlazorLiveView.Core.Circuits
+@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.JSInterop
+@using Microsoft.Extensions.Logging
+@using Microsoft.JSInterop
+
+@attribute [LiveViewTranslateToAttribute(typeof(LiveViewMirrorSideTools))]
+
+@inject ICurrentCircuit currentCircuit
+@inject ICircuitTracker circuitTracker
+@inject ILiveViewJSRuntime jsRuntime
+@inject ILogger<LiveViewMirrorSideTools> logger
+
+@code {
+    private IMirrorCircuit _mirrorCircuit = null!;
+    private long _lastScrollTime = 0;
+    private const long ScrollThrottleMs = 100; // Max 10 calls per second
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (currentCircuit.Current is null)
+        {
+            logger.LogError("Component {ComponentName} must be used within a circuit",
+                nameof(LiveViewMirrorSideTools)
+            );
+            return;
+        }
+
+        var thisCircuit = circuitTracker.GetCircuit(currentCircuit.Current.Id);
+        if (thisCircuit is null)
+        {
+            logger.LogError("Component {ComponentName} could not find the current circuit",
+                nameof(LiveViewMirrorSideTools)
+            );
+        }
+        else if (thisCircuit is IUserCircuit)
+        {
+            logger.LogError("Component {ComponentName} cannot be used on a user circuit",
+                nameof(LiveViewMirrorSideTools)
+            );
+        }
+        else if (thisCircuit is IMirrorCircuit mirrorCircuit)
+        {
+            _mirrorCircuit = mirrorCircuit;
+            _mirrorCircuit.ScrollSyncChanged += MirrorCircuit_ScrollSyncChanged;
+            _mirrorCircuit.SourceCircuit.WindowScrolled += SourceCircuit_WindowScrolled;
+            if (_mirrorCircuit.SourceCircuit.ScrollPosition.HasValue)
+            {
+                SourceCircuit_WindowScrolled(_mirrorCircuit.SourceCircuit);
+            }
+        }
+    }
+
+    private void MirrorCircuit_ScrollSyncChanged(IMirrorCircuit mirrorCircuit)
+    {
+        _ = Scroll(mirrorCircuit.SourceCircuit);
+    }
+
+    private void SourceCircuit_WindowScrolled(IUserCircuit source)
+    {
+        _ = Scroll(source);
+    }
+
+    private ValueTask Scroll(IUserCircuit source)
+    {
+        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        if (now - _lastScrollTime >= ScrollThrottleMs)
+        {
+            _lastScrollTime = now;
+            if (_mirrorCircuit.ScrollSyncEnabled && source.ScrollPosition.HasValue)
+            {
+                return jsRuntime.InvokeVoidAsyncNoMirror(
+                    "window.scrollTo",
+                    source.ScrollPosition.Value.scrollX,
+                    source.ScrollPosition.Value.scrollY
+                );
+            }
+        }
+        return ValueTask.CompletedTask;
+    }
+}

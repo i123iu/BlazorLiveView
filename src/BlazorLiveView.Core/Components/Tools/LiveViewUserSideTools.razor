@@ -1,0 +1,96 @@
+﻿@using BlazorLiveView.Core.Attributes
+@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.JSInterop
+@using Microsoft.JSInterop
+
+@attribute [LiveViewTranslateToAttribute(typeof(LiveViewMirrorSideTools))]
+
+@inject ICurrentCircuit currentCircuit
+@inject ILiveViewJSRuntime jsRuntime
+
+<script type="text/javascript">
+    window.blazorLiveView_addResizeEvent = function(dotNetRef) {
+        let lastResizeTime = 0;
+        const resizeThrottleMs = 100; // Max 10 calls per second
+        
+        const throttledResize = function() {
+            const now = Date.now();
+            if (now - lastResizeTime >= resizeThrottleMs) {
+                lastResizeTime = now;
+                dotNetRef.invokeMethodAsync("WindowSizeChanged", window.innerWidth, window.innerHeight);
+            }
+        };
+        
+        window.addEventListener("resize", throttledResize);
+        // Invoke once to set the initial size.
+        throttledResize();
+    }
+
+    window.blazorLiveView_addScrollEvent = function(dotNetRef) {
+        let lastScrollTime = 0;
+        const scrollThrottleMs = 100; // Max 10 calls per second
+        
+        const throttledScroll = function() {
+            const now = Date.now();
+            if (now - lastScrollTime >= scrollThrottleMs) {
+                lastScrollTime = now;
+                dotNetRef.invokeMethodAsync("WindowScrolled", window.scrollX, window.scrollY);
+            }
+        };
+        
+        window.addEventListener("scroll", throttledScroll);
+        // Invoke once to set the initial scroll position.
+        throttledScroll();
+    }
+</script>
+
+@code {
+    private DotNetObjectReference<LiveViewUserSideTools>? _dotNetRef;
+    private long _lastWindowSizeChangedTime = 0;
+    private long _lastWindowScrolledTime = 0;
+    private const long WindowSizeChangedThrottleMs = 100; // Max 10 calls per second
+    private const long WindowScrolledThrottleMs = 100; // Max 10 calls per second
+
+    protected override async Task OnInitializedAsync()
+    {
+        _dotNetRef = DotNetObjectReference.Create(this);
+    }
+
+    public void Dispose()
+    {
+        _dotNetRef?.Dispose();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addResizeEvent", _dotNetRef);
+            await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addScrollEvent", _dotNetRef);
+        }
+    }
+
+    [JSInvokable]
+    public void WindowSizeChanged(int width, int height)
+    {
+        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        if (now - _lastWindowSizeChangedTime >= WindowSizeChangedThrottleMs)
+        {
+            _lastWindowSizeChangedTime = now;
+            currentCircuit.AsUserCircuit()?
+                .NotifyWindowResized(width, height);
+        }
+    }
+
+    [JSInvokable]
+    public void WindowScrolled(int scrollX, int scrollY)
+    {
+        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        if (now - _lastWindowScrolledTime >= WindowScrolledThrottleMs)
+        {
+            _lastWindowScrolledTime = now;
+            currentCircuit.AsUserCircuit()?
+                .NotifyWindowScrolled(scrollX, scrollY);
+        }
+    }
+}

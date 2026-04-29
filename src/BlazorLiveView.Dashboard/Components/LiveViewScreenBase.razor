@@ -12,6 +12,10 @@
     protected LiveViewScreenIFrame? liveViewScreenIFrame;
     protected HashSet<string> subscribedCircuitIds = new();
 
+    protected bool IsSyncScreenSizeActive { get; set; } = false;
+    protected bool IsSyncScrollPositionActive { get; set; } = false;
+    protected bool IsPointerActive { get; set; } = false;
+
     protected IUserCircuit? _sourceCircuit;
     protected IUserCircuit? SourceCircuit
     {
@@ -75,6 +79,7 @@
             userCircuit.UriChanged += OnAnyUserCircuitChanged;
             userCircuit.AuthenticationStateChanged += OnAnyUserCircuitChanged;
             userCircuit.CircuitStatusChanged += OnAnyCircuitChanged;
+            userCircuit.WindowResized += OnAnyCircuitWindowResized;
         }
     }
 
@@ -86,11 +91,13 @@
             userCircuit.UriChanged -= OnAnyUserCircuitChanged;
             userCircuit.AuthenticationStateChanged -= OnAnyUserCircuitChanged;
             userCircuit.CircuitStatusChanged -= OnAnyCircuitChanged;
+            userCircuit.WindowResized -= OnAnyCircuitWindowResized;
         }
     }
 
-    protected void MirrorCircuitChanged(IMirrorCircuit m)
+    protected void MirrorCircuitChanged(IMirrorCircuit mirrorCircuit)
     {
+        MirrorCircuit?.NotifyScrollSyncChanged(IsSyncScrollPositionActive);
         StateHasChanged();
     }
 
@@ -102,6 +109,35 @@
     protected void OnAnyUserCircuitChanged(IUserCircuit _)
     {
         InvokeAsync(StateHasChanged);
+    }
+
+    protected void OnAnyCircuitWindowResized(IUserCircuit _)
+    {
+        if (IsSyncScreenSizeActive)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    protected Task OnIsSyncScreenSizeActiveChanged(bool value)
+    {
+        IsSyncScreenSizeActive = value;
+        if (!IsSyncScreenSizeActive)
+            OnIsSyncScrollPositionActiveChanged(false);
+        return Task.CompletedTask;
+    }
+
+    protected Task OnIsSyncScrollPositionActiveChanged(bool value)
+    {
+        IsSyncScrollPositionActive = value;
+        MirrorCircuit?.NotifyScrollSyncChanged(IsSyncScrollPositionActive);
+        return Task.CompletedTask;
+    }
+
+    protected Task OnIsPointerActiveChanged(bool value)
+    {
+        IsPointerActive = value;
+        return Task.CompletedTask;
     }
 
     protected virtual void OnAnyCircuitOpened(ICircuit circuit)

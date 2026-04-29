@@ -12,14 +12,20 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
     public event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged;
     public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
+    public event IUserCircuit.WindowResizedHandler? WindowResized;
+    public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
 
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
     public ClaimsPrincipal User => _authenticationStateProvider
         // Calling .Result should be fine, since the task is created in Blazor
         // Server using `Task.FromResult` (in `CircuitHost.cs`).
         .GetAuthenticationStateAsync().Result.User;
+    public (int width, int height)? WindowSize => _windowSize;
+    public (int scrollX, int scrollY)? ScrollPosition => _scrollPosition;
 
     private readonly AuthenticationStateProvider _authenticationStateProvider;
+    private (int width, int height)? _windowSize;
+    private (int scrollX, int scrollY)? _scrollPosition;
 
     public UserCircuit(
         Circuit circuit,
@@ -71,5 +77,17 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args)
     {
         JSRuntimeInvoked?.Invoke(this, identifier, cancellationToken, args);
+    }
+
+    public void NotifyWindowResized(int width, int height)
+    {
+        _windowSize = (width, height);
+        WindowResized?.Invoke(this);
+    }
+
+    public void NotifyWindowScrolled(int scrollX, int scrollY)
+    {
+        _scrollPosition = (scrollX, scrollY);
+        WindowScrolled?.Invoke(this);
     }
 }

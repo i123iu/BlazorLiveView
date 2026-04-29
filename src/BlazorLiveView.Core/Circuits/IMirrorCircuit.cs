@@ -7,8 +7,10 @@
 public interface IMirrorCircuit : ICircuit
 {
     public delegate void MirrorCircuitBlockedHandler(IMirrorCircuit circuit);
-
     event MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
+
+    public delegate void ScrollSyncChangedHandler(IMirrorCircuit circuit);
+    event ScrollSyncChangedHandler? ScrollSyncChanged;
 
     IUserCircuit SourceCircuit { get; }
 
@@ -35,5 +37,8 @@ public interface IMirrorCircuit : ICircuit
     /// </summary>
     MirrorCircuitBlockReason BlockReason { get; }
 
+    bool ScrollSyncEnabled { get; }
+
     internal void SetBlocked(MirrorCircuitBlockReason blockReason);
+    public void NotifyScrollSyncChanged(bool enabled);
 }
