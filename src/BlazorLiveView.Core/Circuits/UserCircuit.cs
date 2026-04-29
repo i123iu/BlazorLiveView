@@ -14,6 +14,8 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
     public event IUserCircuit.WindowResizedHandler? WindowResized;
     public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
+    public event IUserCircuit.PointerShownHandler? PointerShown;
+    public event IUserCircuit.PointerHiddenHandler? PointerHidden;
 
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
     public ClaimsPrincipal User => _authenticationStateProvider
@@ -89,5 +91,15 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     {
         _scrollPosition = (scrollX, scrollY);
         WindowScrolled?.Invoke(this);
+    }
+
+    public void ShowPointer(string pointerId, int x, int y)
+    {
+        PointerShown?.Invoke(this, pointerId, x, y);
+    }
+
+    public void HidePointer(string pointerId)
+    {
+        PointerHidden?.Invoke(this, pointerId);
     }
 }

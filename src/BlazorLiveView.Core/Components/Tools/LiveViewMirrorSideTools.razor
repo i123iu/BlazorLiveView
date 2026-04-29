@@ -12,13 +12,39 @@
 @inject ILiveViewJSRuntime jsRuntime
 @inject ILogger<LiveViewMirrorSideTools> logger
 
+<script type="text/javascript">
+    window.blazorLiveView_addMouseMoveEvent = function(dotNetRef) {
+        let lastMouseMoveTime = 0;
+        const mouseMoveThrottleMs = 50;
+        
+        const throttledMouseMove = function(e) {
+            const now = Date.now();
+            if (now - lastMouseMoveTime >= mouseMoveThrottleMs) {
+                lastMouseMoveTime = now;
+                dotNetRef.invokeMethodAsync("BlazorLiveView_MouseMoved", e.clientX, e.clientY);
+            }
+        };
+        
+        const onMouseLeave = function() {
+            dotNetRef.invokeMethodAsync("BlazorLiveView_MouseLeft");
+        };
+        
+        document.addEventListener("mousemove", throttledMouseMove);
+        document.addEventListener("mouseleave", onMouseLeave);
+    }
+</script>
+
 @code {
     private IMirrorCircuit _mirrorCircuit = null!;
+    private DotNetObjectReference<LiveViewMirrorSideTools>? _dotNetRef;
     private long _lastScrollTime = 0;
-    private const long ScrollThrottleMs = 100; // Max 10 calls per second
+    private const long ScrollThrottleMs = 100;
+    private const long MouseMoveThrottleMs = 50;
 
     protected override async Task OnInitializedAsync()
     {
+        _dotNetRef = DotNetObjectReference.Create(this);
+        
         if (currentCircuit.Current is null)
         {
             logger.LogError("Component {ComponentName} must be used within a circuit",
@@ -52,6 +78,19 @@
         }
     }
 
+    public void Dispose()
+    {
+        _dotNetRef?.Dispose();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _mirrorCircuit is not null)
+        {
+            await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addMouseMoveEvent", _dotNetRef);
+        }
+    }
+
     private void MirrorCircuit_ScrollSyncChanged(IMirrorCircuit mirrorCircuit)
     {
         _ = Scroll(mirrorCircuit.SourceCircuit);
@@ -78,5 +117,23 @@
             }
         }
         return ValueTask.CompletedTask;
+    }
+
+    [JSInvokable]
+    public void BlazorLiveView_MouseMoved(int x, int y)
+    {
+        if (_mirrorCircuit?.SourceCircuit is not null && _mirrorCircuit.PointerSyncEnabled)
+        {
+            _mirrorCircuit.SourceCircuit.ShowPointer(_mirrorCircuit.Id, x, y);
+        }
+    }
+
+    [JSInvokable]
+    public void BlazorLiveView_MouseLeft()
+    {
+        if (_mirrorCircuit?.SourceCircuit is not null && _mirrorCircuit.PointerSyncEnabled)
+        {
+            _mirrorCircuit.SourceCircuit.HidePointer(_mirrorCircuit.Id);
+        }
     }
 }

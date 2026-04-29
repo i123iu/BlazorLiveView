@@ -26,6 +26,12 @@ public interface IUserCircuit : ICircuit
     public delegate void WindowScrolledHandler(IUserCircuit circuit);
     event WindowScrolledHandler? WindowScrolled;
 
+    public delegate void PointerShownHandler(IUserCircuit circuit, string pointerId, int x, int y);
+    event PointerShownHandler? PointerShown;
+
+    public delegate void PointerHiddenHandler(IUserCircuit circuit, string pointerId);
+    event PointerHiddenHandler? PointerHidden;
+
     string Uri { get; }
     ClaimsPrincipal User { get; }
     (int width, int height)? WindowSize { get; }
@@ -38,4 +44,6 @@ public interface IUserCircuit : ICircuit
     internal void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args);
     internal void NotifyWindowResized(int width, int height);
     internal void NotifyWindowScrolled(int scrollX, int scrollY);
+    public void ShowPointer(string pointerId, int x, int y);
+    public void HidePointer(string pointerId);
 }

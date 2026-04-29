@@ -1,4 +1,5 @@
 ﻿@using BlazorLiveView.Core.Attributes
+@using BlazorLiveView.Core.Circuits
 @using BlazorLiveView.Core.Circuits.Services
 @using BlazorLiveView.Core.JSInterop
 @using Microsoft.JSInterop
@@ -42,6 +43,84 @@
         // Invoke once to set the initial scroll position.
         throttledScroll();
     }
+
+    // Pointer management
+    const pointers = {};
+    const pointerColors = {};
+    const pointerLastUpdateTime = {};
+    const pointerStaleTimeoutMs = 5000;
+
+    window.blazorLiveView_getPointerColor = function(pointerId) {
+        if (!pointerColors[pointerId]) {
+            // Generate a consistent color based on pointerId hash
+            let hash = 0;
+            for (let i = 0; i < pointerId.length; i++) {
+                hash = ((hash << 5) - hash) + pointerId.charCodeAt(i);
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            const hue = Math.abs(hash) % 360;
+            pointerColors[pointerId] = `hsl(${hue}, 70%, 50%)`;
+        }
+        return pointerColors[pointerId];
+    };
+
+    window.blazorLiveView_cleanupStalePointers = function() {
+        const now = Date.now();
+        const stalePointerIds = [];
+        
+        for (const pointerId in pointerLastUpdateTime) {
+            if (now - pointerLastUpdateTime[pointerId] >= pointerStaleTimeoutMs) {
+                stalePointerIds.push(pointerId);
+            }
+        }
+        
+        stalePointerIds.forEach(pointerId => {
+            const pointer = pointers[pointerId];
+            if (pointer) {
+                pointer.style.display = 'none';
+                delete pointers[pointerId];
+                delete pointerLastUpdateTime[pointerId];
+            }
+        });
+    };
+
+    window.blazorLiveView_showPointer = function(pointerId, x, y) {
+        let pointer = pointers[pointerId];
+        if (!pointer) {
+            pointer = document.createElement('div');
+            pointer.id = `pointer-${pointerId}`;
+            pointer.style.position = 'fixed';
+            pointer.style.width = '24px';
+            pointer.style.height = '24px';
+            pointer.style.borderRadius = '50%';
+            pointer.style.pointerEvents = 'none';
+            pointer.style.zIndex = '10000';
+            pointer.style.opacity = '0.7';
+            pointer.style.border = '2px solid rgba(255, 255, 255, 0.8)';
+            document.body.appendChild(pointer);
+            pointers[pointerId] = pointer;
+        }
+        
+        pointerLastUpdateTime[pointerId] = Date.now();
+        const color = window.blazorLiveView_getPointerColor(pointerId);
+        pointer.style.backgroundColor = color;
+        pointer.style.left = (x - 12) + 'px';
+        pointer.style.top = (y - 12) + 'px';
+        pointer.style.display = 'block';
+        
+        window.blazorLiveView_cleanupStalePointers();
+    };
+
+    window.blazorLiveView_hidePointer = function(pointerId) {
+        const pointer = pointers[pointerId];
+        if (pointer) {
+            pointer.style.display = 'none';
+            delete pointers[pointerId];
+            delete pointerLastUpdateTime[pointerId];
+        }
+        
+        window.blazorLiveView_cleanupStalePointers();
+    };
 </script>
 
 @code {
@@ -67,6 +146,13 @@
         {
             await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addResizeEvent", _dotNetRef);
             await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_addScrollEvent", _dotNetRef);
+            
+            var userCircuit = currentCircuit.AsUserCircuit();
+            if (userCircuit is not null)
+            {
+                userCircuit.PointerShown += OnPointerShown;
+                userCircuit.PointerHidden += OnPointerHidden;
+            }
         }
     }
 
@@ -92,5 +178,15 @@
             currentCircuit.AsUserCircuit()?
                 .NotifyWindowScrolled(scrollX, scrollY);
         }
+    }
+
+    private async void OnPointerShown(IUserCircuit circuit, string pointerId, int x, int y)
+    {
+        await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_showPointer", pointerId, x, y);
+    }
+
+    private async void OnPointerHidden(IUserCircuit circuit, string pointerId)
+    {
+        await jsRuntime.InvokeVoidAsyncNoMirror("blazorLiveView_hidePointer", pointerId);
     }
 }

@@ -29,11 +29,13 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 
     public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
     public event IMirrorCircuit.ScrollSyncChangedHandler? ScrollSyncChanged;
+    public event IMirrorCircuit.PointerSyncChangedHandler? PointerSyncChanged;
 
     public IUserCircuit SourceCircuit => _source;
     public Guid? State => _state;
     public bool DebugView => _debugView;
     public bool ScrollSyncEnabled { get; private set; } = false;
+    public bool PointerSyncEnabled { get; private set; } = false;
 
     public bool IsBlocked => _blockReason != null;
     public MirrorCircuitBlockReason BlockReason => _blockReason
@@ -172,5 +174,11 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     {
         ScrollSyncEnabled = enabled;
         ScrollSyncChanged?.Invoke(this);
+    }
+
+    public void NotifyPointerSyncChanged(bool enabled)
+    {
+        PointerSyncEnabled = enabled;
+        PointerSyncChanged?.Invoke(this);
     }
 }

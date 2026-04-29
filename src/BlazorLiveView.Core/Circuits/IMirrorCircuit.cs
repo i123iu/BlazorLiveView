@@ -12,6 +12,9 @@ public interface IMirrorCircuit : ICircuit
     public delegate void ScrollSyncChangedHandler(IMirrorCircuit circuit);
     event ScrollSyncChangedHandler? ScrollSyncChanged;
 
+    public delegate void PointerSyncChangedHandler(IMirrorCircuit circuit);
+    event PointerSyncChangedHandler? PointerSyncChanged;
+
     IUserCircuit SourceCircuit { get; }
 
     /// <summary>
@@ -38,7 +41,9 @@ public interface IMirrorCircuit : ICircuit
     MirrorCircuitBlockReason BlockReason { get; }
 
     bool ScrollSyncEnabled { get; }
+    bool PointerSyncEnabled { get; }
 
     internal void SetBlocked(MirrorCircuitBlockReason blockReason);
     public void NotifyScrollSyncChanged(bool enabled);
+    public void NotifyPointerSyncChanged(bool enabled);
 }
