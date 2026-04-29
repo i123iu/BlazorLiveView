@@ -10,6 +10,10 @@ BlazorLiveView requires:
 - .NET 9.0 or later
 - Global interactivity mode
 
+It does not support:
+
+- The older `AddServerSideBlazor`
+
 ### Creating a New Project
 
 If starting a new project in Visual Studio, select a new `Blazor Web App` with the following settings:
