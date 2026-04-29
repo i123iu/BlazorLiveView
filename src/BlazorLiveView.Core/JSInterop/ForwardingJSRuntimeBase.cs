@@ -60,16 +60,16 @@ internal abstract class ForwardingJSRuntimeBase(
             return;
         }
 
-        if (_logger.IsEnabled(LogLevel.Debug))
-        {
-            _logger.LogDebug(
-                "Invoking JS interop method '{Identifier}' on circuit '{CircuitId}' with args: {Args}",
-                identifier, circuit.Id, args
-            );
-        }
-
         if (circuit is IUserCircuit userCircuit)
         {
+            if (_logger.IsEnabled(LogLevel.Debug))
+            {
+                _logger.LogDebug(
+                    "Notifying about JS interop method '{Identifier}' on circuit '{CircuitId}' with args: {Args}",
+                    identifier, circuit.Id, args
+                );
+            }
+
             userCircuit.NotifyJSRuntimeInvoked(identifier, cancellationToken, args);
         }
     }

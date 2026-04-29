@@ -41,7 +41,7 @@ public static class LiveViewExtensions
             {
                 var ijsRuntime = sp.GetRequiredService<IJSRuntime>();
                 RemoteJSRuntimeWrapper remoteJSRuntime;
-                if (ijsRuntime is InterceptingRemoteJSRuntime intercepted)
+                if (ijsRuntime is RemoteJSRuntime intercepted)
                 {
                     // The IJSRuntime has been wrapped (intercepted) by
                     // InterceptIJSRuntime.
@@ -106,10 +106,10 @@ public static class LiveViewExtensions
                 // Decorate the default IJSRuntime implementation (RemoteJSRuntime)
                 // with a new (intercepting) implementation (InterceptingRemoteJSRuntime).
                 RemoteJSRuntimeWrapper remoteJSRuntime = new((JSRuntime)origRemoteJSRuntime);
-                return new InterceptingRemoteJSRuntime(
+                return new RemoteJSRuntime(
                     remoteJSRuntime,
                     sp.GetRequiredService<ICircuitTracker>(),
-                    sp.GetRequiredService<ILogger<InterceptingRemoteJSRuntime>>(),
+                    sp.GetRequiredService<ILogger<RemoteJSRuntime>>(),
                     sp.GetRequiredService<IOptions<LiveViewJSInteropOptions>>()
                 );
             });

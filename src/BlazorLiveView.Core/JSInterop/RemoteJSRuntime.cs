@@ -7,13 +7,17 @@ using Microsoft.Extensions.Options;
 namespace BlazorLiveView.Core.JSInterop;
 
 /// <summary>
+/// THIS IS NOT THE ORIGINAL RemoteJSRuntime. When MudBlazor checks if the current render state is prerender,
+/// it checks jsRuntime.GetType().Name == "RemoteJSRuntime" (in src/MudBlazor/Extensions/IJSRuntimeExtensions.cs).
+/// Rename only if that is resolved.
+/// 
 /// Wrapper around RemoteJSRuntime that is the default IJSRuntime implementation in Blazor Server.
 /// Forwards InvokeAsync calls to mirror circuits, while checking interception rules.
 /// </summary>
-internal class InterceptingRemoteJSRuntime(
+internal class RemoteJSRuntime(
     RemoteJSRuntimeWrapper remoteJSRuntime,
     ICircuitTracker circuitTracker,
-    ILogger<InterceptingRemoteJSRuntime> logger,
+    ILogger<RemoteJSRuntime> logger,
     IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions
 ) : ForwardingJSRuntimeBase(
     remoteJSRuntime,
@@ -76,7 +80,7 @@ internal class InterceptingRemoteJSRuntime(
     }
 
     public static object ToRemoteJSRuntime(
-        InterceptingRemoteJSRuntime intercepted
+        RemoteJSRuntime intercepted
     )
     {
         return intercepted._remoteJsRuntime.Inner;

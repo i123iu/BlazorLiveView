@@ -339,8 +339,8 @@ internal sealed class CircuitFactoryPatcher : IPatcher
                 found = true;
                 yield return new CodeInstruction(
                     OpCodes.Call,
-                    typeof(InterceptingRemoteJSRuntime).GetMethod(
-                        nameof(InterceptingRemoteJSRuntime.ToRemoteJSRuntime)
+                    typeof(RemoteJSRuntime).GetMethod(
+                        nameof(RemoteJSRuntime.ToRemoteJSRuntime)
                     )
                 );
                 continue;
