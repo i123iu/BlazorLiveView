@@ -1,6 +1,6 @@
 # Utilities
 
-These are the attributes and components used to control how your application behaves when being mirrored in BlazorLiveView.
+This pages describes some additional utilities.
 
 ## Hiding Components in Mirror Views
 
@@ -24,7 +24,7 @@ For hiding specific parts of the UI, you can wrap the content in a `LiveViewHide
 
 ### Using the Attribute
 
-For hiding entire components from being mirrored on any page, you can apply the `LiveViewHideInMirrorAttribute` to the component class. For example:
+For hiding entire component types from being mirrored on any page, you can apply the `LiveViewHideInMirrorAttribute` to the component class. For example:
 
 ```razor
 @* TwoFactorAuthComponent.razor *@
@@ -43,5 +43,19 @@ There are three remote support tools available for administrators in the mirrore
 2. _Scroll position sync_: Keeps the scroll position of the mirrored view in sync with the user's actual scroll position. When this is active, the users cursor is shown to the administrator as a laser pointer.
 3. _Laser pointer_: Shows a laser pointer to the user so that the administrator can point at specific parts of the UI in a remote support scenario.
 
+Using them requires the `LiveViewUserSideTools` component to be included in the main layout of your application, e.g. `MainLayout.razor`.
+
+```html
+@using BlazorLiveView.Core.Components.Tools
+@inherits LayoutComponentBase
+
+<LiveViewUserSideTools />
+
+<!-- The rest of your layout -->
+```
+
 ![Window Size Sync](../images/screenshot-mirror-circuit-window-size-sync.png)
+*Admin view of the user circuit with  window size sync*
+
 ![Laser Pointer](../images/screenshot-mirror-circuit-pointer.png)
+*User circuit with admin's laser pointer (blue dot)*

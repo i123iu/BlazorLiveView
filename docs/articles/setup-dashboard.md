@@ -102,10 +102,11 @@ For accessing the dashboard, add a link to your navigation menu, e.g. in `Compon
 
 ## Remote Support Tools
 
-As you can see in the _Live View Screen_ screenshot above, there are three buttons in the top right corner of the status bar. These are for remote support tools like _window size sync_, _scroll position sync_ and a _laser pointer_. To enable these tools, you must include the `LiveViewUserSideTools` component in your main layout, e.g. `MainLayout.razor`. See [Utilities](utilities.md) for more details on these tools and how to use them.
+As you can see in the _Live View Screen_ screenshot, there are three buttons in the top right corner of the status bar. These are for remote support tools like _window size sync_, _scroll position sync_ and a _laser pointer_. To enable these tools, you must include the `LiveViewUserSideTools` component in your main layout, e.g. `MainLayout.razor`. See [Utilities](utilities.md) for more details.
 
 ```html
-@using BlazorLiveView.Core.Components.Tools @inherits LayoutComponentBase
+@using BlazorLiveView.Core.Components.Tools
+@inherits LayoutComponentBase
 
 <LiveViewUserSideTools />
 
@@ -114,11 +115,7 @@ As you can see in the _Live View Screen_ screenshot above, there are three butto
 
 ## Security
 
-Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the `[Authorize]` attribute can be directly used like this:
-
-```csharp
-@attribute [Authorize(Roles = "Administrator")]
-```
+Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the `[Authorize]` attribute can be used.
 
 ## CSS Styles
 
@@ -127,8 +124,3 @@ The default dashboard components use CSS styles that must be included using the 
 ```
 <link href="@Assets["<ProjectName>.styles.css"]" rel="stylesheet" />
 ```
-
-## Next Steps
-
-This completes the setup of BlazorLiveView. It should now work in your application.<br>
-See [Utilities](utilities.md) for additional tools.

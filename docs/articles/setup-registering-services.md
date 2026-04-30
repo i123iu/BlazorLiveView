@@ -4,7 +4,7 @@ This is the second step of BlazorLiveView setup: **Registering the required serv
 
 ## Service Registration
 
-BlazorLiveView services need to be registered in your dependency injection container. Add the following code to `Program.cs` before building the application.
+BlazorLiveView services need to be registered in your dependency injection container. Call the method `AddLiveView()` on `builder.Services` in your `Program.cs`:
 
 ```csharp
 using BlazorLiveView.Core.Extensions;
@@ -25,23 +25,21 @@ builder.Services.AddRazorComponents()
 
         // Whether to use a transparent overlay element on mirrors to prevent interaction
         options.UseScreenOverlay = true;
+        
+        // And more...
     });
 ```
 
 ## Mapping the Mirror Endpoint
 
-To be able to view the mirrored sessions, the _mirror endpoint_ must be mapped. Add the following code to `Program.cs` after building the application and before calling `app.Run()`.
+To be able to view the mirrored sessions, the _mirror endpoint_ must be mapped. Call the method `MapLiveViewMirrorEndpoint()` on `WebApplication app` in `Program.cs` after building the application and before calling `app.Run()`:
 
 ```csharp
 using BlazorLiveView.Core.Extensions;
 app.MapLiveViewMirrorEndpoint();
 ```
 
-Note that the previous code is **NOT SECURE** by default. Anyone could access the mirror endpoint if they know the circuit ID. To add authentication and authorization, see the next section.
-
-### Adding Authorization
-
-To secure the mirror endpoint, the method `MapLiveViewMirrorEndpoint` accepts a configuration action where you can configure the mirror endpoint.
+Note that the previous code is **NOT SECURE** by default. Anyone could access the mirror endpoint if they know the circuit ID. To add authentication and authorization, the method `MapLiveViewMirrorEndpoint` accepts a configuration action where you can configure the mirror endpoint. For example:
 
 ```csharp
 app.MapLiveViewMirrorEndpoint(mirrorEndpoint =>
@@ -72,7 +70,3 @@ app.MapLiveViewMirrorEndpoint();
 
 app.Run();
 ```
-
-## Next Steps
-
-Continue with [Setup: Dashboard](setup-dashboard.md) to add the admin user interface.

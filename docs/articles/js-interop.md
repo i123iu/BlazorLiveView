@@ -4,7 +4,7 @@ BlazorLiveView supports JavaScript interoperability **experimentally**. The DOM 
 
 ## Injecting `ILiveViewJSRuntime`
 
-First option is to inject and use `ILiveViewJSRuntime` instead of `IJSRuntime`. This will automatically forward JavaScript invocations from a user circuit to all mirror circuits that are currently viewing that session. This also contains the method `InvokeAsyncNoMirror` that would do the same as regular `InvokeAsync`.
+First option is to inject and use `ILiveViewJSRuntime` instead of `IJSRuntime`. This will automatically forward JavaScript invocations (`InvokeAsync`) from the user circuit to all mirror circuits that are currently viewing that session. This also contains the method `InvokeAsyncNoMirror` that would do the same as regular `InvokeAsync`.
 
 For example:
 
@@ -25,7 +25,7 @@ For example:
 
 ## Intercepting `IJSRuntime`
 
-You can also intercept all calls to the default `IJSRuntime` by using the method `InterceptIJSRuntime`. This will forward all JS calls to mirror circuits, but it will not be possible to invoke JS only on the user circuit. This can be useful for third-party libraries or for code without having to modify it. To enable this, add the following to your `Program.cs`:
+You can also intercept all calls to the default `IJSRuntime` by using the method `InterceptIJSRuntime` on your `builder.Services`. This will forward all JS calls to mirror circuits, but it will not be possible to invoke JS only on the user circuit. This can be useful for third-party libraries or for code without having to modify it. To enable this, add the following to your `Program.cs`:
 
 ```csharp
 builder.Services.AddRazorComponents()
@@ -51,7 +51,7 @@ For example, with this enabled, the following code will have the JS invocation a
 
 ### Interception Rules
 
-To decide which intercepted calls should be forwarded, you can specify *interception rules*. When enabling interception, you can provide options like this:
+To specify which intercepted calls should be forwarded, you can specify *interception rules*. When enabling interception, you can provide additional options:
 
 ```csharp
 builder.Services.AddRazorComponents()
@@ -66,4 +66,4 @@ builder.Services.AddRazorComponents()
     });
 ```
 
-Rules are evaluated in the order they were added. If no rule matches, the `DefaultInterceptionBehaviour` will be used. In the example above, all JS calls will be intercepted except those to `not_intercepted_function`. You can also create custom rules by implementing the `IJSInteropInterceptionRule` interface.
+Rules are evaluated in the order they were added. If no rule matches, the `options.DefaultInterceptionBehaviour` will be used. In the example above, all JS calls will be intercepted except those to `not_intercepted_function`. You can also create custom rule types by implementing the `IJSInteropInterceptionRule` interface.

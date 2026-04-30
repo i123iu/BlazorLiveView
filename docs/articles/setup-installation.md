@@ -33,11 +33,3 @@ This is a meta-package that includes both:
 
 - BlazorLiveView.Core - Core services and mirror endpoint.
 - BlazorLiveView.Dashboard - Pre-built dashboard components.
-
-### Custom Dashboard
-
-For custom dashboard implementations without the pre-built dashboard, you can install only the `BlazorLiveView.Core` package instead. See [Custom Dashboard](custom-dashboard.md) for more information.
-
-## Next Steps
-
-Continue with [Setup: Registering Services](setup-registering-services.md).

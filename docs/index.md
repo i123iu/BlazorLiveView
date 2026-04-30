@@ -23,7 +23,7 @@ Clicking on the link "Circuit" (in the column "View Mirror") redirects the admin
 
 ![Mirror view of user's session in circuit mode](images/screenshot-mirror-circuit.png)
 
-In the admin dashboard, there is also a link "User" (in the column "View Mirror"). This is very similar to the "Circuit" view, but can show all circuits of the selected logged in user. The admin can switch between them using the dropdown in the top status bar.It also automatically switches to a newer circuit if the original circuit is closed. In this example, the user has two tabs open - `/counter` and `/weather`. 
+In the admin dashboard, there is also a link "User" (in the column "View Mirror"). This is very similar to the "Circuit" view, but can show all circuits of the selected logged in user. The admin can switch between them using the dropdown in the top status bar. It also automatically switches to a newer circuit if the current has been closed. In this example, the user has two tabs open - `/counter` and `/weather`. 
 
 ![Mirror view of user's session in user mode](images/screenshot-mirror-user.png)
 
