@@ -71,7 +71,7 @@
     <div class="status-bar-item tools">
         <button class="tool-button @(IsSyncWindowSizeActive ? "tool-active" : "tool-inactive")" 
                 @onclick="OnSyncWindowSizeClicked"
-                title="Sync Window Size">
+                title="Sync window size">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                 <path d="M0 0h24v24H0z" fill="none"/><path d="M17 4h3c1.1 0 2 .9 2 2v2h-2V6h-3V4zM4 8V6h3V4H4c-1.1 0-2 .9-2 2v2h2zm16 8v2h-3v2h3c1.1 0 2-.9 2-2v-2h-2zM7 18H4v-2H2v2c0 1.1.9 2 2 2h3v-2zM18 8H6v8h12V8z"/>
             </svg>
@@ -79,7 +79,7 @@
         <button class="tool-button @(IsSyncScrollPositionActive ? "tool-active" : "tool-inactive")"
                 @onclick="OnSyncScrollPositionClicked"
                 disabled="@(!IsSyncWindowSizeActive)"
-                title="Sync Scroll Position">
+                title="Sync scroll position (also shows user's cursor)">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                 <path d="M0 0h24v24H0V0z" fill="none"/><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 19h3v3h2v-3h3l-4-4-4 4zm8-15h-3V1h-2v3H8l4 4 4-4zM4 9v2h16V9H4z"/><path d="M4 12h16v2H4z"/>
             </svg>
@@ -87,7 +87,7 @@
         <button class="tool-button @(IsPointerActive ? "tool-active" : "tool-inactive")"
                 @onclick="OnPointerClicked"
                 disabled="@(!IsSyncScrollPositionActive)"
-                title="Pointer">
+                title="Show your cursor to the user">
             <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                 <rect fill="none" height="24" width="24"/><path d="M11.71,17.99C8.53,17.84,6,15.22,6,12c0-3.31,2.69-6,6-6c3.22,0,5.84,2.53,5.99,5.71l-2.1-0.63C15.48,9.31,13.89,8,12,8 c-2.21,0-4,1.79-4,4c0,1.89,1.31,3.48,3.08,3.89L11.71,17.99z M22,12c0,0.3-0.01,0.6-0.04,0.9l-1.97-0.59C20,12.21,20,12.1,20,12 c0-4.42-3.58-8-8-8s-8,3.58-8,8s3.58,8,8,8c0.1,0,0.21,0,0.31-0.01l0.59,1.97C12.6,21.99,12.3,22,12,22C6.48,22,2,17.52,2,12 C2,6.48,6.48,2,12,2S22,6.48,22,12z M18.23,16.26L22,15l-10-3l3,10l1.26-3.77l4.27,4.27l1.98-1.98L18.23,16.26z"/>
             </svg>
@@ -96,7 +96,7 @@
         {
             <button class="tool-button @(WaitOnMirror ? "tool-active" : "tool-inactive")"
                     @onclick="OnWaitOnMirrorClicked"
-                    title="Pause user and wait to load">
+                    title="Pause this user's next circuit to make sure the mirror circuit fully loads">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M360-360v-240h80v240h-80Zm160 0v-240h80v240h-80ZM480-40q-108 0-202.5-49.5T120-228v108H40v-240h240v80h-98q51 75 129.5 117.5T480-120q115 0 208.5-66T820-361l78 18q-45 136-160 219.5T480-40ZM42-520q7-67 32-128.5T143-762l57 57q-32 41-52 87.5T123-520H42Zm214-241-57-57q53-44 114-69.5T440-918v80q-51 5-97 25t-87 52Zm449 0q-41-32-87.5-52T520-838v-80q67 6 128.5 31T762-818l-57 57Zm133 241q-5-51-25-97.5T761-705l57-57q44 52 69 113.5T918-520h-80Z"/></svg>
             </button>
         }
