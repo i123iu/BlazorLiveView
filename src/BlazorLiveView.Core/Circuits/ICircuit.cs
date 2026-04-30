@@ -21,4 +21,5 @@ public interface ICircuit : IDisposable
     internal void SetClosed();
 
     internal ComponentState? GetOptionalComponentState(int componentId);
+    internal void NotifyLoaded();
 }

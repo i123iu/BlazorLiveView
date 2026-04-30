@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Components.Tools;
+﻿using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.Components.Tools;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +31,13 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public Position? ScrollPosition { get; private set; }
     public Position? UserCursorPosition { get; private set; }
 
+    private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly AuthenticationStateProvider _authenticationStateProvider;
 
     public UserCircuit(
         Circuit circuit,
         DateTime openedAt,
+        IPausedCircuitsTracker pausedCircuitsTracker,
         ILogger<UserCircuit> logger
     ) : base(circuit, openedAt, logger)
     {
@@ -44,6 +47,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
                     "The AuthenticationStateProvider service is not available."
                 );
         _authenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+        _pausedCircuitsTracker = pausedCircuitsTracker;
     }
 
     public override void Dispose()
@@ -122,4 +126,12 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     {
         AnyMirrorCircuitCursorPositionChanged?.Invoke(this, mirrorCircuit);
     }
+
+    Task IUserCircuit.WaitOnMirrorCircuitLoad()
+    {
+        return _pausedCircuitsTracker.WaitOnResume(this);
+    }
+
+    public override int GetHashCode()
+        => Id.GetHashCode();
 }

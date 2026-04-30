@@ -9,6 +9,8 @@ public interface ICurrentCircuit
     /// </summary>
     Circuit? Current { get; set; }
 
+    public ICircuit? AsLiveViewCircuit();
+
     /// <summary>
     /// Returns the <see cref="IUserCircuit"/> for the current scope (circuit).
     /// </summary>

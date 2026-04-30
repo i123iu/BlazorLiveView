@@ -49,7 +49,14 @@ public interface IUserCircuit : ICircuit
     Position? WindowSize { get; }
     Position? ScrollPosition { get; }
     Position? UserCursorPosition { get; }
-    
+
+    /// <summary>
+    /// Finishes when a mirror circuit that wants to mirror this session
+    /// finishes loading. Finished instantly when no mirror circuit is
+    /// loading.
+    /// </summary>
+    internal Task WaitOnMirrorCircuitLoad();
+
     internal int SsrComponentIdToInteractiveComponentId(int ssrComponentId);
 
     internal void NotifyMirrorCircuitAdded(IMirrorCircuit mirrorCircuit);

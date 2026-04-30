@@ -12,6 +12,7 @@
 @inherits LiveViewScreenBase
 
 @inject ILiveViewMirrorUriBuilder MirrorUriBuilder
+@inject IPausedCircuitsTracker PausedCircuitsTracker
 @inject IOptions<LiveViewOptions> LiveViewOptions
 @inject ICircuitTracker CircuitTracker
 @inject ILogger<LiveViewUserScreen> Logger
@@ -27,7 +28,10 @@
                        IsSyncScrollPositionActive="@IsSyncScrollPositionActive"
                        IsSyncScrollPositionActiveChanged="OnIsSyncScrollPositionActiveChanged"
                        IsPointerActive="@IsPointerActive"
-                       IsPointerActiveChanged="OnIsPointerActiveChanged" />
+                       IsPointerActiveChanged="OnIsPointerActiveChanged"
+                       ShowWaitOnMirrorButton="true"
+                       WaitOnMirror="@(PausedCircuitReference is not null)"
+                       WaitOnMirrorChanged="OnWaitOnMirrorChanged" />
 
     <div class="liveview-screen-content">
         @switch (GetRenderState())
@@ -60,18 +64,48 @@
 @code {
     [Parameter]
     [EditorRequired]
-    public string? UserSelector { get; set; }
+    public string UserSelector { get; set; } = null!;
 
     [Parameter]
     public bool DebugView { get; set; } = false;
 
-    private string? _selectedCircuitId = null;
+    private PausedCircuitReference? PausedCircuitReference { get; set; } = null;
 
+    private string? _selectedCircuitId = null;
     private Dictionary<string, IUserCircuit> _availableUserCircuits = new();
 
     protected override void OnParametersSet()
     {
+        if (UserSelector is null)
+        {
+            throw new InvalidOperationException("UserSelector parameter is required.");
+        }
         UpdateCircuitsForUser();
+    }
+
+    private void OnWaitOnMirrorChanged(bool value)
+    {
+        bool isPaused = PausedCircuitReference is not null;
+        if (isPaused == value) return;
+
+        if (value)
+        {
+            PausedCircuitReference = PausedCircuitsTracker.PauseUser(UserSelector);
+            PausedCircuitReference?.Unpaused += OnPausedCircuitUnpaused;
+        }
+        else
+        {
+            PausedCircuitReference!.Unpaused -= OnPausedCircuitUnpaused;
+            PausedCircuitReference.Unpause();
+            PausedCircuitReference = null;
+        }
+    }
+
+    private void OnPausedCircuitUnpaused(PausedCircuitReference _)
+    {
+        PausedCircuitReference?.Unpaused -= OnPausedCircuitUnpaused;
+        PausedCircuitReference = null;
+        InvokeAsync(StateHasChanged);
     }
 
     private void UpdateCircuitsForUser()
@@ -79,7 +113,7 @@
         var allUserCircuit = CircuitTracker
             .ListCircuits()
             .OfType<IUserCircuit>()
-            .Where(c => IsUserSelectorMatch(c.User, UserSelector!))
+            .Where(c => IsUserSelectorMatch(c.User, UserSelector))
             .OrderByDescending(c => c.OpenedAt)
             .ToList();
 
@@ -148,7 +182,7 @@
     protected override void OnAnyCircuitOpened(ICircuit circuit)
     {
         if (circuit is IUserCircuit userCircuit &&
-            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
+            IsUserSelectorMatch(userCircuit.User, UserSelector))
         {
             InvokeAsync(UpdateCircuitsForUser);
         }
@@ -157,7 +191,7 @@
     protected override void OnAnyCircuitClosed(ICircuit circuit)
     {
         if (circuit is IUserCircuit userCircuit &&
-            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
+            IsUserSelectorMatch(userCircuit.User, UserSelector))
         {
             InvokeAsync(UpdateCircuitsForUser);
         }
