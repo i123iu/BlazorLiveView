@@ -17,7 +17,13 @@
 <div class="liveview-screen">
     <LiveViewStatusBar RenderState="@GetRenderState()"
                        SourceCircuit="@SourceCircuit"
-                       SelectedCircuitId="@SourceCircuitId" />
+                       SelectedCircuitId="@SourceCircuitId"
+                       IsSyncWindowSizeActive="@IsSyncScreenSizeActive"
+                       IsSyncWindowSizeActiveChanged="OnIsSyncWindowSizeActiveChanged"
+                       IsSyncScrollPositionActive="@IsSyncScrollPositionActive"
+                       IsSyncScrollPositionActiveChanged="OnIsSyncScrollPositionActiveChanged"
+                       IsPointerActive="@IsPointerActive"
+                       IsPointerActiveChanged="@OnIsPointerActiveChanged"/>
 
     <div class="liveview-screen-content">
         @{
@@ -39,10 +45,12 @@
                     </div>
                     break;
                 }
+
                 <LiveViewScreenIFrame @ref="liveViewScreenIFrame"
-                                      SourceCircuitId="@SourceCircuitId"
-                                      MirrorCircuitChanged="MirrorCircuitChanged"
-                                      DebugView="@DebugView" />
+                                        SourceCircuitId="@SourceCircuitId"
+                                        MirrorCircuitChanged="MirrorCircuitChanged"
+                                        DebugView="@DebugView"
+                                        WindowSize="IsSyncScreenSizeActive ? SourceCircuit?.WindowSize : null" />
                 break;
         }
     </div>

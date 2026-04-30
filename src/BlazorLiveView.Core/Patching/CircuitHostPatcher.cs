@@ -1,5 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.Components.Tools;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
@@ -95,7 +96,8 @@ internal sealed class CircuitHostPatcher : IPatcher
     /// be able to interact with the app, so the original function is skipped.
     /// </summary>
     private static bool BeginInvokeDotNetFromJS_Prefix(
-        object __instance
+        object __instance,
+        string methodIdentifier
     )
     {
         try
@@ -112,20 +114,29 @@ internal sealed class CircuitHostPatcher : IPatcher
 
             if (circuit is IMirrorCircuit)
             {
-                // Skip the original function
-                if (_logger.IsEnabled(LogLevel.Debug))
+                if (methodIdentifier == nameof(LaserPointerTransmitter.OnCursorPosition) ||
+                    methodIdentifier == nameof(LaserPointerTransmitter.OnCursorExit))
                 {
-                    _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
-                        circuit.Id);
+                    return true;
                 }
+                else
+                {
+                    // Skip the original function
+                    if (_logger.IsEnabled(LogLevel.Debug))
+                    {
+                        _logger.LogDebug("Skipped BeginInvokeDotNetFromJS method={Method} for mirror circuit id={Id}. ",
+                            methodIdentifier, circuit.Id
+                        );
+                    }
 
-                // The original function BeginInvokeDotNetFromJS calls the requested
-                // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
-                // the function means also skipping the response. The web app will
-                // probably wait for the response indefinitely, but this should not
-                // be a problem as the mirror user should not interact with the app
-                // anyway. 
-                return false;
+                    // The original function BeginInvokeDotNetFromJS calls the requested
+                    // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
+                    // the function means also skipping the response. The web app will
+                    // probably wait for the response indefinitely, but this should not
+                    // be a problem as the mirror user should not interact with the app
+                    // anyway. 
+                    return false;
+                }
             }
         }
         catch (Exception ex)

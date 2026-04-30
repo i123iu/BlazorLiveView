@@ -94,10 +94,22 @@ For accessing the dashboard, add a link to your navigation menu, e.g. in `Compon
 
 ```html
 <div class="nav-item px-3">
-    <NavLink class="nav-link" href="liveview">
+  <NavLink class="nav-link" href="liveview">
         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> LiveView Dashboard
-    </NavLink>
+  </NavLink>
 </div>
+```
+
+## Remote Support Tools
+
+As you can see in the _Live View Screen_ screenshot above, there are three buttons in the top right corner of the status bar. These are for remote support tools like _window size sync_, _scroll position sync_ and a _laser pointer_. To enable these tools, you must include the `LiveViewUserSideTools` component in your main layout, e.g. `MainLayout.razor`. See [Utilities](utilities.md) for more details on these tools and how to use them.
+
+```html
+@using BlazorLiveView.Core.Components.Tools @inherits LayoutComponentBase
+
+<LiveViewUserSideTools />
+
+<!-- The rest of your layout -->
 ```
 
 ## Security

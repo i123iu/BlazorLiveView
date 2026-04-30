@@ -109,6 +109,59 @@
     min-width: 0;
 }
 
+.status-bar-item.tools {
+    display: flex;
+    gap: 0.5em;
+}
+
+.tool-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.tool-button svg {
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.tool-button.tool-active {
+    color: #0091ff;
+    border-color: #0091ff;
+    background-color: rgba(3, 102, 214, 0.1);
+}
+
+.tool-button.tool-active:hover {
+    background-color: rgba(3, 102, 214, 0.1);
+}
+
+.tool-button.tool-inactive {
+    color: #a4a4a4;
+    border-color: #a4a4a4;
+}
+
+.tool-button.tool-inactive:hover:not(:disabled) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tool-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tool-button:disabled:hover {
+    background-color: transparent;
+}
+
+
 @media (max-width: 48em) {
     .liveview-screen-header {
         gap: 0.75em;

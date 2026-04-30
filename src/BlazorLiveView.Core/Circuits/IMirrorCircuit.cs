@@ -1,4 +1,6 @@
-﻿namespace BlazorLiveView.Core.Circuits;
+﻿using BlazorLiveView.Core.Components.Tools;
+
+namespace BlazorLiveView.Core.Circuits;
 
 /// <summary>
 /// A connection with a user (admin) that is using <c>BlazorLiveView</c> to view
@@ -7,8 +9,19 @@
 public interface IMirrorCircuit : ICircuit
 {
     public delegate void MirrorCircuitBlockedHandler(IMirrorCircuit circuit);
-
     event MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
+
+    public delegate void WindowSizeSyncChangedHandler(IMirrorCircuit circuit);
+    event WindowSizeSyncChangedHandler? WindowSizeSyncChanged;
+
+    public delegate void ScrollSyncChangedHandler(IMirrorCircuit circuit);
+    event ScrollSyncChangedHandler? ScrollSyncChanged;
+
+    public delegate void PointerSyncChangedHandler(IMirrorCircuit circuit);
+    event PointerSyncChangedHandler? PointerSyncChanged;
+
+    public delegate void CursorPositionChangedHandler(IMirrorCircuit circuit);
+    event CursorPositionChangedHandler? CursorPositionChanged;
 
     IUserCircuit SourceCircuit { get; }
 
@@ -35,5 +48,14 @@ public interface IMirrorCircuit : ICircuit
     /// </summary>
     MirrorCircuitBlockReason BlockReason { get; }
 
+    bool WindowSizeSyncEnabled { get; }
+    bool ScrollSyncEnabled { get; }
+    bool LaserPointerEnabled { get; }
+    Position? CursorPosition { get; }
+
     internal void SetBlocked(MirrorCircuitBlockReason blockReason);
+    public void NotifyWindowSizeSyncChanged(bool enabled);
+    public void NotifyScrollSyncChanged(bool enabled);
+    internal void NotifyMirrorCursorChanged(Position? position);
+    public void NotifyLaserPointerEnabledChanged(bool enabled);
 }

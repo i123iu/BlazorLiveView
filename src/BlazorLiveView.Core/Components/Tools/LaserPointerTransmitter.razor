@@ -1,0 +1,151 @@
+@using Microsoft.Extensions.Options
+@using Microsoft.JSInterop
+@using BlazorLiveView.Core.JSInterop
+@using BlazorLiveView.Core.Options
+@using System.Threading
+
+@inject ILiveViewJSRuntime jsRuntime
+@inject IOptions<LiveViewOptions> options
+
+@code
+{
+    [Parameter]
+    public EventCallback<Position> OnCursorMoved { get; set; }
+
+    [Parameter]
+    public EventCallback OnCursorLeft { get; set; }
+
+    private DotNetObjectReference<LaserPointerTransmitter>? _dotNetRef;
+    private bool _isCapturing = false;
+    private object _stateLock = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _dotNetRef = DotNetObjectReference.Create(this);
+    }
+
+    public async Task StartCaptureCursor()
+    {
+        if (!_isCapturing)
+        {
+            _isCapturing = true;
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.pointer.transmitter.startCaptureCursor",
+                _dotNetRef,
+                options.Value.ToolsUpdateIntervalMs
+            );
+        }
+    }
+
+    public async Task StopCaptureCursor()
+    {
+        if (_isCapturing)
+        {
+            _isCapturing = false;
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.pointer.transmitter.stopCaptureCursor"
+            );
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnCursorPosition(int x, int y)
+    {
+        await OnCursorMoved.InvokeAsync(new(x, y));
+    }
+
+    [JSInvokable]
+    public async Task OnCursorExit()
+    {
+        await OnCursorLeft.InvokeAsync();
+    }
+}
+
+<script type="text/javascript">
+    window.blazorLiveView = window.blazorLiveView || {};
+    window.blazorLiveView.pointer = window.blazorLiveView.pointer || {};
+    window.blazorLiveView.pointer.transmitter = window.blazorLiveView.pointer.transmitter || {
+        cursorState: {
+            x: 0,
+            y: 0,
+            lastSentX: -1,
+            lastSentY: -1,
+            lastUpdateTime: 0,
+            isActive: false
+        },
+        cursorHandlers: null,
+        captureActive: false,
+        captureRef: null,
+        cursorThrottleMs: 50,
+        positionCheckTimer: null
+    };
+
+    window.blazorLiveView.pointer.transmitter.startCaptureCursor = function(dotNetRef, updateIntervalMs) {
+        const transmitter = window.blazorLiveView.pointer.transmitter;
+        
+        if (transmitter.captureActive) return;
+        transmitter.captureActive = true;
+        transmitter.captureRef = dotNetRef;
+        transmitter.cursorState.lastSentX = -1;
+        transmitter.cursorState.lastSentY = -1;
+        transmitter.cursorThrottleMs = updateIntervalMs || 50;
+        
+        const onMouseMove = function(e) {
+            transmitter.cursorState.x = e.clientX;
+            transmitter.cursorState.y = e.clientY;
+            transmitter.cursorState.isActive = true;
+        };
+        
+        const onMouseLeave = function() {
+            transmitter.cursorState.isActive = false;
+            transmitter.captureRef.invokeMethodAsync("OnCursorExit");
+        };
+        
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseleave", onMouseLeave);
+        
+        // Store handlers for later removal
+        transmitter.cursorHandlers = {
+            move: onMouseMove,
+            leave: onMouseLeave
+        };
+        
+        // Start timer to send position updates at configured interval if position changed
+        transmitter.positionCheckTimer = setInterval(function() {
+            if (transmitter.cursorState.isActive &&
+                (transmitter.cursorState.x !== transmitter.cursorState.lastSentX ||
+                 transmitter.cursorState.y !== transmitter.cursorState.lastSentY)) {
+                
+                transmitter.cursorState.lastSentX = transmitter.cursorState.x;
+                transmitter.cursorState.lastSentY = transmitter.cursorState.y;
+                transmitter.cursorState.lastUpdateTime = Date.now();
+                
+                transmitter.captureRef.invokeMethodAsync("OnCursorPosition", 
+                    transmitter.cursorState.x, 
+                    transmitter.cursorState.y
+                );
+            }
+        }, transmitter.cursorThrottleMs);
+    };
+
+    window.blazorLiveView.pointer.transmitter.stopCaptureCursor = function() {
+        const transmitter = window.blazorLiveView.pointer.transmitter;
+        
+        if (!transmitter.captureActive) return;
+        transmitter.captureActive = false;
+        
+        // Clear position check timer
+        if (transmitter.positionCheckTimer !== null) {
+            clearInterval(transmitter.positionCheckTimer);
+            transmitter.positionCheckTimer = null;
+        }
+        
+        if (transmitter.cursorHandlers) {
+            document.removeEventListener("mousemove", transmitter.cursorHandlers.move);
+            document.removeEventListener("mouseleave", transmitter.cursorHandlers.leave);
+            transmitter.cursorHandlers = null;
+        }
+        
+        transmitter.captureRef = null;
+    };
+</script>
