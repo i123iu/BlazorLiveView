@@ -89,7 +89,7 @@
 
 <p>BlazorLiveView supports JavaScript interoperability <strong>experimentally</strong>. The DOM state of a page is first built when a mirror session is created, but JS function can be invoked at any time before creation. For this reason, the page state cannot be reconstructed completely. Any JS calls that happen before opening the mirror session will be lost. Mirroring JS calls is possible in two ways:</p>
 <h2 id="injecting-iliveviewjsruntime">Injecting <code>ILiveViewJSRuntime</code></h2>
-<p>First option is to inject and use <code>ILiveViewJSRuntime</code> instead of <code>IJSRuntime</code>. This will automatically forward JavaScript invocations from a user circuit to all mirror circuits that are currently viewing that session. This also contains the method <code>InvokeAsyncNoMirror</code> that would do the same as regular <code>InvokeAsync</code>.</p>
+<p>First option is to inject and use <code>ILiveViewJSRuntime</code> instead of <code>IJSRuntime</code>. This will automatically forward JavaScript invocations (<code>InvokeAsync</code>) from the user circuit to all mirror circuits that are currently viewing that session. This also contains the method <code>InvokeAsyncNoMirror</code> that would do the same as regular <code>InvokeAsync</code>.</p>
 <p>For example:</p>
 <pre><code class="lang-csharp">@using BlazorLiveView.Core.JSInterop
 @inject ILiveViewJSRuntime LiveViewJS
@@ -105,7 +105,7 @@
 }
 </code></pre>
 <h2 id="intercepting-ijsruntime">Intercepting <code>IJSRuntime</code></h2>
-<p>You can also intercept all calls to the default <code>IJSRuntime</code> by using the method <code>InterceptIJSRuntime</code>. This will forward all JS calls to mirror circuits, but it will not be possible to invoke JS only on the user circuit. This can be useful for third-party libraries or for code without having to modify it. To enable this, add the following to your <code>Program.cs</code>:</p>
+<p>You can also intercept all calls to the default <code>IJSRuntime</code> by using the method <code>InterceptIJSRuntime</code> on your <code>builder.Services</code>. This will forward all JS calls to mirror circuits, but it will not be possible to invoke JS only on the user circuit. This can be useful for third-party libraries or for code without having to modify it. To enable this, add the following to your <code>Program.cs</code>:</p>
 <pre><code class="lang-csharp">builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddLiveView()
@@ -124,7 +124,7 @@
 }
 </code></pre>
 <h3 id="interception-rules">Interception Rules</h3>
-<p>To decide which intercepted calls should be forwarded, you can specify <em>interception rules</em>. When enabling interception, you can provide options like this:</p>
+<p>To specify which intercepted calls should be forwarded, you can specify <em>interception rules</em>. When enabling interception, you can provide additional options:</p>
 <pre><code class="lang-csharp">builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddLiveView()
@@ -136,7 +136,7 @@
         ));
     });
 </code></pre>
-<p>Rules are evaluated in the order they were added. If no rule matches, the <code>DefaultInterceptionBehaviour</code> will be used. In the example above, all JS calls will be intercepted except those to <code>not_intercepted_function</code>. You can also create custom rules by implementing the <code>IJSInteropInterceptionRule</code> interface.</p>
+<p>Rules are evaluated in the order they were added. If no rule matches, the <code>options.DefaultInterceptionBehaviour</code> will be used. In the example above, all JS calls will be intercepted except those to <code>not_intercepted_function</code>. You can also create custom rule types by implementing the <code>IJSInteropInterceptionRule</code> interface.</p>
 
 </article>
 

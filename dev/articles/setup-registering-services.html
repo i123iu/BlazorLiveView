@@ -89,7 +89,7 @@
 
 <p>This is the second step of BlazorLiveView setup: <strong>Registering the required services in <code>Program.cs</code></strong>.</p>
 <h2 id="service-registration">Service Registration</h2>
-<p>BlazorLiveView services need to be registered in your dependency injection container. Add the following code to <code>Program.cs</code> before building the application.</p>
+<p>BlazorLiveView services need to be registered in your dependency injection container. Call the method <code>AddLiveView()</code> on <code>builder.Services</code> in your <code>Program.cs</code>:</p>
 <pre><code class="lang-csharp">using BlazorLiveView.Core.Extensions;
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
@@ -105,16 +105,16 @@ builder.Services.AddRazorComponents()
 
         // Whether to use a transparent overlay element on mirrors to prevent interaction
         options.UseScreenOverlay = true;
+        
+        // And more...
     });
 </code></pre>
 <h2 id="mapping-the-mirror-endpoint">Mapping the Mirror Endpoint</h2>
-<p>To be able to view the mirrored sessions, the <em>mirror endpoint</em> must be mapped. Add the following code to <code>Program.cs</code> after building the application and before calling <code>app.Run()</code>.</p>
+<p>To be able to view the mirrored sessions, the <em>mirror endpoint</em> must be mapped. Call the method <code>MapLiveViewMirrorEndpoint()</code> on <code>WebApplication app</code> in <code>Program.cs</code> after building the application and before calling <code>app.Run()</code>:</p>
 <pre><code class="lang-csharp">using BlazorLiveView.Core.Extensions;
 app.MapLiveViewMirrorEndpoint();
 </code></pre>
-<p>Note that the previous code is <strong>NOT SECURE</strong> by default. Anyone could access the mirror endpoint if they know the circuit ID. To add authentication and authorization, see the next section.</p>
-<h3 id="adding-authorization">Adding Authorization</h3>
-<p>To secure the mirror endpoint, the method <code>MapLiveViewMirrorEndpoint</code> accepts a configuration action where you can configure the mirror endpoint.</p>
+<p>Note that the previous code is <strong>NOT SECURE</strong> by default. Anyone could access the mirror endpoint if they know the circuit ID. To add authentication and authorization, the method <code>MapLiveViewMirrorEndpoint</code> accepts a configuration action where you can configure the mirror endpoint. For example:</p>
 <pre><code class="lang-csharp">app.MapLiveViewMirrorEndpoint(mirrorEndpoint =&gt;
 {
     mirrorEndpoint.RequireAuthorization(&quot;PolicyName&quot;);
@@ -139,8 +139,6 @@ app.MapLiveViewMirrorEndpoint();
 
 app.Run();
 </code></pre>
-<h2 id="next-steps">Next Steps</h2>
-<p>Continue with <a href="setup-dashboard.html">Setup: Dashboard</a> to add the admin user interface.</p>
 
 </article>
 
