@@ -138,6 +138,31 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.BlockReason
   nameWithType: IMirrorCircuit.BlockReason
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition
+  name: CursorPosition
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_CursorPosition
+  commentId: P:BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition
+  nameWithType: IMirrorCircuit.CursorPosition
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition*
+  name: CursorPosition
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_CursorPosition_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition
+  nameWithType: IMirrorCircuit.CursorPosition
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChanged
+  name: CursorPositionChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_CursorPositionChanged
+  commentId: E:BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChanged
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChanged
+  nameWithType: IMirrorCircuit.CursorPositionChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChangedHandler
+  name: IMirrorCircuit.CursorPositionChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChangedHandler
+  nameWithType: IMirrorCircuit.CursorPositionChangedHandler
 - uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.DebugView
   name: DebugView
   href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_DebugView
@@ -164,6 +189,19 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.IsBlocked
   nameWithType: IMirrorCircuit.IsBlocked
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled
+  name: LaserPointerEnabled
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_LaserPointerEnabled
+  commentId: P:BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled
+  nameWithType: IMirrorCircuit.LaserPointerEnabled
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled*
+  name: LaserPointerEnabled
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_LaserPointerEnabled_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled
+  nameWithType: IMirrorCircuit.LaserPointerEnabled
 - uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlocked
   name: MirrorCircuitBlocked
   href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_MirrorCircuitBlocked
@@ -176,6 +214,91 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler
   fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler
   nameWithType: IMirrorCircuit.MirrorCircuitBlockedHandler
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged(System.Boolean)
+  name: NotifyLaserPointerEnabledChanged(bool)
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyLaserPointerEnabledChanged_System_Boolean_
+  commentId: M:BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged(System.Boolean)
+  name.vb: NotifyLaserPointerEnabledChanged(Boolean)
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged(bool)
+  fullName.vb: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged(Boolean)
+  nameWithType: IMirrorCircuit.NotifyLaserPointerEnabledChanged(bool)
+  nameWithType.vb: IMirrorCircuit.NotifyLaserPointerEnabledChanged(Boolean)
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged*
+  name: NotifyLaserPointerEnabledChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyLaserPointerEnabledChanged_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged
+  nameWithType: IMirrorCircuit.NotifyLaserPointerEnabledChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged(System.Boolean)
+  name: NotifyScrollSyncChanged(bool)
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyScrollSyncChanged_System_Boolean_
+  commentId: M:BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged(System.Boolean)
+  name.vb: NotifyScrollSyncChanged(Boolean)
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged(bool)
+  fullName.vb: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged(Boolean)
+  nameWithType: IMirrorCircuit.NotifyScrollSyncChanged(bool)
+  nameWithType.vb: IMirrorCircuit.NotifyScrollSyncChanged(Boolean)
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged*
+  name: NotifyScrollSyncChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyScrollSyncChanged_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged
+  nameWithType: IMirrorCircuit.NotifyScrollSyncChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged(System.Boolean)
+  name: NotifyWindowSizeSyncChanged(bool)
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyWindowSizeSyncChanged_System_Boolean_
+  commentId: M:BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged(System.Boolean)
+  name.vb: NotifyWindowSizeSyncChanged(Boolean)
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged(bool)
+  fullName.vb: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged(Boolean)
+  nameWithType: IMirrorCircuit.NotifyWindowSizeSyncChanged(bool)
+  nameWithType.vb: IMirrorCircuit.NotifyWindowSizeSyncChanged(Boolean)
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged*
+  name: NotifyWindowSizeSyncChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyWindowSizeSyncChanged_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged
+  nameWithType: IMirrorCircuit.NotifyWindowSizeSyncChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChanged
+  name: PointerSyncChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_PointerSyncChanged
+  commentId: E:BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChanged
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChanged
+  nameWithType: IMirrorCircuit.PointerSyncChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChangedHandler
+  name: IMirrorCircuit.PointerSyncChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChangedHandler
+  nameWithType: IMirrorCircuit.PointerSyncChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChanged
+  name: ScrollSyncChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_ScrollSyncChanged
+  commentId: E:BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChanged
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChanged
+  nameWithType: IMirrorCircuit.ScrollSyncChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChangedHandler
+  name: IMirrorCircuit.ScrollSyncChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChangedHandler
+  nameWithType: IMirrorCircuit.ScrollSyncChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled
+  name: ScrollSyncEnabled
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_ScrollSyncEnabled
+  commentId: P:BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled
+  nameWithType: IMirrorCircuit.ScrollSyncEnabled
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled*
+  name: ScrollSyncEnabled
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_ScrollSyncEnabled_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled
+  nameWithType: IMirrorCircuit.ScrollSyncEnabled
 - uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.SourceCircuit
   name: SourceCircuit
   href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_SourceCircuit
@@ -202,12 +325,43 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.State
   nameWithType: IMirrorCircuit.State
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChanged
+  name: WindowSizeSyncChanged
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_WindowSizeSyncChanged
+  commentId: E:BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChanged
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChanged
+  nameWithType: IMirrorCircuit.WindowSizeSyncChanged
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChangedHandler
+  name: IMirrorCircuit.WindowSizeSyncChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChangedHandler
+  nameWithType: IMirrorCircuit.WindowSizeSyncChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled
+  name: WindowSizeSyncEnabled
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_WindowSizeSyncEnabled
+  commentId: P:BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled
+  nameWithType: IMirrorCircuit.WindowSizeSyncEnabled
+- uid: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled*
+  name: WindowSizeSyncEnabled
+  href: api/BlazorLiveView.Core.Circuits.IMirrorCircuit.html#BlazorLiveView_Core_Circuits_IMirrorCircuit_WindowSizeSyncEnabled_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled
+  nameWithType: IMirrorCircuit.WindowSizeSyncEnabled
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit
   name: IUserCircuit
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit
   nameWithType: IUserCircuit
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
+  name: IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
+  nameWithType: IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
   name: AuthenticationStateChanged
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AuthenticationStateChanged
@@ -232,6 +386,44 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.JSRuntimeInvokedHandler
   nameWithType: IUserCircuit.JSRuntimeInvokedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitAddedHandler
+  name: IUserCircuit.MirrorCircuitAddedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitAddedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitAddedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitAddedHandler
+  nameWithType: IUserCircuit.MirrorCircuitAddedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitRemovedHandler
+  name: IUserCircuit.MirrorCircuitRemovedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitRemovedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitRemovedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuitRemovedHandler
+  nameWithType: IUserCircuit.MirrorCircuitRemovedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
+  name: MirrorCircuits
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorCircuits
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
+  nameWithType: IUserCircuit.MirrorCircuits
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits*
+  name: MirrorCircuits
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorCircuits_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
+  nameWithType: IUserCircuit.MirrorCircuits
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
+  name: ScrollPosition
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
+  nameWithType: IUserCircuit.ScrollPosition
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition*
+  name: ScrollPosition
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
+  nameWithType: IUserCircuit.ScrollPosition
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.Uri
   name: Uri
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_Uri
@@ -270,6 +462,68 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.User
   nameWithType: IUserCircuit.User
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged
+  name: UserCursorChanged
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorChanged
+  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged
+  nameWithType: IUserCircuit.UserCursorChanged
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler
+  name: IUserCircuit.UserCursorChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler
+  nameWithType: IUserCircuit.UserCursorChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition
+  name: UserCursorPosition
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorPosition
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition
+  nameWithType: IUserCircuit.UserCursorPosition
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition*
+  name: UserCursorPosition
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorPosition_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition
+  nameWithType: IUserCircuit.UserCursorPosition
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResized
+  name: WindowResized
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_WindowResized
+  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.WindowResized
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResized
+  nameWithType: IUserCircuit.WindowResized
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler
+  name: IUserCircuit.WindowResizedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler
+  nameWithType: IUserCircuit.WindowResizedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled
+  name: WindowScrolled
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_WindowScrolled
+  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled
+  nameWithType: IUserCircuit.WindowScrolled
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler
+  name: IUserCircuit.WindowScrolledHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler
+  nameWithType: IUserCircuit.WindowScrolledHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize
+  name: WindowSize
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_WindowSize
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize
+  nameWithType: IUserCircuit.WindowSize
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize*
+  name: WindowSize
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_WindowSize_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize
+  nameWithType: IUserCircuit.WindowSize
 - uid: BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason
   name: MirrorCircuitBlockReason
   href: api/BlazorLiveView.Core.Circuits.MirrorCircuitBlockReason.html
@@ -455,6 +709,49 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Components.LiveViewHideInMirror.ChildContent
   nameWithType: LiveViewHideInMirror.ChildContent
+- uid: BlazorLiveView.Core.Components.Tools
+  name: BlazorLiveView.Core.Components.Tools
+  href: api/BlazorLiveView.Core.Components.Tools.html
+  commentId: N:BlazorLiveView.Core.Components.Tools
+  fullName: BlazorLiveView.Core.Components.Tools
+  nameWithType: BlazorLiveView.Core.Components.Tools
+- uid: BlazorLiveView.Core.Components.Tools.Position
+  name: Position
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html
+  commentId: T:BlazorLiveView.Core.Components.Tools.Position
+  fullName: BlazorLiveView.Core.Components.Tools.Position
+  nameWithType: Position
+- uid: BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)
+  name: Position(int, int)
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position__ctor_System_Int32_System_Int32_
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)
+  name.vb: New(Integer, Integer)
+  fullName: BlazorLiveView.Core.Components.Tools.Position.Position(int, int)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New(Integer, Integer)
+  nameWithType: Position.Position(int, int)
+  nameWithType.vb: Position.New(Integer, Integer)
+- uid: BlazorLiveView.Core.Components.Tools.Position.#ctor*
+  name: Position
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position__ctor_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.Components.Tools.Position.Position
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New
+  nameWithType: Position.Position
+  nameWithType.vb: Position.New
+- uid: BlazorLiveView.Core.Components.Tools.Position.x
+  name: x
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_x
+  commentId: F:BlazorLiveView.Core.Components.Tools.Position.x
+  fullName: BlazorLiveView.Core.Components.Tools.Position.x
+  nameWithType: Position.x
+- uid: BlazorLiveView.Core.Components.Tools.Position.y
+  name: y
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_y
+  commentId: F:BlazorLiveView.Core.Components.Tools.Position.y
+  fullName: BlazorLiveView.Core.Components.Tools.Position.y
+  nameWithType: Position.y
 - uid: BlazorLiveView.Core.Extensions
   name: BlazorLiveView.Core.Extensions
   href: api/BlazorLiveView.Core.Extensions.html
@@ -889,6 +1186,19 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
   nameWithType: LiveViewOptions.ShowDebugOptions
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.ToolsUpdateIntervalMs
+  name: ToolsUpdateIntervalMs
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_ToolsUpdateIntervalMs
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.ToolsUpdateIntervalMs
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.ToolsUpdateIntervalMs
+  nameWithType: LiveViewOptions.ToolsUpdateIntervalMs
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.ToolsUpdateIntervalMs*
+  name: ToolsUpdateIntervalMs
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_ToolsUpdateIntervalMs_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.ToolsUpdateIntervalMs
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.ToolsUpdateIntervalMs
+  nameWithType: LiveViewOptions.ToolsUpdateIntervalMs
 - uid: BlazorLiveView.Core.Options.LiveViewOptions.UseScreenOverlay
   name: UseScreenOverlay
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_UseScreenOverlay

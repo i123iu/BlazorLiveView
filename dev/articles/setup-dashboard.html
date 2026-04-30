@@ -161,10 +161,18 @@ else
 <h2 id="navigation">Navigation</h2>
 <p>For accessing the dashboard, add a link to your navigation menu, e.g. in <code>Components/Layout/NavMenu.razor</code>.</p>
 <pre><code class="lang-html">&lt;div class=&quot;nav-item px-3&quot;&gt;
-    &lt;NavLink class=&quot;nav-link&quot; href=&quot;liveview&quot;&gt;
+  &lt;NavLink class=&quot;nav-link&quot; href=&quot;liveview&quot;&gt;
         &lt;span class=&quot;bi bi-list-nested-nav-menu&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt; LiveView Dashboard
-    &lt;/NavLink&gt;
+  &lt;/NavLink&gt;
 &lt;/div&gt;
+</code></pre>
+<h2 id="remote-support-tools">Remote Support Tools</h2>
+<p>As you can see in the <em>Live View Screen</em> screenshot above, there are three buttons in the top right corner of the status bar. These are for remote support tools like <em>window size sync</em>, <em>scroll position sync</em> and a <em>laser pointer</em>. To enable these tools, you must include the <code>LiveViewUserSideTools</code> component in your main layout, e.g. <code>MainLayout.razor</code>. See <a href="utilities.html">Utilities</a> for more details on these tools and how to use them.</p>
+<pre><code class="lang-html">@using BlazorLiveView.Core.Components.Tools @inherits LayoutComponentBase
+
+&lt;LiveViewUserSideTools /&gt;
+
+&lt;!-- The rest of your layout --&gt;
 </code></pre>
 <h2 id="security">Security</h2>
 <p>Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the <code>[Authorize]</code> attribute can be directly used like this:</p>
