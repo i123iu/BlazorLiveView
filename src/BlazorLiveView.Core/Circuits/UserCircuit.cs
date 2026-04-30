@@ -16,8 +16,11 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.WindowResizedHandler? WindowResized;
     public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
     public event IUserCircuit.WindowScrolledHandler? UserCursorChanged;
-    public event IUserCircuit.MirrorCursorChangedHandler? MirrorCursorChanged;
+    public event IUserCircuit.MirrorCircuitAddedHandler? MirrorCircuitAdded;
+    public event IUserCircuit.MirrorCircuitRemovedHandler? MirrorCircuitRemoved;
+    public event IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler? AnyMirrorCircuitCursorPositionChanged;
 
+    public HashSet<IMirrorCircuit> MirrorCircuits { get; } = new();
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
     public ClaimsPrincipal User => _authenticationStateProvider
         // Calling .Result should be fine, since the task is created in Blazor
@@ -26,7 +29,6 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public Position? WindowSize { get; private set; }
     public Position? ScrollPosition { get; private set; }
     public Position? UserCursorPosition { get; private set; }
-    public Dictionary<string, Position> MirrorCursorPositions { get; private set; } = new();
 
     private readonly AuthenticationStateProvider _authenticationStateProvider;
 
@@ -100,16 +102,24 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         UserCursorChanged?.Invoke(this);
     }
 
-    public void NotifyMirrorCursorChanged(string identifier, Position? position)
+    public void NotifyMirrorCircuitAdded(IMirrorCircuit mirrorCircuit)
     {
-        if (position is null)
-        {
-            MirrorCursorPositions.Remove(identifier);
-        }
-        else
-        {
-            MirrorCursorPositions[identifier] = position.Value;
-        }
-        MirrorCursorChanged?.Invoke(this, identifier);
+        if (MirrorCircuits.Contains(mirrorCircuit)) return;
+        MirrorCircuits.Add(mirrorCircuit);
+        MirrorCircuitAdded?.Invoke(this, mirrorCircuit);
+        mirrorCircuit.CursorPositionChanged += OnAnyMirrorCircuitCursorPositionChanged;
+    }
+
+    public void NotifyMirrorCircuitRemoved(IMirrorCircuit mirrorCircuit)
+    {
+        if (!MirrorCircuits.Contains(mirrorCircuit)) return;
+        MirrorCircuits.Remove(mirrorCircuit);
+        MirrorCircuitRemoved?.Invoke(this, mirrorCircuit);
+        mirrorCircuit.CursorPositionChanged -= OnAnyMirrorCircuitCursorPositionChanged;
+    }
+
+    private void OnAnyMirrorCircuitCursorPositionChanged(IMirrorCircuit mirrorCircuit)
+    {
+        AnyMirrorCircuitCursorPositionChanged?.Invoke(this, mirrorCircuit);
     }
 }

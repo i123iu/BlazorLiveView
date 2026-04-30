@@ -1,10 +1,11 @@
+@using Microsoft.Extensions.Options
 @using Microsoft.JSInterop
 @using BlazorLiveView.Core.JSInterop
 @using BlazorLiveView.Core.Options
 @using System.Threading
 
 @inject ILiveViewJSRuntime jsRuntime
-@inject LiveViewOptions options
+@inject IOptions<LiveViewOptions> options
 
 @code
 {
@@ -31,7 +32,7 @@
             await jsRuntime.InvokeVoidAsyncNoMirror(
                 "blazorLiveView.pointer.transmitter.startCaptureCursor",
                 _dotNetRef,
-                options.ToolsUpdateIntervalMs
+                options.Value.ToolsUpdateIntervalMs
             );
         }
     }

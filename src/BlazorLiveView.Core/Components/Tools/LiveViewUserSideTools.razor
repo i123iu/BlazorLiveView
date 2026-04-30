@@ -4,6 +4,7 @@
 @using BlazorLiveView.Core.JSInterop
 @using BlazorLiveView.Core.Options
 @using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
 @using Microsoft.JSInterop
 
 @attribute [LiveViewTranslateToAttribute(typeof(LiveViewMirrorSideTools))]
@@ -12,43 +13,157 @@
 @inject ILiveViewJSRuntime jsRuntime
 @inject ICircuitTracker circuitTracker
 @inject ILogger<LiveViewUserSideTools> logger
-@inject LiveViewOptions options
+@inject IOptions<LiveViewOptions> options
 
 <script type="text/javascript">
     window.blazorLiveView = window.blazorLiveView || {};
     window.blazorLiveView.screen = window.blazorLiveView.screen || {};
+    window.blazorLiveView.screen.state = window.blazorLiveView.screen.state || {
+        resize: {
+            currentWidth: window.innerWidth,
+            currentHeight: window.innerHeight,
+            lastSentWidth: -1,
+            lastSentHeight: -1,
+            timer: null,
+            isActive: false,
+            handler: null,
+            dotNetRef: null,
+            updateMs: 0
+        },
+        scroll: {
+            currentX: window.scrollX,
+            currentY: window.scrollY,
+            lastSentX: -1,
+            lastSentY: -1,
+            timer: null,
+            isActive: false,
+            handler: null,
+            dotNetRef: null,
+            updateMs: 0
+        }
+    };
 
-    window.blazorLiveView.screen.addResizeEvent = function (dotNetRef, throttleMs) {
-        let lastResizeTime = 0;
+    window.blazorLiveView.screen.addResizeEvent = function (dotNetRef, updateMs) {
+        const state = window.blazorLiveView.screen.state.resize;
         
-        const throttledResize = function () {
-            const now = Date.now();
-            if (now - lastResizeTime >= throttleMs) {
-                lastResizeTime = now;
-                dotNetRef.invokeMethodAsync("WindowSizeChanged", window.innerWidth, window.innerHeight);
-            }
+        if (state.isActive) return;
+        state.isActive = true;
+        state.dotNetRef = dotNetRef;
+        state.updateMs = updateMs;
+        
+        const onResize = function () {
+            state.currentWidth = window.innerWidth;
+            state.currentHeight = window.innerHeight;
         };
         
-        window.addEventListener("resize", throttledResize);
-        // Invoke once to set the initial size.
-        throttledResize();
-    }
-
-    window.blazorLiveView.screen.addScrollEvent = function (dotNetRef, throttleMs) {
-        let lastScrollTime = 0;
+        // Store handler for later removal
+        state.handler = onResize;
         
-        const throttledScroll = function () {
-            const now = Date.now();
-            if (now - lastScrollTime >= throttleMs) {
-                lastScrollTime = now;
-                dotNetRef.invokeMethodAsync("WindowScrolled", window.scrollX, window.scrollY);
+        // Start timer to check for changes every updateMs
+        state.timer = setInterval(function() {
+            if (state.currentWidth !== state.lastSentWidth ||
+                state.currentHeight !== state.lastSentHeight) {
+                
+                state.lastSentWidth = state.currentWidth;
+                state.lastSentHeight = state.currentHeight;
+                
+                state.dotNetRef.invokeMethodAsync("WindowSizeChanged",
+                    state.currentWidth,
+                    state.currentHeight
+                );
             }
+        }, updateMs);
+        
+        window.addEventListener("resize", onResize);
+        
+        // Set the initial size
+        onResize();
+        state.lastSentWidth = state.currentWidth;
+        state.lastSentHeight = state.currentHeight;
+        state.dotNetRef.invokeMethodAsync("WindowSizeChanged", state.currentWidth, state.currentHeight);
+    };
+
+    window.blazorLiveView.screen.stopResizeEvent = function () {
+        const state = window.blazorLiveView.screen.state.resize;
+        
+        if (!state.isActive) return;
+        state.isActive = false;
+        
+        // Clear timer
+        if (state.timer !== null) {
+            clearInterval(state.timer);
+            state.timer = null;
+        }
+        
+        // Remove event listener
+        if (state.handler) {
+            window.removeEventListener("resize", state.handler);
+            state.handler = null;
+        }
+        
+        state.dotNetRef = null;
+    };
+
+    window.blazorLiveView.screen.addScrollEvent = function (dotNetRef, updateMs) {
+        const state = window.blazorLiveView.screen.state.scroll;
+        
+        if (state.isActive) return;
+        state.isActive = true;
+        state.dotNetRef = dotNetRef;
+        state.updateMs = updateMs;
+        
+        const onScroll = function () {
+            state.currentX = window.scrollX;
+            state.currentY = window.scrollY;
         };
         
-        window.addEventListener("scroll", throttledScroll);
-        // Invoke once to set the initial scroll position.
-        throttledScroll();
-    }
+        // Store handler for later removal
+        state.handler = onScroll;
+        
+        // Start timer to check for changes every updateMs
+        state.timer = setInterval(function() {
+            if (state.currentX !== state.lastSentX ||
+                state.currentY !== state.lastSentY) {
+                
+                state.lastSentX = state.currentX;
+                state.lastSentY = state.currentY;
+                
+                state.dotNetRef.invokeMethodAsync("WindowScrolled",
+                    state.currentX,
+                    state.currentY
+                );
+            }
+        }, updateMs);
+        
+        window.addEventListener("scroll", onScroll);
+        
+        // Invoke once to set the initial scroll position
+        onScroll();
+        state.lastSentX = state.currentX;
+        state.lastSentY = state.currentY;
+        state.dotNetRef.invokeMethodAsync("WindowScrolled", state.currentX, state.currentY);
+    };
+
+    window.blazorLiveView.screen.stopScrollEvent = function () {
+        const state = window.blazorLiveView.screen.state.scroll;
+        
+        if (!state.isActive) return;
+        state.isActive = false;
+        
+        // Clear timer
+        if (state.timer !== null) {
+            clearInterval(state.timer);
+            state.timer = null;
+        }
+        
+        // Remove event listener
+        if (state.handler) {
+            window.removeEventListener("scroll", state.handler);
+            state.handler = null;
+        }
+        
+        state.dotNetRef = null;
+    };
 </script>
 
 <LaserPointerReceiver @ref="laserPointerReceiver" />
@@ -64,6 +179,7 @@
     private long _lastWindowSizeChangedTime = 0;
     private long _lastWindowScrolledTime = 0;
     private IUserCircuit _userCircuit = null!;
+    private bool _windowTrackingActive = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -72,24 +188,20 @@
 
     public void Dispose()
     {
+        _ = StopWindowTracking();
         _dotNetRef?.Dispose();
+        if (_userCircuit is not null)
+        {
+            _userCircuit.MirrorCircuitAdded -= OnAnyMirrorCircuitAdded;
+            _userCircuit.MirrorCircuitRemoved -= OnAnyMirrorCircuitRemoved;
+            _userCircuit.AnyMirrorCircuitCursorPositionChanged -= OnAnyMirrorCircuitCursorPositionChanged;
+        }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await jsRuntime.InvokeVoidAsyncNoMirror(
-                "blazorLiveView.screen.addResizeEvent",
-                _dotNetRef,
-                options.ToolsUpdateIntervalMs
-            );
-            await jsRuntime.InvokeVoidAsyncNoMirror(
-                "blazorLiveView.screen.addScrollEvent",
-                _dotNetRef,
-                options.ToolsUpdateIntervalMs
-            );
-
             var circuit = circuitTracker.GetCircuit(currentCircuit.Current!.Id);
             if (circuit is null)
             {
@@ -107,13 +219,9 @@
             else if (circuit is IUserCircuit userCircuit)
             {
                 _userCircuit = userCircuit;
-                _userCircuit.MirrorCursorChanged += MirrorCursorChanged;
-            }
-
-            // Start capturing user cursor
-            if (laserPointerTransmitter is not null)
-            {
-                await laserPointerTransmitter.StartCaptureCursor();
+                _userCircuit.MirrorCircuitAdded += OnAnyMirrorCircuitAdded;
+                _userCircuit.MirrorCircuitRemoved += OnAnyMirrorCircuitRemoved;
+                _userCircuit.AnyMirrorCircuitCursorPositionChanged += OnAnyMirrorCircuitCursorPositionChanged;
             }
         }
     }
@@ -122,7 +230,7 @@
     public void WindowSizeChanged(int width, int height)
     {
         var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        if (now - _lastWindowSizeChangedTime >= options.ToolsUpdateIntervalMs)
+        if (now - _lastWindowSizeChangedTime >= options.Value.ToolsUpdateIntervalMs)
         {
             _lastWindowSizeChangedTime = now;
             currentCircuit.AsUserCircuit()?
@@ -134,7 +242,7 @@
     public void WindowScrolled(int scrollX, int scrollY)
     {
         var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        if (now - _lastWindowScrolledTime >= options.ToolsUpdateIntervalMs)
+        if (now - _lastWindowScrolledTime >= options.Value.ToolsUpdateIntervalMs)
         {
             _lastWindowScrolledTime = now;
             currentCircuit.AsUserCircuit()?
@@ -142,16 +250,38 @@
         }
     }
 
-    private void MirrorCursorChanged(IUserCircuit userCircuit, string identifier)
+    private void OnAnyMirrorCircuitAdded(IUserCircuit userCircuit, IMirrorCircuit mirrorCircuit)
     {
-        var mirrorCursorPositions = userCircuit.MirrorCursorPositions;
-        if (mirrorCursorPositions.TryGetValue(identifier, out Position pos))
+        if (mirrorCircuit.CursorPosition is not null)
         {
-            laserPointerReceiver?.ShowPointer(identifier, pos);
+            laserPointerReceiver?.ShowPointer(mirrorCircuit.Id, mirrorCircuit.CursorPosition.Value);
+        }
+        if (userCircuit.MirrorCircuits.Count > 0 && laserPointerTransmitter is not null)
+        {
+            _ = laserPointerTransmitter.StartCaptureCursor();
+            _ = StartWindowTracking();
+        }
+    }
+
+    private void OnAnyMirrorCircuitRemoved(IUserCircuit userCircuit, IMirrorCircuit mirrorCircuit)
+    {
+        laserPointerReceiver?.HidePointer(mirrorCircuit.Id);
+        if (userCircuit.MirrorCircuits.Count == 0 && laserPointerTransmitter is not null)
+        {
+            _ = laserPointerTransmitter.StopCaptureCursor();
+            _ = StopWindowTracking();
+        }
+    }
+
+    private void OnAnyMirrorCircuitCursorPositionChanged(IUserCircuit userCircuit, IMirrorCircuit mirrorCircuit)
+    {
+        if (mirrorCircuit.CursorPosition is not null)
+        {
+            laserPointerReceiver?.ShowPointer(mirrorCircuit.Id, mirrorCircuit.CursorPosition.Value);
         }
         else
         {
-            laserPointerReceiver?.HidePointer(identifier);
+            laserPointerReceiver?.HidePointer(mirrorCircuit.Id);
         }
     }
 
@@ -165,5 +295,37 @@
     {
         currentCircuit.AsUserCircuit()?
             .NotifyUserCursorChanged(null);
+    }
+
+    public async Task StartWindowTracking()
+    {
+        if (!_windowTrackingActive)
+        {
+            _windowTrackingActive = true;
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.screen.addResizeEvent",
+                _dotNetRef,
+                options.Value.ToolsUpdateIntervalMs
+            );
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.screen.addScrollEvent",
+                _dotNetRef,
+                options.Value.ToolsUpdateIntervalMs
+            );
+        }
+    }
+
+    public async Task StopWindowTracking()
+    {
+        if (_windowTrackingActive)
+        {
+            _windowTrackingActive = false;
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.screen.stopResizeEvent"
+            );
+            await jsRuntime.InvokeVoidAsyncNoMirror(
+                "blazorLiveView.screen.stopScrollEvent"
+            );
+        }
     }
 }

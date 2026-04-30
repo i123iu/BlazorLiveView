@@ -10,37 +10,36 @@ namespace BlazorLiveView.Core.Circuits;
 
 internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 {
+    public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
+    public event IMirrorCircuit.WindowSizeSyncChangedHandler? WindowSizeSyncChanged;
+    public event IMirrorCircuit.ScrollSyncChangedHandler? ScrollSyncChanged;
+    public event IMirrorCircuit.PointerSyncChangedHandler? PointerSyncChanged;
+    public event IMirrorCircuit.CursorPositionChangedHandler? CursorPositionChanged;
+
+    public IUserCircuit SourceCircuit { get; private set; }
+    public Guid? State { get; private set; }
+    public bool DebugView { get; private set; }
+    public bool WindowSizeSyncEnabled { get; private set; } = false;
+    public bool ScrollSyncEnabled { get; private set; } = false;
+    public bool LaserPointerEnabled { get; private set; } = false;
+    public Position? CursorPosition { get; private set; } = null;
+
+    public bool IsBlocked => _blockReason != null;
+    public MirrorCircuitBlockReason BlockReason => _blockReason
+        ?? throw new Exception("Not blocked");
+
     private readonly ILogger _logger;
     private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
-    private readonly IUserCircuit _source;
-    private readonly Guid? _state;
-    private readonly bool _debugView;
     private MirrorCircuitBlockReason? _blockReason = null;
-
     private readonly Channel<JSInvocation> _jsInvocationQueue;
     private readonly Task? _processingTask;
     private readonly CancellationTokenSource _cancellationTokenSource;
-
     private readonly record struct JSInvocation(
         string Identifier,
         CancellationToken CancellationToken,
         object?[]? Args,
         long CreatedAtTicks
     );
-
-    public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
-    public event IMirrorCircuit.ScrollSyncChangedHandler? ScrollSyncChanged;
-    public event IMirrorCircuit.PointerSyncChangedHandler? PointerSyncChanged;
-
-    public IUserCircuit SourceCircuit => _source;
-    public Guid? State => _state;
-    public bool DebugView => _debugView;
-    public bool ScrollSyncEnabled { get; private set; } = false;
-    public bool PointerSyncEnabled { get; private set; } = false;
-
-    public bool IsBlocked => _blockReason != null;
-    public MirrorCircuitBlockReason BlockReason => _blockReason
-        ?? throw new Exception("Not blocked");
 
     public MirrorCircuit(
         Circuit circuit,
@@ -52,10 +51,12 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions
     ) : base(circuit, openedAt, logger)
     {
+        SourceCircuit = source;
+        SourceCircuit.NotifyMirrorCircuitAdded(this);
+
+        State = state;
+        DebugView = debugView;
         _logger = logger;
-        _source = source;
-        _state = state;
-        _debugView = debugView;
         _liveViewJSInteropOptions = liveViewJSInteropOptions;
         _cancellationTokenSource = new CancellationTokenSource();
         _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
@@ -64,10 +65,10 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
             SingleWriter = false
         });
 
-        _source.JSRuntimeInvoked += Source_JSRuntimeInvoked;
+        SourceCircuit.JSRuntimeInvoked += Source_JSRuntimeInvoked;
         CircuitStatusChanged += OnCircuitStatusChanged;
 
-        if (!_debugView)
+        if (!DebugView)
         {
             // Do not forward JS invocations to debug views, since all will fail anyway.
             _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
@@ -76,7 +77,8 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 
     public override void Dispose()
     {
-        _source.JSRuntimeInvoked -= Source_JSRuntimeInvoked;
+        SourceCircuit.NotifyMirrorCircuitRemoved(this);
+        SourceCircuit.JSRuntimeInvoked -= Source_JSRuntimeInvoked;
         CircuitStatusChanged -= OnCircuitStatusChanged;
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
@@ -171,22 +173,36 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         MirrorCircuitBlocked?.Invoke(this);
     }
 
+    public void NotifyWindowSizeSyncChanged(bool enabled)
+    {
+        if (WindowSizeSyncEnabled == enabled) return;
+        WindowSizeSyncEnabled = enabled;
+        WindowSizeSyncChanged?.Invoke(this);
+    }
+
     public void NotifyScrollSyncChanged(bool enabled)
     {
+        if (ScrollSyncEnabled == enabled) return;
         ScrollSyncEnabled = enabled;
         ScrollSyncChanged?.Invoke(this);
     }
 
-    public void NotifyMirrorCursorChanged(Position? position)
+    public void NotifyLaserPointerEnabledChanged(bool enabled)
     {
-        if (!PointerSyncEnabled) return;
-        SourceCircuit.NotifyMirrorCursorChanged(Id, position);
+        if (LaserPointerEnabled == enabled) return;
+        LaserPointerEnabled = enabled;
+        PointerSyncChanged?.Invoke(this);
     }
 
-    public void NotifyPointerSyncChanged(bool enabled)
+    public void NotifyMirrorCursorChanged(Position? position)
     {
-        PointerSyncEnabled = enabled;
-        SourceCircuit.NotifyMirrorCursorChanged(Id, null);
-        PointerSyncChanged?.Invoke(this);
+        if (position != null && CursorPosition != null)
+        {
+            if (CursorPosition.Value.x == position.Value.x &&
+                CursorPosition.Value.y == position.Value.y)
+                return;
+        }
+        CursorPosition = position;
+        CursorPositionChanged?.Invoke(this);
     }
 }

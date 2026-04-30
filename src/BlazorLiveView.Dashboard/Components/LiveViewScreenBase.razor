@@ -119,9 +119,10 @@
         }
     }
 
-    protected Task OnIsSyncScreenSizeActiveChanged(bool value)
+    protected Task OnIsSyncWindowSizeActiveChanged(bool value)
     {
         IsSyncScreenSizeActive = value;
+        MirrorCircuit?.NotifyWindowSizeSyncChanged(IsSyncScreenSizeActive);
         if (!IsSyncScreenSizeActive)
             OnIsSyncScrollPositionActiveChanged(false);
         return Task.CompletedTask;
@@ -137,7 +138,7 @@
     protected Task OnIsPointerActiveChanged(bool value)
     {
         IsPointerActive = value;
-        MirrorCircuit?.NotifyPointerSyncChanged(IsPointerActive);
+        MirrorCircuit?.NotifyLaserPointerEnabledChanged(IsPointerActive);
         return Task.CompletedTask;
     }
 

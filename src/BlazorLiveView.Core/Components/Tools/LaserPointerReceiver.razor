@@ -1,3 +1,4 @@
+@using Microsoft.Extensions.Options
 @using Microsoft.JSInterop
 @using BlazorLiveView.Core.JSInterop
 @using BlazorLiveView.Core.Options
@@ -6,7 +7,7 @@
 @implements IAsyncDisposable
 
 @inject ILiveViewJSRuntime jsRuntime
-@inject LiveViewOptions options
+@inject IOptions<LiveViewOptions> options
 
 @code
 {
@@ -26,7 +27,7 @@
     protected override async Task OnInitializedAsync()
     {
         _updateTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(
-            options.ToolsUpdateIntervalMs
+            options.Value.ToolsUpdateIntervalMs
         ));
         _ = ProcessUpdatesAsync();
     }

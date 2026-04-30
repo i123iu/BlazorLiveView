@@ -17,8 +17,6 @@
 
 @code {
     private IMirrorCircuit _mirrorCircuit = null!;
-    private long _lastScrollTime = 0;
-    private const long ScrollThrottleMs = 100;
 
     private LaserPointerReceiver? laserPointerReceiver;
     private LaserPointerTransmitter? laserPointerTransmitter;
@@ -63,7 +61,7 @@
                 SourceCircuit_UserCursorMoved(_mirrorCircuit.SourceCircuit);
             }
 
-            if (laserPointerTransmitter is not null && mirrorCircuit.PointerSyncEnabled)
+            if (laserPointerTransmitter is not null && mirrorCircuit.LaserPointerEnabled)
             {
                 await laserPointerTransmitter.StartCaptureCursor();
             }
@@ -72,14 +70,17 @@
 
     private void MirrorCircuit_ScrollSyncChanged(IMirrorCircuit mirrorCircuit)
     {
+        if (!mirrorCircuit.WindowSizeSyncEnabled)
+        {
+            laserPointerReceiver?.HideAllPointers();
+        }
         _ = Scroll(mirrorCircuit.SourceCircuit);
-        laserPointerReceiver?.HideAllPointers();
     }
 
     private void MirrorCircuit_PointerSyncChanged(IMirrorCircuit mirrorCircuit)
     {
         if (laserPointerTransmitter is null) return;
-        if (mirrorCircuit.PointerSyncEnabled)
+        if (mirrorCircuit.LaserPointerEnabled)
         {
             _ = laserPointerTransmitter.StartCaptureCursor();
         }
@@ -96,18 +97,13 @@
 
     private ValueTask Scroll(IUserCircuit source)
     {
-        var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        if (now - _lastScrollTime >= ScrollThrottleMs)
+        if (_mirrorCircuit.ScrollSyncEnabled && source.ScrollPosition.HasValue)
         {
-            _lastScrollTime = now;
-            if (_mirrorCircuit.ScrollSyncEnabled && source.ScrollPosition.HasValue)
-            {
-                return jsRuntime.InvokeVoidAsyncNoMirror(
-                    "window.scrollTo",
-                    source.ScrollPosition.Value.x,
-                    source.ScrollPosition.Value.y
-                );
-            }
+            return jsRuntime.InvokeVoidAsyncNoMirror(
+                "window.scrollTo",
+                source.ScrollPosition.Value.x,
+                source.ScrollPosition.Value.y
+            );
         }
         return ValueTask.CompletedTask;
     }

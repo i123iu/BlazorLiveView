@@ -244,5 +244,6 @@ internal sealed class CircuitTracker(
         }
 
         OnCircuitClosed?.Invoke(circuit);
+        circuit.Dispose();
     }
 }

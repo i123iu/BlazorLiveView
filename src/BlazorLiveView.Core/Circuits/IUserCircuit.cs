@@ -30,23 +30,34 @@ public interface IUserCircuit : ICircuit
     public delegate void UserCursorChangedHandler(IUserCircuit circuit);
     event WindowScrolledHandler? UserCursorChanged;
 
-    public delegate void MirrorCursorChangedHandler(IUserCircuit circuit, string identifier);
-    event MirrorCursorChangedHandler? MirrorCursorChanged;
+    public delegate void MirrorCircuitAddedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
+    internal event MirrorCircuitAddedHandler? MirrorCircuitAdded;
+
+    public delegate void MirrorCircuitRemovedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
+    internal event MirrorCircuitRemovedHandler? MirrorCircuitRemoved;
+
+    public delegate void AnyMirrorCircuitCursorPositionChangedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
+    internal event AnyMirrorCircuitCursorPositionChangedHandler? AnyMirrorCircuitCursorPositionChanged;
+
+    /// <summary>
+    /// Mirror circuits that are currently viewing this user circuit.
+    /// </summary>
+    HashSet<IMirrorCircuit> MirrorCircuits { get; }
 
     string Uri { get; }
     ClaimsPrincipal User { get; }
     Position? WindowSize { get; }
     Position? ScrollPosition { get; }
     Position? UserCursorPosition { get; }
-    Dictionary<string, Position> MirrorCursorPositions { get; }
     
     internal int SsrComponentIdToInteractiveComponentId(int ssrComponentId);
 
+    internal void NotifyMirrorCircuitAdded(IMirrorCircuit mirrorCircuit);
+    internal void NotifyMirrorCircuitRemoved(IMirrorCircuit mirrorCircuit);
     internal void NotifyUriChanged();
     internal void NotifyComponentRerendered(int componentId);
     internal void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args);
     internal void NotifyWindowResized(Position size);
     internal void NotifyWindowScrolled(Position scroll);
     internal void NotifyUserCursorChanged(Position? position);
-    internal void NotifyMirrorCursorChanged(string identifier, Position? position);
 }
