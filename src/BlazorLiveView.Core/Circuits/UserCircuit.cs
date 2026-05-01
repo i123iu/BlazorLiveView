@@ -13,6 +13,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.UriChangedHandler? UriChanged;
     public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
     public event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged;
+    public event IUserCircuit.SessionIdAssignedHandler? SessionIdAssigned;
     public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
     public event IUserCircuit.WindowResizedHandler? WindowResized;
     public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
@@ -77,6 +78,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
             throw new InvalidOperationException("Session ID is already assigned.");
         }
         SessionId = sessionId;
+        SessionIdAssigned?.Invoke(this);
     }
 
     public void NotifyComponentRerendered(int componentId)

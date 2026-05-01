@@ -19,7 +19,7 @@
 
     protected PausedCircuitReference? PausedCircuitReference { get; set; } = null;
 
-    protected IUserCircuit? _sourceCircuit;
+    private IUserCircuit? _sourceCircuit;
     protected IUserCircuit? SourceCircuit
     {
         get => _sourceCircuit;
@@ -153,9 +153,7 @@
         if (value)
         {
             // Pause
-            if (MirrorCircuit is null)
-                return;
-            var sessionId = MirrorCircuit.SourceCircuit.SessionId;
+            var sessionId = SourceCircuit?.SessionId;
             if (sessionId is null)
                 return;
             PausedCircuitReference = PausedCircuitsTracker.MarkPaused(sessionId.Value);

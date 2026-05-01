@@ -1,5 +1,8 @@
-﻿@using BlazorLiveView.Core.JSInterop
+﻿@using BlazorLiveView.Core.Attributes
+@using BlazorLiveView.Core.JSInterop
 @inject ILiveViewJSRuntime JS
+
+@attribute [LiveViewHideInMirror]
 
 <script type="text/javascript">
     // https://stackoverflow.com/a/59173474
@@ -7,13 +10,16 @@
     window.addEventListener('beforeunload', function (event) {
         sessionStorage.removeItem('blazorLiveView.lock');
     });
+    
+    window.blazorLiveView = window.blazorLiveView || {};
+    window.blazorLiveView.lockSessionStorage = function () {
+        if (sessionStorage.getItem('blazorLiveView.lock')) {
+            sessionStorage.clear();
+            console.warn('Found a lock in session storage. The storage was cleared.');
+        }
 
-    if (sessionStorage.getItem('blazorLiveView.lock')) {
-        sessionStorage.clear();
-        console.warn('Found a lock in session storage. The storage was cleared.');
-    }
-
-    sessionStorage.setItem('blazorLiveView.lock', '1');
+        sessionStorage.setItem('blazorLiveView.lock', '1');
+    };
 </script>
 
 @code {
@@ -22,16 +28,23 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!firstRender) return;
+
+        await LockSessionStorage();
+        var sessionId = await RetrieveSessionId();
+        if (sessionId == null || sessionId == Guid.Empty)
         {
-            var sessionId = await RetrieveSessionId();
-            if (sessionId == null || sessionId == Guid.Empty)
-            {
-                sessionId = Guid.NewGuid();
-                await StoreSessionId(sessionId.Value);
-            }
-            await OnSessionIdRetrieved.InvokeAsync(sessionId.Value);
+            sessionId = Guid.NewGuid();
+            await StoreSessionId(sessionId.Value);
         }
+        await OnSessionIdRetrieved.InvokeAsync(sessionId.Value);
+    }
+
+    private async Task LockSessionStorage()
+    {
+        await JS.InvokeVoidAsyncNoMirror(
+            "blazorLiveView.lockSessionStorage"
+        );
     }
 
     private async Task<Guid?> RetrieveSessionId()

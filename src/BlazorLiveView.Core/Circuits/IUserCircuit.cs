@@ -18,6 +18,9 @@ public interface IUserCircuit : ICircuit
     public delegate void ComponentRerenderedHandler(IUserCircuit circuit, int componentId);
     internal event ComponentRerenderedHandler? ComponentRerendered;
 
+    public delegate void SessionIdAssignedHandler(IUserCircuit circuit);
+    public event SessionIdAssignedHandler? SessionIdAssigned;
+
     public delegate void JSRuntimeInvokedHandler(IUserCircuit circuit, string identifier, CancellationToken cancellationToken, object?[]? args);
     internal event JSRuntimeInvokedHandler? JSRuntimeInvoked;
 
