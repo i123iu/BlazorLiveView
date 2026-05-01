@@ -424,6 +424,31 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
   nameWithType: IUserCircuit.ScrollPosition
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.SessionId
+  name: SessionId
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_SessionId
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.SessionId
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionId
+  nameWithType: IUserCircuit.SessionId
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.SessionId*
+  name: SessionId
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_SessionId_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.SessionId
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionId
+  nameWithType: IUserCircuit.SessionId
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssigned
+  name: SessionIdAssigned
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_SessionIdAssigned
+  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssigned
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssigned
+  nameWithType: IUserCircuit.SessionIdAssigned
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
+  name: IUserCircuit.SessionIdAssignedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
+  nameWithType: IUserCircuit.SessionIdAssignedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.Uri
   name: Uri
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_Uri
@@ -626,6 +651,19 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
   fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
   nameWithType: ICurrentCircuit
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
+  name: AsLiveViewCircuit()
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsLiveViewCircuit
+  commentId: M:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit()
+  nameWithType: ICurrentCircuit.AsLiveViewCircuit()
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit*
+  name: AsLiveViewCircuit
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsLiveViewCircuit_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
+  nameWithType: ICurrentCircuit.AsLiveViewCircuit
 - uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsUserCircuit
   name: AsUserCircuit()
   href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsUserCircuit
@@ -652,6 +690,149 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.Current
   nameWithType: ICurrentCircuit.Current
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker
+  name: IPausedCircuitsTracker
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker
+  nameWithType: IPausedCircuitsTracker
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MarkPaused(System.Guid)
+  name: MarkPaused(Guid)
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html#BlazorLiveView_Core_Circuits_Services_IPausedCircuitsTracker_MarkPaused_System_Guid_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MarkPaused(System.Guid)
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MarkPaused(System.Guid)
+  nameWithType: IPausedCircuitsTracker.MarkPaused(Guid)
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MarkPaused*
+  name: MarkPaused
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html#BlazorLiveView_Core_Circuits_Services_IPausedCircuitsTracker_MarkPaused_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MarkPaused
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MarkPaused
+  nameWithType: IPausedCircuitsTracker.MarkPaused
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MirrorCircuitLoaded(BlazorLiveView.Core.Circuits.IMirrorCircuit)
+  name: MirrorCircuitLoaded(IMirrorCircuit)
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html#BlazorLiveView_Core_Circuits_Services_IPausedCircuitsTracker_MirrorCircuitLoaded_BlazorLiveView_Core_Circuits_IMirrorCircuit_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MirrorCircuitLoaded(BlazorLiveView.Core.Circuits.IMirrorCircuit)
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MirrorCircuitLoaded(BlazorLiveView.Core.Circuits.IMirrorCircuit)
+  nameWithType: IPausedCircuitsTracker.MirrorCircuitLoaded(IMirrorCircuit)
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MirrorCircuitLoaded*
+  name: MirrorCircuitLoaded
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html#BlazorLiveView_Core_Circuits_Services_IPausedCircuitsTracker_MirrorCircuitLoaded_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MirrorCircuitLoaded
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.MirrorCircuitLoaded
+  nameWithType: IPausedCircuitsTracker.MirrorCircuitLoaded
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume(BlazorLiveView.Core.Circuits.IUserCircuit)
+  name: WaitOnResume(IUserCircuit)
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html#BlazorLiveView_Core_Circuits_Services_IPausedCircuitsTracker_WaitOnResume_BlazorLiveView_Core_Circuits_IUserCircuit_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume(BlazorLiveView.Core.Circuits.IUserCircuit)
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume(BlazorLiveView.Core.Circuits.IUserCircuit)
+  nameWithType: IPausedCircuitsTracker.WaitOnResume(IUserCircuit)
+- uid: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume*
+  name: WaitOnResume
+  href: api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html#BlazorLiveView_Core_Circuits_Services_IPausedCircuitsTracker_WaitOnResume_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume
+  nameWithType: IPausedCircuitsTracker.WaitOnResume
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference
+  name: PausedCircuitReference
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference
+  nameWithType: PausedCircuitReference
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor(System.Guid)
+  name: PausedCircuitReference(Guid)
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference__ctor_System_Guid_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.PausedCircuitReference(System.Guid)
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.New(System.Guid)
+  nameWithType: PausedCircuitReference.PausedCircuitReference(Guid)
+  nameWithType.vb: PausedCircuitReference.New(Guid)
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor*
+  name: PausedCircuitReference
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference__ctor_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.PausedCircuitReference
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.New
+  nameWithType: PausedCircuitReference.PausedCircuitReference
+  nameWithType.vb: PausedCircuitReference.New
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(System.Object)
+  name: Equals(object?)
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_Equals_System_Object_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(object?)
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(Object)
+  nameWithType: PausedCircuitReference.Equals(object?)
+  nameWithType.vb: PausedCircuitReference.Equals(Object)
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals*
+  name: Equals
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_Equals_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals
+  nameWithType: PausedCircuitReference.Equals
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
+  name: GetHashCode()
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_GetHashCode
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode()
+  nameWithType: PausedCircuitReference.GetHashCode()
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode*
+  name: GetHashCode
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_GetHashCode_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
+  nameWithType: PausedCircuitReference.GetHashCode
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  name: IsPaused
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_IsPaused
+  commentId: P:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  nameWithType: PausedCircuitReference.IsPaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused*
+  name: IsPaused
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_IsPaused_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  nameWithType: PausedCircuitReference.IsPaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler
+  name: PausedCircuitReference.StatusChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler
+  nameWithType: PausedCircuitReference.StatusChangedHandler
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
+  name: UnmarkPaused()
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_UnmarkPaused
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused()
+  nameWithType: PausedCircuitReference.UnmarkPaused()
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused*
+  name: UnmarkPaused
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_UnmarkPaused_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
+  nameWithType: PausedCircuitReference.UnmarkPaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Unpaused
+  name: Unpaused
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_Unpaused
+  commentId: E:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Unpaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Unpaused
+  nameWithType: PausedCircuitReference.Unpaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.circuitSessionId
+  name: circuitSessionId
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_circuitSessionId
+  commentId: F:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.circuitSessionId
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.circuitSessionId
+  nameWithType: PausedCircuitReference.circuitSessionId
 - uid: BlazorLiveView.Core.Components
   name: BlazorLiveView.Core.Components
   href: api/BlazorLiveView.Core.Components.html
@@ -709,6 +890,73 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Components.LiveViewHideInMirror.ChildContent
   nameWithType: LiveViewHideInMirror.ChildContent
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror
+  name: LiveViewWaitOnMirror
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html
+  commentId: T:BlazorLiveView.Core.Components.LiveViewWaitOnMirror
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror
+  nameWithType: LiveViewWaitOnMirror
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.#ctor(BlazorLiveView.Core.Circuits.Services.ICurrentCircuit,Microsoft.Extensions.Logging.ILogger{BlazorLiveView.Core.Components.LiveViewWaitOnMirror})
+  name: LiveViewWaitOnMirror(ICurrentCircuit, ILogger<LiveViewWaitOnMirror>)
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror__ctor_BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_Microsoft_Extensions_Logging_ILogger_BlazorLiveView_Core_Components_LiveViewWaitOnMirror__
+  commentId: M:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.#ctor(BlazorLiveView.Core.Circuits.Services.ICurrentCircuit,Microsoft.Extensions.Logging.ILogger{BlazorLiveView.Core.Components.LiveViewWaitOnMirror})
+  name.vb: New(ICurrentCircuit, ILogger(Of LiveViewWaitOnMirror))
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.LiveViewWaitOnMirror(BlazorLiveView.Core.Circuits.Services.ICurrentCircuit, Microsoft.Extensions.Logging.ILogger<BlazorLiveView.Core.Components.LiveViewWaitOnMirror>)
+  fullName.vb: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.New(BlazorLiveView.Core.Circuits.Services.ICurrentCircuit, Microsoft.Extensions.Logging.ILogger(Of BlazorLiveView.Core.Components.LiveViewWaitOnMirror))
+  nameWithType: LiveViewWaitOnMirror.LiveViewWaitOnMirror(ICurrentCircuit, ILogger<LiveViewWaitOnMirror>)
+  nameWithType.vb: LiveViewWaitOnMirror.New(ICurrentCircuit, ILogger(Of LiveViewWaitOnMirror))
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.#ctor*
+  name: LiveViewWaitOnMirror
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror__ctor_
+  commentId: Overload:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.LiveViewWaitOnMirror
+  fullName.vb: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.New
+  nameWithType: LiveViewWaitOnMirror.LiveViewWaitOnMirror
+  nameWithType.vb: LiveViewWaitOnMirror.New
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  name: BuildRenderTree(RenderTreeBuilder)
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_BuildRenderTree_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_
+  commentId: M:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+  nameWithType: LiveViewWaitOnMirror.BuildRenderTree(RenderTreeBuilder)
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree*
+  name: BuildRenderTree
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_BuildRenderTree_
+  commentId: Overload:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree
+  nameWithType: LiveViewWaitOnMirror.BuildRenderTree
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent
+  name: ChildContent
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_ChildContent
+  commentId: P:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent
+  nameWithType: LiveViewWaitOnMirror.ChildContent
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent*
+  name: ChildContent
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_ChildContent_
+  commentId: Overload:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent
+  nameWithType: LiveViewWaitOnMirror.ChildContent
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(System.Boolean)
+  name: OnAfterRender(bool)
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_System_Boolean_
+  commentId: M:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(System.Boolean)
+  name.vb: OnAfterRender(Boolean)
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(bool)
+  fullName.vb: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(Boolean)
+  nameWithType: LiveViewWaitOnMirror.OnAfterRender(bool)
+  nameWithType.vb: LiveViewWaitOnMirror.OnAfterRender(Boolean)
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender*
+  name: OnAfterRender
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_
+  commentId: Overload:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender
+  nameWithType: LiveViewWaitOnMirror.OnAfterRender
 - uid: BlazorLiveView.Core.Components.Tools
   name: BlazorLiveView.Core.Components.Tools
   href: api/BlazorLiveView.Core.Components.Tools.html

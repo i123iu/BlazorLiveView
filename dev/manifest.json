@@ -250,6 +250,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.yml",
       "output": {
         ".html": {
@@ -390,6 +404,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.Services.PausedCircuitReference",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.yml",
       "output": {
         ".html": {
@@ -429,6 +485,20 @@
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Components.LiveViewHideInMirror",
       "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Components.LiveViewHideInMirror.yml\" sourcestartlinenumber=\"1\">The contents of this component will be hidden (removed) when rendering inside\na mirror circuit. Also see <xref href=\"BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Components.LiveViewWaitOnMirror",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.yml\" sourcestartlinenumber=\"1\">Wrapper for app content that will first wait on any mirror circuits that\nwant to view this circuit to finish loading. This allows the mirror\ncircuits to capture all JS interop calls that would normally happen\nbefore the mirror circuit could finish loading.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -554,7 +624,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.yml\" sourcestartlinenumber=\"1\">A subtype of <xref href=\"Microsoft.JSInterop.IJSRuntime\" data-throw-if-not-resolved=\"false\"></xref> that automatically forwards all JS\ninterop invocations (<xref href=\"Microsoft.JSInterop.IJSRuntime.InvokeAsync%60%601(System.String%2cSystem.Object%5b%5d)\" data-throw-if-not-resolved=\"false\"></xref>) to all mirror\ncircuits that are viewing the current session.\nSee <xref href=\"BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder%2cSystem.Action%7bBlazorLiveView.Core.Options.LiveViewJSInteropOptions%7d)\" data-throw-if-not-resolved=\"false\"></xref> for\nforwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>\n"
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.yml\" sourcestartlinenumber=\"1\">A subtype of <xref href=\"Microsoft.JSInterop.IJSRuntime\" data-throw-if-not-resolved=\"false\"></xref> that automatically forwards all JS\ninterop invocations (<xref href=\"Microsoft.JSInterop.IJSRuntime.InvokeAsync%60%601(System.String%2cSystem.Object%5b%5d)\" data-throw-if-not-resolved=\"false\"></xref>) to all mirror\ncircuits that are viewing the current circuit.\nSee <xref href=\"BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder%2cSystem.Action%7bBlazorLiveView.Core.Options.LiveViewJSInteropOptions%7d)\" data-throw-if-not-resolved=\"false\"></xref> for\nforwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>\n"
     },
     {
       "type": "ManagedReference",

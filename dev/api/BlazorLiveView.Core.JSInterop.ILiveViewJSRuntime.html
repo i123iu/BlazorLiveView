@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface ILiveViewJSRuntime | BlazorLiveView ">
       
-      <meta name="description" content="A subtype of  that automatically forwards all JS interop invocations () to all mirror circuits that are viewing the current session. See  for forwarding JS invocations from all instances of IJSRuntime.">
+      <meta name="description" content="A subtype of  that automatically forwards all JS interop invocations () to all mirror circuits that are viewing the current circuit. See  for forwarding JS invocations from all instances of IJSRuntime.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -99,7 +99,7 @@ Interface ILiveViewJSRuntime  <a class="header-action link-secondary" title="Vie
 
   <div class="markdown summary"><p>A subtype of <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> that automatically forwards all JS
 interop invocations (<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeasync#microsoft-jsinterop-ijsruntime-invokeasync-1(system-string-system-object())">InvokeAsync&lt;TValue&gt;(string, object[])</a>) to all mirror
-circuits that are viewing the current session.
+circuits that are viewing the current circuit.
 See <a class="xref" href="BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__">InterceptIJSRuntime(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)</a> for
 forwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>
 </div>
@@ -170,7 +170,7 @@ forwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>
   <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/ILiveViewJSRuntime.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Does not forward the JS interop invocation unlike <code>InvokeAsync</code>.</p>
+  <div class="markdown level1 summary"><p>Does not forward the JS interop invocation to mirror circuits unlike <code>InvokeAsync</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -214,7 +214,7 @@ forwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>
   <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/ILiveViewJSRuntime.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Does not forward the JS interop invocation unlike <code>InvokeAsync</code>.</p>
+  <div class="markdown level1 summary"><p>Does not forward the JS interop invocation to mirror circuits unlike <code>InvokeAsync</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
