@@ -17,7 +17,25 @@
     protected bool IsSyncScrollPositionActive { get; set; } = false;
     protected bool IsPointerActive { get; set; } = false;
 
-    protected PausedCircuitReference? PausedCircuitReference { get; set; } = null;
+    private PausedCircuitReference? _pausedCircuitReference;
+    protected PausedCircuitReference? PausedCircuitReference
+    {
+        get => _pausedCircuitReference;
+        set {
+            if (_pausedCircuitReference == value) return;
+            if (_pausedCircuitReference is not null)
+            {
+                _pausedCircuitReference.Unpaused -= OnPausedCircuitUnpaused;
+                _pausedCircuitReference.UnmarkPaused();
+                _pausedCircuitReference = null;
+            }
+            if (value is not null)
+            {
+                _pausedCircuitReference = value;
+                _pausedCircuitReference.Unpaused += OnPausedCircuitUnpaused;
+            }
+        }
+    }
 
     private IUserCircuit? _sourceCircuit;
     protected IUserCircuit? SourceCircuit
@@ -25,12 +43,21 @@
         get => _sourceCircuit;
         set
         {
-            if (_sourceCircuit != value)
+            if (_sourceCircuit == value) return;
+
+            PausedCircuitReference = null;
+
+            _sourceCircuit = value;
+            if (_sourceCircuit is null) return;
+
+            _sourceCircuit.SessionIdAssigned += OnSourceCircuitSessionIdAssigned;
+            if (_sourceCircuit.SessionId is not null)
             {
-                _sourceCircuit = value;
-                liveViewScreenIFrame?.ResetState();
-                StateHasChanged();
+                OnSourceCircuitSessionIdAssigned(_sourceCircuit);
             }
+
+            liveViewScreenIFrame?.ResetState();
+            StateHasChanged();
         }
     }
 
@@ -72,6 +99,8 @@
                 UnsubscribeFromCircuit(circuit);
             }
         }
+
+        PausedCircuitReference = null;
     }
 
     protected void SubscribeToCircuit(ICircuit circuit)
@@ -145,34 +174,20 @@
         return Task.CompletedTask;
     }
 
-    protected void OnWaitOnMirrorChanged(bool value)
+    private void OnSourceCircuitSessionIdAssigned(IUserCircuit userCircuit)
     {
-        bool isPaused = PausedCircuitReference is not null;
-        if (isPaused == value) return;
-
-        if (value)
-        {
-            // Pause
-            var sessionId = SourceCircuit?.SessionId;
-            if (sessionId is null)
-                return;
-            PausedCircuitReference = PausedCircuitsTracker.MarkPaused(sessionId.Value);
-            PausedCircuitReference?.Unpaused += OnPausedCircuitUnpaused;
-        }
-        else
-        {
-            // Unpause
-            PausedCircuitReference!.Unpaused -= OnPausedCircuitUnpaused;
-            PausedCircuitReference.UnmarkPaused();
-            PausedCircuitReference = null;
-        }
+        _sourceCircuit?.SessionIdAssigned -= OnSourceCircuitSessionIdAssigned;
+        if (PausedCircuitReference is not null &&
+            PausedCircuitReference.circuitSessionId == userCircuit.SessionId)
+            return;
+        PausedCircuitReference = PausedCircuitsTracker.MarkPaused(
+            userCircuit.SessionId!.Value);
     }
 
-    private void OnPausedCircuitUnpaused(PausedCircuitReference _)
+    private void OnPausedCircuitUnpaused(PausedCircuitReference r)
     {
-        PausedCircuitReference?.Unpaused -= OnPausedCircuitUnpaused;
+        if (PausedCircuitReference != r) return;
         PausedCircuitReference = null;
-        InvokeAsync(StateHasChanged);
     }
 
     protected virtual void OnAnyCircuitOpened(ICircuit circuit)
