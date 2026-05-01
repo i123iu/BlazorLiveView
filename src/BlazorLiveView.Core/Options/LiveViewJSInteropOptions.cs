@@ -30,6 +30,7 @@ public sealed class LiveViewJSInteropOptions
             new ExactJSInteropInterceptionRule("Blazor._internal.PageTitle.getAndRemoveExistingTitle", InterceptionBehavior.Intercept),
             new ExactJSInteropInterceptionRule("Blazor._internal.domWrapper.focusBySelector", InterceptionBehavior.Intercept),
             new ExactJSInteropInterceptionRule("Blazor._internal.attachWebRendererInterop", InterceptionBehavior.SkipInterception),
+            new ExactJSInteropInterceptionRule("Blazor._internal.navigationManager.enableNavigationInterception", InterceptionBehavior.SkipInterception),
         };
 
     /// <summary>

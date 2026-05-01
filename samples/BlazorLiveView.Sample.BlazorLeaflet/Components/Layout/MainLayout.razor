@@ -1,4 +1,5 @@
-﻿@using BlazorLiveView.Core.Components.Tools
+﻿@using BlazorLiveView.Core.Components
+@using BlazorLiveView.Core.Components.Tools
 @inherits LayoutComponentBase
 
 <LiveViewUserSideTools />
@@ -14,7 +15,9 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <LiveViewWaitOnMirror>
+                @Body
+            </LiveViewWaitOnMirror>
         </article>
     </main>
 </div>

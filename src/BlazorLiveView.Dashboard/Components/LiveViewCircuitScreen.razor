@@ -23,7 +23,7 @@
                        IsSyncScrollPositionActive="@IsSyncScrollPositionActive"
                        IsSyncScrollPositionActiveChanged="OnIsSyncScrollPositionActiveChanged"
                        IsPointerActive="@IsPointerActive"
-                       IsPointerActiveChanged="@OnIsPointerActiveChanged"/>
+                       IsPointerActiveChanged="@OnIsPointerActiveChanged" />
 
     <div class="liveview-screen-content">
         @{
@@ -47,10 +47,10 @@
                 }
 
                 <LiveViewScreenIFrame @ref="liveViewScreenIFrame"
-                                        SourceCircuitId="@SourceCircuitId"
-                                        MirrorCircuitChanged="MirrorCircuitChanged"
-                                        DebugView="@DebugView"
-                                        WindowSize="IsSyncScreenSizeActive ? SourceCircuit?.WindowSize : null" />
+                                      SourceCircuitId="@SourceCircuitId"
+                                      MirrorCircuitChanged="MirrorCircuitChanged"
+                                      DebugView="@DebugView"
+                                      WindowSize="IsSyncScreenSizeActive ? SourceCircuit?.WindowSize : null" />
                 break;
         }
     </div>
@@ -64,6 +64,11 @@
     public bool DebugView { get; set; } = false;
 
     protected override void OnParametersSet()
+    {
+        UpdateSourceCircuit();
+    }
+
+    private void UpdateSourceCircuit()
     {
         if (string.IsNullOrEmpty(SourceCircuitId))
         {
@@ -81,10 +86,17 @@
         {
             SourceCircuit = null;
         }
+
+        StateHasChanged();
     }
 
     protected override void OnAnyCircuitOpened(ICircuit circuit)
     {
+        if (circuit is IUserCircuit userCircuit)
+        {
+            userCircuit.SessionIdAssigned += OnAnyUserCircuitSessionIdAssigned;
+        }
+
         if (circuit.Id == SourceCircuitId)
         {
             InvokeAsync(StateHasChanged);
@@ -96,6 +108,22 @@
         if (circuit.Id == SourceCircuitId)
         {
             InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void OnAnyUserCircuitSessionIdAssigned(IUserCircuit userCircuit)
+    {
+        if (GetRenderState() == LiveViewRenderState.SourceCircuitClosed &&
+            SourceCircuit != userCircuit &&
+            SourceCircuit?.SessionId == userCircuit.SessionId)
+        {
+            InvokeAsync(() =>
+            {
+                // TODO: Change URI
+                SourceCircuitId = userCircuit.Id;
+                SourceCircuit = null;
+                UpdateSourceCircuit();
+            });
         }
     }
 }

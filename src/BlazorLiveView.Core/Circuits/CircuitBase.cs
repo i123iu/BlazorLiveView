@@ -93,4 +93,7 @@ internal abstract class CircuitBase(
     {
         return Circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
     }
+
+    public virtual void NotifyLoaded()
+    { }
 }

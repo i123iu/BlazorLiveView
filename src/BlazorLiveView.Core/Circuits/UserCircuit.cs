@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Components.Tools;
+﻿using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.Components.Tools;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.UriChangedHandler? UriChanged;
     public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
     public event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged;
+    public event IUserCircuit.SessionIdAssignedHandler? SessionIdAssigned;
     public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
     public event IUserCircuit.WindowResizedHandler? WindowResized;
     public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
@@ -22,6 +24,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
 
     public HashSet<IMirrorCircuit> MirrorCircuits { get; } = new();
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
+    public Guid? SessionId { get; private set; } = null;
     public ClaimsPrincipal User => _authenticationStateProvider
         // Calling .Result should be fine, since the task is created in Blazor
         // Server using `Task.FromResult` (in `CircuitHost.cs`).
@@ -30,11 +33,13 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public Position? ScrollPosition { get; private set; }
     public Position? UserCursorPosition { get; private set; }
 
+    private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly AuthenticationStateProvider _authenticationStateProvider;
 
     public UserCircuit(
         Circuit circuit,
         DateTime openedAt,
+        IPausedCircuitsTracker pausedCircuitsTracker,
         ILogger<UserCircuit> logger
     ) : base(circuit, openedAt, logger)
     {
@@ -44,6 +49,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
                     "The AuthenticationStateProvider service is not available."
                 );
         _authenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
+        _pausedCircuitsTracker = pausedCircuitsTracker;
     }
 
     public override void Dispose()
@@ -63,6 +69,16 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
         var webRootComponent = webRootComponentManager.GetRequiredWebRootComponent(ssrComponentId);
         return webRootComponent.InteractiveComponentId;
+    }
+
+    public void AssignSessionId(Guid sessionId)
+    {
+        if (SessionId != null)
+        {
+            throw new InvalidOperationException("Session ID is already assigned.");
+        }
+        SessionId = sessionId;
+        SessionIdAssigned?.Invoke(this);
     }
 
     public void NotifyComponentRerendered(int componentId)
@@ -122,4 +138,12 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     {
         AnyMirrorCircuitCursorPositionChanged?.Invoke(this, mirrorCircuit);
     }
+
+    Task IUserCircuit.WaitOnMirrorCircuitLoad()
+    {
+        return _pausedCircuitsTracker.WaitOnResume(this);
+    }
+
+    public override int GetHashCode()
+        => Id.GetHashCode();
 }

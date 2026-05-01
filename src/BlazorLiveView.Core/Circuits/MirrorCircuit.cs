@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Components.Tools;
+﻿using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.Components.Tools;
 using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
@@ -29,11 +30,13 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         ?? throw new Exception("Not blocked");
 
     private readonly ILogger _logger;
+    private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
-    private MirrorCircuitBlockReason? _blockReason = null;
+
     private readonly Channel<JSInvocation> _jsInvocationQueue;
     private readonly Task? _processingTask;
     private readonly CancellationTokenSource _cancellationTokenSource;
+    private MirrorCircuitBlockReason? _blockReason = null;
     private readonly record struct JSInvocation(
         string Identifier,
         CancellationToken CancellationToken,
@@ -47,6 +50,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         Guid? state,
         DateTime openedAt,
         bool debugView,
+        IPausedCircuitsTracker pausedCircuitsTracker,
         ILogger<MirrorCircuit> logger,
         IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions
     ) : base(circuit, openedAt, logger)
@@ -57,6 +61,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         State = state;
         DebugView = debugView;
         _logger = logger;
+        _pausedCircuitsTracker = pausedCircuitsTracker;
         _liveViewJSInteropOptions = liveViewJSInteropOptions;
         _cancellationTokenSource = new CancellationTokenSource();
         _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
@@ -204,5 +209,10 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         }
         CursorPosition = position;
         CursorPositionChanged?.Invoke(this);
+    }
+
+    public override void NotifyLoaded()
+    {
+        _pausedCircuitsTracker.MirrorCircuitLoaded(this);
     }
 }
