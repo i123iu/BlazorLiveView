@@ -5,18 +5,15 @@ namespace BlazorLiveView.Core.Circuits.Services;
 public interface IPausedCircuitsTracker
 {
     /// <summary>
-    /// Mark the next circuit created with this userSelector as paused at
-    /// start. It will be resumed when a mirror circuit loads and resumes
-    /// it by calling <see cref="ResumeUser(IUserCircuit)"/>.
+    /// Mark the circuit with this sessionId to be paused the next time it is
+    /// reloaded (refreshed). It will be resumed when a mirror circuit loads
+    /// and resumes it by calling <see cref="MirrorCircuitLoaded"/>.
     /// </summary>
-    /// <returns>
-    /// True when the caller has successfully paused the user.
-    /// </returns>
-    PausedCircuitReference? PauseUser(string userSelector);
+    PausedCircuitReference? MarkPaused(Guid circuitSessionId);
 
     /// <summary>
-    /// All user circuits (their <see cref="LiveViewWaitOnMirror"/> component)
-    /// should call this and resume once this task completers.
+    /// All user circuits (their <see cref="LiveViewWaitOnMirror"/> components)
+    /// should call this and resume once this task completes.
     /// </summary>
     Task WaitOnResume(IUserCircuit waitingCircuit);
 
@@ -27,16 +24,16 @@ public interface IPausedCircuitsTracker
 }
 
 public class PausedCircuitReference(
-    string userSelector
+    Guid circuitSessionId
 )
 {
     public delegate void StatusChangedHandler(PausedCircuitReference reference);
     public event StatusChangedHandler? Unpaused;
 
-    public readonly string userSelector = userSelector;
+    public readonly Guid circuitSessionId = circuitSessionId;
     public bool IsPaused { get; private set; } = true;
 
-    public void Unpause()
+    public void UnmarkPaused()
     {
         if (!IsPaused) return;
         IsPaused = false;
@@ -44,12 +41,12 @@ public class PausedCircuitReference(
     }
 
     public override int GetHashCode()
-        => userSelector.GetHashCode();
+        => circuitSessionId.GetHashCode();
 
     public override bool Equals(object? obj)
     {
         if (obj == null) return false;
         if (obj is not PausedCircuitReference other) return false;
-        return userSelector == other.userSelector;
+        return circuitSessionId == other.circuitSessionId;
     }
 }

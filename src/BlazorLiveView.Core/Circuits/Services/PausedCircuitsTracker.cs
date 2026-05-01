@@ -1,6 +1,4 @@
-﻿using BlazorLiveView.Core.Options;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
 
 namespace BlazorLiveView.Core.Circuits.Services;
 
@@ -9,16 +7,15 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
     private const long TIMEOUT_MS = 10_000;
 
     private readonly ICircuitTracker _circuitTracker;
-    private readonly IOptions<LiveViewOptions> _liveViewOptions;
     private readonly ILogger<PausedCircuitsTracker> _logger;
 
     private readonly Lock _lock = new();
 
     /// <summary>
-    /// User selector of users whose next circuit will be paused.
+    /// Session IDs of circuits whose next circuit will be paused.
     /// Access only with _lock.
     /// </summary>
-    private readonly Dictionary<string, PausedCircuitReference> _usersToBePaused = new();
+    private readonly Dictionary<Guid, PausedCircuitReference> _usersToBePaused = new();
 
     /// <summary>
     /// 
@@ -29,12 +26,10 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
 
     public PausedCircuitsTracker(
         ICircuitTracker circuitTracker,
-        IOptions<LiveViewOptions> liveViewOptions,
         ILogger<PausedCircuitsTracker> logger
     )
     {
         _circuitTracker = circuitTracker;
-        _liveViewOptions = liveViewOptions;
         _logger = logger;
 
         _circuitTracker.OnCircuitClosed += OnCircuitClosed;
@@ -91,23 +86,21 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         }
     }
 
-    public PausedCircuitReference? PauseUser(
-        string userSelector
-    )
+    public PausedCircuitReference? MarkPaused(Guid circuitSessionId)
     {
         lock (_lock)
         {
             if (_logger.IsEnabled(LogLevel.Debug))
             {
                 _logger.LogDebug(
-                    "Pausing user {UserSelector}",
-                    userSelector
+                    "Pausing session {SessionId}",
+                    circuitSessionId
                 );
             }
 
-            PausedCircuitReference reference = new(userSelector);
+            PausedCircuitReference reference = new(circuitSessionId);
             reference.Unpaused += PausedCircuitReference_UnpauseUser;
-            if (_usersToBePaused.TryAdd(userSelector, reference))
+            if (_usersToBePaused.TryAdd(circuitSessionId, reference))
             {
                 return reference;
             }
@@ -115,19 +108,21 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         }
     }
 
-    private void PausedCircuitReference_UnpauseUser(PausedCircuitReference reference)
+    private void PausedCircuitReference_UnpauseUser(
+        PausedCircuitReference reference
+    )
     {
         lock (_lock)
         {
             if (_logger.IsEnabled(LogLevel.Debug))
             {
                 _logger.LogDebug(
-                    "Unpausing user {UserSelector}",
-                    reference.userSelector
+                    "Unpausing session {SessionId}",
+                    reference.circuitSessionId
                 );
             }
             reference.Unpaused -= PausedCircuitReference_UnpauseUser;
-            _usersToBePaused.Remove(reference.userSelector);
+            _usersToBePaused.Remove(reference.circuitSessionId);
         }
     }
 
@@ -135,27 +130,26 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         IUserCircuit waitingCircuit
     )
     {
-        var userSelector = _liveViewOptions.Value.UserSelectorExtractor(
-            waitingCircuit.User
-        );
-
-        if (userSelector is null)
+        if (waitingCircuit.SessionId is null)
         {
-            // Do not pause circuits for users that are not logged in
+            _logger.LogWarning(
+                "Circuit {CircuitId} does not have a session ID.",
+                waitingCircuit.Id
+            );
             return;
         }
+
+        var sessionId = waitingCircuit.SessionId.Value;
 
         TaskCompletionSource tcs;
         PausedCircuitReference reference;
         lock (_lock)
         {
-            if (!_usersToBePaused.Remove(userSelector, out var referenceNullable))
+            if (!_usersToBePaused.Remove(sessionId, out reference!))
             {
                 // This user is not paused
                 return;
             }
-            
-            reference = referenceNullable;
 
             // Pause this user
 
@@ -173,7 +167,7 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         if (_logger.IsEnabled(LogLevel.Debug))
         {
             _logger.LogDebug(
-                "Circuit {CircuitId} is waiting.",
+                "Circuit {CircuitId} is paused and waiting.",
                 waitingCircuit.Id
             );
         }
@@ -181,7 +175,7 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         await tcs.Task.WaitAsync(TimeSpan.FromMilliseconds(TIMEOUT_MS));
 
         reference.Unpaused -= PausedCircuitReference_UnpauseUser;
-        reference.Unpause();
+        reference.UnmarkPaused();
 
         if (_logger.IsEnabled(LogLevel.Debug))
         {

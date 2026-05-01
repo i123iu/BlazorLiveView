@@ -23,7 +23,9 @@
                        IsSyncScrollPositionActive="@IsSyncScrollPositionActive"
                        IsSyncScrollPositionActiveChanged="OnIsSyncScrollPositionActiveChanged"
                        IsPointerActive="@IsPointerActive"
-                       IsPointerActiveChanged="@OnIsPointerActiveChanged"/>
+                       IsPointerActiveChanged="@OnIsPointerActiveChanged"
+                       WaitOnMirror="@(PausedCircuitReference is not null)"
+                       WaitOnMirrorChanged="OnWaitOnMirrorChanged" />
 
     <div class="liveview-screen-content">
         @{
@@ -47,10 +49,10 @@
                 }
 
                 <LiveViewScreenIFrame @ref="liveViewScreenIFrame"
-                                        SourceCircuitId="@SourceCircuitId"
-                                        MirrorCircuitChanged="MirrorCircuitChanged"
-                                        DebugView="@DebugView"
-                                        WindowSize="IsSyncScreenSizeActive ? SourceCircuit?.WindowSize : null" />
+                                      SourceCircuitId="@SourceCircuitId"
+                                      MirrorCircuitChanged="MirrorCircuitChanged"
+                                      DebugView="@DebugView"
+                                      WindowSize="IsSyncScreenSizeActive ? SourceCircuit?.WindowSize : null" />
                 break;
         }
     </div>

@@ -12,7 +12,6 @@
 @inherits LiveViewScreenBase
 
 @inject ILiveViewMirrorUriBuilder MirrorUriBuilder
-@inject IPausedCircuitsTracker PausedCircuitsTracker
 @inject IOptions<LiveViewOptions> LiveViewOptions
 @inject ICircuitTracker CircuitTracker
 @inject ILogger<LiveViewUserScreen> Logger
@@ -29,7 +28,6 @@
                        IsSyncScrollPositionActiveChanged="OnIsSyncScrollPositionActiveChanged"
                        IsPointerActive="@IsPointerActive"
                        IsPointerActiveChanged="OnIsPointerActiveChanged"
-                       ShowWaitOnMirrorButton="true"
                        WaitOnMirror="@(PausedCircuitReference is not null)"
                        WaitOnMirrorChanged="OnWaitOnMirrorChanged" />
 
@@ -69,8 +67,6 @@
     [Parameter]
     public bool DebugView { get; set; } = false;
 
-    private PausedCircuitReference? PausedCircuitReference { get; set; } = null;
-
     private string? _selectedCircuitId = null;
     private Dictionary<string, IUserCircuit> _availableUserCircuits = new();
 
@@ -81,31 +77,6 @@
             throw new InvalidOperationException("UserSelector parameter is required.");
         }
         UpdateCircuitsForUser();
-    }
-
-    private void OnWaitOnMirrorChanged(bool value)
-    {
-        bool isPaused = PausedCircuitReference is not null;
-        if (isPaused == value) return;
-
-        if (value)
-        {
-            PausedCircuitReference = PausedCircuitsTracker.PauseUser(UserSelector);
-            PausedCircuitReference?.Unpaused += OnPausedCircuitUnpaused;
-        }
-        else
-        {
-            PausedCircuitReference!.Unpaused -= OnPausedCircuitUnpaused;
-            PausedCircuitReference.Unpause();
-            PausedCircuitReference = null;
-        }
-    }
-
-    private void OnPausedCircuitUnpaused(PausedCircuitReference _)
-    {
-        PausedCircuitReference?.Unpaused -= OnPausedCircuitUnpaused;
-        PausedCircuitReference = null;
-        InvokeAsync(StateHasChanged);
     }
 
     private void UpdateCircuitsForUser()

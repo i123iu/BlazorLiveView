@@ -4,6 +4,7 @@
 @using Microsoft.Extensions.Logging
 
 @inject ICircuitTracker CircuitTracker
+@inject IPausedCircuitsTracker PausedCircuitsTracker
 @inject ILogger<LiveViewScreenBase> Logger
 
 @implements IDisposable
@@ -15,6 +16,8 @@
     protected bool IsSyncScreenSizeActive { get; set; } = false;
     protected bool IsSyncScrollPositionActive { get; set; } = false;
     protected bool IsPointerActive { get; set; } = false;
+
+    protected PausedCircuitReference? PausedCircuitReference { get; set; } = null;
 
     protected IUserCircuit? _sourceCircuit;
     protected IUserCircuit? SourceCircuit
@@ -140,6 +143,38 @@
         IsPointerActive = value;
         MirrorCircuit?.NotifyLaserPointerEnabledChanged(IsPointerActive);
         return Task.CompletedTask;
+    }
+
+    protected void OnWaitOnMirrorChanged(bool value)
+    {
+        bool isPaused = PausedCircuitReference is not null;
+        if (isPaused == value) return;
+
+        if (value)
+        {
+            // Pause
+            if (MirrorCircuit is null)
+                return;
+            var sessionId = MirrorCircuit.SourceCircuit.SessionId;
+            if (sessionId is null)
+                return;
+            PausedCircuitReference = PausedCircuitsTracker.MarkPaused(sessionId.Value);
+            PausedCircuitReference?.Unpaused += OnPausedCircuitUnpaused;
+        }
+        else
+        {
+            // Unpause
+            PausedCircuitReference!.Unpaused -= OnPausedCircuitUnpaused;
+            PausedCircuitReference.UnmarkPaused();
+            PausedCircuitReference = null;
+        }
+    }
+
+    private void OnPausedCircuitUnpaused(PausedCircuitReference _)
+    {
+        PausedCircuitReference?.Unpaused -= OnPausedCircuitUnpaused;
+        PausedCircuitReference = null;
+        InvokeAsync(StateHasChanged);
     }
 
     protected virtual void OnAnyCircuitOpened(ICircuit circuit)

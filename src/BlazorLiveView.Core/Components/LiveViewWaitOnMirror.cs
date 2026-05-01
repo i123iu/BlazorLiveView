@@ -8,7 +8,7 @@ namespace BlazorLiveView.Core.Components;
 
 /// <summary>
 /// Wrapper for app content that will first wait on any mirror circuits that
-/// want to view this session to finish loading. This allows the mirror
+/// want to view this circuit to finish loading. This allows the mirror
 /// circuits to capture all JS interop calls that would normally happen
 /// before the mirror circuit could finish loading.
 /// </summary>
@@ -17,6 +17,8 @@ public class LiveViewWaitOnMirror(
     ILogger<LiveViewWaitOnMirror> logger
 ) : ComponentBase
 {
+    private const int TIMEOUT_MS = 10_000;
+
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
@@ -24,6 +26,8 @@ public class LiveViewWaitOnMirror(
     private readonly ILogger<LiveViewWaitOnMirror> _logger = logger;
 
     private bool _showChildContent = false;
+    private bool _sessionIdRetrieved = false;
+    private IUserCircuit _userCircuit = null!;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -44,15 +48,37 @@ public class LiveViewWaitOnMirror(
         }
         else if (circuit is IUserCircuit userCircuit)
         {
-            userCircuit.WaitOnMirrorCircuitLoad().ContinueWith(task =>
+            _userCircuit = userCircuit;
+            Task.Delay(TIMEOUT_MS).ContinueWith(t =>
             {
                 InvokeAsync(() =>
                 {
-                    _showChildContent = true;
-                    StateHasChanged();
+                    if (!_sessionIdRetrieved)
+                    {
+                        _showChildContent = true;
+                        _logger.LogWarning(
+                            "Timeout while waiting for OnSessionIdRetrieved."
+                        );
+                        StateHasChanged();
+                    }
                 });
             });
         }
+    }
+
+    private Task OnSessionIdRetrieved(Guid sessionId)
+    {
+        _sessionIdRetrieved = true;
+        _userCircuit.AssignSessionId(sessionId);
+        _userCircuit.WaitOnMirrorCircuitLoad().ContinueWith(task =>
+        {
+            InvokeAsync(() =>
+            {
+                _showChildContent = true;
+                StateHasChanged();
+            });
+        });
+        return Task.CompletedTask;
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -69,6 +95,13 @@ public class LiveViewWaitOnMirror(
         // (see its attribute) and will notify the mirror circuit when it
         // finishes loading. This will complete WaitOnMirrorCircuitLoad.
         builder.OpenComponent<LiveViewLoadIndicator>(0);
+        builder.CloseComponent();
+
+        builder.OpenComponent<LiveViewSessionDetector>(1);
+        builder.AddAttribute(2,
+            nameof(LiveViewSessionDetector.OnSessionIdRetrieved),
+            EventCallback.Factory.Create<Guid>(this, OnSessionIdRetrieved)
+        );
         builder.CloseComponent();
 
         if (_showChildContent)

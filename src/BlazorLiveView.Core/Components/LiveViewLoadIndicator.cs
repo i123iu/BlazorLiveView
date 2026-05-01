@@ -23,7 +23,7 @@ internal class LiveViewLoadIndicator(
         if (!firstRender) return;
 
         var circuit = _currentCircuit.AsLiveViewCircuit();
-        if ( circuit is null)
+        if (circuit is null)
         {
             _logger.LogWarning("Could not find circuit.");
             return;

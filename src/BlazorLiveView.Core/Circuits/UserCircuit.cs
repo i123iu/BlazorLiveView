@@ -23,6 +23,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
 
     public HashSet<IMirrorCircuit> MirrorCircuits { get; } = new();
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
+    public Guid? SessionId { get; private set; } = null;
     public ClaimsPrincipal User => _authenticationStateProvider
         // Calling .Result should be fine, since the task is created in Blazor
         // Server using `Task.FromResult` (in `CircuitHost.cs`).
@@ -67,6 +68,15 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
         var webRootComponent = webRootComponentManager.GetRequiredWebRootComponent(ssrComponentId);
         return webRootComponent.InteractiveComponentId;
+    }
+
+    public void AssignSessionId(Guid sessionId)
+    {
+        if (SessionId != null)
+        {
+            throw new InvalidOperationException("Session ID is already assigned.");
+        }
+        SessionId = sessionId;
     }
 
     public void NotifyComponentRerendered(int componentId)

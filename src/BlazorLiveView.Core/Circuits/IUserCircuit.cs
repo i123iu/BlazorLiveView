@@ -44,6 +44,13 @@ public interface IUserCircuit : ICircuit
     /// </summary>
     HashSet<IMirrorCircuit> MirrorCircuits { get; }
 
+    /// <summary>
+    /// Special ID (additionally to the circuit ID), that uniquely identifies
+    /// a web session (one tab in a web browser; see
+    /// https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage). 
+    /// </summary>
+    Guid? SessionId { get; }
+
     string Uri { get; }
     ClaimsPrincipal User { get; }
     Position? WindowSize { get; }
@@ -51,11 +58,12 @@ public interface IUserCircuit : ICircuit
     Position? UserCursorPosition { get; }
 
     /// <summary>
-    /// Finishes when a mirror circuit that wants to mirror this session
+    /// Finishes when a mirror circuit that wants to mirror this circuit
     /// finishes loading. Finished instantly when no mirror circuit is
     /// loading.
     /// </summary>
     internal Task WaitOnMirrorCircuitLoad();
+    internal void AssignSessionId(Guid sessionId);
 
     internal int SsrComponentIdToInteractiveComponentId(int ssrComponentId);
 
