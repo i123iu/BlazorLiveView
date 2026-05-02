@@ -21,7 +21,7 @@ namespace BlazorLiveView.Sample.Accounts
                 })
                 .AddLiveView(options =>
                 {
-                    options.ShowDebugOptions = true;
+                    options.ShowDebugOptions = false;
                 })
                 .InterceptIJSRuntime();
 
