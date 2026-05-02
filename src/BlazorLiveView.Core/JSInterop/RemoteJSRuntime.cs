@@ -33,7 +33,8 @@ internal class RemoteJSRuntime(
     protected override bool ShouldForward(string identifier)
     {
         var jsInteropOptions = _liveViewJSInteropOptions.Value;
-        bool shouldForward = jsInteropOptions.JsToDotnetForwardingRules.GetForwardingBehavior(identifier) switch
+        bool shouldForward = jsInteropOptions.DotnetToJsForwardingRules
+            .GetForwardingBehavior(identifier) switch
         {
             ForwardingBehavior.Forward => true,
             ForwardingBehavior.SkipForwarding => false,
