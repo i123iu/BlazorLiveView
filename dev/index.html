@@ -78,17 +78,21 @@
 <h2 id="showcase">Showcase</h2>
 <p>Imagine the default Blazor Server application.</p>
 <p>There is a regular user <code>test@example.com</code> on the counter page (URL <code>/counter</code>). Clicking on the button increases the counter value; the current value is <strong>2</strong>.</p>
-<p><img src="images/screenshot-source.png" alt="User session"></p>
+<p><img src="images/0-screenshot-source.png" alt="User session"></p>
 <p>Using BlazorLiveView, administrators can view all active user connections (sessions) in the admin dashboard (URL <code>/liveview</code>). There are two connections shown:</p>
 <ol>
 <li>The user on the counter page with URL <code>/counter</code></li>
 <li>The admin's own session with URL <code>/liveview</code></li>
 </ol>
-<p><img src="images/screenshot-table.png" alt="Admin dashboard"></p>
+<p><img src="images/1-screenshot-table.png" alt="Admin dashboard"></p>
 <p>Clicking on the link &quot;Circuit&quot; (in the column &quot;View Mirror&quot;) redirects the admin to a page with a live mirror view of the user's session (URL <code>/liveview/circuit/{circuitId}</code>). Notice the original user's session shown in a red box (with the count <strong>2</strong>). There is also a top status bar with additional information. When the user clicks the button (increasing the count to <strong>3</strong>), the mirrored view updates in real-time.</p>
-<p><img src="images/screenshot-mirror-circuit.png" alt="Mirror view of user's session in circuit mode"></p>
+<p><img src="images/2-screenshot-mirror-circuit.png" alt="Mirror view of user's session in circuit mode"></p>
 <p>In the admin dashboard, there is also a link &quot;User&quot; (in the column &quot;View Mirror&quot;). This is very similar to the &quot;Circuit&quot; view, but can show all circuits of the selected logged in user. The admin can switch between them using the dropdown in the top status bar. It also automatically switches to a newer circuit if the current has been closed. In this example, the user has two tabs open - <code>/counter</code> and <code>/weather</code>.</p>
-<p><img src="images/screenshot-mirror-user.png" alt="Mirror view of user's session in user mode"></p>
+<p><img src="images/3-screenshot-mirror-user.png" alt="Mirror view of user's session in user mode"></p>
+<p>When viewing a user session, the admin can use &quot;Window size sync&quot; and &quot;Window scroll sync&quot; options in the top status bar. When scroll sync is enabled, the user's cursor is shown.</p>
+<p><img src="images/4-screenshot-mirror-scrollsync.png" alt="Mirror view of user's session with active window size and scroll sync"></p>
+<p>Additionally, the admin can use the &quot;Laser pointer&quot; option to show their cursor to the user.</p>
+<p><img src="images/5-screenshot-mirror-circuit-pointer.png" alt="User session with admin's cursor as a laser pointer"></p>
 <h2 id="nuget-packages">NuGet Packages</h2>
 <p>BlazorLiveView provides three NuGet packages:</p>
 <ul>

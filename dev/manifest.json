@@ -968,6 +968,66 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/0-screenshot-source.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/0-screenshot-source.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/1-screenshot-table.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/1-screenshot-table.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/2-screenshot-mirror-circuit.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/2-screenshot-mirror-circuit.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/3-screenshot-mirror-user.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/3-screenshot-mirror-user.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/4-screenshot-mirror-scrollsync.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/4-screenshot-mirror-scrollsync.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/5-screenshot-mirror-circuit-pointer.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/5-screenshot-mirror-circuit-pointer.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/icon.png",
       "output": {
         "resource": {
@@ -982,66 +1042,6 @@
       "output": {
         "resource": {
           "relative_path": "images/logo.png"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/screenshot-mirror-circuit-pointer.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/screenshot-mirror-circuit-pointer.png"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/screenshot-mirror-circuit-window-size-sync.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/screenshot-mirror-circuit-window-size-sync.png"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/screenshot-mirror-circuit.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/screenshot-mirror-circuit.png"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/screenshot-mirror-user.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/screenshot-mirror-user.png"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/screenshot-source.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/screenshot-source.png"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/screenshot-table.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/screenshot-table.png"
         }
       },
       "version": ""

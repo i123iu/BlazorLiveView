@@ -134,9 +134,6 @@ before the mirror circuit could finish loading.</p>
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitialized">ComponentBase.OnInitialized()</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitializedasync">ComponentBase.OnInitializedAsync()</a>
     </div>
     <div>
@@ -150,6 +147,9 @@ before the mirror circuit could finish loading.</p>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.shouldrender">ComponentBase.ShouldRender()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender">ComponentBase.OnAfterRender(bool)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrenderasync">ComponentBase.OnAfterRenderAsync(bool)</a>
@@ -288,7 +288,7 @@ public RenderFragment? ChildContent { get; set; }</code></pre>
 
   <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_BuildRenderTree_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
   BuildRenderTree(RenderTreeBuilder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Renders the component to the supplied <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder">RenderTreeBuilder</a>.</p>
@@ -317,32 +317,22 @@ public RenderFragment? ChildContent { get; set; }</code></pre>
 
 
 
-  <a id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender*"></a>
+  <a id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnInitialized_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized*"></a>
 
-  <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_System_Boolean_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(System.Boolean)">
-  OnAfterRender(bool)
+  <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnInitialized" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized">
+  OnInitialized()
   <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Method invoked after each time the component has rendered interactively and the UI has finished
-updating (for example, after elements have been added to the browser DOM). Any <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.elementreference">ElementReference</a>
-fields will be populated by the time this runs.</p>
-<p>This method is not invoked during prerendering or server-side rendering, because those processes
-are not attached to any live browser DOM and are already complete before the DOM is updated.</p>
+  <div class="markdown level1 summary"><p>Method invoked when the component is ready to start, having received its
+initial parameters from its parent in the render tree.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnAfterRender(bool firstRender)</code></pre>
+    <pre><code class="lang-csharp hljs">protected override void OnInitialized()</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>firstRender</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd><p>Set to <code>true</code> if this is the first time <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender">OnAfterRender(bool)</a> has been invoked
-on this component instance; otherwise <code>false</code>.</p>
-</dd>
-  </dl>
 
 
 
@@ -351,12 +341,6 @@ on this component instance; otherwise <code>false</code>.</p>
 
 
 
-  <h4 class="section" id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_System_Boolean__remarks">Remarks</h4>
-  <div class="markdown level1 remarks"><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrender">OnAfterRender(bool)</a> and <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onafterrenderasync">OnAfterRenderAsync(bool)</a> lifecycle methods
-are useful for performing interop, or interacting with values received from <code>@ref</code>.
-Use the <code class="paramref">firstRender</code> parameter to ensure that initialization work is only performed
-once.</p>
-</div>
 
 
 

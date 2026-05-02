@@ -941,22 +941,19 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent
   nameWithType: LiveViewWaitOnMirror.ChildContent
-- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(System.Boolean)
-  name: OnAfterRender(bool)
-  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_System_Boolean_
-  commentId: M:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(System.Boolean)
-  name.vb: OnAfterRender(Boolean)
-  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(bool)
-  fullName.vb: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender(Boolean)
-  nameWithType: LiveViewWaitOnMirror.OnAfterRender(bool)
-  nameWithType.vb: LiveViewWaitOnMirror.OnAfterRender(Boolean)
-- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender*
-  name: OnAfterRender
-  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnAfterRender_
-  commentId: Overload:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized
+  name: OnInitialized()
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnInitialized
+  commentId: M:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized()
+  nameWithType: LiveViewWaitOnMirror.OnInitialized()
+- uid: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized*
+  name: OnInitialized
+  href: api/BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html#BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnInitialized_
+  commentId: Overload:BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnAfterRender
-  nameWithType: LiveViewWaitOnMirror.OnAfterRender
+  fullName: BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized
+  nameWithType: LiveViewWaitOnMirror.OnInitialized
 - uid: BlazorLiveView.Core.Components.Tools
   name: BlazorLiveView.Core.Components.Tools
   href: api/BlazorLiveView.Core.Components.Tools.html
@@ -988,6 +985,44 @@ references:
   fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New
   nameWithType: Position.Position
   nameWithType.vb: Position.New
+- uid: BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
+  name: operator +(Position, Position)
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Addition_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
+  name.vb: +(Position, Position)
+  fullName: BlazorLiveView.Core.Components.Tools.Position.operator +(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.+(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
+  nameWithType: Position.operator +(Position, Position)
+  nameWithType.vb: Position.+(Position, Position)
+- uid: BlazorLiveView.Core.Components.Tools.Position.op_Addition*
+  name: operator +
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Addition_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.op_Addition
+  isSpec: "True"
+  name.vb: +
+  fullName: BlazorLiveView.Core.Components.Tools.Position.operator +
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.+
+  nameWithType: Position.operator +
+  nameWithType.vb: Position.+
+- uid: BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
+  name: operator -(Position, Position)
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
+  name.vb: -(Position, Position)
+  fullName: BlazorLiveView.Core.Components.Tools.Position.operator -(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.-(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
+  nameWithType: Position.operator -(Position, Position)
+  nameWithType.vb: Position.-(Position, Position)
+- uid: BlazorLiveView.Core.Components.Tools.Position.op_Subtraction*
+  name: operator -
+  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.op_Subtraction
+  isSpec: "True"
+  name.vb: '-'
+  fullName: BlazorLiveView.Core.Components.Tools.Position.operator -
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.-
+  nameWithType: Position.operator -
+  nameWithType.vb: Position.-
 - uid: BlazorLiveView.Core.Components.Tools.Position.x
   name: x
   href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_x
