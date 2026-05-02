@@ -17,7 +17,7 @@ public class LiveViewWaitOnMirror(
     ILogger<LiveViewWaitOnMirror> logger
 ) : ComponentBase
 {
-    private const int TIMEOUT_MS = 10_000;
+    private const int TIMEOUT_MS = 4_000;
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -29,9 +29,13 @@ public class LiveViewWaitOnMirror(
     private bool _sessionIdRetrieved = false;
     private IUserCircuit _userCircuit = null!;
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnInitialized()
     {
-        if (!firstRender) return;
+        if (!RendererInfo.IsInteractive)
+        {
+            _showChildContent = true;
+            return;
+        }
 
         var circuit = _currentCircuit.AsLiveViewCircuit();
         if (circuit is null)
@@ -49,6 +53,14 @@ public class LiveViewWaitOnMirror(
         else if (circuit is IUserCircuit userCircuit)
         {
             _userCircuit = userCircuit;
+            if (_userCircuit.SessionId.HasValue)
+            {
+                _sessionIdRetrieved = true;
+                WaitOnMirrorCircuitLoad();
+                return;
+            }
+
+            // Continue rendering if session id retrieval timeouts
             Task.Delay(TIMEOUT_MS).ContinueWith(t =>
             {
                 InvokeAsync(() =>
@@ -68,8 +80,15 @@ public class LiveViewWaitOnMirror(
 
     private Task OnSessionIdRetrieved(Guid sessionId)
     {
+        if (_sessionIdRetrieved) return Task.CompletedTask;
         _sessionIdRetrieved = true;
         _userCircuit.AssignSessionId(sessionId);
+        WaitOnMirrorCircuitLoad();
+        return Task.CompletedTask;
+    }
+
+    private void WaitOnMirrorCircuitLoad()
+    {
         _userCircuit.WaitOnMirrorCircuitLoad().ContinueWith(task =>
         {
             InvokeAsync(() =>
@@ -78,7 +97,6 @@ public class LiveViewWaitOnMirror(
                 StateHasChanged();
             });
         });
-        return Task.CompletedTask;
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -97,12 +115,15 @@ public class LiveViewWaitOnMirror(
         builder.OpenComponent<LiveViewLoadIndicator>(0);
         builder.CloseComponent();
 
-        builder.OpenComponent<LiveViewSessionDetector>(1);
-        builder.AddAttribute(2,
-            nameof(LiveViewSessionDetector.OnSessionIdRetrieved),
-            EventCallback.Factory.Create<Guid>(this, OnSessionIdRetrieved)
-        );
-        builder.CloseComponent();
+        if (!_sessionIdRetrieved)
+        {
+            builder.OpenComponent<LiveViewSessionDetector>(1);
+            builder.AddAttribute(2,
+                nameof(LiveViewSessionDetector.OnSessionIdRetrieved),
+                EventCallback.Factory.Create<Guid>(this, OnSessionIdRetrieved)
+            );
+            builder.CloseComponent();
+        }
 
         if (_showChildContent)
         {
