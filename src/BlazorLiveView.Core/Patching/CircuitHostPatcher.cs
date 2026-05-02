@@ -1,10 +1,13 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -15,16 +18,19 @@ namespace BlazorLiveView.Core.Patching;
 internal sealed class CircuitHostPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
+    private static LiveViewJSInteropOptions _jsInteropOptions = null!;
     private static ILogger<CircuitHostPatcher> _logger = null!;
     private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public CircuitHostPatcher(
         ICircuitTracker circuitTracker,
+        IOptions<LiveViewJSInteropOptions> jsInteropOptions,
         ILogger<CircuitHostPatcher> logger,
         IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
+        _jsInteropOptions = jsInteropOptions.Value;
         _logger = logger;
         _patchExceptionHandler = patchExceptionHandler;
     }
@@ -114,29 +120,28 @@ internal sealed class CircuitHostPatcher : IPatcher
 
             if (circuit is IMirrorCircuit)
             {
-                if (methodIdentifier == nameof(LaserPointerTransmitter.OnCursorPosition) ||
-                    methodIdentifier == nameof(LaserPointerTransmitter.OnCursorExit))
+                var forwardingBehaviour = _jsInteropOptions.JsToDotnetForwardingRules
+                    .GetForwardingBehavior(methodIdentifier);
+                if (forwardingBehaviour == ForwardingBehavior.Forward)
                 {
                     return true;
                 }
-                else
-                {
-                    // Skip the original function
-                    if (_logger.IsEnabled(LogLevel.Debug))
-                    {
-                        _logger.LogDebug("Skipped BeginInvokeDotNetFromJS method={Method} for mirror circuit id={Id}. ",
-                            methodIdentifier, circuit.Id
-                        );
-                    }
 
-                    // The original function BeginInvokeDotNetFromJS calls the requested
-                    // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
-                    // the function means also skipping the response. The web app will
-                    // probably wait for the response indefinitely, but this should not
-                    // be a problem as the mirror user should not interact with the app
-                    // anyway. 
-                    return false;
+                // Skip the original function
+                if (_logger.IsEnabled(LogLevel.Debug))
+                {
+                    _logger.LogDebug("Skipped BeginInvokeDotNetFromJS method={Method} for mirror circuit id={Id}. ",
+                        methodIdentifier, circuit.Id
+                    );
                 }
+
+                // The original function BeginInvokeDotNetFromJS calls the requested
+                // method and sends "JS.EndInvokeDotNet" after finishing. Skipping
+                // the function means also skipping the response. The web app will
+                // probably wait for the response indefinitely, but this should not
+                // be a problem as the mirror user should not interact with the app
+                // anyway. 
+                return false;
             }
         }
         catch (Exception ex)

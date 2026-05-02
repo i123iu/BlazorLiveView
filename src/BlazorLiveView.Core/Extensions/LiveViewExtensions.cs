@@ -81,13 +81,11 @@ public static class LiveViewExtensions
     }
 
     /// <summary>
-    /// BlazorLiveView will intercept all <see cref="IJSRuntime"/> instances. 
+    /// Make BlazorLiveView intercept all <see cref="IJSRuntime"/> instances.
     /// JS interop invocations passed to them will be forwarded to mirror
-    /// circuits that are viewing the current user. To filter which invocations
-    /// are forwarded, see <see cref="LiveViewJSInteropOptions.DefaultInterceptionBehaviour"/>
-    /// and <see cref="LiveViewJSInteropOptions.InterceptionRules"/>.
-    /// To forward only specific invocations use <see cref="ILiveViewJSRuntime"/>
-    /// (which does not require calling this extension method).
+    /// circuits that are viewing the current user's session. To forward only
+    /// specific invocations use <see cref="ILiveViewJSRuntime"/> (which does
+    /// not require calling this extension method).
     /// </summary>
     public static ILiveViewBuilder InterceptIJSRuntime(
         this ILiveViewBuilder builder,
@@ -105,7 +103,7 @@ public static class LiveViewExtensions
             .Decorate<IJSRuntime>((origRemoteJSRuntime, sp) =>
             {
                 // Decorate the default IJSRuntime implementation (RemoteJSRuntime)
-                // with a new (intercepting) implementation (InterceptingRemoteJSRuntime).
+                // with a new (intercepting) implementation (BlazorLiveView.Core.RemoteJSRuntime).
                 RemoteJSRuntimeWrapper remoteJSRuntime = new((JSRuntime)origRemoteJSRuntime);
                 return new RemoteJSRuntime(
                     remoteJSRuntime,

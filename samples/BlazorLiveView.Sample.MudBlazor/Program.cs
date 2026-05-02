@@ -13,7 +13,7 @@ builder.Services.AddRazorComponents()
     .AddLiveView()
     .InterceptIJSRuntime(options =>
     {
-        options.AddMudBlazorInterceptionRules();
+        options.AddMudBlazorForwardingRules();
     });
 
 var app = builder.Build();

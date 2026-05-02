@@ -1,11 +1,12 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components.Tools;
 using BlazorLiveView.Core.Options;
+using BlazorLiveView.Core.Reflection;
+using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
-using System.Threading.Channels;
 
 namespace BlazorLiveView.Core.Circuits;
 
@@ -29,20 +30,12 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     public MirrorCircuitBlockReason BlockReason => _blockReason
         ?? throw new Exception("Not blocked");
 
-    private readonly ILogger _logger;
+    private readonly ILogger<MirrorCircuit> _logger;
     private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
 
-    private readonly Channel<JSInvocation> _jsInvocationQueue;
-    private readonly Task? _processingTask;
     private readonly CancellationTokenSource _cancellationTokenSource;
     private MirrorCircuitBlockReason? _blockReason = null;
-    private readonly record struct JSInvocation(
-        string Identifier,
-        CancellationToken CancellationToken,
-        object?[]? Args,
-        long CreatedAtTicks
-    );
 
     public MirrorCircuit(
         Circuit circuit,
@@ -64,20 +57,9 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         _pausedCircuitsTracker = pausedCircuitsTracker;
         _liveViewJSInteropOptions = liveViewJSInteropOptions;
         _cancellationTokenSource = new CancellationTokenSource();
-        _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
-        {
-            SingleReader = true,
-            SingleWriter = false
-        });
 
         SourceCircuit.JSRuntimeInvoked += Source_JSRuntimeInvoked;
         CircuitStatusChanged += OnCircuitStatusChanged;
-
-        if (!DebugView)
-        {
-            // Do not forward JS invocations to debug views, since all will fail anyway.
-            _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
-        }
     }
 
     public override void Dispose()
@@ -91,17 +73,20 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     }
 
     private void Source_JSRuntimeInvoked(
-        IUserCircuit _,
+        IUserCircuit userCircuit,
         string identifier,
         CancellationToken cancellationToken,
         object?[]? args
     )
     {
         if (_cancellationTokenSource.IsCancellationRequested) return;
+        if (DebugView) return;
 
-        _jsInvocationQueue.Writer.TryWrite(new JSInvocation(
-            identifier, cancellationToken, args, DateTime.UtcNow.Ticks
-        ));
+        _ = ProcessInvocationAsync(
+            identifier,
+            cancellationToken,
+            args
+        );
     }
 
     private void OnCircuitStatusChanged(ICircuit circuit)
@@ -112,58 +97,98 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         }
     }
 
-    private async Task ProcessInvocationsAsync(CancellationToken cancellationToken)
+    // Source - https://stackoverflow.com/a/1075059
+    public static bool IsAssignableToGenericType(Type givenType, Type genericType)
+    {
+        var interfaceTypes = givenType.GetInterfaces();
+
+        foreach (var it in interfaceTypes)
+        {
+            if (it.IsGenericType && it.GetGenericTypeDefinition() == genericType)
+                return true;
+        }
+
+        if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType)
+            return true;
+
+        Type? baseType = givenType.BaseType;
+        if (baseType == null) return false;
+
+        return IsAssignableToGenericType(baseType, genericType);
+    }
+
+
+    private async Task ProcessInvocationAsync(
+        string identifier,
+        CancellationToken cancellationToken,
+        object?[]? args
+    )
     {
         try
         {
-            await foreach (var invocation in _jsInvocationQueue.Reader.ReadAllAsync(cancellationToken))
+            var jsRuntime = Circuit.CircuitHost.JSRuntime;
+
+            object?[]? newArgs = null;
+            if (args is not null && args.Length > 0)
             {
-                try
+                // Translate arguments
+                newArgs = new object?[args.Length];
+                for (int i = 0; i < args.Length; i++)
                 {
-                    using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
-                        cancellationToken,
-                        invocation.CancellationToken
-                    );
+                    var arg = args[i];
+                    if (arg == null) continue;
 
-                    var elapsed = TimeSpan.FromTicks(
-                        DateTime.UtcNow.Ticks - invocation.CreatedAtTicks
-                    );
-                    var remainingDelay = _liveViewJSInteropOptions.Value
-                        .DefaultDelayForInvocationForward
-                        - elapsed;
-
-                    if (remainingDelay > TimeSpan.Zero)
+                    if (Types.IDotNetObjectReference.IsInstanceOfType(arg))
                     {
-                        // A short delay so that components can finish rendering.
-                        // For example when IJSRuntime.InvokeAsync is called in
-                        // OnAfterRenderAsync.
-                        await Task.Delay(remainingDelay, linkedCts.Token);
+                        if (IsAssignableToGenericType(arg.GetType(), Types.DotNetObjectReferenceOfT))
+                        {
+                            var wrapper = new DotNetObjectReferenceOfTWrapper(arg);
+                            var refValue = wrapper.Value;
+                            var newRef = DotNetObjectReferenceOfTWrapper.Create(refValue);
+                            newArgs[i] = newRef.Inner;
+                        }
+                        else
+                        {
+                            _logger.LogWarning(
+                                "When calling {Identifier}: expected argument of type {ArgType} to be of type DotNetObjectReference<T> when implements interface IDotNetObjectReference",
+                                identifier, arg.GetType().Name
+                            );
+                        }
                     }
-
-                    var jsRuntime = Circuit.CircuitHost.JSRuntime;
-                    await jsRuntime.Inner.InvokeVoidAsync(
-                        invocation.Identifier,
-                        linkedCts.Token,
-                        invocation.Args
-                    );
-                }
-                catch (OperationCanceledException)
-                {
-                    if (cancellationToken.IsCancellationRequested) break;
-                }
-                catch (Exception ex)
-                {
-                    // TODO:  At least notify the mirror circuit's user (admin)
-                    _logger.LogError(
-                        ex,
-                        "Failed to invoke JS runtime method '{Identifier}' on mirror circuit id={Id}",
-                        invocation.Identifier, Id
-                    );
+                    else
+                    {
+                        newArgs[i] = arg;
+                    }
                 }
             }
+
+            using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+                _cancellationTokenSource.Token,
+                cancellationToken
+            );
+
+            // A short delay so that components can finish rendering.
+            // For example when called in OnAfterRenderAsync.
+            await Task.Delay(
+                _liveViewJSInteropOptions.Value.DefaultDelayForInvocationForward,
+                linkedCts.Token
+            );
+
+            await jsRuntime.Inner.InvokeVoidAsync(
+                identifier,
+                linkedCts.Token,
+                newArgs
+            );
         }
         catch (OperationCanceledException)
         { }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex,
+                "Failed to invoke JS runtime method '{Identifier}' on mirror circuit id={Id}",
+                identifier, Id
+            );
+        }
     }
 
     public void SetBlocked(MirrorCircuitBlockReason blockReason)

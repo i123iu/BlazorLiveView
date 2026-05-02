@@ -49,13 +49,13 @@
     }
 
     [JSInvokable]
-    public async Task OnCursorPosition(int x, int y)
+    public async Task BlazorLiveView_LaserPointerTransmitter_OnCursorPosition(int x, int y)
     {
         await OnCursorMoved.InvokeAsync(new(x, y));
     }
 
     [JSInvokable]
-    public async Task OnCursorExit()
+    public async Task BlazorLiveView_LaserPointerTransmitter_OnCursorExit()
     {
         await OnCursorLeft.InvokeAsync();
     }

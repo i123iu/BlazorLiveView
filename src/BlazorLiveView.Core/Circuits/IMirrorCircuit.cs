@@ -31,9 +31,6 @@ public interface IMirrorCircuit : ICircuit
     /// </summary>
     Guid? State { get; }
 
-    /// <summary>
-    /// Should the mirrored componets be in DebugView?
-    /// </summary>
     bool DebugView { get; }
 
     /// <summary>

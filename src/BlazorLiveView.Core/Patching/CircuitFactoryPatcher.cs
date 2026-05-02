@@ -321,10 +321,10 @@ internal sealed class CircuitFactoryPatcher : IPatcher
     {
         // The original CreateCircuitHostAsync method contains the following line:
         //   var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
-        // Since IJSRuntime is changed (decorated) to InterceptingRemoteJSRuntime,
+        // Since IJSRuntime is changed (decorated) to BlazorLiveView.Core.RemoteJSRuntime,
         // this line would throw an InvalidCastException. This transpiler swaps
         // the cast to RemoteJSRuntime with a call to a helper method
-        // InterceptingRemoteJSRuntime.ToRemoteJSRuntime.
+        // BlazorLiveView.Core.RemoteJSRuntime.ToRemoteJSRuntime.
 
         bool found = false;
         foreach (CodeInstruction instruction in instructions)

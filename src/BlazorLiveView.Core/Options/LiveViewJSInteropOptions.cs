@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Extensions;
+﻿using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.Extensions;
 using BlazorLiveView.Core.JSInterop;
 
 namespace BlazorLiveView.Core.Options;
@@ -12,26 +13,34 @@ public sealed class LiveViewJSInteropOptions
     internal bool InterceptIJSRuntime { get; set; } = false;
 
     /// <summary>
-    /// Default behaviour of JS interop invocations interception when no
-    /// interception rule matches.
+    /// Rules for intercepting JS interop invocations and forwarding them to
+    /// mirror circuits. Default is to <c>Forward</c> all, with some exceptions
+    /// specific to Blazor.
     /// </summary>
-    public InterceptionBehavior DefaultInterceptionBehaviour { get; set; }
-        = InterceptionBehavior.Intercept;
+    public ForwardingRules DotnetToJsForwardingRules { get; set; } = new(
+        ForwardingBehavior.Forward,
+        new()
+        {
+            new ExactJSInteropForwardingRule("Blazor._internal.PageTitle.getAndRemoveExistingTitle", ForwardingBehavior.Forward),
+            new ExactJSInteropForwardingRule("Blazor._internal.domWrapper.focusBySelector", ForwardingBehavior.Forward),
+            new ExactJSInteropForwardingRule("Blazor._internal.attachWebRendererInterop", ForwardingBehavior.SkipForwarding),
+            new ExactJSInteropForwardingRule("Blazor._internal.navigationManager.enableNavigationInterception", ForwardingBehavior.SkipForwarding),
+        }
+    );
 
     /// <summary>
-    /// Rules for intercepting JS interop invocations. Each rule can specify
-    /// whether to intercept, skip interception, or do nothing and let other
-    /// rules choose (or the default). Rules are evaluated in the order of this
-    /// list.
+    /// Rules for allowing calls from JS to .NET, most commonly done via
+    /// <see cref="DotNetObjectReference"/>. Default is to skip all with some
+    /// exceptions for this library's use.
     /// </summary>
-    public List<IJSInteropInterceptionRule> InterceptionRules { get; set; }
-        = new()
+    public ForwardingRules JsToDotnetForwardingRules { get; set; } = new(
+        ForwardingBehavior.SkipForwarding,
+        new()
         {
-            new ExactJSInteropInterceptionRule("Blazor._internal.PageTitle.getAndRemoveExistingTitle", InterceptionBehavior.Intercept),
-            new ExactJSInteropInterceptionRule("Blazor._internal.domWrapper.focusBySelector", InterceptionBehavior.Intercept),
-            new ExactJSInteropInterceptionRule("Blazor._internal.attachWebRendererInterop", InterceptionBehavior.SkipInterception),
-            new ExactJSInteropInterceptionRule("Blazor._internal.navigationManager.enableNavigationInterception", InterceptionBehavior.SkipInterception),
-        };
+            new ExactJSInteropForwardingRule(nameof(LaserPointerTransmitter.BlazorLiveView_LaserPointerTransmitter_OnCursorPosition), ForwardingBehavior.Forward),
+            new ExactJSInteropForwardingRule(nameof(LaserPointerTransmitter.BlazorLiveView_LaserPointerTransmitter_OnCursorExit), ForwardingBehavior.Forward),
+        }
+    );
 
     /// <summary>
     /// How long to wait before forwarding a JS interop invocation to mirror
@@ -42,12 +51,48 @@ public sealed class LiveViewJSInteropOptions
     public TimeSpan DefaultDelayForInvocationForward { get; set; }
         = TimeSpan.FromMilliseconds(100);
 
-    public LiveViewJSInteropOptions AddInterceptionRule(IJSInteropInterceptionRule rule)
+    public LiveViewJSInteropOptions AddMudBlazorForwardingRules()
     {
-        InterceptionRules.Add(rule);
+        DotnetToJsForwardingRules.Rules.Add(new MudBlazorJSInteropForwardingRule());
         return this;
     }
+}
 
-    public LiveViewJSInteropOptions AddMudBlazorInterceptionRules()
-        => AddInterceptionRule(new MudBlazorJSInteropInterceptionRule());
+public class ForwardingRules(
+    ForwardingBehavior defaultBehaviour,
+    List<IForwardingRule> rules
+)
+{
+    /// <summary>
+    /// The default behavior to apply when no rules match an invocation.
+    /// </summary>
+    public ForwardingBehavior Default
+    { get; set; } = defaultBehaviour;
+
+    /// <summary>
+    /// Each rule can specify whether to forward, skip forwarding, or do
+    /// nothing and let other rules choose (or the default). Rules are
+    /// evaluated in the order of this list.
+    /// </summary>
+    public List<IForwardingRule> Rules
+    { get; set; } = rules;
+
+    public ForwardingBehavior GetForwardingBehavior(string identifier)
+    {
+        foreach (var rule in Rules)
+        {
+            var behavior = rule.GetForwardingBehaviour(identifier);
+            switch (behavior)
+            {
+                case RuleForwardingBehavior.Forward:
+                    return ForwardingBehavior.Forward;
+                case RuleForwardingBehavior.SkipForwarding:
+                    return ForwardingBehavior.SkipForwarding;
+                case RuleForwardingBehavior.None:
+                    continue;
+            }
+        }
+
+        return Default;
+    }
 }

@@ -22,9 +22,9 @@ public class Program
             })
             .InterceptIJSRuntime(options =>
             {
-                options.DefaultInterceptionBehaviour = InterceptionBehavior.Intercept;
-                options.AddInterceptionRule(new ExactJSInteropInterceptionRule(
-                    "not_intercepted_function", InterceptionBehavior.SkipInterception
+                options.JsToDotnetForwardingRules.Default = ForwardingBehavior.Forward;
+                options.JsToDotnetForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+                    "not_forwarded_function", ForwardingBehavior.SkipForwarding
                 ));
             });
 

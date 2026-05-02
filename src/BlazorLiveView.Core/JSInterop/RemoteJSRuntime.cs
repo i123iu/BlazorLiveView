@@ -12,7 +12,7 @@ namespace BlazorLiveView.Core.JSInterop;
 /// Rename only if that is resolved.
 /// 
 /// Wrapper around RemoteJSRuntime that is the default IJSRuntime implementation in Blazor Server.
-/// Forwards InvokeAsync calls to mirror circuits, while checking interception rules.
+/// Forwards InvokeAsync calls to mirror circuits, while checking the forwarding rules.
 /// </summary>
 internal class RemoteJSRuntime(
     RemoteJSRuntimeWrapper remoteJSRuntime,
@@ -33,50 +33,22 @@ internal class RemoteJSRuntime(
     protected override bool ShouldForward(string identifier)
     {
         var jsInteropOptions = _liveViewJSInteropOptions.Value;
-
-        foreach (var rule in jsInteropOptions.InterceptionRules)
+        bool shouldForward = jsInteropOptions.JsToDotnetForwardingRules.GetForwardingBehavior(identifier) switch
         {
-            switch (rule.GetInterceptionBehaviour(identifier))
-            {
-                case RuleInterceptionBehavior.Intercept:
-                    LogRuleMatchResult(identifier, rule, RuleInterceptionBehavior.Intercept);
-                    return true;
-                case RuleInterceptionBehavior.SkipInterception:
-                    LogRuleMatchResult(identifier, rule, RuleInterceptionBehavior.SkipInterception);
-                    return false;
-                case RuleInterceptionBehavior.None:
-                    continue;
-            }
-        }
-
-
-        if (_logger.IsEnabled(LogLevel.Debug))
-        {
-            _logger.LogDebug(
-                "JS interop call '{Identifier}' did not match any interception rules. Applying default {Default}.",
-                identifier, jsInteropOptions.DefaultInterceptionBehaviour
-            );
-        }
-
-        return jsInteropOptions.DefaultInterceptionBehaviour switch
-        {
-            InterceptionBehavior.Intercept => true,
-            InterceptionBehavior.SkipInterception => false,
-            _ => throw new Exception("Unimplemented default interception behavior.")
+            ForwardingBehavior.Forward => true,
+            ForwardingBehavior.SkipForwarding => false,
+            _ => throw new Exception()
         };
-    }
 
-    private void LogRuleMatchResult(string identifier, IJSInteropInterceptionRule rule, RuleInterceptionBehavior behavior)
-    {
-        if (_logger.IsEnabled(LogLevel.Debug))
+        if (logger.IsEnabled(LogLevel.Debug))
         {
-            _logger.LogDebug(
-                "JS interop call '{Identifier}' matched interception rule '{RuleType}' with behavior '{Behavior}'.",
-                identifier,
-                rule.GetType().Name,
-                behavior
+            logger.LogDebug(
+                "Determined that JS invocation with identifier {Identifier} should {ForwardingBehavior}",
+                identifier, shouldForward ? "be forwarded" : "NOT be forwarded"
             );
         }
+
+        return shouldForward;
     }
 
     public static object ToRemoteJSRuntime(
