@@ -53,6 +53,12 @@ internal abstract class ForwardingJSRuntimeBase(
         ICircuit? circuit = _circuitTracker.GetCircuit(_remoteJsRuntime);
         if (circuit is null)
         {
+            if (identifier == "Blazor._internal.attachWebRendererInterop")
+            {
+                // This is called before circuit creation and is expected.
+                return;
+            }
+
             _logger.LogWarning(
                 "No circuit found for the current JSRuntime. " +
                 "Skipping mirror circuit invocation. "
