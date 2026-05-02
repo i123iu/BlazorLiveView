@@ -1,6 +1,6 @@
 # MudBlazor
 
-BlazorLiveView supports MudBlazor **experimentally**. MudBlazor uses JavaScript interop a lot, so when using `InterceptIJSRuntime` (see [JS interop](js-interop.md)), you should include the default MudBlazor rules that block MudBlazor JS calls from being mirrored. To do this, use the method `AddMudBlazorInterceptionRules`:
+BlazorLiveView supports MudBlazor **experimentally**. MudBlazor uses JavaScript interop a lot, so when using `InterceptIJSRuntime` (see [JS interop](js-interop.md)), you should include the default MudBlazor rules that block MudBlazor JS calls from being mirrored. To do this, use the method `AddMudBlazorForwardingRules`:
 
 ```csharp
 builder.Services.AddRazorComponents()
@@ -8,6 +8,6 @@ builder.Services.AddRazorComponents()
     .AddLiveView()
     .InterceptIJSRuntime(options =>
     {
-        options.AddMudBlazorInterceptionRules();
+        options.AddMudBlazorForwardingRules();
     });
 ```

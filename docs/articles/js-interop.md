@@ -49,9 +49,9 @@ For example, with this enabled, the following code will have the JS invocation a
 }
 ```
 
-### Interception Rules
+### Forwarding Rules
 
-To specify which intercepted calls should be forwarded, you can specify *interception rules*. When enabling interception, you can provide additional options:
+To specify which intercepted calls should be forwarded, you can specify the *forwarding rules*. When enabling interception, you can provide additional options:
 
 ```csharp
 builder.Services.AddRazorComponents()
@@ -59,11 +59,28 @@ builder.Services.AddRazorComponents()
     .AddLiveView()
     .InterceptIJSRuntime(options =>
     {
-        options.DefaultInterceptionBehaviour = InterceptionBehavior.Intercept;
-        options.AddInterceptionRule(new ExactJSInteropInterceptionRule(
-            "not_intercepted_function", InterceptionBehavior.SkipInterception
+        options.JsToDotnetForwardingRules.Default = ForwardingBehavior.Forward;
+        options.JsToDotnetForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+            "not_forwarded_function", ForwardingBehavior.SkipForwarding
         ));
     });
 ```
 
-Rules are evaluated in the order they were added. If no rule matches, the `options.DefaultInterceptionBehaviour` will be used. In the example above, all JS calls will be intercepted except those to `not_intercepted_function`. You can also create custom rule types by implementing the `IJSInteropInterceptionRule` interface.
+Rules are evaluated in the order they were added. If no rule matches, the default value will be used. In the example above, all JS calls will be intercepted and forwarded except those to `not_forwarded_function`. You can also create custom rule types by implementing the `IJSInteropForwardingRule` interface.
+
+### Calling .NET from JavaScript
+
+Calling .NET methods from JavaScript is usually done via `DotNetObjectReference`. To specify which `invokeMethodAsync` calls on this instance should be allowed, you can use the `DotnetToJsForwardingRules`. By default, all calls from .NET to JS are disallowed as they can cause unexpected behavior when invoking methods from the original user circuit. For example, a method on a component could be called once by the user and then "unexpectedly" again by the mirrored invocation.
+
+```csharp
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView()
+    .InterceptIJSRuntime(options =>
+    {
+        options.DotnetToJsForwardingRules.Default = ForwardingBehavior.SkipForwarding;
+        options.DotnetToJsForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+            "MethodCalledByMirrorCircuits", ForwardingBehavior.Forward
+        ));
+    });
+```
