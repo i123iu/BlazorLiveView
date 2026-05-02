@@ -87,13 +87,13 @@
         <article data-uid="">
 <h1 id="mudblazor">MudBlazor</h1>
 
-<p>BlazorLiveView supports MudBlazor <strong>experimentally</strong>. MudBlazor uses JavaScript interop a lot, so when using <code>InterceptIJSRuntime</code> (see <a href="js-interop.html">JS interop</a>), you should include the default MudBlazor rules that block MudBlazor JS calls from being mirrored. To do this, use the method <code>AddMudBlazorInterceptionRules</code>:</p>
+<p>BlazorLiveView supports MudBlazor <strong>experimentally</strong>. MudBlazor uses JavaScript interop a lot, so when using <code>InterceptIJSRuntime</code> (see <a href="js-interop.html">JS interop</a>), you should include the default MudBlazor rules that block MudBlazor JS calls from being mirrored. To do this, use the method <code>AddMudBlazorForwardingRules</code>:</p>
 <pre><code class="lang-csharp">builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddLiveView()
     .InterceptIJSRuntime(options =&gt;
     {
-        options.AddMudBlazorInterceptionRules();
+        options.AddMudBlazorForwardingRules();
     });
 </code></pre>
 

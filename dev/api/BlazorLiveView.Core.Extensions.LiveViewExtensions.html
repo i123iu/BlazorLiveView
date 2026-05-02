@@ -195,16 +195,14 @@ Class LiveViewExtensions  <a class="header-action link-secondary" title="View so
 
   <h3 id="BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})">
   InterceptIJSRuntime(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L90"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>BlazorLiveView will intercept all <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> instances.
+  <div class="markdown level1 summary"><p>Make BlazorLiveView intercept all <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> instances.
 JS interop invocations passed to them will be forwarded to mirror
-circuits that are viewing the current user. To filter which invocations
-are forwarded, see <a class="xref" href="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour">DefaultInterceptionBehaviour</a>
-and <a class="xref" href="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules">InterceptionRules</a>.
-To forward only specific invocations use <a class="xref" href="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html">ILiveViewJSRuntime</a>
-(which does not require calling this extension method).</p>
+circuits that are viewing the current user's session. To forward only
+specific invocations use <a class="xref" href="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html">ILiveViewJSRuntime</a> (which does
+not require calling this extension method).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -240,7 +238,7 @@ To forward only specific invocations use <a class="xref" href="BlazorLiveView.Co
 
   <h3 id="BlazorLiveView_Core_Extensions_LiveViewExtensions_MapLiveViewMirrorEndpoint_Microsoft_AspNetCore_Builder_WebApplication_System_Action_Microsoft_AspNetCore_Builder_IEndpointConventionBuilder__" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.MapLiveViewMirrorEndpoint(Microsoft.AspNetCore.Builder.WebApplication,System.Action{Microsoft.AspNetCore.Builder.IEndpointConventionBuilder})">
   MapLiveViewMirrorEndpoint(WebApplication, Action&lt;IEndpointConventionBuilder&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L123"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Finishes the setup of <code>BlazorLiveView</code> and maps the mirror

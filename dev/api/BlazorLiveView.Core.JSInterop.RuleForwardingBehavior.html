@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace BlazorLiveView.Core.JSInterop | BlazorLiveView </title>
+      <title>Enum RuleForwardingBehavior | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace BlazorLiveView.Core.JSInterop | BlazorLiveView ">
+      <meta name="title" content="Enum RuleForwardingBehavior | BlazorLiveView ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/dev/apiSpec/new?filename=BlazorLiveView_Core_JSInterop_RuleForwardingBehavior.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.JSInterop.RuleForwardingBehavior%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,59 +84,57 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.JSInterop">
+        <article data-uid="BlazorLiveView.Core.JSInterop.RuleForwardingBehavior">
 
-  <h1 id="BlazorLiveView_Core_JSInterop" data-uid="BlazorLiveView.Core.JSInterop" class="text-break">Namespace BlazorLiveView.Core.JSInterop</h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
 
-    <h3 id="classes">
-Classes
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html">ExactJSInteropForwardingRule</a></dt>
-      <dd></dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html">ForwardingBehaviorExtensions</a></dt>
-      <dd></dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html">LiveViewJSRuntimeExtensions</a></dt>
-      <dd></dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html">MudBlazorJSInteropForwardingRule</a></dt>
-      <dd></dd>
-    </dl>
-    <h3 id="interfaces">
-Interfaces
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.IForwardingRule.html">IForwardingRule</a></dt>
-      <dd></dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html">ILiveViewJSRuntime</a></dt>
-      <dd><p>A subtype of <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> that automatically forwards all JS
-interop invocations (<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeasync#microsoft-jsinterop-ijsruntime-invokeasync-1(system-string-system-object())">InvokeAsync&lt;TValue&gt;(string, object[])</a>) to all mirror
-circuits that are viewing the current circuit.
-See <a class="xref" href="BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__">InterceptIJSRuntime(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)</a> for
-forwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>
+
+
+  <h1 id="BlazorLiveView_Core_JSInterop_RuleForwardingBehavior" data-uid="BlazorLiveView.Core.JSInterop.RuleForwardingBehavior" class="text-break">
+Enum RuleForwardingBehavior  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/IForwardingRule.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.JSInterop.html">JSInterop</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>BlazorLiveView.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum RuleForwardingBehavior</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_Forward"><code>Forward = 1</code></dt>
+  
+  <dd><p>Forward the current invocation to the mirror circuit no matter the
+default behaviour. In case of calling .NET methods from JS, this means
+the method will be invoked when coming from a mirror circuit.</p>
 </dd>
-    </dl>
-    <h3 id="enums">
-Enums
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ForwardingBehavior.html">ForwardingBehavior</a></dt>
-      <dd></dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html">RuleForwardingBehavior</a></dt>
-      <dd></dd>
-    </dl>
+    <dt id="BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_None"><code>None = 0</code></dt>
+  
+  <dd><p>No modification - let other rules or the default behaviour decide.</p>
+</dd>
+    <dt id="BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_SkipForwarding"><code>SkipForwarding = 2</code></dt>
+  
+  <dd><p>Do not forward the current invocation to the mirror circuit no matter
+the default behaviour. In case of calling .NET methods from JS, this
+means the method will be invoked only when coming from a user circuit
+(not a mirror circuit).</p>
+</dd>
+  </dl>
+
 
 
 </article>

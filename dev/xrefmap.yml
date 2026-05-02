@@ -1107,95 +1107,132 @@ references:
   commentId: N:BlazorLiveView.Core.JSInterop
   fullName: BlazorLiveView.Core.JSInterop
   nameWithType: BlazorLiveView.Core.JSInterop
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule
-  name: ExactJSInteropInterceptionRule
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule
-  nameWithType: ExactJSInteropInterceptionRule
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  name: ExactJSInteropInterceptionRule(string, InterceptionBehavior)
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule__ctor_System_String_BlazorLiveView_Core_JSInterop_InterceptionBehavior_
-  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  name.vb: New(String, InterceptionBehavior)
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule(string, BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.New(String, BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  nameWithType: ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule(string, InterceptionBehavior)
-  nameWithType.vb: ExactJSInteropInterceptionRule.New(String, InterceptionBehavior)
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor*
-  name: ExactJSInteropInterceptionRule
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule__ctor_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.#ctor
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule
+  name: ExactJSInteropForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule
+  nameWithType: ExactJSInteropForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  name: ExactJSInteropForwardingRule(string, ForwardingBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule__ctor_System_String_BlazorLiveView_Core_JSInterop_ForwardingBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  name.vb: New(String, ForwardingBehavior)
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.ExactJSInteropForwardingRule(string, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.New(String, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  nameWithType: ExactJSInteropForwardingRule.ExactJSInteropForwardingRule(string, ForwardingBehavior)
+  nameWithType.vb: ExactJSInteropForwardingRule.New(String, ForwardingBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor*
+  name: ExactJSInteropForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.New
-  nameWithType: ExactJSInteropInterceptionRule.ExactJSInteropInterceptionRule
-  nameWithType.vb: ExactJSInteropInterceptionRule.New
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.ExactJSInteropForwardingRule
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.New
+  nameWithType: ExactJSInteropForwardingRule.ExactJSInteropForwardingRule
+  nameWithType.vb: ExactJSInteropForwardingRule.New
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
   name: BehaviourOnMatch
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_BehaviourOnMatch
-  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
-  nameWithType: ExactJSInteropInterceptionRule.BehaviourOnMatch
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch*
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_BehaviourOnMatch
+  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
+  nameWithType: ExactJSInteropForwardingRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch*
   name: BehaviourOnMatch
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_BehaviourOnMatch_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_BehaviourOnMatch_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.BehaviourOnMatch
-  nameWithType: ExactJSInteropInterceptionRule.BehaviourOnMatch
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
-  name: GetInterceptionBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_GetInterceptionBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
-  name.vb: GetInterceptionBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour(String)
-  nameWithType: ExactJSInteropInterceptionRule.GetInterceptionBehaviour(string)
-  nameWithType.vb: ExactJSInteropInterceptionRule.GetInterceptionBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour*
-  name: GetInterceptionBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_GetInterceptionBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
+  nameWithType: ExactJSInteropForwardingRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  name: GetForwardingBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  name.vb: GetForwardingBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(String)
+  nameWithType: ExactJSInteropForwardingRule.GetForwardingBehaviour(string)
+  nameWithType.vb: ExactJSInteropForwardingRule.GetForwardingBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour*
+  name: GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.GetInterceptionBehaviour
-  nameWithType: ExactJSInteropInterceptionRule.GetInterceptionBehaviour
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour
+  nameWithType: ExactJSInteropForwardingRule.GetForwardingBehaviour
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
   name: Identifier
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_Identifier
-  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
-  nameWithType: ExactJSInteropInterceptionRule.Identifier
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier*
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_Identifier
+  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
+  nameWithType: ExactJSInteropForwardingRule.Identifier
+- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier*
   name: Identifier
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropInterceptionRule_Identifier_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
+  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_Identifier_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropInterceptionRule.Identifier
-  nameWithType: ExactJSInteropInterceptionRule.Identifier
-- uid: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule
-  name: IJSInteropInterceptionRule
-  href: api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule
-  fullName: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule
-  nameWithType: IJSInteropInterceptionRule
-- uid: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
-  name: GetInterceptionBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_GetInterceptionBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
-  name.vb: GetInterceptionBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour(String)
-  nameWithType: IJSInteropInterceptionRule.GetInterceptionBehaviour(string)
-  nameWithType.vb: IJSInteropInterceptionRule.GetInterceptionBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour*
-  name: GetInterceptionBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_GetInterceptionBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour
+  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
+  nameWithType: ExactJSInteropForwardingRule.Identifier
+- uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior
+  name: ForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingBehavior
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehavior
+  nameWithType: ForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior.Forward
+  name: Forward
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingBehavior_Forward
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingBehavior.Forward
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehavior.Forward
+  nameWithType: ForwardingBehavior.Forward
+- uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior.SkipForwarding
+  name: SkipForwarding
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingBehavior_SkipForwarding
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingBehavior.SkipForwarding
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehavior.SkipForwarding
+  nameWithType: ForwardingBehavior.SkipForwarding
+- uid: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions
+  name: ForwardingBehaviorExtensions
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions
+  nameWithType: ForwardingBehaviorExtensions
+- uid: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  name: ToRuleForwardingBehavior(ForwardingBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_ForwardingBehaviorExtensions_ToRuleForwardingBehavior_BlazorLiveView_Core_JSInterop_ForwardingBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  nameWithType: ForwardingBehaviorExtensions.ToRuleForwardingBehavior(ForwardingBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior*
+  name: ToRuleForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_ForwardingBehaviorExtensions_ToRuleForwardingBehavior_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule.GetInterceptionBehaviour
-  nameWithType: IJSInteropInterceptionRule.GetInterceptionBehaviour
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
+  nameWithType: ForwardingBehaviorExtensions.ToRuleForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.IForwardingRule
+  name: IForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.IForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.IForwardingRule
+  nameWithType: IForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(System.String)
+  name: GetForwardingBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html#BlazorLiveView_Core_JSInterop_IForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(System.String)
+  name.vb: GetForwardingBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(String)
+  nameWithType: IForwardingRule.GetForwardingBehaviour(string)
+  nameWithType.vb: IForwardingRule.GetForwardingBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour*
+  name: GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html#BlazorLiveView_Core_JSInterop_IForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour
+  nameWithType: IForwardingRule.GetForwardingBehaviour
 - uid: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime
   name: ILiveViewJSRuntime
   href: api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html
@@ -1227,43 +1264,6 @@ references:
   fullName.vb: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror(Of TValue)(String, System.Threading.CancellationToken, Object())
   nameWithType: ILiveViewJSRuntime.InvokeAsyncNoMirror<TValue>(string, CancellationToken, object?[]?)
   nameWithType.vb: ILiveViewJSRuntime.InvokeAsyncNoMirror(Of TValue)(String, CancellationToken, Object())
-- uid: BlazorLiveView.Core.JSInterop.InterceptionBehavior
-  name: InterceptionBehavior
-  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html
-  commentId: T:BlazorLiveView.Core.JSInterop.InterceptionBehavior
-  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehavior
-  nameWithType: InterceptionBehavior
-- uid: BlazorLiveView.Core.JSInterop.InterceptionBehavior.Intercept
-  name: Intercept
-  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html#BlazorLiveView_Core_JSInterop_InterceptionBehavior_Intercept
-  commentId: F:BlazorLiveView.Core.JSInterop.InterceptionBehavior.Intercept
-  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehavior.Intercept
-  nameWithType: InterceptionBehavior.Intercept
-- uid: BlazorLiveView.Core.JSInterop.InterceptionBehavior.SkipInterception
-  name: SkipInterception
-  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehavior.html#BlazorLiveView_Core_JSInterop_InterceptionBehavior_SkipInterception
-  commentId: F:BlazorLiveView.Core.JSInterop.InterceptionBehavior.SkipInterception
-  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehavior.SkipInterception
-  nameWithType: InterceptionBehavior.SkipInterception
-- uid: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions
-  name: InterceptionBehaviorExtensions
-  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html
-  commentId: T:BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions
-  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions
-  nameWithType: InterceptionBehaviorExtensions
-- uid: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  name: ToRuleInterceptionBehavior(InterceptionBehavior)
-  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions_ToRuleInterceptionBehavior_BlazorLiveView_Core_JSInterop_InterceptionBehavior_
-  commentId: M:BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(BlazorLiveView.Core.JSInterop.InterceptionBehavior)
-  nameWithType: InterceptionBehaviorExtensions.ToRuleInterceptionBehavior(InterceptionBehavior)
-- uid: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior*
-  name: ToRuleInterceptionBehavior
-  href: api/BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_InterceptionBehaviorExtensions_ToRuleInterceptionBehavior_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.InterceptionBehaviorExtensions.ToRuleInterceptionBehavior
-  nameWithType: InterceptionBehaviorExtensions.ToRuleInterceptionBehavior
 - uid: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions
   name: LiveViewJSRuntimeExtensions
   href: api/BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html
@@ -1295,90 +1295,144 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
   nameWithType: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule
-  name: MudBlazorJSInteropInterceptionRule
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule
-  nameWithType: MudBlazorJSInteropInterceptionRule
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
-  name: GetInterceptionBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropInterceptionRule_GetInterceptionBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(System.String)
-  name.vb: GetInterceptionBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(String)
-  nameWithType: MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(string)
-  nameWithType.vb: MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour*
-  name: GetInterceptionBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropInterceptionRule_GetInterceptionBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule
+  name: MudBlazorJSInteropForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule
+  nameWithType: MudBlazorJSInteropForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  name: GetForwardingBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  name.vb: GetForwardingBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(String)
+  nameWithType: MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(string)
+  nameWithType.vb: MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour*
+  name: GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour
-  nameWithType: MudBlazorJSInteropInterceptionRule.GetInterceptionBehaviour
-- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior
-  name: RuleInterceptionBehavior
-  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html
-  commentId: T:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior
-  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior
-  nameWithType: RuleInterceptionBehavior
-- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.Intercept
-  name: Intercept
-  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html#BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_Intercept
-  commentId: F:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.Intercept
-  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.Intercept
-  nameWithType: RuleInterceptionBehavior.Intercept
-- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.None
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour
+  nameWithType: MudBlazorJSInteropForwardingRule.GetForwardingBehaviour
+- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
+  name: RuleForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html
+  commentId: T:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
+  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
+  nameWithType: RuleForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.Forward
+  name: Forward
+  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_Forward
+  commentId: F:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.Forward
+  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.Forward
+  nameWithType: RuleForwardingBehavior.Forward
+- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.None
   name: None
-  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html#BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_None
-  commentId: F:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.None
-  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.None
-  nameWithType: RuleInterceptionBehavior.None
-- uid: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.SkipInterception
-  name: SkipInterception
-  href: api/BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.html#BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_SkipInterception
-  commentId: F:BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.SkipInterception
-  fullName: BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior.SkipInterception
-  nameWithType: RuleInterceptionBehavior.SkipInterception
+  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_None
+  commentId: F:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.None
+  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.None
+  nameWithType: RuleForwardingBehavior.None
+- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.SkipForwarding
+  name: SkipForwarding
+  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_SkipForwarding
+  commentId: F:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.SkipForwarding
+  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.SkipForwarding
+  nameWithType: RuleForwardingBehavior.SkipForwarding
 - uid: BlazorLiveView.Core.Options
   name: BlazorLiveView.Core.Options
   href: api/BlazorLiveView.Core.Options.html
   commentId: N:BlazorLiveView.Core.Options
   fullName: BlazorLiveView.Core.Options
   nameWithType: BlazorLiveView.Core.Options
+- uid: BlazorLiveView.Core.Options.ForwardingRules
+  name: ForwardingRules
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html
+  commentId: T:BlazorLiveView.Core.Options.ForwardingRules
+  fullName: BlazorLiveView.Core.Options.ForwardingRules
+  nameWithType: ForwardingRules
+- uid: BlazorLiveView.Core.Options.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
+  name: ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules__ctor_BlazorLiveView_Core_JSInterop_ForwardingBehavior_System_Collections_Generic_List_BlazorLiveView_Core_JSInterop_IForwardingRule__
+  commentId: M:BlazorLiveView.Core.Options.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
+  name.vb: New(ForwardingBehavior, List(Of IForwardingRule))
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.ForwardingRules(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List<BlazorLiveView.Core.JSInterop.IForwardingRule>)
+  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.New(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List(Of BlazorLiveView.Core.JSInterop.IForwardingRule))
+  nameWithType: ForwardingRules.ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
+  nameWithType.vb: ForwardingRules.New(ForwardingBehavior, List(Of IForwardingRule))
+- uid: BlazorLiveView.Core.Options.ForwardingRules.#ctor*
+  name: ForwardingRules
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules__ctor_
+  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.ForwardingRules
+  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.New
+  nameWithType: ForwardingRules.ForwardingRules
+  nameWithType.vb: ForwardingRules.New
+- uid: BlazorLiveView.Core.Options.ForwardingRules.Default
+  name: Default
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Default
+  commentId: P:BlazorLiveView.Core.Options.ForwardingRules.Default
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.Default
+  nameWithType: ForwardingRules.Default
+- uid: BlazorLiveView.Core.Options.ForwardingRules.Default*
+  name: Default
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Default_
+  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.Default
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.Default
+  nameWithType: ForwardingRules.Default
+- uid: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(System.String)
+  name: GetForwardingBehavior(string)
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_GetForwardingBehavior_System_String_
+  commentId: M:BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(System.String)
+  name.vb: GetForwardingBehavior(String)
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(string)
+  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(String)
+  nameWithType: ForwardingRules.GetForwardingBehavior(string)
+  nameWithType.vb: ForwardingRules.GetForwardingBehavior(String)
+- uid: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior*
+  name: GetForwardingBehavior
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_GetForwardingBehavior_
+  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior
+  nameWithType: ForwardingRules.GetForwardingBehavior
+- uid: BlazorLiveView.Core.Options.ForwardingRules.Rules
+  name: Rules
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Rules
+  commentId: P:BlazorLiveView.Core.Options.ForwardingRules.Rules
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.Rules
+  nameWithType: ForwardingRules.Rules
+- uid: BlazorLiveView.Core.Options.ForwardingRules.Rules*
+  name: Rules
+  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Rules_
+  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.Rules
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.ForwardingRules.Rules
+  nameWithType: ForwardingRules.Rules
 - uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   name: LiveViewJSInteropOptions
   href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html
   commentId: T:BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   nameWithType: LiveViewJSInteropOptions
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)
-  name: AddInterceptionRule(IJSInteropInterceptionRule)
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddInterceptionRule_BlazorLiveView_Core_JSInterop_IJSInteropInterceptionRule_
-  commentId: M:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule(BlazorLiveView.Core.JSInterop.IJSInteropInterceptionRule)
-  nameWithType: LiveViewJSInteropOptions.AddInterceptionRule(IJSInteropInterceptionRule)
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule*
-  name: AddInterceptionRule
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddInterceptionRule_
-  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules
+  name: AddMudBlazorForwardingRules()
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorForwardingRules
+  commentId: M:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules()
+  nameWithType: LiveViewJSInteropOptions.AddMudBlazorForwardingRules()
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules*
+  name: AddMudBlazorForwardingRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorForwardingRules_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddInterceptionRule
-  nameWithType: LiveViewJSInteropOptions.AddInterceptionRule
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
-  name: AddMudBlazorInterceptionRules()
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorInterceptionRules
-  commentId: M:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules()
-  nameWithType: LiveViewJSInteropOptions.AddMudBlazorInterceptionRules()
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules*
-  name: AddMudBlazorInterceptionRules
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorInterceptionRules_
-  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
-  nameWithType: LiveViewJSInteropOptions.AddMudBlazorInterceptionRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules
+  nameWithType: LiveViewJSInteropOptions.AddMudBlazorForwardingRules
 - uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
   name: DefaultDelayForInvocationForward
   href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward
@@ -1392,32 +1446,32 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward
   nameWithType: LiveViewJSInteropOptions.DefaultDelayForInvocationForward
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
-  name: DefaultInterceptionBehaviour
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour
-  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
-  nameWithType: LiveViewJSInteropOptions.DefaultInterceptionBehaviour
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour*
-  name: DefaultInterceptionBehaviour
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultInterceptionBehaviour_
-  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules
+  name: DotnetToJsForwardingRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DotnetToJsForwardingRules
+  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules
+  nameWithType: LiveViewJSInteropOptions.DotnetToJsForwardingRules
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules*
+  name: DotnetToJsForwardingRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DotnetToJsForwardingRules_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultInterceptionBehaviour
-  nameWithType: LiveViewJSInteropOptions.DefaultInterceptionBehaviour
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
-  name: InterceptionRules
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules
-  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
-  nameWithType: LiveViewJSInteropOptions.InterceptionRules
-- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules*
-  name: InterceptionRules
-  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_InterceptionRules_
-  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules
+  nameWithType: LiveViewJSInteropOptions.DotnetToJsForwardingRules
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules
+  name: JsToDotnetForwardingRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_JsToDotnetForwardingRules
+  commentId: P:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules
+  nameWithType: LiveViewJSInteropOptions.JsToDotnetForwardingRules
+- uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules*
+  name: JsToDotnetForwardingRules
+  href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html#BlazorLiveView_Core_Options_LiveViewJSInteropOptions_JsToDotnetForwardingRules_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.InterceptionRules
-  nameWithType: LiveViewJSInteropOptions.InterceptionRules
+  fullName: BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules
+  nameWithType: LiveViewJSInteropOptions.JsToDotnetForwardingRules
 - uid: BlazorLiveView.Core.Options.LiveViewOptions
   name: LiveViewOptions
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html

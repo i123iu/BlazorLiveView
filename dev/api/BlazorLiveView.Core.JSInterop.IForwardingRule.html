@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Enum RuleInterceptionBehavior | BlazorLiveView </title>
+      <title>Interface IForwardingRule | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Enum RuleInterceptionBehavior | BlazorLiveView ">
+      <meta name="title" content="Interface IForwardingRule | BlazorLiveView ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/dev/apiSpec/new?filename=BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/dev/apiSpec/new?filename=BlazorLiveView_Core_JSInterop_IForwardingRule.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.JSInterop.IForwardingRule%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,13 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior">
+        <article data-uid="BlazorLiveView.Core.JSInterop.IForwardingRule">
 
 
 
-
-  <h1 id="BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior" data-uid="BlazorLiveView.Core.JSInterop.RuleInterceptionBehavior" class="text-break">
-Enum RuleInterceptionBehavior  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/IJSInteropInterceptionRule.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  <h1 id="BlazorLiveView_Core_JSInterop_IForwardingRule" data-uid="BlazorLiveView.Core.JSInterop.IForwardingRule" class="text-break">
+Interface IForwardingRule  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/IForwardingRule.cs/#L3"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -102,7 +101,7 @@ Enum RuleInterceptionBehavior  <a class="header-action link-secondary" title="Vi
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum RuleInterceptionBehavior</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IForwardingRule</code></pre>
   </div>
 
 
@@ -113,24 +112,48 @@ Enum RuleInterceptionBehavior  <a class="header-action link-secondary" title="Vi
 
 
 
-  <h2 id="fields">Fields
+
+
+
+
+  <h2 class="section" id="methods">Methods
 </h2>
+
+
+  <a id="BlazorLiveView_Core_JSInterop_IForwardingRule_GetForwardingBehaviour_" data-uid="BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour*"></a>
+
+  <h3 id="BlazorLiveView_Core_JSInterop_IForwardingRule_GetForwardingBehaviour_System_String_" data-uid="BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(System.String)">
+  GetForwardingBehaviour(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/dev/src/BlazorLiveView.Core/JSInterop/IForwardingRule.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">RuleForwardingBehavior GetForwardingBehaviour(string identifier)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt id="BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_Intercept"><code>Intercept = 1</code></dt>
-  
-  <dd><p>Intercept the current JS interop invocation and forward it to the
-mirror circuit no matter the default behaviour.</p>
-</dd>
-    <dt id="BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_None"><code>None = 0</code></dt>
-  
-  <dd><p>No modification - let other rules or the default behaviour decide.</p>
-</dd>
-    <dt id="BlazorLiveView_Core_JSInterop_RuleInterceptionBehavior_SkipInterception"><code>SkipInterception = 2</code></dt>
-  
-  <dd><p>Do not intercept the current JS interop invocation no matter the
-default behaviour.</p>
-</dd>
+    <dt><code>identifier</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
   </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html">RuleForwardingBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
 
 
 
