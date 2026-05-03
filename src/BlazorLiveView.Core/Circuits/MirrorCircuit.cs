@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
+using System.Threading.Channels;
 
 namespace BlazorLiveView.Core.Circuits;
 
@@ -34,6 +35,15 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
 
+    private readonly Channel<JSInvocation> _jsInvocationQueue;
+    private readonly Task? _processingTask;
+    private readonly record struct JSInvocation(
+        string Identifier,
+        CancellationToken CancellationToken,
+        object?[]? Args,
+        long CreatedAtTicks
+    );
+
     private readonly CancellationTokenSource _cancellationTokenSource;
     private MirrorCircuitBlockReason? _blockReason = null;
 
@@ -58,8 +68,20 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         _liveViewJSInteropOptions = liveViewJSInteropOptions;
         _cancellationTokenSource = new CancellationTokenSource();
 
+        _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
+        {
+            SingleReader = true,
+            SingleWriter = false
+        });
+
         SourceCircuit.JSRuntimeInvoked += Source_JSRuntimeInvoked;
         CircuitStatusChanged += OnCircuitStatusChanged;
+
+        if (!DebugView)
+        {
+            // Do not forward JS invocations to debug views, since all will fail anyway.
+            _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
+        }
     }
 
     public override void Dispose()
@@ -82,11 +104,9 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         if (_cancellationTokenSource.IsCancellationRequested) return;
         if (DebugView) return;
 
-        _ = ProcessInvocationAsync(
-            identifier,
-            cancellationToken,
-            args
-        );
+        _jsInvocationQueue.Writer.TryWrite(new JSInvocation(
+            identifier, cancellationToken, args, DateTime.UtcNow.Ticks
+        ));
     }
 
     private void OnCircuitStatusChanged(ICircuit circuit)
@@ -117,78 +137,101 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         return IsAssignableToGenericType(baseType, genericType);
     }
 
-
-    private async Task ProcessInvocationAsync(
-        string identifier,
-        CancellationToken cancellationToken,
-        object?[]? args
-    )
+    private async Task ProcessInvocationsAsync(CancellationToken cancellationToken)
     {
         try
         {
-            var jsRuntime = Circuit.CircuitHost.JSRuntime;
-
-            object?[]? newArgs = null;
-            if (args is not null && args.Length > 0)
+            await foreach (var invocation in _jsInvocationQueue.Reader.ReadAllAsync(cancellationToken))
             {
-                // Translate arguments
-                newArgs = new object?[args.Length];
-                for (int i = 0; i < args.Length; i++)
+                try
                 {
-                    var arg = args[i];
-                    if (arg == null) continue;
+                    using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+                        cancellationToken,
+                        invocation.CancellationToken
+                    );
 
-                    if (Types.IDotNetObjectReference.IsInstanceOfType(arg))
+                    var elapsed = TimeSpan.FromTicks(
+                        DateTime.UtcNow.Ticks - invocation.CreatedAtTicks
+                    );
+                    var remainingDelay = _liveViewJSInteropOptions.Value
+                        .DefaultDelayForInvocationForward
+                        - elapsed;
+
+                    if (remainingDelay > TimeSpan.Zero)
                     {
-                        if (IsAssignableToGenericType(arg.GetType(), Types.DotNetObjectReferenceOfT))
-                        {
-                            var wrapper = new DotNetObjectReferenceOfTWrapper(arg);
-                            var refValue = wrapper.Value;
-                            var newRef = DotNetObjectReferenceOfTWrapper.Create(refValue);
-                            newArgs[i] = newRef.Inner;
-                        }
-                        else
-                        {
-                            _logger.LogWarning(
-                                "When calling {Identifier}: expected argument of type {ArgType} to be of type DotNetObjectReference<T> when implements interface IDotNetObjectReference",
-                                identifier, arg.GetType().Name
-                            );
-                        }
+                        // A short delay so that components can finish rendering.
+                        // For example when IJSRuntime.InvokeAsync is called in
+                        // OnAfterRenderAsync.
+                        await Task.Delay(remainingDelay, linkedCts.Token);
                     }
-                    else
+
+                    object?[]? newArgs = null;
+                    if (invocation.Args is not null && invocation.Args.Length > 0)
                     {
-                        newArgs[i] = arg;
+                        newArgs = TranslateArgs(invocation.Args, invocation.Identifier);
                     }
+
+                    var jsRuntime = Circuit.CircuitHost.JSRuntime;
+                    await jsRuntime.Inner.InvokeVoidAsync(
+                        invocation.Identifier,
+                        linkedCts.Token,
+                        newArgs
+                    );
+                }
+                catch (OperationCanceledException)
+                {
+                    if (cancellationToken.IsCancellationRequested) break;
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(
+                        ex,
+                        "Failed to invoke JS runtime method '{Identifier}' on mirror circuit id={Id}",
+                        invocation.Identifier, Id
+                    );
                 }
             }
-
-            using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
-                _cancellationTokenSource.Token,
-                cancellationToken
-            );
-
-            // A short delay so that components can finish rendering.
-            // For example when called in OnAfterRenderAsync.
-            await Task.Delay(
-                _liveViewJSInteropOptions.Value.DefaultDelayForInvocationForward,
-                linkedCts.Token
-            );
-
-            await jsRuntime.Inner.InvokeVoidAsync(
-                identifier,
-                linkedCts.Token,
-                newArgs
-            );
         }
         catch (OperationCanceledException)
         { }
-        catch (Exception ex)
+    }
+
+    private object?[] TranslateArgs(object?[] args, string identifier)
+    {
+        object?[] newArgs = new object?[args.Length];
+
+        for (int i = 0; i < args.Length; i++)
         {
-            _logger.LogError(ex,
-                "Failed to invoke JS runtime method '{Identifier}' on mirror circuit id={Id}",
-                identifier, Id
-            );
+            var arg = args[i];
+            if (arg == null) continue;
+
+            if (Types.IDotNetObjectReference.IsInstanceOfType(arg))
+            {
+                if (IsAssignableToGenericType(arg.GetType(), Types.DotNetObjectReferenceOfT))
+                {
+                    // An instance of DotNetObjectReference<T> contains a
+                    // reference to the original JSRuntime object. So a new
+                    // instance must be crated with the same value.
+                    var wrapper = new DotNetObjectReferenceOfTWrapper(arg);
+                    var refValue = wrapper.Value;
+                    var newRef = DotNetObjectReferenceOfTWrapper.Create(refValue);
+                    newArgs[i] = newRef.Inner;
+                }
+                else
+                {
+                    _logger.LogWarning(
+                        "When calling {Identifier}: expected argument of type {ArgType} to be of type DotNetObjectReference<T> when implements interface IDotNetObjectReference",
+                        identifier, arg.GetType().Name
+                    );
+                }
+            }
+            else
+            {
+                newArgs[i] = arg;
+            }
         }
+
+        return newArgs;
     }
 
     public void SetBlocked(MirrorCircuitBlockReason blockReason)
