@@ -87,7 +87,7 @@
         <article data-uid="">
 <h1 id="utilities">Utilities</h1>
 
-<p>These are the attributes and components used to control how your application behaves when being mirrored in BlazorLiveView.</p>
+<p>This pages describes some additional utilities.</p>
 <h2 id="hiding-components-in-mirror-views">Hiding Components in Mirror Views</h2>
 <p>When working with sensitive data (like personal information) you may want to hide them from being visible in the mirrored views.</p>
 <h3 id="using-the-component">Using the Component</h3>
@@ -103,7 +103,7 @@
 &lt;/div&gt;
 </code></pre>
 <h3 id="using-the-attribute">Using the Attribute</h3>
-<p>For hiding entire components from being mirrored on any page, you can apply the <code>LiveViewHideInMirrorAttribute</code> to the component class. For example:</p>
+<p>For hiding entire component types from being mirrored on any page, you can apply the <code>LiveViewHideInMirrorAttribute</code> to the component class. For example:</p>
 <pre><code class="lang-razor">@* TwoFactorAuthComponent.razor *@
 
 @using BlazorLiveView.Core.Attributes;
@@ -111,6 +111,25 @@
 
 Your authentication code is: @AuthCode
 </code></pre>
+<h2 id="remote-support-tools">Remote Support Tools</h2>
+<p>There are three remote support tools available for administrators in the mirrored view like you can see in the screenshot below. These tools are:</p>
+<ol>
+<li><em>Window size sync</em>: Keeps the window size of the mirrored view in sync with the user's actual window size.</li>
+<li><em>Scroll position sync</em>: Keeps the scroll position of the mirrored view in sync with the user's actual scroll position. When this is active, the users cursor is shown to the administrator as a laser pointer.</li>
+<li><em>Laser pointer</em>: Shows a laser pointer to the user so that the administrator can point at specific parts of the UI in a remote support scenario.</li>
+</ol>
+<p>Using them requires the <code>LiveViewUserSideTools</code> component to be included in the main layout of your application, e.g. <code>MainLayout.razor</code>.</p>
+<pre><code class="lang-html">@using BlazorLiveView.Core.Components.Tools
+@inherits LayoutComponentBase
+
+&lt;LiveViewUserSideTools /&gt;
+
+&lt;!-- The rest of your layout --&gt;
+</code></pre>
+<p><img src="../images/screenshot-mirror-circuit-window-size-sync.png" alt="Window Size Sync">
+<em>Admin view of the user circuit with  window size sync</em></p>
+<p><img src="../images/screenshot-mirror-circuit-pointer.png" alt="Laser Pointer">
+<em>User circuit with admin's laser pointer (blue dot)</em></p>
 
 </article>
 

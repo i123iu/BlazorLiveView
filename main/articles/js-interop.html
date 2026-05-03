@@ -87,11 +87,12 @@
         <article data-uid="">
 <h1 id="js-interop">JS interop</h1>
 
-<p>BlazorLiveView supports JavaScript interoperability <strong>experimentally</strong>. The DOM state of a page is first built when a mirror session is created, but JS function can be invoked at any time before creation. For this reason, the page state cannot be reconstructed completely. Any JS calls that happen before opening the mirror session will be lost.</p>
-<h2 id="iliveviewjsruntime"><code>ILiveViewJSRuntime</code></h2>
-<p>First option is to inject and use <code>ILiveViewJSRuntime</code> instead of <code>IJSRuntime</code>. That automatically forwards JavaScript invocations to all mirror circuits that are currently viewing that user's session.</p>
+<p>BlazorLiveView supports JavaScript interoperability <strong>experimentally</strong>. Making sure the mirror circuit's page has the same state as the user circuit is difficult. For example JS calls are not mirrored by default, since they could cause unexcepted behaviour when invoked on the mirror circuit.</p>
+<p>Mirroring JS calls is possible in two ways:</p>
+<h2 id="injecting-iliveviewjsruntime">Injecting <code>ILiveViewJSRuntime</code></h2>
+<p>First option is to inject and use <code>ILiveViewJSRuntime</code> instead of <code>IJSRuntime</code>. This will automatically forward JavaScript invocations (<code>InvokeAsync</code>) from the user circuit to all mirror circuits that are currently viewing that session. This also contains the method <code>InvokeAsyncNoMirror</code> that would do the same as regular <code>InvokeAsync</code>.</p>
 <p>For example:</p>
-<pre><code class="lang-csharp">@using BlazorLiveView.Core.Circuits.Services
+<pre><code class="lang-csharp">@using BlazorLiveView.Core.JSInterop
 @inject ILiveViewJSRuntime LiveViewJS
 
 &lt;button @onclick=&quot;DoAlert&quot;&gt;Click me&lt;/button&gt;
@@ -99,18 +100,19 @@
 @code {
     private void DoAlert()
     {
-        LiveViewJS.InvokeVoidAsync(&quot;alert&quot;, &quot;This will appear on user and all mirror circuits.&quot;);
+        _ = LiveViewJS.InvokeVoidAsync(&quot;alert&quot;, &quot;This will appear on user and all mirror circuits.&quot;);
+        _ = LiveViewJS.InvokeVoidAsyncNoMirror(&quot;alert&quot;, &quot;This will appear only on the user circuit.&quot;);
     }
 }
 </code></pre>
-<h2 id="intercepting-all-js-invocations">Intercepting all JS invocations</h2>
-<p>BlazorLiveView also supports intercepting <strong>all</strong> JS interop invocations to the default <code>IJSRuntime</code>. To enable this feature, set the flag <code>InterceptJsInteropInvocations</code> to <code>true</code> when registering BlazorLiveView services like this:</p>
+<h2 id="intercepting-ijsruntime">Intercepting <code>IJSRuntime</code></h2>
+<p>You can also intercept all calls to the default <code>IJSRuntime</code> by using the method <code>InterceptIJSRuntime</code> on your <code>builder.Services</code>. This will forward all JS calls to mirror circuits, but it will not be possible to invoke JS only on the user circuit. This can be useful for third-party libraries or for code without having to modify it. To enable this, add the following to your <code>Program.cs</code>:</p>
 <pre><code class="lang-csharp">builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddLiveView()
-    .InterceptJSInteropInvocations();
+    .InterceptIJSRuntime();
 </code></pre>
-<p>This way, the example in the previous section would work even when using the default <code>IJSRuntime</code>:</p>
+<p>With this enabled, the following example code will have the JS invocation also mirrored:</p>
 <pre><code class="lang-csharp">@inject IJSRuntime JS
 
 &lt;button @onclick=&quot;DoAlert&quot;&gt;Click me&lt;/button&gt;
@@ -121,6 +123,33 @@
         JS.InvokeVoidAsync(&quot;alert&quot;, &quot;This will appear on user and all mirror circuits.&quot;);
     }
 }
+</code></pre>
+<h3 id="forwarding-rules">Forwarding Rules</h3>
+<p>To specify which intercepted calls to JS function should be forwarded, you can specify the <em>forwarding rules</em> in <code>DotnetToJsForwardingRules</code>. When enabling interception, you can provide additional options:</p>
+<pre><code class="lang-csharp">builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView()
+    .InterceptIJSRuntime(options =&gt;
+    {
+        options.DotnetToJsForwardingRules.Default = ForwardingBehavior.Forward;
+        options.DotnetToJsForwardingRules.Rules.Add(new ExactForwardingRule(
+            &quot;not_forwarded_function&quot;, ForwardingBehavior.SkipForwarding
+        ));
+    });
+</code></pre>
+<p>Rules are evaluated in the order they were added. If no rule matches, the default value will be used. In the example above, all JS calls will be intercepted and forwarded except those to <code>not_forwarded_function</code>. You can also create custom rule types by implementing the <code>IForwardingRule</code> interface.</p>
+<h3 id="calling-net-from-javascript">Calling .NET from JavaScript</h3>
+<p>Calling .NET methods from JavaScript is usually done via <code>DotNetObjectReference</code>. To specify which <code>invokeMethodAsync</code> calls on this instance should be allowed, you can use the <code>JsToDotnetForwardingRules</code>. By default, all calls from .NET to JS are disallowed as they can cause unexpected behavior when invoking methods from the original user circuit. For example, a method on a component could be called once by the user and then &quot;unexpectedly&quot; again by the mirrored invocation.</p>
+<pre><code class="lang-csharp">builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddLiveView()
+    .InterceptIJSRuntime(options =&gt;
+    {
+        options.JsToDotnetForwardingRules.Default = ForwardingBehavior.SkipForwarding;
+        options.JsToDotnetForwardingRules.Rules.Add(new ExactForwardingRule(
+            &quot;MethodCalledByMirrorCircuits&quot;, ForwardingBehavior.Forward
+        ));
+    });
 </code></pre>
 
 </article>

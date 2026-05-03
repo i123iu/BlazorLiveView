@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Interface ILiveViewJSRuntime | BlazorLiveView ">
       
-      <meta name="description" content="A subtype of  that automatically forwards all JS interop invocations to all mirror circuits that mirror the current user. See LiveViewOptions.InterceptJsInteropInvocations for forwarding JS invocations from all IJSRuntime.">
+      <meta name="description" content="A subtype of  that automatically forwards all JS interop invocations () to all mirror circuits that are viewing the current circuit. See  for forwarding JS invocations from all instances of IJSRuntime.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_Circuits_Services_ILiveViewJSRuntime.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,23 +84,24 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime">
+        <article data-uid="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime">
 
 
 
-  <h1 id="BlazorLiveView_Core_Circuits_Services_ILiveViewJSRuntime" data-uid="BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime" class="text-break">
-Interface ILiveViewJSRuntime  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/Services/ILiveViewJSRuntime.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <h1 id="BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime" data-uid="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime" class="text-break">
+Interface ILiveViewJSRuntime  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/ILiveViewJSRuntime.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.html">Circuits</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.Services.html">Services</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.JSInterop.html">JSInterop</a></dd></dl>
   <dl><dt>Assembly</dt><dd>BlazorLiveView.Core.dll</dd></dl>
   </div>
 
   <div class="markdown summary"><p>A subtype of <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> that automatically forwards all JS
-interop invocations to all mirror circuits that mirror the current user.
-See LiveViewOptions.InterceptJsInteropInvocations for
-forwarding JS invocations from all <code>IJSRuntime</code>.</p>
+interop invocations (<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.invokeasync#microsoft-jsinterop-ijsruntime-invokeasync-1(system-string-system-object())">InvokeAsync&lt;TValue&gt;(string, object[])</a>) to all mirror
+circuits that are viewing the current circuit.
+See <a class="xref" href="BlazorLiveView.Core.Extensions.LiveViewExtensions.html#BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__">InterceptIJSRuntime(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)</a> for
+forwarding JS invocations from all instances of <code>IJSRuntime</code>.</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -142,6 +143,110 @@ forwarding JS invocations from all <code>IJSRuntime</code>.</p>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime.setvalueasync#microsoft-jsinterop-ijsruntime-setvalueasync-1(system-string-0-system-threading-cancellationtoken)">IJSRuntime.SetValueAsync&lt;TValue&gt;(string, TValue, CancellationToken)</a>
     </div>
   </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html#BlazorLiveView_Core_JSInterop_LiveViewJSRuntimeExtensions_InvokeVoidAsyncNoMirror_BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_System_String_System_Object___">LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, string, params object?[]?)</a>
+  </div>
+  <div>
+      <a class="xref" href="BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.html#BlazorLiveView_Core_JSInterop_LiveViewJSRuntimeExtensions_InvokeVoidAsyncNoMirror_BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_System_String_System_Threading_CancellationToken_System_Object___">LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror(ILiveViewJSRuntime, string, CancellationToken, params object?[]?)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror_" data-uid="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror*"></a>
+
+  <h3 id="BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror__1_System_String_System_Object___" data-uid="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror``1(System.String,System.Object[])">
+  InvokeAsyncNoMirror&lt;TValue&gt;(string, object?[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/ILiveViewJSRuntime.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Does not forward the JS interop invocation to mirror circuits unlike <code>InvokeAsync</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ValueTask&lt;TValue&gt; InvokeAsyncNoMirror&lt;TValue&gt;(string identifier, object?[]? args)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>identifier</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>args</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;TValue&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror_" data-uid="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror*"></a>
+
+  <h3 id="BlazorLiveView_Core_JSInterop_ILiveViewJSRuntime_InvokeAsyncNoMirror__1_System_String_System_Threading_CancellationToken_System_Object___" data-uid="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.InvokeAsyncNoMirror``1(System.String,System.Threading.CancellationToken,System.Object[])">
+  InvokeAsyncNoMirror&lt;TValue&gt;(string, CancellationToken, object?[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/ILiveViewJSRuntime.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Does not forward the JS interop invocation to mirror circuits unlike <code>InvokeAsync</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ValueTask&lt;TValue&gt; InvokeAsyncNoMirror&lt;TValue&gt;(string identifier, CancellationToken cancellationToken, object?[]? args)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>identifier</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+    <dt><code>args</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;TValue&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
 
 
 

@@ -89,7 +89,7 @@
 
 
   <h1 id="BlazorLiveView_Core_Circuits_IMirrorCircuit" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit" class="text-break">
-Interface IMirrorCircuit  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L7"><i class="bi bi-code-slash"></i></a>
+Interface IMirrorCircuit  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -145,7 +145,7 @@ another user's &quot;screen&quot; (browser tab).</p>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_BlockReason" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.BlockReason">
   BlockReason
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L46"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Throws an exception if not blocked.</p>
@@ -173,15 +173,45 @@ another user's &quot;screen&quot; (browser tab).</p>
 
 
 
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_CursorPosition_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_CursorPosition" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPosition">
+  CursorPosition
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Position? CursorPosition { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_DebugView_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.DebugView*"></a>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_DebugView" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.DebugView">
   DebugView
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Should the mirrored componets be in DebugView?</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -209,7 +239,7 @@ another user's &quot;screen&quot; (browser tab).</p>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_IsBlocked" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.IsBlocked">
   IsBlocked
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>When a mirror circuit has been block by this library. E.g. when mirror
@@ -239,11 +269,73 @@ circuit tries to change location, which is disallowed. See
 
 
 
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_LaserPointerEnabled_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_LaserPointerEnabled" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.LaserPointerEnabled">
+  LaserPointerEnabled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool LaserPointerEnabled { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_ScrollSyncEnabled_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_ScrollSyncEnabled" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncEnabled">
+  ScrollSyncEnabled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ScrollSyncEnabled { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_SourceCircuit_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.SourceCircuit*"></a>
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_SourceCircuit" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.SourceCircuit">
   SourceCircuit
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -274,7 +366,7 @@ circuit tries to change location, which is disallowed. See
 
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_State" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.State">
   State
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Unique identifier that is passed as a query parameter to the mirror
@@ -303,14 +395,172 @@ endpoint. This way the mirror circuit can be recognized when created.</p>
 
 
 
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_WindowSizeSyncEnabled_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_WindowSizeSyncEnabled" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncEnabled">
+  WindowSizeSyncEnabled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool WindowSizeSyncEnabled { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyLaserPointerEnabledChanged_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyLaserPointerEnabledChanged_System_Boolean_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyLaserPointerEnabledChanged(System.Boolean)">
+  NotifyLaserPointerEnabledChanged(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void NotifyLaserPointerEnabledChanged(bool enabled)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enabled</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyScrollSyncChanged_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyScrollSyncChanged_System_Boolean_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyScrollSyncChanged(System.Boolean)">
+  NotifyScrollSyncChanged(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void NotifyScrollSyncChanged(bool enabled)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enabled</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyWindowSizeSyncChanged_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_NotifyWindowSizeSyncChanged_System_Boolean_" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.NotifyWindowSizeSyncChanged(System.Boolean)">
+  NotifyWindowSizeSyncChanged(bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void NotifyWindowSizeSyncChanged(bool enabled)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enabled</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
   <h2 class="section" id="events">Events
 </h2>
 
 
 
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_CursorPositionChanged" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChanged">
+  CursorPositionChanged
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event IMirrorCircuit.CursorPositionChangedHandler? CursorPositionChanged</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.html">IMirrorCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.CursorPositionChangedHandler.html">CursorPositionChangedHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_MirrorCircuitBlocked" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlocked">
   MirrorCircuitBlocked
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L12"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -328,6 +578,96 @@ endpoint. This way the mirror circuit can be recognized when created.</p>
   <h4 class="section">Event Type</h4>
   <dl class="parameters">
     <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.html">IMirrorCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.MirrorCircuitBlockedHandler.html">MirrorCircuitBlockedHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_PointerSyncChanged" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChanged">
+  PointerSyncChanged
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event IMirrorCircuit.PointerSyncChangedHandler? PointerSyncChanged</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.html">IMirrorCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.PointerSyncChangedHandler.html">PointerSyncChangedHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_ScrollSyncChanged" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChanged">
+  ScrollSyncChanged
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event IMirrorCircuit.ScrollSyncChangedHandler? ScrollSyncChanged</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.html">IMirrorCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.ScrollSyncChangedHandler.html">ScrollSyncChangedHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="BlazorLiveView_Core_Circuits_IMirrorCircuit_WindowSizeSyncChanged" data-uid="BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChanged">
+  WindowSizeSyncChanged
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IMirrorCircuit.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event IMirrorCircuit.WindowSizeSyncChangedHandler? WindowSizeSyncChanged</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.html">IMirrorCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IMirrorCircuit.WindowSizeSyncChangedHandler.html">WindowSizeSyncChangedHandler</a></dt>
     <dd></dd>
   </dl>
 

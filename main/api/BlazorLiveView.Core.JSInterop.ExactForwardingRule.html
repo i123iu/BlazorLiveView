@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class LiveViewJSInteropOptions | BlazorLiveView </title>
+      <title>Class ExactForwardingRule | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class LiveViewJSInteropOptions | BlazorLiveView ">
+      <meta name="title" content="Class ExactForwardingRule | BlazorLiveView ">
       
-      
+      <meta name="description" content="A forwarding rule that matches an identifier exactly by string comparison.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_Options_LiveViewJSInteropOptions.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.Options.LiveViewJSInteropOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_JSInterop_ExactForwardingRule.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.JSInterop.ExactForwardingRule%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,24 +84,25 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions">
+        <article data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule">
 
 
 
-  <h1 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions" class="text-break">
-Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  <h1 id="BlazorLiveView_Core_JSInterop_ExactForwardingRule" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule" class="text-break">
+Class ExactForwardingRule  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/JSInteropForwardingRules.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.Options.html">Options</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.JSInterop.html">JSInterop</a></dd></dl>
   <dl><dt>Assembly</dt><dd>BlazorLiveView.Core.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>A forwarding rule that matches an identifier exactly by string comparison.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class LiveViewJSInteropOptions</code></pre>
+    <pre><code class="lang-csharp hljs">public class ExactForwardingRule : IForwardingRule</code></pre>
   </div>
 
 
@@ -111,10 +112,16 @@ Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="V
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">LiveViewJSInteropOptions</span></div>
+      <div><span class="xref">ExactForwardingRule</span></div>
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="BlazorLiveView.Core.JSInterop.IForwardingRule.html">IForwardingRule</a></div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
@@ -133,6 +140,9 @@ Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="V
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
@@ -145,26 +155,60 @@ Class LiveViewJSInteropOptions  <a class="header-action link-secondary" title="V
 
 
 
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="BlazorLiveView_Core_JSInterop_ExactForwardingRule__ctor_" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor*"></a>
+
+  <h3 id="BlazorLiveView_Core_JSInterop_ExactForwardingRule__ctor_System_String_BlazorLiveView_Core_JSInterop_ForwardingBehavior_" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)">
+  ExactForwardingRule(string, ForwardingBehavior)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/JSInteropForwardingRules.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A forwarding rule that matches an identifier exactly by string comparison.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExactForwardingRule(string identifier, ForwardingBehavior behaviourOnMatch)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>identifier</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>behaviourOnMatch</code> <a class="xref" href="BlazorLiveView.Core.JSInterop.ForwardingBehavior.html">ForwardingBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
   <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward*"></a>
+  <a id="BlazorLiveView_Core_JSInterop_ExactForwardingRule_BehaviourOnMatch_" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch*"></a>
 
-  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DefaultDelayForInvocationForward" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DefaultDelayForInvocationForward">
-  DefaultDelayForInvocationForward
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_JSInterop_ExactForwardingRule_BehaviourOnMatch" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch">
+  BehaviourOnMatch
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/JSInteropForwardingRules.cs/#L12"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>How long to wait before forwarding a JS interop invocation to mirror
-circuits. This can be useful for targeting a specific HTML element that
-may not be immediately available in the DOM (rendering might sometimes
-have a delay).</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TimeSpan DefaultDelayForInvocationForward { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ForwardingBehavior BehaviourOnMatch { get; set; }</code></pre>
   </div>
 
 
@@ -173,7 +217,7 @@ have a delay).</p>
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.ForwardingBehavior.html">ForwardingBehavior</a></dt>
     <dd></dd>
   </dl>
 
@@ -184,21 +228,18 @@ have a delay).</p>
 
 
 
-  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DotnetToJsForwardingRules_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules*"></a>
+  <a id="BlazorLiveView_Core_JSInterop_ExactForwardingRule_Identifier_" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier*"></a>
 
-  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_DotnetToJsForwardingRules" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.DotnetToJsForwardingRules">
-  DotnetToJsForwardingRules
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_JSInterop_ExactForwardingRule_Identifier" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier">
+  Identifier
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/JSInteropForwardingRules.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Rules for intercepting JS interop invocations and forwarding them to
-mirror circuits. Default is to <code>Forward</code> all, with some exceptions
-specific to Blazor.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ForwardingRules DotnetToJsForwardingRules { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string Identifier { get; }</code></pre>
   </div>
 
 
@@ -207,41 +248,7 @@ specific to Blazor.</p>
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Options.ForwardingRules.html">ForwardingRules</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_JsToDotnetForwardingRules_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules*"></a>
-
-  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_JsToDotnetForwardingRules" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.JsToDotnetForwardingRules">
-  JsToDotnetForwardingRules
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L36"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Rules for allowing calls from JS to .NET, most commonly done via
-DotNetObjectReference. Default is to skip all with some
-exceptions for this library's use.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ForwardingRules JsToDotnetForwardingRules { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h4 class="section">Property Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Options.ForwardingRules.html">ForwardingRules</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
 
@@ -256,24 +263,29 @@ exceptions for this library's use.</p>
 </h2>
 
 
-  <a id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorForwardingRules_" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules*"></a>
+  <a id="BlazorLiveView_Core_JSInterop_ExactForwardingRule_GetForwardingBehaviour_" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour*"></a>
 
-  <h3 id="BlazorLiveView_Core_Options_LiveViewJSInteropOptions_AddMudBlazorForwardingRules" data-uid="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.AddMudBlazorForwardingRules">
-  AddMudBlazorForwardingRules()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Options/LiveViewJSInteropOptions.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_JSInterop_ExactForwardingRule_GetForwardingBehaviour_System_String_" data-uid="BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(System.String)">
+  GetForwardingBehaviour(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/JSInterop/JSInteropForwardingRules.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LiveViewJSInteropOptions AddMudBlazorForwardingRules()</code></pre>
+    <pre><code class="lang-csharp hljs">public RuleForwardingBehavior GetForwardingBehaviour(string identifier)</code></pre>
   </div>
 
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>identifier</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html">LiveViewJSInteropOptions</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html">RuleForwardingBehavior</a></dt>
     <dd></dd>
   </dl>
 

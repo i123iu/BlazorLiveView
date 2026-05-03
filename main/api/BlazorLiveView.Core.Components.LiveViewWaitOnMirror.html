@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class LiveViewUserScreen | BlazorLiveView </title>
+      <title>Class LiveViewWaitOnMirror | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class LiveViewUserScreen | BlazorLiveView ">
+      <meta name="title" content="Class LiveViewWaitOnMirror | BlazorLiveView ">
       
-      
+      <meta name="description" content="Wrapper for app content that will first wait on any mirror circuits that want to view this circuit to finish loading. This allows the mirror circuits to capture all JS interop calls that would normally happen before the mirror circuit could finish loading.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_Components_LiveViewWaitOnMirror.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.Components.LiveViewWaitOnMirror%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,24 +84,28 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen">
+        <article data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror">
 
 
 
-  <h1 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen" class="text-break">
-Class LiveViewUserScreen  
+  <h1 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror" class="text-break">
+Class LiveViewWaitOnMirror  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Dashboard.html">Dashboard</a>.<a class="xref" href="BlazorLiveView.Dashboard.Components.html">Components</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>BlazorLiveView.Dashboard.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="BlazorLiveView.html">BlazorLiveView</a>.<a class="xref" href="BlazorLiveView.Core.html">Core</a>.<a class="xref" href="BlazorLiveView.Core.Components.html">Components</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>BlazorLiveView.Core.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Wrapper for app content that will first wait on any mirror circuits that
+want to view this circuit to finish loading. This allows the mirror
+circuits to capture all JS interop calls that would normally happen
+before the mirror circuit could finish loading.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class LiveViewUserScreen : LiveViewScreenBase, IComponent, IHandleEvent, IHandleAfterRender, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class LiveViewWaitOnMirror : ComponentBase, IComponent, IHandleEvent, IHandleAfterRender</code></pre>
   </div>
 
 
@@ -112,8 +116,7 @@ Class LiveViewUserScreen
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase">ComponentBase</a></div>
-      <div><a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html">LiveViewScreenBase</a></div>
-      <div><span class="xref">LiveViewUserScreen</span></div>
+      <div><span class="xref">LiveViewWaitOnMirror</span></div>
     </dd>
   </dl>
 
@@ -123,7 +126,6 @@ Class LiveViewUserScreen
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.icomponent">IComponent</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleevent">IHandleEvent</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.ihandleafterrender">IHandleAfterRender</a></div>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
     </dd>
   </dl>
 
@@ -132,46 +134,10 @@ Class LiveViewUserScreen
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_liveViewScreenIFrame">LiveViewScreenBase.liveViewScreenIFrame</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_subscribedCircuitIds">LiveViewScreenBase.subscribedCircuitIds</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase__sourceCircuit">LiveViewScreenBase._sourceCircuit</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_SourceCircuit">LiveViewScreenBase.SourceCircuit</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_MirrorCircuit">LiveViewScreenBase.MirrorCircuit</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_GetRenderState">LiveViewScreenBase.GetRenderState()</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_OnInitialized">LiveViewScreenBase.OnInitialized()</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_Dispose">LiveViewScreenBase.Dispose()</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_SubscribeToCircuit_BlazorLiveView_Core_Circuits_ICircuit_">LiveViewScreenBase.SubscribeToCircuit(ICircuit)</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_UnsubscribeFromCircuit_BlazorLiveView_Core_Circuits_ICircuit_">LiveViewScreenBase.UnsubscribeFromCircuit(ICircuit)</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_MirrorCircuitChanged_BlazorLiveView_Core_Circuits_IMirrorCircuit_">LiveViewScreenBase.MirrorCircuitChanged(IMirrorCircuit)</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_OnAnyCircuitChanged_BlazorLiveView_Core_Circuits_ICircuit_">LiveViewScreenBase.OnAnyCircuitChanged(ICircuit)</a>
-    </div>
-    <div>
-      <a class="xref" href="BlazorLiveView.Dashboard.Components.LiveViewScreenBase.html#BlazorLiveView_Dashboard_Components_LiveViewScreenBase_OnAnyUserCircuitChanged_BlazorLiveView_Core_Circuits_IUserCircuit_">LiveViewScreenBase.OnAnyUserCircuitChanged(IUserCircuit)</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.oninitializedasync">ComponentBase.OnInitializedAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparametersset">ComponentBase.OnParametersSet()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.componentbase.onparameterssetasync">ComponentBase.OnParametersSetAsync()</a>
@@ -237,32 +203,33 @@ Class LiveViewUserScreen
 
 
 
-  <h2 class="section" id="properties">Properties
+  <h2 class="section" id="constructors">Constructors
 </h2>
 
 
-  <a id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_DebugView_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.DebugView*"></a>
+  <a id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror__ctor_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.#ctor*"></a>
 
-  <h3 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_DebugView" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.DebugView">
-  DebugView
-  
+  <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror__ctor_BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_Microsoft_Extensions_Logging_ILogger_BlazorLiveView_Core_Components_LiveViewWaitOnMirror__" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.#ctor(BlazorLiveView.Core.Circuits.Services.ICurrentCircuit,Microsoft.Extensions.Logging.ILogger{BlazorLiveView.Core.Components.LiveViewWaitOnMirror})">
+  LiveViewWaitOnMirror(ICurrentCircuit, ILogger&lt;LiveViewWaitOnMirror&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L15"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Wrapper for app content that will first wait on any mirror circuits that
+want to view this circuit to finish loading. This allows the mirror
+circuits to capture all JS interop calls that would normally happen
+before the mirror circuit could finish loading.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Parameter]
-public bool DebugView { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public LiveViewWaitOnMirror(ICurrentCircuit currentCircuit, ILogger&lt;LiveViewWaitOnMirror&gt; logger)</code></pre>
   </div>
 
-
-
-
-
-  <h4 class="section">Property Value</h4>
+  <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dt><code>currentCircuit</code> <a class="xref" href="BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html">ICurrentCircuit</a></dt>
+    <dd></dd>
+    <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.html">LiveViewWaitOnMirror</a>&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -273,11 +240,19 @@ public bool DebugView { get; set; }</code></pre>
 
 
 
-  <a id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_UserSelector_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.UserSelector*"></a>
 
-  <h3 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_UserSelector" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.UserSelector">
-  UserSelector
-  
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_ChildContent_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent*"></a>
+
+  <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_ChildContent" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.ChildContent">
+  ChildContent
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -285,8 +260,7 @@ public bool DebugView { get; set; }</code></pre>
 
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Parameter]
-[EditorRequired]
-public string? UserSelector { get; set; }</code></pre>
+public RenderFragment? ChildContent { get; set; }</code></pre>
   </div>
 
 
@@ -295,7 +269,7 @@ public string? UserSelector { get; set; }</code></pre>
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.renderfragment">RenderFragment</a></dt>
     <dd></dd>
   </dl>
 
@@ -310,11 +284,11 @@ public string? UserSelector { get; set; }</code></pre>
 </h2>
 
 
-  <a id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_BuildRenderTree_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.BuildRenderTree*"></a>
+  <a id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_BuildRenderTree_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree*"></a>
 
-  <h3 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_BuildRenderTree_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+  <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_BuildRenderTree_Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
   BuildRenderTree(RenderTreeBuilder)
-  
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L102"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Renders the component to the supplied <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder">RenderTreeBuilder</a>.</p>
@@ -322,13 +296,14 @@ public string? UserSelector { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void BuildRenderTree(RenderTreeBuilder __builder)</code></pre>
+    <pre><code class="lang-csharp hljs">protected override void BuildRenderTree(RenderTreeBuilder builder)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>__builder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder">RenderTreeBuilder</a></dt>
-    <dd></dd>
+    <dt><code>builder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder">RenderTreeBuilder</a></dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.components.rendering.rendertreebuilder">RenderTreeBuilder</a> that will receive the render output.</p>
+</dd>
   </dl>
 
 
@@ -342,82 +317,20 @@ public string? UserSelector { get; set; }</code></pre>
 
 
 
-  <a id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_OnAnyCircuitClosed_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.OnAnyCircuitClosed*"></a>
+  <a id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnInitialized_" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized*"></a>
 
-  <h3 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_OnAnyCircuitClosed_BlazorLiveView_Core_Circuits_ICircuit_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.OnAnyCircuitClosed(BlazorLiveView.Core.Circuits.ICircuit)">
-  OnAnyCircuitClosed(ICircuit)
-  
+  <h3 id="BlazorLiveView_Core_Components_LiveViewWaitOnMirror_OnInitialized" data-uid="BlazorLiveView.Core.Components.LiveViewWaitOnMirror.OnInitialized">
+  OnInitialized()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/LiveViewWaitOnMirror.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnAnyCircuitClosed(ICircuit circuit)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>circuit</code> <a class="xref" href="BlazorLiveView.Core.Circuits.ICircuit.html">ICircuit</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-  <a id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_OnAnyCircuitOpened_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.OnAnyCircuitOpened*"></a>
-
-  <h3 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_OnAnyCircuitOpened_BlazorLiveView_Core_Circuits_ICircuit_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.OnAnyCircuitOpened(BlazorLiveView.Core.Circuits.ICircuit)">
-  OnAnyCircuitOpened(ICircuit)
-  
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnAnyCircuitOpened(ICircuit circuit)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>circuit</code> <a class="xref" href="BlazorLiveView.Core.Circuits.ICircuit.html">ICircuit</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-  <a id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_OnParametersSet_" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.OnParametersSet*"></a>
-
-  <h3 id="BlazorLiveView_Dashboard_Components_LiveViewUserScreen_OnParametersSet" data-uid="BlazorLiveView.Dashboard.Components.LiveViewUserScreen.OnParametersSet">
-  OnParametersSet()
-  
-  </h3>
-
-  <div class="markdown level1 summary"><p>Method invoked when the component has received parameters from its parent in
-the render tree, and the incoming values have been assigned to properties.</p>
+  <div class="markdown level1 summary"><p>Method invoked when the component is ready to start, having received its
+initial parameters from its parent in the render tree.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected override void OnParametersSet()</code></pre>
+    <pre><code class="lang-csharp hljs">protected override void OnInitialized()</code></pre>
   </div>
 
 

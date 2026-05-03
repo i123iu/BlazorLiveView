@@ -89,7 +89,7 @@
 
 
   <h1 id="BlazorLiveView_Core_Extensions_LiveViewExtensions" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions" class="text-break">
-Class LiveViewExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L18"><i class="bi bi-code-slash"></i></a>
+Class LiveViewExtensions  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -156,10 +156,10 @@ Class LiveViewExtensions  <a class="header-action link-secondary" title="View so
 
   <h3 id="BlazorLiveView_Core_Extensions_LiveViewExtensions_AddLiveView_Microsoft_Extensions_DependencyInjection_IServerSideBlazorBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewOptions__" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.AddLiveView(Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewOptions})">
   AddLiveView(IServerSideBlazorBuilder, Action&lt;LiveViewOptions&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Registers services required for <code>BlazorLiveView</code>.</p>
+  <div class="markdown level1 summary"><p>Registers services required for BlazorLiveView.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -191,23 +191,23 @@ Class LiveViewExtensions  <a class="header-action link-secondary" title="View so
 
 
 
-  <a id="BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptJSInteropInvocations_" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations*"></a>
+  <a id="BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime*"></a>
 
-  <h3 id="BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptJSInteropInvocations_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptJSInteropInvocations(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})">
-  InterceptJSInteropInvocations(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_Extensions_LiveViewExtensions_InterceptIJSRuntime_BlazorLiveView_Core_Extensions_ILiveViewBuilder_System_Action_BlazorLiveView_Core_Options_LiveViewJSInteropOptions__" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.InterceptIJSRuntime(BlazorLiveView.Core.Extensions.ILiveViewBuilder,System.Action{BlazorLiveView.Core.Options.LiveViewJSInteropOptions})">
+  InterceptIJSRuntime(ILiveViewBuilder, Action&lt;LiveViewJSInteropOptions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L90"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>BlazorLiveView will intercept all JS interop invocations passed to
-<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> and will forward them to mirror circuits that
-are viewing the current user. To forward only specific invocations
-see <a class="xref" href="BlazorLiveView.Core.Circuits.Services.ILiveViewJSRuntime.html">ILiveViewJSRuntime</a> (which does not require calling
-this extension method).</p>
+  <div class="markdown level1 summary"><p>Make BlazorLiveView intercept all <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.jsinterop.ijsruntime">IJSRuntime</a> instances.
+JS interop invocations passed to them will be forwarded to mirror
+circuits that are viewing the current user's session. To forward only
+specific invocations use <a class="xref" href="BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html">ILiveViewJSRuntime</a> (which does
+not require calling this extension method).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ILiveViewBuilder InterceptJSInteropInvocations(this ILiveViewBuilder builder, Action&lt;LiveViewJSInteropOptions&gt;? configureOptions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static ILiveViewBuilder InterceptIJSRuntime(this ILiveViewBuilder builder, Action&lt;LiveViewJSInteropOptions&gt;? configureOptions = null)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -238,7 +238,7 @@ this extension method).</p>
 
   <h3 id="BlazorLiveView_Core_Extensions_LiveViewExtensions_MapLiveViewMirrorEndpoint_Microsoft_AspNetCore_Builder_WebApplication_System_Action_Microsoft_AspNetCore_Builder_IEndpointConventionBuilder__" data-uid="BlazorLiveView.Core.Extensions.LiveViewExtensions.MapLiveViewMirrorEndpoint(Microsoft.AspNetCore.Builder.WebApplication,System.Action{Microsoft.AspNetCore.Builder.IEndpointConventionBuilder})">
   MapLiveViewMirrorEndpoint(WebApplication, Action&lt;IEndpointConventionBuilder&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Extensions/LiveViewExtensions.cs/#L123"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Finishes the setup of <code>BlazorLiveView</code> and maps the mirror
