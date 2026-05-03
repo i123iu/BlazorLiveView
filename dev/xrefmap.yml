@@ -1107,73 +1107,73 @@ references:
   commentId: N:BlazorLiveView.Core.JSInterop
   fullName: BlazorLiveView.Core.JSInterop
   nameWithType: BlazorLiveView.Core.JSInterop
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule
-  name: ExactJSInteropForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule
-  nameWithType: ExactJSInteropForwardingRule
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  name: ExactJSInteropForwardingRule(string, ForwardingBehavior)
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule__ctor_System_String_BlazorLiveView_Core_JSInterop_ForwardingBehavior_
-  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule
+  name: ExactForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ExactForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule
+  nameWithType: ExactForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  name: ExactForwardingRule(string, ForwardingBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule__ctor_System_String_BlazorLiveView_Core_JSInterop_ForwardingBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
   name.vb: New(String, ForwardingBehavior)
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.ExactJSInteropForwardingRule(string, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.New(String, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  nameWithType: ExactJSInteropForwardingRule.ExactJSInteropForwardingRule(string, ForwardingBehavior)
-  nameWithType.vb: ExactJSInteropForwardingRule.New(String, ForwardingBehavior)
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor*
-  name: ExactJSInteropForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule__ctor_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.#ctor
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.ExactForwardingRule(string, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactForwardingRule.New(String, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  nameWithType: ExactForwardingRule.ExactForwardingRule(string, ForwardingBehavior)
+  nameWithType.vb: ExactForwardingRule.New(String, ForwardingBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor*
+  name: ExactForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.ExactJSInteropForwardingRule
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.New
-  nameWithType: ExactJSInteropForwardingRule.ExactJSInteropForwardingRule
-  nameWithType.vb: ExactJSInteropForwardingRule.New
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.ExactForwardingRule
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactForwardingRule.New
+  nameWithType: ExactForwardingRule.ExactForwardingRule
+  nameWithType.vb: ExactForwardingRule.New
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
   name: BehaviourOnMatch
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_BehaviourOnMatch
-  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
-  nameWithType: ExactJSInteropForwardingRule.BehaviourOnMatch
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch*
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_BehaviourOnMatch
+  commentId: P:BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+  nameWithType: ExactForwardingRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch*
   name: BehaviourOnMatch
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_BehaviourOnMatch_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_BehaviourOnMatch_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.BehaviourOnMatch
-  nameWithType: ExactJSInteropForwardingRule.BehaviourOnMatch
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+  nameWithType: ExactForwardingRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(System.String)
   name: GetForwardingBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_GetForwardingBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(System.String)
   name.vb: GetForwardingBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour(String)
-  nameWithType: ExactJSInteropForwardingRule.GetForwardingBehaviour(string)
-  nameWithType.vb: ExactJSInteropForwardingRule.GetForwardingBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour*
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(String)
+  nameWithType: ExactForwardingRule.GetForwardingBehaviour(string)
+  nameWithType.vb: ExactForwardingRule.GetForwardingBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour*
   name: GetForwardingBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_GetForwardingBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.GetForwardingBehaviour
-  nameWithType: ExactJSInteropForwardingRule.GetForwardingBehaviour
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour
+  nameWithType: ExactForwardingRule.GetForwardingBehaviour
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
   name: Identifier
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_Identifier
-  commentId: P:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
-  nameWithType: ExactJSInteropForwardingRule.Identifier
-- uid: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier*
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_Identifier
+  commentId: P:BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+  nameWithType: ExactForwardingRule.Identifier
+- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier*
   name: Identifier
-  href: api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactJSInteropForwardingRule_Identifier_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
+  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_Identifier_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.Identifier
-  nameWithType: ExactJSInteropForwardingRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+  nameWithType: ExactForwardingRule.Identifier
 - uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior
   name: ForwardingBehavior
   href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html
@@ -1295,28 +1295,28 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
   nameWithType: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule
-  name: MudBlazorJSInteropForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule
-  nameWithType: MudBlazorJSInteropForwardingRule
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule
+  name: MudBlazorForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule
+  nameWithType: MudBlazorForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(System.String)
   name: GetForwardingBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropForwardingRule_GetForwardingBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(System.String)
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(System.String)
   name.vb: GetForwardingBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(String)
-  nameWithType: MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(string)
-  nameWithType.vb: MudBlazorJSInteropForwardingRule.GetForwardingBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour*
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(String)
+  nameWithType: MudBlazorForwardingRule.GetForwardingBehaviour(string)
+  nameWithType.vb: MudBlazorForwardingRule.GetForwardingBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour*
   name: GetForwardingBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorJSInteropForwardingRule_GetForwardingBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.GetForwardingBehaviour
-  nameWithType: MudBlazorJSInteropForwardingRule.GetForwardingBehaviour
+  fullName: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour
+  nameWithType: MudBlazorForwardingRule.GetForwardingBehaviour
 - uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
   name: RuleForwardingBehavior
   href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html

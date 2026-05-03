@@ -132,12 +132,12 @@
     .InterceptIJSRuntime(options =&gt;
     {
         options.DotnetToJsForwardingRules.Default = ForwardingBehavior.Forward;
-        options.DotnetToJsForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+        options.DotnetToJsForwardingRules.Rules.Add(new ExactForwardingRule(
             &quot;not_forwarded_function&quot;, ForwardingBehavior.SkipForwarding
         ));
     });
 </code></pre>
-<p>Rules are evaluated in the order they were added. If no rule matches, the default value will be used. In the example above, all JS calls will be intercepted and forwarded except those to <code>not_forwarded_function</code>. You can also create custom rule types by implementing the <code>IJSInteropForwardingRule</code> interface.</p>
+<p>Rules are evaluated in the order they were added. If no rule matches, the default value will be used. In the example above, all JS calls will be intercepted and forwarded except those to <code>not_forwarded_function</code>. You can also create custom rule types by implementing the <code>IForwardingRule</code> interface.</p>
 <h3 id="calling-net-from-javascript">Calling .NET from JavaScript</h3>
 <p>Calling .NET methods from JavaScript is usually done via <code>DotNetObjectReference</code>. To specify which <code>invokeMethodAsync</code> calls on this instance should be allowed, you can use the <code>JsToDotnetForwardingRules</code>. By default, all calls from .NET to JS are disallowed as they can cause unexpected behavior when invoking methods from the original user circuit. For example, a method on a component could be called once by the user and then &quot;unexpectedly&quot; again by the mirrored invocation.</p>
 <pre><code class="lang-csharp">builder.Services.AddRazorComponents()
@@ -146,7 +146,7 @@
     .InterceptIJSRuntime(options =&gt;
     {
         options.JsToDotnetForwardingRules.Default = ForwardingBehavior.SkipForwarding;
-        options.JsToDotnetForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+        options.JsToDotnetForwardingRules.Rules.Add(new ExactForwardingRule(
             &quot;MethodCalledByMirrorCircuits&quot;, ForwardingBehavior.Forward
         ));
     });

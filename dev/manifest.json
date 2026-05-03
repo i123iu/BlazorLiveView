@@ -586,17 +586,17 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule.html"
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.ExactJSInteropForwardingRule",
-      "Summary": null
+      "Title": "BlazorLiveView.Core.JSInterop.ExactForwardingRule",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.yml\" sourcestartlinenumber=\"1\">A forwarding rule that matches an identifier exactly by string comparison.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -670,16 +670,16 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule.html"
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.MudBlazorJSInteropForwardingRule",
+      "Title": "BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule",
       "Summary": null
     },
     {
