@@ -1,4 +1,8 @@
-﻿using BlazorLiveView.Core.Options;
+﻿using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.Options;
+using BlazorLiveView.Core.Reflection;
+using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,17 +13,30 @@ namespace BlazorLiveView.Core.Circuits;
 
 internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 {
-    private readonly ILogger _logger;
+    public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
+    public event IMirrorCircuit.WindowSizeSyncChangedHandler? WindowSizeSyncChanged;
+    public event IMirrorCircuit.ScrollSyncChangedHandler? ScrollSyncChanged;
+    public event IMirrorCircuit.PointerSyncChangedHandler? PointerSyncChanged;
+    public event IMirrorCircuit.CursorPositionChangedHandler? CursorPositionChanged;
+
+    public IUserCircuit SourceCircuit { get; private set; }
+    public Guid? State { get; private set; }
+    public bool DebugView { get; private set; }
+    public bool WindowSizeSyncEnabled { get; private set; } = false;
+    public bool ScrollSyncEnabled { get; private set; } = false;
+    public bool LaserPointerEnabled { get; private set; } = false;
+    public Position? CursorPosition { get; private set; } = null;
+
+    public bool IsBlocked => _blockReason != null;
+    public MirrorCircuitBlockReason BlockReason => _blockReason
+        ?? throw new Exception("Not blocked");
+
+    private readonly ILogger<MirrorCircuit> _logger;
+    private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
-    private readonly IUserCircuit _source;
-    private readonly Guid? _state;
-    private readonly bool _debugView;
-    private MirrorCircuitBlockReason? _blockReason = null;
 
     private readonly Channel<JSInvocation> _jsInvocationQueue;
-    private readonly Task _processingTask;
-    private readonly CancellationTokenSource _cancellationTokenSource;
-
+    private readonly Task? _processingTask;
     private readonly record struct JSInvocation(
         string Identifier,
         CancellationToken CancellationToken,
@@ -27,15 +44,8 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         long CreatedAtTicks
     );
 
-    public event IMirrorCircuit.MirrorCircuitBlockedHandler? MirrorCircuitBlocked;
-
-    public IUserCircuit SourceCircuit => _source;
-    public Guid? State => _state;
-    public bool DebugView => _debugView;
-
-    public bool IsBlocked => _blockReason != null;
-    public MirrorCircuitBlockReason BlockReason => _blockReason
-        ?? throw new Exception("Not blocked");
+    private readonly CancellationTokenSource _cancellationTokenSource;
+    private MirrorCircuitBlockReason? _blockReason = null;
 
     public MirrorCircuit(
         Circuit circuit,
@@ -43,30 +53,41 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         Guid? state,
         DateTime openedAt,
         bool debugView,
+        IPausedCircuitsTracker pausedCircuitsTracker,
         ILogger<MirrorCircuit> logger,
         IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions
     ) : base(circuit, openedAt, logger)
     {
+        SourceCircuit = source;
+        SourceCircuit.NotifyMirrorCircuitAdded(this);
+
+        State = state;
+        DebugView = debugView;
         _logger = logger;
-        _source = source;
-        _state = state;
-        _debugView = debugView;
+        _pausedCircuitsTracker = pausedCircuitsTracker;
         _liveViewJSInteropOptions = liveViewJSInteropOptions;
         _cancellationTokenSource = new CancellationTokenSource();
+
         _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
         {
             SingleReader = true,
             SingleWriter = false
         });
 
-        _source.JSRuntimeInvoked += Source_JSRuntimeInvoked;
+        SourceCircuit.JSRuntimeInvoked += Source_JSRuntimeInvoked;
         CircuitStatusChanged += OnCircuitStatusChanged;
-        _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
+
+        if (!DebugView)
+        {
+            // Do not forward JS invocations to debug views, since all will fail anyway.
+            _processingTask = ProcessInvocationsAsync(_cancellationTokenSource.Token);
+        }
     }
 
     public override void Dispose()
     {
-        _source.JSRuntimeInvoked -= Source_JSRuntimeInvoked;
+        SourceCircuit.NotifyMirrorCircuitRemoved(this);
+        SourceCircuit.JSRuntimeInvoked -= Source_JSRuntimeInvoked;
         CircuitStatusChanged -= OnCircuitStatusChanged;
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
@@ -74,13 +95,14 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     }
 
     private void Source_JSRuntimeInvoked(
-        IUserCircuit _,
+        IUserCircuit userCircuit,
         string identifier,
         CancellationToken cancellationToken,
         object?[]? args
     )
     {
         if (_cancellationTokenSource.IsCancellationRequested) return;
+        if (DebugView) return;
 
         _jsInvocationQueue.Writer.TryWrite(new JSInvocation(
             identifier, cancellationToken, args, DateTime.UtcNow.Ticks
@@ -93,6 +115,26 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         {
             _cancellationTokenSource.Cancel();
         }
+    }
+
+    // Source - https://stackoverflow.com/a/1075059
+    public static bool IsAssignableToGenericType(Type givenType, Type genericType)
+    {
+        var interfaceTypes = givenType.GetInterfaces();
+
+        foreach (var it in interfaceTypes)
+        {
+            if (it.IsGenericType && it.GetGenericTypeDefinition() == genericType)
+                return true;
+        }
+
+        if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType)
+            return true;
+
+        Type? baseType = givenType.BaseType;
+        if (baseType == null) return false;
+
+        return IsAssignableToGenericType(baseType, genericType);
     }
 
     private async Task ProcessInvocationsAsync(CancellationToken cancellationToken)
@@ -123,11 +165,17 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                         await Task.Delay(remainingDelay, linkedCts.Token);
                     }
 
+                    object?[]? newArgs = null;
+                    if (invocation.Args is not null && invocation.Args.Length > 0)
+                    {
+                        newArgs = TranslateArgs(invocation.Args, invocation.Identifier);
+                    }
+
                     var jsRuntime = Circuit.CircuitHost.JSRuntime;
                     await jsRuntime.Inner.InvokeVoidAsync(
                         invocation.Identifier,
                         linkedCts.Token,
-                        invocation.Args
+                        newArgs
                     );
                 }
                 catch (OperationCanceledException)
@@ -136,7 +184,6 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                 }
                 catch (Exception ex)
                 {
-                    // TODO:  At least notify the mirror circuit's user (admin)
                     _logger.LogError(
                         ex,
                         "Failed to invoke JS runtime method '{Identifier}' on mirror circuit id={Id}",
@@ -149,6 +196,44 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         { }
     }
 
+    private object?[] TranslateArgs(object?[] args, string identifier)
+    {
+        object?[] newArgs = new object?[args.Length];
+
+        for (int i = 0; i < args.Length; i++)
+        {
+            var arg = args[i];
+            if (arg == null) continue;
+
+            if (Types.IDotNetObjectReference.IsInstanceOfType(arg))
+            {
+                if (IsAssignableToGenericType(arg.GetType(), Types.DotNetObjectReferenceOfT))
+                {
+                    // An instance of DotNetObjectReference<T> contains a
+                    // reference to the original JSRuntime object. So a new
+                    // instance must be crated with the same value.
+                    var wrapper = new DotNetObjectReferenceOfTWrapper(arg);
+                    var refValue = wrapper.Value;
+                    var newRef = DotNetObjectReferenceOfTWrapper.Create(refValue);
+                    newArgs[i] = newRef.Inner;
+                }
+                else
+                {
+                    _logger.LogWarning(
+                        "When calling {Identifier}: expected argument of type {ArgType} to be of type DotNetObjectReference<T> when implements interface IDotNetObjectReference",
+                        identifier, arg.GetType().Name
+                    );
+                }
+            }
+            else
+            {
+                newArgs[i] = arg;
+            }
+        }
+
+        return newArgs;
+    }
+
     public void SetBlocked(MirrorCircuitBlockReason blockReason)
     {
         if (_logger.IsEnabled(LogLevel.Information))
@@ -159,5 +244,43 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         _blockReason = blockReason;
         _cancellationTokenSource.Cancel();
         MirrorCircuitBlocked?.Invoke(this);
+    }
+
+    public void NotifyWindowSizeSyncChanged(bool enabled)
+    {
+        if (WindowSizeSyncEnabled == enabled) return;
+        WindowSizeSyncEnabled = enabled;
+        WindowSizeSyncChanged?.Invoke(this);
+    }
+
+    public void NotifyScrollSyncChanged(bool enabled)
+    {
+        if (ScrollSyncEnabled == enabled) return;
+        ScrollSyncEnabled = enabled;
+        ScrollSyncChanged?.Invoke(this);
+    }
+
+    public void NotifyLaserPointerEnabledChanged(bool enabled)
+    {
+        if (LaserPointerEnabled == enabled) return;
+        LaserPointerEnabled = enabled;
+        PointerSyncChanged?.Invoke(this);
+    }
+
+    public void NotifyMirrorCursorChanged(Position? position)
+    {
+        if (position != null && CursorPosition != null)
+        {
+            if (CursorPosition.Value.x == position.Value.x &&
+                CursorPosition.Value.y == position.Value.y)
+                return;
+        }
+        CursorPosition = position;
+        CursorPositionChanged?.Invoke(this);
+    }
+
+    public override void NotifyLoaded()
+    {
+        _pausedCircuitsTracker.MirrorCircuitLoaded(this);
     }
 }

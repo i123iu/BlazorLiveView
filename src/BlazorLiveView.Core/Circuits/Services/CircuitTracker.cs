@@ -122,6 +122,7 @@ internal sealed class CircuitTracker(
                 pending.state,
                 DateTime.UtcNow,
                 pending.debugView,
+                _serviceProvider.GetRequiredService<IPausedCircuitsTracker>(),
                 _loggerFactory.CreateLogger<MirrorCircuit>(),
                 _serviceProvider.GetRequiredService<IOptions<LiveViewJSInteropOptions>>()
             );
@@ -137,6 +138,7 @@ internal sealed class CircuitTracker(
             circuit = new UserCircuit(
                 blazorCircuit,
                 DateTime.UtcNow,
+                _serviceProvider.GetRequiredService<IPausedCircuitsTracker>(),
                 _loggerFactory.CreateLogger<UserCircuit>()
             );
         }
@@ -244,5 +246,6 @@ internal sealed class CircuitTracker(
         }
 
         OnCircuitClosed?.Invoke(circuit);
+        circuit.Dispose();
     }
 }

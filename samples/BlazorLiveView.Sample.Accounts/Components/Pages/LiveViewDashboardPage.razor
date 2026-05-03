@@ -1,12 +1,14 @@
 ﻿@page "/liveview"
 @using BlazorLiveView.Dashboard.Components
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
 
 <PageTitle>LiveViewDashboardPage</PageTitle>
 <h1>LiveViewDashboardPage</h1>
 
 <LiveViewDashboard CircuitIdToLink="@CircuitIdToLink"
                    UserSelectorToLink="@UserSelectorToLink"
-                   ShowFullUrl="true" />
+                   ShowFullUrl="false" />
 
 @code {
     private string CircuitIdToLink(string circuitId,

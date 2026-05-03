@@ -1,6 +1,4 @@
-﻿using BlazorLiveView.Core.Circuits.Services;
-using Microsoft.JSInterop;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 namespace BlazorLiveView.Core.Options;
 
@@ -72,6 +70,12 @@ public sealed class LiveViewOptions
         AutomaticDecompression = System.Net.DecompressionMethods.None,
         ActivityHeadersPropagator = null
     };
+
+    /// <summary>
+    /// The interval in milliseconds at which updates are batched/polled when
+    /// using tools like the Laser Pointer or Window Size Sync. Default is 50ms.
+    /// </summary>
+    public int ToolsUpdateIntervalMs { get; set; } = 50;
 
     public bool ShowDebugOptions { get; set; } = false;
 }

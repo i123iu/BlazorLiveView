@@ -4,6 +4,7 @@
 @using Microsoft.Extensions.Logging
 
 @inject ICircuitTracker CircuitTracker
+@inject IPausedCircuitsTracker PausedCircuitsTracker
 @inject ILogger<LiveViewScreenBase> Logger
 
 @implements IDisposable
@@ -12,18 +13,51 @@
     protected LiveViewScreenIFrame? liveViewScreenIFrame;
     protected HashSet<string> subscribedCircuitIds = new();
 
-    protected IUserCircuit? _sourceCircuit;
+    protected bool IsSyncScreenSizeActive { get; set; } = false;
+    protected bool IsSyncScrollPositionActive { get; set; } = false;
+    protected bool IsPointerActive { get; set; } = false;
+
+    private PausedCircuitReference? _pausedCircuitReference;
+    protected PausedCircuitReference? PausedCircuitReference
+    {
+        get => _pausedCircuitReference;
+        set {
+            if (_pausedCircuitReference == value) return;
+            if (_pausedCircuitReference is not null)
+            {
+                _pausedCircuitReference.Unpaused -= OnPausedCircuitUnpaused;
+                _pausedCircuitReference.UnmarkPaused();
+                _pausedCircuitReference = null;
+            }
+            if (value is not null)
+            {
+                _pausedCircuitReference = value;
+                _pausedCircuitReference.Unpaused += OnPausedCircuitUnpaused;
+            }
+        }
+    }
+
+    private IUserCircuit? _sourceCircuit;
     protected IUserCircuit? SourceCircuit
     {
         get => _sourceCircuit;
         set
         {
-            if (_sourceCircuit != value)
+            if (_sourceCircuit == value) return;
+
+            PausedCircuitReference = null;
+
+            _sourceCircuit = value;
+            if (_sourceCircuit is null) return;
+
+            _sourceCircuit.SessionIdAssigned += OnSourceCircuitSessionIdAssigned;
+            if (_sourceCircuit.SessionId is not null)
             {
-                _sourceCircuit = value;
-                liveViewScreenIFrame?.ResetState();
-                StateHasChanged();
+                OnSourceCircuitSessionIdAssigned(_sourceCircuit);
             }
+
+            liveViewScreenIFrame?.ResetState();
+            StateHasChanged();
         }
     }
 
@@ -65,6 +99,8 @@
                 UnsubscribeFromCircuit(circuit);
             }
         }
+
+        PausedCircuitReference = null;
     }
 
     protected void SubscribeToCircuit(ICircuit circuit)
@@ -75,6 +111,7 @@
             userCircuit.UriChanged += OnAnyUserCircuitChanged;
             userCircuit.AuthenticationStateChanged += OnAnyUserCircuitChanged;
             userCircuit.CircuitStatusChanged += OnAnyCircuitChanged;
+            userCircuit.WindowResized += OnAnyCircuitWindowResized;
         }
     }
 
@@ -86,11 +123,13 @@
             userCircuit.UriChanged -= OnAnyUserCircuitChanged;
             userCircuit.AuthenticationStateChanged -= OnAnyUserCircuitChanged;
             userCircuit.CircuitStatusChanged -= OnAnyCircuitChanged;
+            userCircuit.WindowResized -= OnAnyCircuitWindowResized;
         }
     }
 
-    protected void MirrorCircuitChanged(IMirrorCircuit m)
+    protected void MirrorCircuitChanged(IMirrorCircuit mirrorCircuit)
     {
+        mirrorCircuit?.NotifyScrollSyncChanged(IsSyncScrollPositionActive);
         StateHasChanged();
     }
 
@@ -102,6 +141,53 @@
     protected void OnAnyUserCircuitChanged(IUserCircuit _)
     {
         InvokeAsync(StateHasChanged);
+    }
+
+    protected void OnAnyCircuitWindowResized(IUserCircuit _)
+    {
+        if (IsSyncScreenSizeActive)
+        {
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    protected Task OnIsSyncWindowSizeActiveChanged(bool value)
+    {
+        IsSyncScreenSizeActive = value;
+        MirrorCircuit?.NotifyWindowSizeSyncChanged(IsSyncScreenSizeActive);
+        if (!IsSyncScreenSizeActive)
+            OnIsSyncScrollPositionActiveChanged(false);
+        return Task.CompletedTask;
+    }
+
+    protected Task OnIsSyncScrollPositionActiveChanged(bool value)
+    {
+        IsSyncScrollPositionActive = value;
+        MirrorCircuit?.NotifyScrollSyncChanged(IsSyncScrollPositionActive);
+        return Task.CompletedTask;
+    }
+
+    protected Task OnIsPointerActiveChanged(bool value)
+    {
+        IsPointerActive = value;
+        MirrorCircuit?.NotifyLaserPointerEnabledChanged(IsPointerActive);
+        return Task.CompletedTask;
+    }
+
+    private void OnSourceCircuitSessionIdAssigned(IUserCircuit userCircuit)
+    {
+        _sourceCircuit?.SessionIdAssigned -= OnSourceCircuitSessionIdAssigned;
+        if (PausedCircuitReference is not null &&
+            PausedCircuitReference.circuitSessionId == userCircuit.SessionId)
+            return;
+        PausedCircuitReference = PausedCircuitsTracker.MarkPaused(
+            userCircuit.SessionId!.Value);
+    }
+
+    private void OnPausedCircuitUnpaused(PausedCircuitReference r)
+    {
+        if (PausedCircuitReference != r) return;
+        PausedCircuitReference = null;
     }
 
     protected virtual void OnAnyCircuitOpened(ICircuit circuit)

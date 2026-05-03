@@ -100,9 +100,15 @@
                 </tr>
             </thead>
             <tbody>
+                @{
+                    var currentUserClaimsPrincipal = CurrentCircuit.AsUserCircuit()?.User;
+                    string? currentUserSelector = null;
+                    if (currentUserClaimsPrincipal is not null)
+                        currentUserSelector = LiveViewOptions.Value.UserSelectorExtractor(currentUserClaimsPrincipal);
+                }
                 @foreach (var userCircuit in paginatedResult.Items)
                 {
-                    var user = userCircuit.User.FindFirst(ClaimTypes.Email)?.Value;
+                    var userSelector = LiveViewOptions.Value.UserSelectorExtractor(userCircuit.User);
                     <tr class="circuit-row">
                         <td class="col-id">
                             <span class="circuit-id" title="@userCircuit.Id">@userCircuit.Id</span>
@@ -116,11 +122,19 @@
                                 @userCircuit.CircuitStatus
                             </span>
                         </td>
-                        <td class="col-user">@(user is null ? "-" : user)</td>
+                        <td class="col-user">@(userSelector is null ? "-" : userSelector)</td>
                         <td class="col-mirror">
                             @if (CurrentCircuit.Current is not null && CurrentCircuit.Current.Id == userCircuit.Id)
                             {
-                                <span class="current-circuit-label">This session</span>
+                                <span class="current-circuit-label">This circuit</span>
+                            }
+                            else if (currentUserSelector is not null && string.Equals(
+                                currentUserSelector,
+                                userSelector,
+                                LiveViewOptions.Value.UserSelectorStringComparison
+                            ))
+                            {
+                                <span class="current-circuit-label">This user (You)</span>
                             }
                             else
                             {
@@ -136,15 +150,15 @@
                                             </text>
                                         }
                                     </span>
-                                    @if (user is not null)
+                                    @if (userSelector is not null)
                                     {
                                         <span>
-                                            <a href="@UserSelectorToLink(user)"
+                                            <a href="@UserSelectorToLink(userSelector)"
                                                class="mirror-link user">User</a>
                                             @if (LiveViewOptions.Value.ShowDebugOptions)
                                             {
                                                 <text>
-                                                    (<a href="@UserSelectorToLink(user, debugView: true)"
+                                                    (<a href="@UserSelectorToLink(userSelector, debugView: true)"
                                                         class="mirror-link user debug">DEBUG</a>)
                                                 </text>
                                             }
@@ -293,7 +307,7 @@
                 var userSelector = LiveViewOptions.Value.UserSelectorExtractor(c.User);
                 return userSelector is not null &&
                     userSelector.Contains(
-                        filterUser, 
+                        filterUser,
                         LiveViewOptions.Value.UserSelectorStringComparison
                     );
             });
@@ -325,8 +339,8 @@
                 : circuits.OrderByDescending(c => c.CircuitStatus),
 
             SortColumn.User => currentSortDirection == SortDirection.Ascending
-                ? circuits.OrderBy(c => c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "Anonymous")
-                : circuits.OrderByDescending(c => c.User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value ?? "Anonymous"),
+                ? circuits.OrderBy(c => LiveViewOptions.Value.UserSelectorExtractor(c.User))
+                : circuits.OrderByDescending(c => LiveViewOptions.Value.UserSelectorExtractor(c.User)),
 
             _ => currentSortDirection == SortDirection.Ascending
                 ? circuits.OrderBy(c => c.OpenedAt)

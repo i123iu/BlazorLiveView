@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Reflection;
+using System.Reflection;
 
 namespace BlazorLiveView.Core.Tests.Reflection;
 
@@ -7,27 +8,16 @@ public class TypesTests
     [Fact]
     public void TypesNotNull()
     {
-        Assert.NotNull(Types.Circuit);
-        Assert.NotNull(Types.CircuitHost);
-        Assert.NotNull(Types.CircuitFactory);
-        Assert.NotNull(Types.RemoteRenderer);
-        Assert.NotNull(Types.RemoteNavigationManager);
-        Assert.NotNull(Types.WebRootComponentManager);
-        Assert.NotNull(Types.WebRootComponent);
-        Assert.NotNull(Types.RemoteJSRuntime);
+        var typesFields = typeof(Types)
+            .GetFields(BindingFlags.Public | BindingFlags.Static)
+            .Where(f => f.FieldType == typeof(Type));
 
-        Assert.NotNull(Types.ValueTaskOfCircuitHost);
-        Assert.NotNull(Types.TaskOfCircuitHost);
-        Assert.NotNull(Types.FuncOfTaskOfCircuitHostAndCircuitHost);
+        Assert.NotEmpty(typesFields);
 
-        Assert.NotNull(Types.Renderer);
-        Assert.NotNull(Types.WebRenderer);
-        Assert.NotNull(Types.RenderTreeFrameArrayBuilder);
-
-        Assert.NotNull(Types.ComponentState);
-        Assert.NotNull(Types.RenderTreeBuilder);
-
-        Assert.NotNull(Types.CircuitOptions);
-        Assert.NotNull(Types.ComponentHub);
+        foreach (var field in typesFields)
+        {
+            var value = field.GetValue(null);
+            Assert.NotNull(value);
+        }
     }
 }

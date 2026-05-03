@@ -1,0 +1,235 @@
+@using Microsoft.Extensions.Options
+@using Microsoft.JSInterop
+@using BlazorLiveView.Core.JSInterop
+@using BlazorLiveView.Core.Options
+@using System.Threading
+
+@implements IAsyncDisposable
+
+@inject ILiveViewJSRuntime jsRuntime
+@inject IOptions<LiveViewOptions> options
+
+@code
+{
+    private class PointerState
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public long LastUpdateTime { get; set; }
+        public bool IsVisible { get; set; }
+    }
+
+    private Dictionary<string, PointerState> _trackedPointers = new();
+    private HashSet<PointerUpdate> _pendingUpdates = new();
+    private PeriodicTimer? _updateTimer;
+    private Lock _updateLock = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _updateTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(
+            options.Value.ToolsUpdateIntervalMs
+        ));
+        _ = ProcessUpdatesAsync();
+    }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        _updateTimer?.Dispose();
+        await ValueTask.CompletedTask;
+    }
+
+    public void ShowPointer(string pointerId, Position pos)
+    {
+        lock (_updateLock)
+        {
+            if (!_trackedPointers.ContainsKey(pointerId))
+            {
+                _trackedPointers[pointerId] = new PointerState { IsVisible = false };
+            }
+
+            var state = _trackedPointers[pointerId];
+            bool isNew = !state.IsVisible;
+            bool hasMoved = state.X != pos.x || state.Y != pos.y;
+
+            state.X = pos.x;
+            state.Y = pos.y;
+            state.LastUpdateTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            state.IsVisible = true;
+
+            if (isNew || hasMoved)
+            {
+                _pendingUpdates.Add(new PointerUpdate
+                {
+                    PointerId = pointerId,
+                    Action = "show",
+                    X = pos.x,
+                    Y = pos.y
+                });
+            }
+        }
+    }
+
+    public void HidePointer(string pointerId)
+    {
+        lock (_updateLock)
+        {
+            if (_trackedPointers.TryGetValue(pointerId, out var state)
+                && state.IsVisible)
+            {
+                state.IsVisible = false;
+                _pendingUpdates.Add(new PointerUpdate
+                {
+                    PointerId = pointerId,
+                    Action = "hide",
+                    X = 0,
+                    Y = 0
+                });
+            }
+        }
+    }
+
+    public void HideAllPointers()
+    {
+        lock (_updateLock)
+        {
+            foreach (var kvp in _trackedPointers)
+            {
+                var pointerId = kvp.Key;
+                var state = kvp.Value;
+                if (state.IsVisible)
+                {
+                    state.IsVisible = false;
+                    _pendingUpdates.Add(new PointerUpdate
+                    {
+                        PointerId = pointerId,
+                        Action = "hide",
+                        X = 0,
+                        Y = 0
+                    });
+                }
+            }
+        }
+    }
+
+    private async Task ProcessUpdatesAsync()
+    {
+        try
+        {
+            while (await _updateTimer!.WaitForNextTickAsync())
+            {
+                List<PointerUpdate> updates;
+                lock (_updateLock)
+                {
+                    if (_pendingUpdates.Count == 0)
+                        continue;
+
+                    updates = _pendingUpdates.ToList();
+                    _pendingUpdates.Clear();
+                }
+
+                if (updates.Count > 0)
+                {
+                    await jsRuntime.InvokeVoidAsyncNoMirror(
+                        "blazorLiveView.pointer.receiver.updatePointers",
+                        updates
+                    );
+                }
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // Timer disposed
+        }
+    }
+
+    public record PointerUpdate
+    {
+        /// <summary>
+        /// "show" or "hide".
+        /// </summary>
+        public string Action { get; set; } = "";
+        public string PointerId { get; set; } = "";
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
+}
+
+<script type="text/javascript">
+    window.blazorLiveView = window.blazorLiveView || {};
+    window.blazorLiveView.pointer = window.blazorLiveView.pointer || {};
+    window.blazorLiveView.pointer.receiver = window.blazorLiveView.pointer.receiver || {
+        pointers: {},
+        pointerColors: {},
+        pointerLastUpdateTime: {}
+    };
+
+    window.blazorLiveView.pointer.receiver.getPointerColor = function (pointerId) {
+        const receiver = window.blazorLiveView.pointer.receiver;
+
+        if (!receiver.pointerColors[pointerId]) {
+            // Generate a consistent color based on pointerId hash
+            let hash = 0;
+            for (let i = 0; i < pointerId.length; i++) {
+                hash = ((hash << 5) - hash) + pointerId.charCodeAt(i);
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            const hue = Math.abs(hash) % 360;
+            receiver.pointerColors[pointerId] = `hsl(${hue}, 70%, 50%)`;
+        }
+        return receiver.pointerColors[pointerId];
+    };
+
+    window.blazorLiveView.pointer.receiver.createPointer = function (pointerId) {
+        const pointer = document.createElement('div');
+        pointer.id = `pointer-${pointerId}`;
+        pointer.style.position = 'fixed';
+        pointer.style.width = '24px';
+        pointer.style.height = '24px';
+        pointer.style.borderRadius = '50%';
+        pointer.style.pointerEvents = 'none';
+        pointer.style.zIndex = '10000';
+        pointer.style.opacity = '0.7';
+        pointer.style.border = '2px solid rgba(255, 255, 255, 0.8)';
+        pointer.style.transition = 'none';
+        pointer.style.boxShadow = '0 0 8px rgba(0, 0, 0, 0.3)';
+        document.body.appendChild(pointer);
+        return pointer;
+    };
+
+    window.blazorLiveView.pointer.receiver.updatePointerStyle = function (pointer, pointerId, x, y) {
+        const receiver = window.blazorLiveView.pointer.receiver;
+
+        const color = receiver.getPointerColor(pointerId);
+        pointer.style.backgroundColor = color;
+        pointer.style.left = (x - 12) + 'px';
+        pointer.style.top = (y - 12) + 'px';
+    };
+
+    window.blazorLiveView.pointer.receiver.updatePointers = function (updates) {
+        const receiver = window.blazorLiveView.pointer.receiver;
+        
+        updates.forEach(update => {
+            const { pointerId, action, x, y } = update;
+            
+            if (action === 'show') {
+                let pointer = receiver.pointers[pointerId];
+                if (!pointer) {
+                    pointer = receiver.createPointer(pointerId);
+                    receiver.pointers[pointerId] = pointer;
+                }
+                
+                receiver.pointerLastUpdateTime[pointerId] = Date.now();
+                receiver.updatePointerStyle(pointer, pointerId, x, y);
+                pointer.style.display = 'block';
+            }
+            else if (action === 'hide') {
+                const pointer = receiver.pointers[pointerId];
+                if (pointer) {
+                    pointer.style.display = 'none';
+                    delete receiver.pointers[pointerId];
+                    delete receiver.pointerLastUpdateTime[pointerId];
+                }
+            }
+        });
+    };
+</script>

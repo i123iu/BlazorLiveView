@@ -1,4 +1,5 @@
 ﻿@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.Components.Tools
 
 @implements IDisposable
 
@@ -7,7 +8,9 @@
 
 <iframe class="liveview-screen-iframe"
         @key="@_state"
-        src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)" />
+        src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)"
+        width="@(IframeSize is null ? "100%" : IframeSize.Value.x + "px")"
+        height="@(IframeSize is null ? "100%" : IframeSize.Value.y + "px")" />
 
 @code {
     [Parameter]
@@ -15,12 +18,17 @@
     public string SourceCircuitId { get; set; } = default!;
 
     [Parameter]
+    public Position? WindowSize { get; set; } = null;
+
+    [Parameter]
     public bool DebugView { get; set; } = false;
 
     [Parameter]
-    public EventCallback<IMirrorCircuit> MirrorCircuitChanged { get; set; }
+    public EventCallback<IMirrorCircuit?> MirrorCircuitChanged { get; set; }
 
     private MirrorUri MirrorUri => new(SourceCircuitId, _state, DebugView);
+    private Position? IframeSize => WindowSize is null ? null
+    : (WindowSize.Value + new Position(4, 4)); // For red border width
 
     public IMirrorCircuit? MirrorCircuit { get; private set; }
 
@@ -39,8 +47,9 @@
 
     protected override void OnParametersSet()
     {
-        ResetState();
         base.OnParametersSet();
+        //ResetState();
+        StateHasChanged();
     }
 
     private void OnCircuitOpened(ICircuit circuit)
@@ -58,7 +67,7 @@
     {
         _state = Guid.NewGuid();
         MirrorCircuit = null;
-        MirrorCircuitChanged.InvokeAsync();
+        MirrorCircuitChanged.InvokeAsync(null);
         StateHasChanged();
     }
 }

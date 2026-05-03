@@ -21,9 +21,9 @@ namespace BlazorLiveView.Sample.Accounts
                 })
                 .AddLiveView(options =>
                 {
-                    options.ShowDebugOptions = true;
+                    options.ShowDebugOptions = false;
                 })
-                .InterceptJSInteropInvocations();
+                .InterceptIJSRuntime();
 
             // Add services to the container.
             builder.Services.AddCascadingAuthenticationState();

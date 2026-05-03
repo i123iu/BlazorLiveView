@@ -1,9 +1,12 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -14,16 +17,19 @@ namespace BlazorLiveView.Core.Patching;
 internal sealed class CircuitHostPatcher : IPatcher
 {
     private static ICircuitTracker _circuitTracker = null!;
+    private static LiveViewJSInteropOptions _jsInteropOptions = null!;
     private static ILogger<CircuitHostPatcher> _logger = null!;
     private static IPatchExceptionHandler _patchExceptionHandler = null!;
 
     public CircuitHostPatcher(
         ICircuitTracker circuitTracker,
+        IOptions<LiveViewJSInteropOptions> jsInteropOptions,
         ILogger<CircuitHostPatcher> logger,
         IPatchExceptionHandler patchExceptionHandler
     )
     {
         _circuitTracker = circuitTracker;
+        _jsInteropOptions = jsInteropOptions.Value;
         _logger = logger;
         _patchExceptionHandler = patchExceptionHandler;
     }
@@ -92,10 +98,11 @@ internal sealed class CircuitHostPatcher : IPatcher
 
     /// <summary>
     /// Called for example on events like "onclick". Mirror circuits should not
-    /// be able to interact with the app, so we skip the original function. 
+    /// be able to interact with the app, so the original function is skipped.
     /// </summary>
     private static bool BeginInvokeDotNetFromJS_Prefix(
-        object __instance
+        object __instance,
+        string methodIdentifier
     )
     {
         try
@@ -112,10 +119,20 @@ internal sealed class CircuitHostPatcher : IPatcher
 
             if (circuit is IMirrorCircuit)
             {
+                var forwardingBehaviour = _jsInteropOptions.JsToDotnetForwardingRules
+                    .GetForwardingBehavior(methodIdentifier);
+                if (forwardingBehaviour == ForwardingBehavior.Forward)
+                {
+                    return true;
+                }
+
                 // Skip the original function
-                // TODO?: passing e.g. button clicks to the original user circuit
-                _logger.LogDebug("Skipped BeginInvokeDotNetFromJS for mirror circuit id={Id}. ",
-                    circuit.Id);
+                if (_logger.IsEnabled(LogLevel.Debug))
+                {
+                    _logger.LogDebug("Skipped BeginInvokeDotNetFromJS method={Method} for mirror circuit id={Id}. ",
+                        methodIdentifier, circuit.Id
+                    );
+                }
 
                 // The original function BeginInvokeDotNetFromJS calls the requested
                 // method and sends "JS.EndInvokeDotNet" after finishing. Skipping

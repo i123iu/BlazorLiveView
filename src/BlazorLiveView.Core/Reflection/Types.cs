@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.JSInterop;
+using Microsoft.JSInterop.Infrastructure;
 using System.Reflection;
 
 namespace BlazorLiveView.Core.Reflection;
@@ -51,6 +53,16 @@ internal static class Types
     public static readonly Type ComponentHub = CircuitOptions.GetTypeFromSameNamespace(nameof(ComponentHub));
     #endregion
 
+    #region Microsoft.JSInterop
+    public static readonly Type DotNetObjectReference = typeof(DotNetObjectReference);
+    public static readonly Type DotNetObjectReferenceOfT = typeof(DotNetObjectReference<>);
+    #endregion
+
+    #region Microsoft.JSInterop.Infrastructure
+    public static readonly Type IJSVoidResult = typeof(IJSVoidResult);
+    public static readonly Type IDotNetObjectReference = IJSVoidResult.GetTypeFromSameNamespace(nameof(IDotNetObjectReference));
+    #endregion
+
     private static Type GetTypeFromSameNamespace(
         this Type typeFromSameNamespace,
         string name
@@ -64,6 +76,8 @@ internal static class Types
 
     private static readonly BindingFlags DefaultPublic = BindingFlags.Public | BindingFlags.Instance;
     private static readonly BindingFlags DefaultPrivate = BindingFlags.NonPublic | BindingFlags.Instance;
+    private static readonly BindingFlags DefaultPublicStatic = BindingFlags.Public | BindingFlags.Static;
+    private static readonly BindingFlags DefaultPrivateStatic = BindingFlags.NonPublic | BindingFlags.Static;
 
     public static FieldInfo GetRequiredField(
         this Type type,
@@ -91,10 +105,13 @@ internal static class Types
         this Type type,
         string name,
         bool isPublic,
+        bool isStatic = false,
         Type[]? parameters = null
     )
     {
-        var flags = isPublic ? DefaultPublic : DefaultPrivate;
+        var flags = isPublic
+            ? (isStatic ? DefaultPublicStatic : DefaultPublic)
+            : (isStatic ? DefaultPrivateStatic : DefaultPrivate);
         var method = parameters is not null
             ? type.GetMethod(name, flags, parameters)
             : type.GetMethod(name, flags);

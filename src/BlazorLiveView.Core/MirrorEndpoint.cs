@@ -20,7 +20,7 @@ internal static class MirrorEndpoint
     )
     {
         var circuit = circuitTracker.GetCircuit(circuitId);
-        
+
         if (circuit is null)
         {
             context.Response.StatusCode = 404;
@@ -54,7 +54,7 @@ internal static class MirrorEndpoint
         };
 
         await httpForwarder.SendAsync(
-            context, targetUri, httpClient, 
+            context, targetUri, httpClient,
             requestOptions, transformer
         );
     }

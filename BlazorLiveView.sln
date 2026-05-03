@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiveView.Sample.Accou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiveView.Sample.BlazorLeaflet", "samples\BlazorLiveView.Sample.BlazorLeaflet\BlazorLiveView.Sample.BlazorLeaflet.csproj", "{FD9FCEB5-8E8D-44C8-B0D9-18F34B96EDF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorLiveView.Sample.MudBlazor", "samples\BlazorLiveView.Sample.MudBlazor\BlazorLiveView.Sample.MudBlazor.csproj", "{C2F567D6-0450-1B35-89CB-6CD2ECCB0F49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{FD9FCEB5-8E8D-44C8-B0D9-18F34B96EDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD9FCEB5-8E8D-44C8-B0D9-18F34B96EDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD9FCEB5-8E8D-44C8-B0D9-18F34B96EDF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F567D6-0450-1B35-89CB-6CD2ECCB0F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F567D6-0450-1B35-89CB-6CD2ECCB0F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F567D6-0450-1B35-89CB-6CD2ECCB0F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F567D6-0450-1B35-89CB-6CD2ECCB0F49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

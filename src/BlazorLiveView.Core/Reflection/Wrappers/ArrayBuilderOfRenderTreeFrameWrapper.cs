@@ -9,6 +9,7 @@ internal class ArrayBuilderOfRenderTreeFrameWrapper
 {
     private static readonly Type InnerType = Types.ArrayBuilderOfRenderTreeFrame;
     private static readonly MethodInfo _Append;
+    private static readonly Func<object, ReadOnlySpan<RenderTreeFrame>, int> _AppendDelegate;
 
     static ArrayBuilderOfRenderTreeFrameWrapper()
     {
@@ -17,6 +18,29 @@ internal class ArrayBuilderOfRenderTreeFrameWrapper
             isPublic: false,
             parameters: [typeof(ReadOnlySpan<RenderTreeFrame>)]
         );
+        _AppendDelegate = BuildAppendDelegate();
+    }
+
+    private static Func<object, ReadOnlySpan<RenderTreeFrame>, int> BuildAppendDelegate()
+    {
+        // The Append method in ArrayBuilder<RenderTreeFrame> has a parameter
+        // of ReadOnlySpan<RenderTreeFrame>, which is a ref struct and cannot be
+        // directly called via reflection (it would have to be cast to an object).
+
+        var instanceParameter = Expression.Parameter(typeof(object), "instance");
+        var sourceParameter = Expression.Parameter(typeof(ReadOnlySpan<RenderTreeFrame>), "source");
+        return Expression.Lambda<Func<object, ReadOnlySpan<RenderTreeFrame>, int>>(
+            Expression.Call(
+                Expression.Convert(
+                    instanceParameter,
+                    InnerType
+                ),
+                _Append,
+                sourceParameter
+            ),
+            instanceParameter,
+            sourceParameter
+        ).Compile();
     }
 
     public ArrayBuilderOfRenderTreeFrameWrapper(object inner)
@@ -27,15 +51,6 @@ internal class ArrayBuilderOfRenderTreeFrameWrapper
 
     public void Append(ReadOnlySpan<RenderTreeFrame> source)
     {
-        var parameter = Expression.Parameter(typeof(ReadOnlySpan<RenderTreeFrame>), "source");
-        var lambda = Expression.Lambda<Func<ReadOnlySpan<RenderTreeFrame>, int>>(
-            Expression.Call(
-                Expression.Constant(Inner),
-                _Append,
-                parameter
-            ),
-            parameter
-        ).Compile();
-        lambda(source);
+        _AppendDelegate(Inner, source);
     }
 }

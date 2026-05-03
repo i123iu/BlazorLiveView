@@ -21,7 +21,13 @@
                        SourceCircuit="@SourceCircuit"
                        AvailableCircuits="@_availableUserCircuits"
                        SelectedCircuitId="@_selectedCircuitId"
-                       SelectedCircuitIdChanged="OnSelectedCircuitIdChanged" />
+                       SelectedCircuitIdChanged="OnSelectedCircuitIdChanged"
+                       IsSyncWindowSizeActive="@IsSyncScreenSizeActive"
+                       IsSyncWindowSizeActiveChanged="OnIsSyncWindowSizeActiveChanged"
+                       IsSyncScrollPositionActive="@IsSyncScrollPositionActive"
+                       IsSyncScrollPositionActiveChanged="OnIsSyncScrollPositionActiveChanged"
+                       IsPointerActive="@IsPointerActive"
+                       IsPointerActiveChanged="OnIsPointerActiveChanged" />
 
     <div class="liveview-screen-content">
         @switch (GetRenderState())
@@ -40,10 +46,12 @@
                     </div>
                     break;
                 }
+
                 <LiveViewScreenIFrame @ref="liveViewScreenIFrame"
                                       SourceCircuitId="@_selectedCircuitId"
                                       MirrorCircuitChanged="MirrorCircuitChanged"
-                                      DebugView="@DebugView" />
+                                      DebugView="@DebugView"
+                                      WindowSize="IsSyncScreenSizeActive ? SourceCircuit?.WindowSize : null" />
                 break;
         }
     </div>
@@ -52,17 +60,20 @@
 @code {
     [Parameter]
     [EditorRequired]
-    public string? UserSelector { get; set; }
+    public string UserSelector { get; set; } = null!;
 
     [Parameter]
     public bool DebugView { get; set; } = false;
 
     private string? _selectedCircuitId = null;
-
     private Dictionary<string, IUserCircuit> _availableUserCircuits = new();
 
     protected override void OnParametersSet()
     {
+        if (UserSelector is null)
+        {
+            throw new InvalidOperationException("UserSelector parameter is required.");
+        }
         UpdateCircuitsForUser();
     }
 
@@ -71,7 +82,7 @@
         var allUserCircuit = CircuitTracker
             .ListCircuits()
             .OfType<IUserCircuit>()
-            .Where(c => IsUserSelectorMatch(c.User, UserSelector!))
+            .Where(c => IsUserSelectorMatch(c.User, UserSelector))
             .OrderByDescending(c => c.OpenedAt)
             .ToList();
 
@@ -140,7 +151,7 @@
     protected override void OnAnyCircuitOpened(ICircuit circuit)
     {
         if (circuit is IUserCircuit userCircuit &&
-            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
+            IsUserSelectorMatch(userCircuit.User, UserSelector))
         {
             InvokeAsync(UpdateCircuitsForUser);
         }
@@ -149,7 +160,7 @@
     protected override void OnAnyCircuitClosed(ICircuit circuit)
     {
         if (circuit is IUserCircuit userCircuit &&
-            IsUserSelectorMatch(userCircuit.User, UserSelector ?? ""))
+            IsUserSelectorMatch(userCircuit.User, UserSelector))
         {
             InvokeAsync(UpdateCircuitsForUser);
         }

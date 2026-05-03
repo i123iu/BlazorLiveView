@@ -1,16 +1,9 @@
 ﻿using BlazorLiveView.Core.Reflection;
-using BlazorLiveView.Core.Reflection.Wrappers;
 
 namespace BlazorLiveView.Core.Tests.Reflection;
 
 public class WrappersTests
 {
-    private static void RunClassConstructor<T>()
-        where T : WrapperBase
-    {
-        typeof(T).TypeInitializer!.Invoke(null, []);
-    }
-
     /// <summary>
     /// FieldInfo, PropertyInfo and MethodInfo instances are create in static constructors of wrapper classes.
     /// If any of them is not found, these methods will throw an exception:
@@ -23,19 +16,19 @@ public class WrappersTests
     [Fact]
     public void TestWrapperClassConstructors()
     {
-        RunClassConstructor<ArrayBuilderOfRenderTreeFrameWrapper>();
-        RunClassConstructor<CircuitHostWrapper>();
-        RunClassConstructor<CircuitWrapper>();
-        RunClassConstructor<ComponentStateWrapper>();
-        RunClassConstructor<RemoteJSRuntimeWrapper>();
-        RunClassConstructor<RemoteNavigationManagerWrapper>();
-        RunClassConstructor<RemoteRendererWrapper>();
-        RunClassConstructor<RendererWrapper>();
-        RunClassConstructor<RenderTreeBuilderWrapper>();
-        RunClassConstructor<RenderTreeFrameArrayBuilderWrapper>();
-        RunClassConstructor<TaskOfCircuitHostWrapper>();
-        RunClassConstructor<ValueTaskOfCircuitHostWrapper>();
-        RunClassConstructor<WebRootComponentManagerWrapper>();
-        RunClassConstructor<WebRootComponentWrapper>();
+        var wrapperTypes = typeof(WrapperBase).Assembly
+            .GetTypes()
+            .Where(t => t.IsClass &&
+                !t.IsAbstract && typeof(WrapperBase).IsAssignableFrom(t) &&
+                t != typeof(WrapperBase))
+            .OrderBy(t => t.Name);
+
+        Assert.NotEmpty(wrapperTypes);
+
+        foreach (var wrapperType in wrapperTypes)
+        {
+            // Run class (static) constructor
+            wrapperType.TypeInitializer!.Invoke(null, []);
+        }
     }
 }

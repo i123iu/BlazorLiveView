@@ -25,6 +25,7 @@ internal sealed class MirrorComponent(
     private readonly IRenderTreeTranslatorFactory _translatorFactory = translatorFactory;
     private readonly ILogger<MirrorComponent> _logger = logger;
     private RenderHandle _renderHandle;
+    private uint _lastAppliedRenderVersion = 0, _nextRenderVersion = 1;
 
     [Parameter]
     public string CircuitId { get; set; } = "";
@@ -57,7 +58,7 @@ internal sealed class MirrorComponent(
         }
         userCircuit.ComponentRerendered += OriginalComponentRerendered;
 
-        Render();
+        Render(is_first_render: true);
         return Task.CompletedTask;
     }
 
@@ -72,16 +73,16 @@ internal sealed class MirrorComponent(
 
         if (componentId == ComponentId)
         {
-            _renderHandle.Dispatcher.InvokeAsync(Render);
+            Render(is_first_render: false);
         }
     }
 
-    private void Render()
+    private void Render(bool is_first_render)
     {
         var circuit = _circuitTracker.GetCircuit(CircuitId);
         if (circuit is null)
         {
-            // This can happen if the user circuit was closed
+            // This can happen if the user circuit has been closed
             return;
         }
 
@@ -95,19 +96,63 @@ internal sealed class MirrorComponent(
         var componentState = userCircuit.GetOptionalComponentState(ComponentId);
         if (componentState is null)
         {
-            _logger.LogWarning("Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
-                ComponentId, CircuitId);
+            // Other renders (not the first one after setting parameters to this MirrorComponent) are invoked
+            // by RenderIntoBatch (see ComponentStatePatcher) which makes sure that the target component
+            // exists. First renders can have a delay (Blazor needs to instantiate this MirrorComponent),
+            // after which the target component could have already been disposed.
+            if (!is_first_render)
+            {
+                _logger.LogWarning("Component with ID '{ComponentId}' not found in circuit '{CircuitId}'.",
+                    ComponentId, CircuitId);
+                _renderHandle.Render(builder => { });
+            }
+            return;
+        }
+
+        var currentRenderVersion = Interlocked.Increment(ref _nextRenderVersion) - 1;
+        if (is_first_render)
+        {
+            Render(userCircuit, componentState, currentRenderVersion);
+        }
+        else
+        {
+            _renderHandle.Dispatcher.InvokeAsync(
+                () => Render(userCircuit, componentState, currentRenderVersion)
+            );
+        }
+    }
+
+    private void Render(IUserCircuit userCircuit, ComponentState componentState, uint renderVersion)
+    {
+        uint currentApplied;
+        do
+        {
+            currentApplied = _lastAppliedRenderVersion;
+            if (renderVersion <= currentApplied)
+            {
+                // A newer render has already been applied
+                return;
+            }
+        }
+        while (Interlocked.CompareExchange(ref _lastAppliedRenderVersion, renderVersion, currentApplied) != currentApplied);
+
+        if (userCircuit.CircuitStatus == CircuitStatus.Closed)
+        {
+            // Circuit closed before it could be mirrored.
             _renderHandle.Render(builder => { });
             return;
         }
 
-        Render(componentState);
-    }
-
-    private void Render(ComponentState componentState)
-    {
         ComponentStateWrapper componentStateWrapper =
             new(componentState);
+
+        if (componentStateWrapper.ComponentWasDisposed)
+        {
+            // Component disposed before it could be mirrored.
+            _renderHandle.Render(builder => { });
+            return;
+        }
+
         var sourceBuilder = componentStateWrapper.CurrentRenderTree;
         var frames = sourceBuilder.GetFrames().Array.AsSpan();
         var view = BuildView(
@@ -145,13 +190,13 @@ internal sealed class MirrorComponent(
 
         translator.TranslateRoot(frames);
 
-        string log = _builder.Count == 0
-            ? "<empty>"
-            : string.Join("\n", _builder.Select(frame => $"- {frame}"));
         if (_logger.IsEnabled(LogLevel.Trace))
         {
+            string log = _builder.Count == 0
+                ? "<empty>"
+                : string.Join("\n", _builder.Select(frame => $"- {frame}"));
             _logger.LogTrace(
-                "Translated {CircuitId}{ComponentId} to: \n{Frames}",
+                "Translated {CircuitId} {ComponentId} to: \n{Frames}",
                 CircuitId,
                 ComponentId,
                 log

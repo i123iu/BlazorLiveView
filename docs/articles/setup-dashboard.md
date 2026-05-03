@@ -8,7 +8,7 @@ This guide uses the pre-built dashboard components provided by the package `Blaz
 
 The `LiveViewDashboard` component displays a all active user circuits (connections) in a table.
 
-![LiveViewDashboard Example](../images/screenshot-table.png)
+![LiveViewDashboard Example](../images/1-screenshot-table.png)
 
 Create a new Razor Component page for the dashboard, e.g. `Components/Pages/LiveViewDashboardPage.razor` with the following code.
 
@@ -44,9 +44,9 @@ The `LiveViewDashboard` component expects two delegates: `CircuitIdToLink` and `
 
 ## Live View Screen
 
-Viewing the mirrored user session can be done with `LiveViewCircuitScreen` using a circuit ID or with `LiveViewUserScreen` using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.
+Viewing the mirrored user circuit can be done with `LiveViewCircuitScreen` using a circuit ID or with `LiveViewUserScreen` using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.
 
-![LiveViewCircuitScreen Example](../images/screenshot-mirror-circuit.png)
+![LiveViewCircuitScreen Example](../images/2-screenshot-mirror-circuit.png)
 
 Create a new Razor Component page, e.g. `Components/Pages/LiveViewScreenPage.razor` with the following code.
 
@@ -94,21 +94,71 @@ For accessing the dashboard, add a link to your navigation menu, e.g. in `Compon
 
 ```html
 <div class="nav-item px-3">
-    <NavLink class="nav-link" href="liveview">
+  <NavLink class="nav-link" href="liveview">
         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> LiveView Dashboard
-    </NavLink>
+  </NavLink>
+</div>
+```
+
+## Remote Support Tools
+
+As you can see in the _Live View Screen_ screenshot, there are three buttons in the top right corner of the status bar. These are for remote support tools like _window size sync_, _scroll position sync_ and a _laser pointer_. For them to work, you must include the `LiveViewUserSideTools` component in your main layout, e.g. `MainLayout.razor`. See [Utilities](utilities.md) for more details.
+
+```html
+@using BlazorLiveView.Core.Components.Tools
+@inherits LayoutComponentBase
+
+<LiveViewUserSideTools />
+
+<!-- The rest of your layout -->
+```
+
+## Pausing User Circuits until Mirror Circuit Loads
+
+When you open a mirror circuit, the source circuit has already been loaded for some time and for example JS interop calls will not be synced. Even if the user refreshes the page, it takes some time for the mirror circuit to reconnect and can still miss some of the initial interactions. 
+
+To make sure mirror circuit are fully up to date with the source circuit, you should use the `LiveViewWaitOnMirror` component. Wrap the `@Body` of your layout with this component, e.g. in `MainLayout.razor`. This component will, on startup, check if any mirror circuits are trying to connect to this circuit and if so, wait for it to connect before rendering its content.
+
+```html
+@using BlazorLiveView.Core.Components
+@using BlazorLiveView.Core.Components.Tools
+@inherits LayoutComponentBase
+
+<LiveViewUserSideTools />
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            <LiveViewWaitOnMirror>
+                @Body
+            </LiveViewWaitOnMirror>
+        </article>
+    </main>
+</div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
 </div>
 ```
 
 ## Security
 
-Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the `[Authorize]` attribute can be directly used like this:
+Both of the mentioned pages should be protected. They could be placed in the secured admin UI of your application or the `[Authorize]` attribute can be used.
 
-```csharp
-@attribute [Authorize(Roles = "Administrator")]
+## CSS Styles
+
+The default dashboard components use CSS styles that must be included using the Blazor's CSS bundling mechanism. Make sure to include the following line in `App.razor`:
+
 ```
-
-## Next Steps
-
-This completes the setup of BlazorLiveView. It should now work in your application.<br>
-See [Utilities](utilities.md) for additional tools.
+<link href="@Assets["<ProjectName>.styles.css"]" rel="stylesheet" />
+```

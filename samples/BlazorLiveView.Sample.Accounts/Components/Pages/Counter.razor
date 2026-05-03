@@ -1,5 +1,5 @@
 ﻿@page "/counter"
-@using BlazorLiveView.Core.Circuits.Services
+@using BlazorLiveView.Core.JSInterop
 
 @inject ILiveViewJSRuntime LiveViewJS
 
@@ -20,7 +20,14 @@
 
         if (currentCount % 5 == 0)
         {
-            LiveViewJS.InvokeVoidAsync("alert", $"Current count is {currentCount}");
+            if (currentCount % 10 == 0)
+            {
+                _ = LiveViewJS.InvokeVoidAsyncNoMirror("alert", $"Current count is {currentCount}");
+            }
+            else
+            {
+                _ = LiveViewJS.InvokeVoidAsync("alert", $"Current count is {currentCount}");
+            }
         }
     }
 }

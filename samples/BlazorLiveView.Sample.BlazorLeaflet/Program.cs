@@ -20,7 +20,7 @@ public class Program
                 options.ShowDebugOptions = true;
                 options.UseScreenOverlay = false;
             })
-            .InterceptJSInteropInvocations();
+            .InterceptIJSRuntime();
 
         var app = builder.Build();
 

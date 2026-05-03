@@ -9,12 +9,11 @@
 
 .liveview-screen-content {
     flex-grow: 1;
-    border: 2px solid red;
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    -webkit-align-items: stretch;
+    align-items: center;
+    justify-items: center;
 }
 
 .liveview-screen-placeholder {
