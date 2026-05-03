@@ -91,7 +91,7 @@
 <p>This guide uses the pre-built dashboard components provided by the package <code>BlazorLiveView.Dashboard</code> (included in <code>BlazorLiveView</code>). To create custom dashboard components, see <a href="custom-dashboard.html">Custom Dashboard</a>.</p>
 <h2 id="circuits-table">Circuits Table</h2>
 <p>The <code>LiveViewDashboard</code> component displays a all active user circuits (connections) in a table.</p>
-<p><img src="../images/screenshot-table.png" alt="LiveViewDashboard Example"></p>
+<p><img src="../images/1-screenshot-table.png" alt="LiveViewDashboard Example"></p>
 <p>Create a new Razor Component page for the dashboard, e.g. <code>Components/Pages/LiveViewDashboardPage.razor</code> with the following code.</p>
 <pre><code class="lang-csharp">@page &quot;/liveview&quot;
 @using BlazorLiveView.Dashboard.Components
@@ -122,7 +122,7 @@
 <p>The <code>LiveViewDashboard</code> component expects two delegates: <code>CircuitIdToLink</code> and <code>UserSelectorToLink</code>. They both should generate URL adresses to the mirror view. <code>CircuitIdToLink</code> for a given circuit ID and <code>UserSelectorToLink</code> for a given user selector (for example email). This guide uses route parameters to pass them to a single live view screen page.</p>
 <h2 id="live-view-screen">Live View Screen</h2>
 <p>Viewing the mirrored user circuit can be done with <code>LiveViewCircuitScreen</code> using a circuit ID or with <code>LiveViewUserScreen</code> using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.</p>
-<p><img src="../images/screenshot-mirror-circuit.png" alt="LiveViewCircuitScreen Example"></p>
+<p><img src="../images/2-screenshot-mirror-circuit.png" alt="LiveViewCircuitScreen Example"></p>
 <p>Create a new Razor Component page, e.g. <code>Components/Pages/LiveViewScreenPage.razor</code> with the following code.</p>
 <pre><code class="lang-csharp">@page &quot;/liveview/circuit/{CircuitId}&quot;
 @page &quot;/liveview/user/{UserSelector}&quot;
@@ -167,7 +167,7 @@ else
 &lt;/div&gt;
 </code></pre>
 <h2 id="remote-support-tools">Remote Support Tools</h2>
-<p>As you can see in the <em>Live View Screen</em> screenshot, there are three buttons in the top right corner of the status bar. These are for remote support tools like <em>window size sync</em>, <em>scroll position sync</em> and a <em>laser pointer</em>. In order to use these tools, you must include the <code>LiveViewUserSideTools</code> component in your main layout, e.g. <code>MainLayout.razor</code>. See <a href="utilities.html">Utilities</a> for more details.</p>
+<p>As you can see in the <em>Live View Screen</em> screenshot, there are three buttons in the top right corner of the status bar. These are for remote support tools like <em>window size sync</em>, <em>scroll position sync</em> and a <em>laser pointer</em>. For them to work, you must include the <code>LiveViewUserSideTools</code> component in your main layout, e.g. <code>MainLayout.razor</code>. See <a href="utilities.html">Utilities</a> for more details.</p>
 <pre><code class="lang-html">@using BlazorLiveView.Core.Components.Tools
 @inherits LayoutComponentBase
 

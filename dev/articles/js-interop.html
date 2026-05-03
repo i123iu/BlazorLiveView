@@ -87,7 +87,8 @@
         <article data-uid="">
 <h1 id="js-interop">JS interop</h1>
 
-<p>BlazorLiveView supports JavaScript interoperability <strong>experimentally</strong>. The DOM state of a page is first built when a mirror session is created, but JS function can be invoked at any time before creation. For this reason, the page state cannot be reconstructed completely. Any JS calls that happen before opening the mirror session will be lost. Mirroring JS calls is possible in two ways:</p>
+<p>BlazorLiveView supports JavaScript interoperability <strong>experimentally</strong>. Making sure the mirror circuit's page has the same state as the user circuit is difficult. For example JS calls are not mirrored by default, since they could cause unexcepted behaviour when invoked on the mirror circuit.</p>
+<p>Mirroring JS calls is possible in two ways:</p>
 <h2 id="injecting-iliveviewjsruntime">Injecting <code>ILiveViewJSRuntime</code></h2>
 <p>First option is to inject and use <code>ILiveViewJSRuntime</code> instead of <code>IJSRuntime</code>. This will automatically forward JavaScript invocations (<code>InvokeAsync</code>) from the user circuit to all mirror circuits that are currently viewing that session. This also contains the method <code>InvokeAsyncNoMirror</code> that would do the same as regular <code>InvokeAsync</code>.</p>
 <p>For example:</p>
@@ -111,7 +112,7 @@
     .AddLiveView()
     .InterceptIJSRuntime();
 </code></pre>
-<p>For example, with this enabled, the following code will have the JS invocation also mirrored:</p>
+<p>With this enabled, the following example code will have the JS invocation also mirrored:</p>
 <pre><code class="lang-csharp">@inject IJSRuntime JS
 
 &lt;button @onclick=&quot;DoAlert&quot;&gt;Click me&lt;/button&gt;
