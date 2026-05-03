@@ -8,7 +8,7 @@ This guide uses the pre-built dashboard components provided by the package `Blaz
 
 The `LiveViewDashboard` component displays a all active user circuits (connections) in a table.
 
-![LiveViewDashboard Example](../images/screenshot-table.png)
+![LiveViewDashboard Example](../images/1-screenshot-table.png)
 
 Create a new Razor Component page for the dashboard, e.g. `Components/Pages/LiveViewDashboardPage.razor` with the following code.
 
@@ -46,7 +46,7 @@ The `LiveViewDashboard` component expects two delegates: `CircuitIdToLink` and `
 
 Viewing the mirrored user circuit can be done with `LiveViewCircuitScreen` using a circuit ID or with `LiveViewUserScreen` using a user selector. Both of these components render the actual mirrored view of a user's session in a red box along with a top status bar with additional information.
 
-![LiveViewCircuitScreen Example](../images/screenshot-mirror-circuit.png)
+![LiveViewCircuitScreen Example](../images/2-screenshot-mirror-circuit.png)
 
 Create a new Razor Component page, e.g. `Components/Pages/LiveViewScreenPage.razor` with the following code.
 
@@ -102,7 +102,7 @@ For accessing the dashboard, add a link to your navigation menu, e.g. in `Compon
 
 ## Remote Support Tools
 
-As you can see in the _Live View Screen_ screenshot, there are three buttons in the top right corner of the status bar. These are for remote support tools like _window size sync_, _scroll position sync_ and a _laser pointer_. In order to use these tools, you must include the `LiveViewUserSideTools` component in your main layout, e.g. `MainLayout.razor`. See [Utilities](utilities.md) for more details.
+As you can see in the _Live View Screen_ screenshot, there are three buttons in the top right corner of the status bar. These are for remote support tools like _window size sync_, _scroll position sync_ and a _laser pointer_. For them to work, you must include the `LiveViewUserSideTools` component in your main layout, e.g. `MainLayout.razor`. See [Utilities](utilities.md) for more details.
 
 ```html
 @using BlazorLiveView.Core.Components.Tools
