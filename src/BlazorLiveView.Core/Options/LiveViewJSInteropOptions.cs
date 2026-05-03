@@ -21,10 +21,10 @@ public sealed class LiveViewJSInteropOptions
         ForwardingBehavior.Forward,
         new()
         {
-            new ExactJSInteropForwardingRule("Blazor._internal.PageTitle.getAndRemoveExistingTitle", ForwardingBehavior.Forward),
-            new ExactJSInteropForwardingRule("Blazor._internal.domWrapper.focusBySelector", ForwardingBehavior.Forward),
-            new ExactJSInteropForwardingRule("Blazor._internal.attachWebRendererInterop", ForwardingBehavior.SkipForwarding),
-            new ExactJSInteropForwardingRule("Blazor._internal.navigationManager.enableNavigationInterception", ForwardingBehavior.SkipForwarding),
+            new ExactForwardingRule("Blazor._internal.PageTitle.getAndRemoveExistingTitle", ForwardingBehavior.Forward),
+            new ExactForwardingRule("Blazor._internal.domWrapper.focusBySelector", ForwardingBehavior.Forward),
+            new ExactForwardingRule("Blazor._internal.attachWebRendererInterop", ForwardingBehavior.SkipForwarding),
+            new ExactForwardingRule("Blazor._internal.navigationManager.enableNavigationInterception", ForwardingBehavior.SkipForwarding),
         }
     );
 
@@ -37,8 +37,8 @@ public sealed class LiveViewJSInteropOptions
         ForwardingBehavior.SkipForwarding,
         new()
         {
-            new ExactJSInteropForwardingRule(nameof(LaserPointerTransmitter.BlazorLiveView_LaserPointerTransmitter_OnCursorPosition), ForwardingBehavior.Forward),
-            new ExactJSInteropForwardingRule(nameof(LaserPointerTransmitter.BlazorLiveView_LaserPointerTransmitter_OnCursorExit), ForwardingBehavior.Forward),
+            new ExactForwardingRule(nameof(LaserPointerTransmitter.BlazorLiveView_LaserPointerTransmitter_OnCursorPosition), ForwardingBehavior.Forward),
+            new ExactForwardingRule(nameof(LaserPointerTransmitter.BlazorLiveView_LaserPointerTransmitter_OnCursorExit), ForwardingBehavior.Forward),
         }
     );
 
@@ -53,7 +53,7 @@ public sealed class LiveViewJSInteropOptions
 
     public LiveViewJSInteropOptions AddMudBlazorForwardingRules()
     {
-        DotnetToJsForwardingRules.Rules.Add(new MudBlazorJSInteropForwardingRule());
+        DotnetToJsForwardingRules.Rules.Add(new MudBlazorForwardingRule());
         return this;
     }
 }

@@ -1,6 +1,9 @@
 ﻿namespace BlazorLiveView.Core.JSInterop;
 
-public class ExactJSInteropForwardingRule(
+/// <summary>
+/// A forwarding rule that matches an identifier exactly by string comparison.
+/// </summary>
+public class ExactForwardingRule(
     string identifier,
     ForwardingBehavior behaviourOnMatch
 ) : IForwardingRule
@@ -16,7 +19,7 @@ public class ExactJSInteropForwardingRule(
     }
 }
 
-public class MudBlazorJSInteropForwardingRule : IForwardingRule
+public class MudBlazorForwardingRule : IForwardingRule
 {
     public RuleForwardingBehavior GetForwardingBehaviour(string identifier)
     {

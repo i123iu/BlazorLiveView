@@ -62,13 +62,13 @@ builder.Services.AddRazorComponents()
     .InterceptIJSRuntime(options =>
     {
         options.DotnetToJsForwardingRules.Default = ForwardingBehavior.Forward;
-        options.DotnetToJsForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+        options.DotnetToJsForwardingRules.Rules.Add(new ExactForwardingRule(
             "not_forwarded_function", ForwardingBehavior.SkipForwarding
         ));
     });
 ```
 
-Rules are evaluated in the order they were added. If no rule matches, the default value will be used. In the example above, all JS calls will be intercepted and forwarded except those to `not_forwarded_function`. You can also create custom rule types by implementing the `IJSInteropForwardingRule` interface.
+Rules are evaluated in the order they were added. If no rule matches, the default value will be used. In the example above, all JS calls will be intercepted and forwarded except those to `not_forwarded_function`. You can also create custom rule types by implementing the `IForwardingRule` interface.
 
 ### Calling .NET from JavaScript
 
@@ -81,7 +81,7 @@ builder.Services.AddRazorComponents()
     .InterceptIJSRuntime(options =>
     {
         options.JsToDotnetForwardingRules.Default = ForwardingBehavior.SkipForwarding;
-        options.JsToDotnetForwardingRules.Rules.Add(new ExactJSInteropForwardingRule(
+        options.JsToDotnetForwardingRules.Rules.Add(new ExactForwardingRule(
             "MethodCalledByMirrorCircuits", ForwardingBehavior.Forward
         ));
     });
