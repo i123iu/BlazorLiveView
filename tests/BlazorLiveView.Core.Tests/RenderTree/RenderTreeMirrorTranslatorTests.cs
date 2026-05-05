@@ -34,6 +34,15 @@ public class RenderTreeMirrorTranslatorTests
     }
 
     [Fact]
+    public void None()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.None(),
+        ]);
+        Assert.Empty(translated);
+    }
+
+    [Fact]
     public void Text()
     {
         var translated = TranslateRoot([
@@ -97,6 +106,64 @@ public class RenderTreeMirrorTranslatorTests
                 Assert.Equal(RenderTreeFrameType.Text, frame.FrameType);
                 Assert.Equal(2 * SEQ_MUL, frame.Sequence);
                 Assert.Equal("text", frame.TextContent);
+            }
+        );
+    }
+
+    [Fact]
+    public void Element_Anchor()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Element(0, 2, "a"),
+            RenderTreeFrameBuilder.Attribute(1, "href", "example.com")
+        ]);
+        Assert.Collection(translated,
+            frame =>
+            {
+                Assert.Equal(RenderTreeFrameType.Element, frame.FrameType);
+                Assert.Equal(0 * SEQ_MUL, frame.Sequence);
+                Assert.Equal("a", frame.ElementName);
+                Assert.Equal(2, frame.ElementSubtreeLength);
+            },
+            frame =>
+            {
+                Assert.Equal(RenderTreeFrameType.Attribute, frame.FrameType);
+                Assert.Equal(1 * SEQ_MUL, frame.Sequence);
+                Assert.Equal("href", frame.AttributeName);
+                Assert.Equal("javascript:void(0)", frame.AttributeValue);
+            }
+        );
+    }
+
+    [Fact]
+    public void Element_Anchor_TargetBlank()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Element(0, 3, "a"),
+            RenderTreeFrameBuilder.Attribute(1, "href", "example.com"),
+            RenderTreeFrameBuilder.Attribute(2, "target", "_blank")
+        ]);
+        Assert.Collection(translated,
+            frame =>
+            {
+                Assert.Equal(RenderTreeFrameType.Element, frame.FrameType);
+                Assert.Equal(0 * SEQ_MUL, frame.Sequence);
+                Assert.Equal("a", frame.ElementName);
+                Assert.Equal(3, frame.ElementSubtreeLength);
+            },
+            frame =>
+            {
+                Assert.Equal(RenderTreeFrameType.Attribute, frame.FrameType);
+                Assert.Equal(1 * SEQ_MUL, frame.Sequence);
+                Assert.Equal("href", frame.AttributeName);
+                Assert.Equal("example.com", frame.AttributeValue);
+            },
+            frame =>
+            {
+                Assert.Equal(RenderTreeFrameType.Attribute, frame.FrameType);
+                Assert.Equal(2 * SEQ_MUL, frame.Sequence);
+                Assert.Equal("target", frame.AttributeName);
+                Assert.Equal("_blank", frame.AttributeValue);
             }
         );
     }
@@ -184,6 +251,23 @@ public class RenderTreeMirrorTranslatorTests
                 RenderTreeFrameBuilder.Attribute(2, "Param2", "value2"),
             ]);
         });
+    }
+
+    [LiveViewTranslateTo(typeof(TestComponent))]
+    public class LiveViewTranslateToTestComponent : ComponentBase
+    { }
+
+    [Fact]
+    public void Component_LiveViewTranslateTo()
+    {
+        var translated = TranslateRoot([
+            RenderTreeFrameBuilder.Component(0, 1, typeof(LiveViewTranslateToTestComponent)),
+        ]);
+        var frame = Assert.Single(translated);
+        Assert.Equal(RenderTreeFrameType.Component, frame.FrameType);
+        Assert.Equal(0 * SEQ_MUL, frame.Sequence);
+        Assert.Equal(typeof(TestComponent), frame.ComponentType);
+        Assert.Equal(1, frame.ComponentSubtreeLength);
     }
 
     [Fact]

@@ -115,8 +115,9 @@ internal sealed class RenderTreeMirrorTranslator(
     {
         if (component.ComponentType is null)
         {
-            _logger.LogWarning("Component has ComponentType == null");
-            return;
+            throw new RenderTreeTranslationException(
+                $"Component has ComponentType == null"
+            );
         }
 
         if (LiveViewHideInMirrorAttribute.WillComponentBeHiddenInMirrorCircuits(
@@ -132,7 +133,9 @@ internal sealed class RenderTreeMirrorTranslator(
             if (childFrames.Length > 0 || component.ComponentSubtreeLength != 1)
             {
                 throw new RenderTreeTranslationException(
-                    $"Components marked with {nameof(LiveViewTranslateToAttribute)} cannot have attributes (parameters). ");
+                    $"Components marked with {nameof(LiveViewTranslateToAttribute)} " +
+                    $"cannot have parameters."
+                );
             }
             _result.Add(RenderTreeFrameBuilder.Component(
                 component.Sequence * SEQ_MUL,

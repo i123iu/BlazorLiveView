@@ -8,6 +8,7 @@ using BlazorLiveView.Core.UriHelpers;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -46,6 +47,7 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         _patchExceptionHandler = patchExceptionHandler;
     }
 
+    [ExcludeFromCodeCoverage]
     public void Patch(Harmony harmony)
     {
         var method_CreateCircuitHostAsync = AccessTools.Method(

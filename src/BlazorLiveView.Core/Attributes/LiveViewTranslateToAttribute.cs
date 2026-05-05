@@ -7,7 +7,7 @@ internal class LiveViewTranslateToAttribute(
     Type targetComponent
 ) : Attribute
 {
-    private Type? _targetComponent = targetComponent;
+    private readonly Type? _targetComponent = targetComponent;
 
     public static Type? GetTranslationTarget(Type componentType)
     {

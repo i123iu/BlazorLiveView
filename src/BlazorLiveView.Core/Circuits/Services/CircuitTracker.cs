@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Options;
+﻿using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server.Circuits;
@@ -123,6 +124,7 @@ internal sealed class CircuitTracker(
                 DateTime.UtcNow,
                 pending.debugView,
                 _serviceProvider.GetRequiredService<IPausedCircuitsTracker>(),
+                _serviceProvider.GetRequiredService<IDotnetToJsArgsTranslator>(),
                 _loggerFactory.CreateLogger<MirrorCircuit>(),
                 _serviceProvider.GetRequiredService<IOptions<LiveViewJSInteropOptions>>()
             );

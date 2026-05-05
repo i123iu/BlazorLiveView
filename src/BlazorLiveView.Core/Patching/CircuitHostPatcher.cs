@@ -7,6 +7,7 @@ using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -34,6 +35,7 @@ internal sealed class CircuitHostPatcher : IPatcher
         _patchExceptionHandler = patchExceptionHandler;
     }
 
+    [ExcludeFromCodeCoverage]
     public void Patch(Harmony harmony)
     {
         harmony.Patch(

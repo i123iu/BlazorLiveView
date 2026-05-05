@@ -1,9 +1,11 @@
 ﻿using BlazorLiveView.Core.Attributes;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorLiveView.Core.RenderTree;
 
+[ExcludeFromCodeCoverage]
 internal sealed class RenderTreeDebugTranslator(
     ILogger<RenderTreeDebugTranslator> logger,
     List<RenderTreeFrame> result,
