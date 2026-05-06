@@ -1211,6 +1211,73 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
   nameWithType: ForwardingBehaviorExtensions.ToRuleForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules
+  name: ForwardingRules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules
+  nameWithType: ForwardingRules
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
+  name: ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules__ctor_BlazorLiveView_Core_JSInterop_ForwardingBehavior_System_Collections_Generic_List_BlazorLiveView_Core_JSInterop_IForwardingRule__
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
+  name.vb: New(ForwardingBehavior, List(Of IForwardingRule))
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List<BlazorLiveView.Core.JSInterop.IForwardingRule>)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.New(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List(Of BlazorLiveView.Core.JSInterop.IForwardingRule))
+  nameWithType: ForwardingRules.ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
+  nameWithType.vb: ForwardingRules.New(ForwardingBehavior, List(Of IForwardingRule))
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.#ctor*
+  name: ForwardingRules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.New
+  nameWithType: ForwardingRules.ForwardingRules
+  nameWithType.vb: ForwardingRules.New
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.Default
+  name: Default
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_Default
+  commentId: P:BlazorLiveView.Core.JSInterop.ForwardingRules.Default
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.Default
+  nameWithType: ForwardingRules.Default
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.Default*
+  name: Default
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_Default_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.Default
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.Default
+  nameWithType: ForwardingRules.Default
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior(System.String)
+  name: GetForwardingBehavior(string)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_GetForwardingBehavior_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior(System.String)
+  name.vb: GetForwardingBehavior(String)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior(String)
+  nameWithType: ForwardingRules.GetForwardingBehavior(string)
+  nameWithType.vb: ForwardingRules.GetForwardingBehavior(String)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior*
+  name: GetForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_GetForwardingBehavior_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.GetForwardingBehavior
+  nameWithType: ForwardingRules.GetForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.Rules
+  name: Rules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_Rules
+  commentId: P:BlazorLiveView.Core.JSInterop.ForwardingRules.Rules
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.Rules
+  nameWithType: ForwardingRules.Rules
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.Rules*
+  name: Rules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_Rules_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.Rules
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.Rules
+  nameWithType: ForwardingRules.Rules
 - uid: BlazorLiveView.Core.JSInterop.IForwardingRule
   name: IForwardingRule
   href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html
@@ -1347,73 +1414,6 @@ references:
   commentId: N:BlazorLiveView.Core.Options
   fullName: BlazorLiveView.Core.Options
   nameWithType: BlazorLiveView.Core.Options
-- uid: BlazorLiveView.Core.Options.ForwardingRules
-  name: ForwardingRules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html
-  commentId: T:BlazorLiveView.Core.Options.ForwardingRules
-  fullName: BlazorLiveView.Core.Options.ForwardingRules
-  nameWithType: ForwardingRules
-- uid: BlazorLiveView.Core.Options.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
-  name: ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules__ctor_BlazorLiveView_Core_JSInterop_ForwardingBehavior_System_Collections_Generic_List_BlazorLiveView_Core_JSInterop_IForwardingRule__
-  commentId: M:BlazorLiveView.Core.Options.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
-  name.vb: New(ForwardingBehavior, List(Of IForwardingRule))
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.ForwardingRules(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List<BlazorLiveView.Core.JSInterop.IForwardingRule>)
-  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.New(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List(Of BlazorLiveView.Core.JSInterop.IForwardingRule))
-  nameWithType: ForwardingRules.ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
-  nameWithType.vb: ForwardingRules.New(ForwardingBehavior, List(Of IForwardingRule))
-- uid: BlazorLiveView.Core.Options.ForwardingRules.#ctor*
-  name: ForwardingRules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules__ctor_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.ForwardingRules
-  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.New
-  nameWithType: ForwardingRules.ForwardingRules
-  nameWithType.vb: ForwardingRules.New
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Default
-  name: Default
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Default
-  commentId: P:BlazorLiveView.Core.Options.ForwardingRules.Default
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Default
-  nameWithType: ForwardingRules.Default
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Default*
-  name: Default
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Default_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.Default
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Default
-  nameWithType: ForwardingRules.Default
-- uid: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(System.String)
-  name: GetForwardingBehavior(string)
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_GetForwardingBehavior_System_String_
-  commentId: M:BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(System.String)
-  name.vb: GetForwardingBehavior(String)
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(string)
-  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(String)
-  nameWithType: ForwardingRules.GetForwardingBehavior(string)
-  nameWithType.vb: ForwardingRules.GetForwardingBehavior(String)
-- uid: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior*
-  name: GetForwardingBehavior
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_GetForwardingBehavior_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior
-  nameWithType: ForwardingRules.GetForwardingBehavior
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Rules
-  name: Rules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Rules
-  commentId: P:BlazorLiveView.Core.Options.ForwardingRules.Rules
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Rules
-  nameWithType: ForwardingRules.Rules
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Rules*
-  name: Rules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Rules_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.Rules
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Rules
-  nameWithType: ForwardingRules.Rules
 - uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   name: LiveViewJSInteropOptions
   href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html

@@ -628,6 +628,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.JSInterop.IForwardingRule.yml",
       "output": {
         ".html": {
@@ -708,20 +722,6 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.JSInterop",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Options.ForwardingRules.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Options.ForwardingRules.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Options.ForwardingRules",
       "Summary": null
     },
     {
