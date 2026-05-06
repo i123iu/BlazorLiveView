@@ -1,0 +1,144 @@
+﻿@using BlazorLiveView.Core.Components
+@using BlazorLiveView.Core.JSInterop
+@using Microsoft.JSInterop
+
+@inject IJSRuntime IJSRuntime
+@inject ILiveViewJSRuntime ILiveViewJSRuntime
+
+<script>
+    window.blazorLiveView_logJsInterop = function(text) {
+        let ul = document.getElementById("jsInteropCalls");
+        let li = document.createElement("li");
+        let currentTime = new Date().toLocaleTimeString();
+        li.textContent = currentTime + ": " + text + ". ";
+        ul.appendChild(li);
+    }
+    window.blazorLiveView_notMirroredFunction = function() {
+        window.blazorLiveView_logJsInterop(
+            "Function called: notMirroredFunction."
+        );
+    }
+    window.blazorLiveView_mirroredFunction = function() {
+        window.blazorLiveView_logJsInterop(
+            "Function called: mirroredFunction."
+        );
+    }
+</script>
+
+<style>
+    .debug-table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 2px solid #333;
+    }
+
+        .debug-table thead {
+            background-color: #f8f9fa;
+        }
+
+        .debug-table th,
+        .debug-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .debug-table th {
+            font-weight: 600;
+        }
+</style>
+
+<h3>DebugTools</h3>
+
+<h4>LiveViewHideInMirror</h4>
+
+<LiveViewHideInMirror>
+    This text will not be visible in mirror circuits.
+</LiveViewHideInMirror>
+
+<h4>JS functions</h4>
+
+<table class="debug-table">
+    <thead>
+        <tr>
+            <th>Function name</th>
+            <th>IJSRuntime</th>
+            <th>ILiveViewJSRuntime<br />(ignores forwarding rules)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                mirroredFunction
+            </td>
+            <td>
+                <button class="btn btn-secondary" @onclick="() => CallFunctionNormal(true)">
+                    InvokeVoidAsync
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-secondary" @onclick="() => CallFunctionLiveView(true, false)">
+                    InvokeVoidAsync
+                </button>
+                <button class="btn btn-secondary" @onclick="() => CallFunctionLiveView(true, true)">
+                    InvokeVoidAsyncNoMirror
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                notMirroredFunction
+            </td>
+            <td>
+                <button class="btn btn-secondary" @onclick="() => CallFunctionNormal(false)">
+                    InvokeVoidAsync
+                </button>
+            </td>
+            <td>
+                <button class="btn btn-secondary" @onclick="() => CallFunctionLiveView(false, false)">
+                    InvokeVoidAsync
+                </button>
+                <button class="btn btn-secondary" @onclick="() => CallFunctionLiveView(false, true)">
+                    InvokeVoidAsyncNoMirror
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>JSInterop calls</h4>
+
+<ul id="jsInteropCalls">
+</ul>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ILiveViewJSRuntime.InvokeVoidAsync(
+                "blazorLiveView_logJsInterop",
+                $"OnAfterRenderAsync, firstRender={firstRender}"
+            );
+        }
+    }
+
+    private void CallFunctionLiveView(bool mirroredFunction, bool noMirror)
+    {
+        string fn = mirroredFunction
+            ? "blazorLiveView_mirroredFunction"
+            : "blazorLiveView_notMirroredFunction";
+        if (noMirror)
+            _ = ILiveViewJSRuntime.InvokeVoidAsyncNoMirror(fn);
+        else
+            _ = ILiveViewJSRuntime.InvokeVoidAsync(fn);
+    }
+
+    private void CallFunctionNormal(bool mirroredFunction)
+    {
+        string fn = mirroredFunction
+            ? "blazorLiveView_mirroredFunction"
+            : "blazorLiveView_notMirroredFunction";
+        IJSRuntime.InvokeVoidAsync(fn);
+    }
+}
