@@ -118,7 +118,6 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         }
     }
 
-
     private async Task ProcessInvocationsAsync(CancellationToken cancellationToken)
     {
         try

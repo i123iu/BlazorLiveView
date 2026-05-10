@@ -141,6 +141,7 @@ internal sealed class CircuitTracker(
                 blazorCircuit,
                 DateTime.UtcNow,
                 _serviceProvider.GetRequiredService<IPausedCircuitsTracker>(),
+                _serviceProvider.GetRequiredService<IOptions<LiveViewOptions>>(),
                 _loggerFactory.CreateLogger<UserCircuit>()
             );
         }

@@ -170,6 +170,9 @@
 <LaserPointerTransmitter @ref="laserPointerTransmitter"
                          OnCursorMoved="@OnCursorMoved"
                          OnCursorLeft="@OnCursorLeft" />
+<PermissionPopup IsVisible="_showPermissionPopup"
+                    OnAccept="() => OnPermissionGiven(IUserCircuit.MirrorPermissionType.Allow)"
+                    OnDeny="() => OnPermissionGiven(IUserCircuit.MirrorPermissionType.Deny)" />     
 
 @code {
     private LaserPointerReceiver? laserPointerReceiver;
@@ -180,6 +183,7 @@
     private long _lastWindowScrolledTime = 0;
     private IUserCircuit _userCircuit = null!;
     private bool _windowTrackingActive = false;
+    private bool _showPermissionPopup = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -222,6 +226,7 @@
                 _userCircuit.MirrorCircuitAdded += OnAnyMirrorCircuitAdded;
                 _userCircuit.MirrorCircuitRemoved += OnAnyMirrorCircuitRemoved;
                 _userCircuit.AnyMirrorCircuitCursorPositionChanged += OnAnyMirrorCircuitCursorPositionChanged;
+                _userCircuit.ShowUserPermissionRequest += ShowPermissionPopup;
             }
         }
     }
@@ -327,5 +332,27 @@
                 "blazorLiveView.screen.stopScrollEvent"
             );
         }
+    }
+
+    private void ShowPermissionPopup(IUserCircuit _)
+    {
+        InvokeAsync(() =>
+        {
+            _showPermissionPopup = true;
+            StateHasChanged();
+        });
+    }
+
+    private void OnPermissionGiven(
+        IUserCircuit.MirrorPermissionType permission
+    )
+    {
+        currentCircuit.AsUserCircuit()?
+            .NotifyUserPermissionGiven(permission);
+        InvokeAsync(() =>
+        {
+            _showPermissionPopup = false;
+            StateHasChanged();
+        });
     }
 }

@@ -2,6 +2,7 @@
 using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
+using System.Runtime.CompilerServices;
 
 namespace BlazorLiveView.Core.Components;
 
@@ -42,6 +43,8 @@ internal sealed class RootMirrorComponent(
 
         mirrorCircuit.MirrorCircuitBlocked += OnMirrorCircuitBlocked;
         mirrorCircuit.SourceCircuit.CircuitStatusChanged += OnSourceCircuitStatusChanged;
+        mirrorCircuit.SourceCircuit.UserPermissionChanged += OnSourceCircuitPermissionChanged;
+        mirrorCircuit.SourceCircuit.AskUserForPermission();
     }
 
     public void Dispose()
@@ -50,6 +53,7 @@ internal sealed class RootMirrorComponent(
         {
             _parameters.Value.mirrorCircuit.MirrorCircuitBlocked -= OnMirrorCircuitBlocked;
             _parameters.Value.mirrorCircuit.SourceCircuit.CircuitStatusChanged -= OnSourceCircuitStatusChanged;
+            _parameters.Value.mirrorCircuit.SourceCircuit.UserPermissionChanged -= OnSourceCircuitPermissionChanged;
             _parameters = null;
         }
     }
@@ -65,6 +69,16 @@ internal sealed class RootMirrorComponent(
     }
 
     private void OnSourceCircuitStatusChanged(ICircuit circuit)
+    {
+        if (_parameters is null)
+            throw new InvalidOperationException();
+        if (_parameters.Value.mirrorCircuit.SourceCircuit.Id != circuit.Id)
+            throw new InvalidOperationException();
+
+        _renderHandle.Dispatcher.InvokeAsync(Render);
+    }
+
+    private void OnSourceCircuitPermissionChanged(ICircuit circuit)
     {
         if (_parameters is null)
             throw new InvalidOperationException();
@@ -100,6 +114,19 @@ internal sealed class RootMirrorComponent(
             var blockReason = parameters.mirrorCircuit.BlockReason;
             RenderMessage(blockReason.message);
             return;
+        }
+
+        var mirrorPermission = parameters.mirrorCircuit.SourceCircuit.MirrorPermission;
+        switch (mirrorPermission)
+        {
+            case null:
+                RenderMessage("Waiting for mirror permission.");
+                return;
+            case IUserCircuit.MirrorPermissionType.Allow:
+                break;
+            case IUserCircuit.MirrorPermissionType.Deny:
+                RenderMessage("Mirror permission denied.");
+                return;
         }
 
         switch (parameters.mirrorCircuit.SourceCircuit.CircuitStatus)

@@ -42,6 +42,18 @@ public interface IUserCircuit : ICircuit
     public delegate void AnyMirrorCircuitCursorPositionChangedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
     internal event AnyMirrorCircuitCursorPositionChangedHandler? AnyMirrorCircuitCursorPositionChanged;
 
+    public delegate void OnUserPermissionChangedHandler(IUserCircuit circuit);
+    internal event OnUserPermissionChangedHandler? UserPermissionChanged;
+
+    public delegate void ShowUserPermissionRequestHandler(IUserCircuit circuit);
+    internal event ShowUserPermissionRequestHandler? ShowUserPermissionRequest;
+
+    public enum MirrorPermissionType
+    {
+        Allow,
+        Deny,
+    }
+
     /// <summary>
     /// Mirror circuits that are currently viewing this user circuit.
     /// </summary>
@@ -59,6 +71,8 @@ public interface IUserCircuit : ICircuit
     Position? WindowSize { get; }
     Position? ScrollPosition { get; }
     Position? UserCursorPosition { get; }
+
+    MirrorPermissionType? MirrorPermission { get; }
 
     /// <summary>
     /// Finishes when a mirror circuit that wants to mirror this circuit
@@ -78,4 +92,7 @@ public interface IUserCircuit : ICircuit
     internal void NotifyWindowResized(Position size);
     internal void NotifyWindowScrolled(Position scroll);
     internal void NotifyUserCursorChanged(Position? position);
+
+    void AskUserForPermission();
+    internal void NotifyUserPermissionGiven(MirrorPermissionType permission);
 }

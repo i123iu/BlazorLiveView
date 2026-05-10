@@ -53,6 +53,7 @@ public class LiveViewWaitOnMirror(
         else if (circuit is IUserCircuit userCircuit)
         {
             _userCircuit = userCircuit;
+            _userCircuit.UserPermissionChanged += OnUserCircuitPermissionChanged;
             if (_userCircuit.SessionId.HasValue)
             {
                 _sessionIdRetrieved = true;
@@ -65,7 +66,7 @@ public class LiveViewWaitOnMirror(
             {
                 InvokeAsync(() =>
                 {
-                    if (!_sessionIdRetrieved)
+                    if (!_sessionIdRetrieved && !_showChildContent)
                     {
                         _showChildContent = true;
                         _logger.LogWarning(
@@ -75,6 +76,16 @@ public class LiveViewWaitOnMirror(
                     }
                 });
             });
+        }
+    }
+
+    private void OnUserCircuitPermissionChanged(IUserCircuit userCircuit)
+    {
+        if (userCircuit.MirrorPermission == IUserCircuit.MirrorPermissionType.Deny)
+        {
+            // Stop waiting
+            _showChildContent = true;
+            StateHasChanged();
         }
     }
 

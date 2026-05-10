@@ -1,9 +1,11 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace BlazorLiveView.Core.Circuits;
@@ -21,6 +23,8 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public event IUserCircuit.MirrorCircuitAddedHandler? MirrorCircuitAdded;
     public event IUserCircuit.MirrorCircuitRemovedHandler? MirrorCircuitRemoved;
     public event IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler? AnyMirrorCircuitCursorPositionChanged;
+    public event IUserCircuit.OnUserPermissionChangedHandler? UserPermissionChanged;
+    public event IUserCircuit.ShowUserPermissionRequestHandler? ShowUserPermissionRequest;
 
     public HashSet<IMirrorCircuit> MirrorCircuits { get; } = new();
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
@@ -33,13 +37,28 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public Position? ScrollPosition { get; private set; }
     public Position? UserCursorPosition { get; private set; }
 
+    public IUserCircuit.MirrorPermissionType? MirrorPermission
+    {
+        get => _liveViewOptions.Value.RequireUserAgreement
+            ? _mirrorPermission
+            : IUserCircuit.MirrorPermissionType.Allow;
+        set
+        {
+            if (_liveViewOptions.Value.RequireUserAgreement)
+                _mirrorPermission = value;
+        }
+    }
+
+    private IUserCircuit.MirrorPermissionType? _mirrorPermission = null;
     private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly AuthenticationStateProvider _authenticationStateProvider;
+    private readonly IOptions<LiveViewOptions> _liveViewOptions;
 
     public UserCircuit(
         Circuit circuit,
         DateTime openedAt,
         IPausedCircuitsTracker pausedCircuitsTracker,
+        IOptions<LiveViewOptions> liveViewOptions,
         ILogger<UserCircuit> logger
     ) : base(circuit, openedAt, logger)
     {
@@ -50,6 +69,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
                 );
         _authenticationStateProvider.AuthenticationStateChanged += OnAuthenticationStateChanged;
         _pausedCircuitsTracker = pausedCircuitsTracker;
+        _liveViewOptions = liveViewOptions;
     }
 
     public override void Dispose()
@@ -137,6 +157,21 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     private void OnAnyMirrorCircuitCursorPositionChanged(IMirrorCircuit mirrorCircuit)
     {
         AnyMirrorCircuitCursorPositionChanged?.Invoke(this, mirrorCircuit);
+    }
+
+    public void AskUserForPermission()
+    {
+        if (!_liveViewOptions.Value.RequireUserAgreement) return;
+        if (MirrorPermission is not null &&
+            MirrorPermission == IUserCircuit.MirrorPermissionType.Deny) return;
+        ShowUserPermissionRequest?.Invoke(this);
+    }
+
+    public void NotifyUserPermissionGiven(IUserCircuit.MirrorPermissionType permission)
+    {
+        if (MirrorPermission == permission) return;
+        MirrorPermission = permission;
+        UserPermissionChanged?.Invoke(this);
     }
 
     Task IUserCircuit.WaitOnMirrorCircuitLoad()
