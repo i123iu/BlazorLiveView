@@ -250,6 +250,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.yml",
       "output": {
         ".html": {
@@ -260,6 +288,20 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler",
       "Summary": null
     },
     {

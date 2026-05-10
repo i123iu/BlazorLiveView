@@ -362,6 +362,19 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
   nameWithType: IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  name: AskUserForPermission()
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AskUserForPermission
+  commentId: M:BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission()
+  nameWithType: IUserCircuit.AskUserForPermission()
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission*
+  name: AskUserForPermission
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AskUserForPermission_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  nameWithType: IUserCircuit.AskUserForPermission
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
   name: AuthenticationStateChanged
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AuthenticationStateChanged
@@ -411,6 +424,43 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
   nameWithType: IUserCircuit.MirrorCircuits
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  name: MirrorPermission
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermission
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  nameWithType: IUserCircuit.MirrorPermission
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission*
+  name: MirrorPermission
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermission_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  nameWithType: IUserCircuit.MirrorPermission
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType
+  name: IUserCircuit.MirrorPermissionType
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType
+  nameWithType: IUserCircuit.MirrorPermissionType
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Allow
+  name: Allow
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermissionType_Allow
+  commentId: F:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Allow
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Allow
+  nameWithType: IUserCircuit.MirrorPermissionType.Allow
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Deny
+  name: Deny
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermissionType_Deny
+  commentId: F:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Deny
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Deny
+  nameWithType: IUserCircuit.MirrorPermissionType.Deny
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler
+  name: IUserCircuit.OnUserPermissionChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler
+  nameWithType: IUserCircuit.OnUserPermissionChangedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
   name: ScrollPosition
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition
@@ -449,6 +499,12 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
   nameWithType: IUserCircuit.SessionIdAssignedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler
+  name: IUserCircuit.ShowUserPermissionRequestHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler
+  nameWithType: IUserCircuit.ShowUserPermissionRequestHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.Uri
   name: Uri
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_Uri
@@ -1510,6 +1566,19 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewOptions.MirrorUri
   nameWithType: LiveViewOptions.MirrorUri
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  name: RequireUserAgreement
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_RequireUserAgreement
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  nameWithType: LiveViewOptions.RequireUserAgreement
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement*
+  name: RequireUserAgreement
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_RequireUserAgreement_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  nameWithType: LiveViewOptions.RequireUserAgreement
 - uid: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
   name: ShowDebugOptions
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_ShowDebugOptions
