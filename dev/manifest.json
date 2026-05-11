@@ -22,7 +22,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.yml\" sourcestartlinenumber=\"1\">Marks a Blazor component (IComponent) to be hidden (removed) when rendering\ninside a mirror circuit. Also see <xref href=\"BlazorLiveView.Core.Components.LiveViewHideInMirror\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.yml\" sourcestartlinenumber=\"1\">Marks a Blazor component (<xref href=\"Microsoft.AspNetCore.Components.IComponent\" data-throw-if-not-resolved=\"false\"></xref>) to be hidden (removed)\nwhen being translated to a mirror circuit.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -180,20 +180,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.yml",
       "output": {
         ".html": {
@@ -264,100 +250,16 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler.html"
+          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.OnUserPermissionChangedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.ShowUserPermissionRequestHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler",
+      "Title": "BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler",
       "Summary": null
     },
     {
@@ -442,7 +344,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Circuits.Services.ICurrentCircuit",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.yml\" sourcestartlinenumber=\"1\">Can be used to access the circuit of the current scope.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -456,34 +358,34 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.yml\" sourcestartlinenumber=\"1\">Used to mark sessions (circuits that track their web browser tab) to be\npaused the next time they are reloaded (refreshed). This can allow mirror\ncircuit to fully load when they are being created.</p>\n"
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.html"
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler",
+      "Title": "BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html"
+          "relative_path": "api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Circuits.Services.PausedCircuitReference",
+      "Title": "BlazorLiveView.Core.Circuits.Services.PausedSessionReference",
       "Summary": null
     },
     {
@@ -628,44 +530,128 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html"
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.ExactForwardingRule",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.yml\" sourcestartlinenumber=\"1\">A forwarding rule that matches an identifier exactly by string comparison.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.ForwardingBehavior",
+      "Title": "BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation",
       "Summary": null
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.DotnetToJs.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html"
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.DotnetToJs.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions",
+      "Title": "BlazorLiveView.Core.JSInterop.DotnetToJs",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule",
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.yml\" sourcestartlinenumber=\"1\">A forwarding rule that matches an identifier exactly by string comparison.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior",
       "Summary": null
     },
     {
@@ -680,20 +666,6 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.JSInterop.ForwardingRules",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.IForwardingRule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.IForwardingRule.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.IForwardingRule",
       "Summary": null
     },
     {
@@ -722,34 +694,6 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "BlazorLiveView.Core.JSInterop.RuleForwardingBehavior",
       "Summary": null
     },
     {

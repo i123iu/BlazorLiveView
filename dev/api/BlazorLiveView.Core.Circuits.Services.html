@@ -95,7 +95,7 @@
 Classes
 </h3>
     <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html">PausedCircuitReference</a></dt>
+      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html">PausedSessionReference</a></dt>
       <dd></dd>
     </dl>
     <h3 id="interfaces">
@@ -108,11 +108,15 @@ Interfaces
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html">ICurrentCircuit</a></dt>
-      <dd></dd>
+      <dd><p>Can be used to access the circuit of the current scope.</p>
+</dd>
     </dl>
     <dl class="jumplist">
       <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.html">IPausedCircuitsTracker</a></dt>
-      <dd></dd>
+      <dd><p>Used to mark sessions (circuits that track their web browser tab) to be
+paused the next time they are reloaded (refreshed). This can allow mirror
+circuit to fully load when they are being created.</p>
+</dd>
     </dl>
     <h3 id="delegates">
 Delegates
@@ -126,7 +130,7 @@ Delegates
       <dd></dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.html">PausedCircuitReference.StatusChangedHandler</a></dt>
+      <dt><a class="xref" href="BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler.html">PausedSessionReference.StatusChangedHandler</a></dt>
       <dd></dd>
     </dl>
 
