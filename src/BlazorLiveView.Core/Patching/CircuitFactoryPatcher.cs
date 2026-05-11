@@ -8,7 +8,6 @@ using BlazorLiveView.Core.UriHelpers;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;

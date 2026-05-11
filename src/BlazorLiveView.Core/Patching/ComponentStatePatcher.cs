@@ -5,7 +5,6 @@ using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorLiveView.Core.Patching;
 

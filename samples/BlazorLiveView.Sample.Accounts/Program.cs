@@ -1,5 +1,4 @@
 using BlazorLiveView.Core.Extensions;
-using BlazorLiveView.Sample.Accounts.Components;
 using BlazorLiveView.Sample.Accounts.Components.Account;
 using BlazorLiveView.Sample.Accounts.Data;
 using BlazorLiveView.Sample.Common;
