@@ -1,3 +1,5 @@
+using BlazorLiveView.Sample.Accounts.Components.Account.Pages;
+using BlazorLiveView.Sample.Accounts.Components.Account.Pages.Manage;
 using BlazorLiveView.Sample.Accounts.Data;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication;

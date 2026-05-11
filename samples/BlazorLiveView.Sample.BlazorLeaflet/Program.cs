@@ -1,4 +1,5 @@
 using BlazorLiveView.Core.Extensions;
+using BlazorLiveView.Sample.BlazorLeaflet.Components;
 
 namespace BlazorLiveView.Sample.BlazorLeaflet;
 

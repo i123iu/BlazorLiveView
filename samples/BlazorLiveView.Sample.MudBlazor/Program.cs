@@ -1,4 +1,5 @@
 using BlazorLiveView.Core.Extensions;
+using BlazorLiveView.Sample.MudBlazor.Components;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);

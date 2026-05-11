@@ -1,5 +1,6 @@
 using BlazorLiveView.Core.Extensions;
 using BlazorLiveView.Sample.Common;
+using BlazorLiveView.Sample.Components;
 
 namespace BlazorLiveView.Sample;
 
