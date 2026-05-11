@@ -1,4 +1,4 @@
-﻿using BlazorLiveView.Core.JSInterop;
+﻿using BlazorLiveView.Core.JSInterop.ForwardingRules;
 
 namespace BlazorLiveView.Sample.Common;
 

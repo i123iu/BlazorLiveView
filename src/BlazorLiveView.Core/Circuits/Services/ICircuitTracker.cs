@@ -23,8 +23,12 @@ public interface ICircuitTracker
     /// <summary>
     /// Called when a mirror circuit's constructor was called.
     /// </summary>
-    internal void MirrorCircuitCreated(Circuit mirrorCircuit,
-        IUserCircuit sourceCircuit, Guid? state, bool debugView);
+    internal void MirrorCircuitCreated(
+        Circuit mirrorCircuit,
+        IUserCircuit sourceCircuit,
+        Guid? state,
+        bool debugView
+    );
 
     /// <summary>
     /// Called when any circuit's SignalR connection was initialized.
@@ -32,12 +36,13 @@ public interface ICircuitTracker
     internal void CircuitOpened(Circuit circuit);
 
     /// <summary>
-    /// Called after <see cref="CircuitOpened"/>, or after reconnecting. 
+    /// Called after <see cref="CircuitOpened"/>, or after reconnecting.
     /// </summary>
     internal void CircuitUp(Circuit circuit);
 
     /// <summary>
-    /// Called when a circuit's SignalR connection was lost (could still be reconnected.
+    /// Called when a circuit's SignalR connection was lost (could still be
+    /// reconnected).
     /// </summary>
     internal void CircuitDown(Circuit circuit);
 

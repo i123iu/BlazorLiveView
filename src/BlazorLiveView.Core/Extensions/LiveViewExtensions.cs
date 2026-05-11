@@ -1,5 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Patching;
 using BlazorLiveView.Core.Reflection;

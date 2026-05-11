@@ -37,7 +37,7 @@ public class LiveViewWaitOnMirror(
             return;
         }
 
-        var circuit = _currentCircuit.AsLiveViewCircuit();
+        var circuit = _currentCircuit.AsICircuit();
         if (circuit is null)
         {
             _showChildContent = true;

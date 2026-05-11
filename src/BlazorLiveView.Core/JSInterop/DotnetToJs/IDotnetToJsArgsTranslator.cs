@@ -1,4 +1,4 @@
-﻿namespace BlazorLiveView.Core.JSInterop;
+﻿namespace BlazorLiveView.Core.JSInterop.DotnetToJs;
 
 internal interface IDotnetToJsArgsTranslator
 {

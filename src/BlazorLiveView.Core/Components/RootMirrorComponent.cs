@@ -2,7 +2,6 @@
 using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
-using System.Runtime.CompilerServices;
 
 namespace BlazorLiveView.Core.Components;
 
@@ -51,9 +50,10 @@ internal sealed class RootMirrorComponent(
     {
         if (_parameters is not null)
         {
-            _parameters.Value.mirrorCircuit.MirrorCircuitBlocked -= OnMirrorCircuitBlocked;
-            _parameters.Value.mirrorCircuit.SourceCircuit.CircuitStatusChanged -= OnSourceCircuitStatusChanged;
-            _parameters.Value.mirrorCircuit.SourceCircuit.UserPermissionChanged -= OnSourceCircuitPermissionChanged;
+            var mirrorCircuit = _parameters.Value.mirrorCircuit;
+            mirrorCircuit.MirrorCircuitBlocked -= OnMirrorCircuitBlocked;
+            mirrorCircuit.SourceCircuit.CircuitStatusChanged -= OnSourceCircuitStatusChanged;
+            mirrorCircuit.SourceCircuit.UserPermissionChanged -= OnSourceCircuitPermissionChanged;
             _parameters = null;
         }
     }

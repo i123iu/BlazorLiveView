@@ -8,7 +8,7 @@ public enum CircuitStatus
     Open,
 
     /// <summary>
-    /// When the components have been initialized.
+    /// When the circuit has been initialized.
     /// </summary>
     Up,
 

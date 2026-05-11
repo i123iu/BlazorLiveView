@@ -1,5 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
@@ -7,24 +8,26 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
+using static BlazorLiveView.Core.Circuits.IUserCircuit;
 
 namespace BlazorLiveView.Core.Circuits;
 
 internal sealed class UserCircuit : CircuitBase, IUserCircuit
 {
-    public event IUserCircuit.UriChangedHandler? UriChanged;
-    public event IUserCircuit.ComponentRerenderedHandler? ComponentRerendered;
-    public event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged;
-    public event IUserCircuit.SessionIdAssignedHandler? SessionIdAssigned;
-    public event IUserCircuit.JSRuntimeInvokedHandler? JSRuntimeInvoked;
-    public event IUserCircuit.WindowResizedHandler? WindowResized;
-    public event IUserCircuit.WindowScrolledHandler? WindowScrolled;
-    public event IUserCircuit.WindowScrolledHandler? UserCursorChanged;
-    public event IUserCircuit.MirrorCircuitAddedHandler? MirrorCircuitAdded;
-    public event IUserCircuit.MirrorCircuitRemovedHandler? MirrorCircuitRemoved;
-    public event IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler? AnyMirrorCircuitCursorPositionChanged;
-    public event IUserCircuit.OnUserPermissionChangedHandler? UserPermissionChanged;
-    public event IUserCircuit.ShowUserPermissionRequestHandler? ShowUserPermissionRequest;
+    public event UserCircuitActionHandler? UriChanged;
+    public event ComponentRerenderedHandler? ComponentRerendered;
+    public event UserCircuitActionHandler? AuthenticationStateChanged;
+    public event UserCircuitActionHandler? SessionIdAssigned;
+    public event JSRuntimeInvokedHandler? JSRuntimeInvoked;
+    public event UserCircuitActionHandler? WindowResized;
+    public event UserCircuitActionHandler? WindowScrolled;
+    public event UserCircuitActionHandler? UserCursorChanged;
+    public event MirrorCircuitAddedHandler? MirrorCircuitAdded;
+    public event MirrorCircuitRemovedHandler? MirrorCircuitRemoved;
+    public event AnyMirrorCircuitCursorPositionChangedHandler?
+        AnyMirrorCircuitCursorPositionChanged;
+    public event UserCircuitActionHandler? UserPermissionChanged;
+    public event UserCircuitActionHandler? ShowUserPermissionRequest;
 
     public HashSet<IMirrorCircuit> MirrorCircuits { get; } = new();
     public string Uri => Circuit.CircuitHost.NavigationManager.Inner.Uri;
@@ -37,11 +40,11 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     public Position? ScrollPosition { get; private set; }
     public Position? UserCursorPosition { get; private set; }
 
-    public IUserCircuit.MirrorPermissionType? MirrorPermission
+    public MirrorPermissionType? MirrorPermission
     {
         get => _liveViewOptions.Value.RequireUserAgreement
             ? _mirrorPermission
-            : IUserCircuit.MirrorPermissionType.Allow;
+            : MirrorPermissionType.Allow;
         set
         {
             if (_liveViewOptions.Value.RequireUserAgreement)
@@ -49,7 +52,7 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         }
     }
 
-    private IUserCircuit.MirrorPermissionType? _mirrorPermission = null;
+    private MirrorPermissionType? _mirrorPermission = null;
     private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
     private readonly AuthenticationStateProvider _authenticationStateProvider;
     private readonly IOptions<LiveViewOptions> _liveViewOptions;
@@ -115,9 +118,9 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         UriChanged?.Invoke(this);
     }
 
-    public void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args)
+    public void NotifyJSRuntimeInvoked(DotnetToJsInvocation invocation)
     {
-        JSRuntimeInvoked?.Invoke(this, identifier, cancellationToken, args);
+        JSRuntimeInvoked?.Invoke(this, invocation);
     }
 
     public void NotifyWindowResized(Position size)

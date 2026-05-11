@@ -47,7 +47,6 @@ internal sealed class CircuitFactoryPatcher : IPatcher
         _patchExceptionHandler = patchExceptionHandler;
     }
 
-    [ExcludeFromCodeCoverage]
     public void Patch(Harmony harmony)
     {
         var method_CreateCircuitHostAsync = AccessTools.Method(

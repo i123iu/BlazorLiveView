@@ -1,6 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
-using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.JSInterop.ForwardingRules;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;

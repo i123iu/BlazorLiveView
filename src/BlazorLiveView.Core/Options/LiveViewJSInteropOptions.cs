@@ -1,6 +1,6 @@
 ﻿using BlazorLiveView.Core.Components.Tools;
 using BlazorLiveView.Core.Extensions;
-using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.JSInterop.ForwardingRules;
 
 namespace BlazorLiveView.Core.Options;
 

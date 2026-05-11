@@ -1,6 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components.Tools;
-using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Options;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
@@ -35,14 +35,15 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     private readonly LiveViewJSInteropOptions _liveViewJSInteropOptions;
     private readonly IDotnetToJsArgsTranslator _dotnetToJsArgsTranslator;
 
-    private readonly Channel<JSInvocation> _jsInvocationQueue;
-    private readonly Task? _processingTask;
-    private readonly record struct JSInvocation(
+    private readonly Channel<DotnetToJsInvocationWithTime> _jsInvocationQueue;
+    public readonly record struct DotnetToJsInvocationWithTime(
         string Identifier,
         CancellationToken CancellationToken,
         object?[]? Args,
-        long CreatedAtTicks
+        DateTime CreatedAt
     );
+
+    private readonly Task? _processingTask;
 
     private readonly CancellationTokenSource _cancellationTokenSource = new();
     private MirrorCircuitBlockReason? _blockReason = null;
@@ -69,7 +70,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         _pausedCircuitsTracker = pausedCircuitsTracker;
         _liveViewJSInteropOptions = liveViewJSInteropOptions.Value;
 
-        _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
+        _jsInvocationQueue = Channel.CreateUnbounded<DotnetToJsInvocationWithTime>(new()
         {
             SingleReader = true,
             SingleWriter = false
@@ -97,16 +98,17 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 
     private void Source_JSRuntimeInvoked(
         IUserCircuit userCircuit,
-        string identifier,
-        CancellationToken cancellationToken,
-        object?[]? args
+        DotnetToJsInvocation invocation
     )
     {
         if (_cancellationTokenSource.IsCancellationRequested) return;
         if (DebugView) return;
 
-        _jsInvocationQueue.Writer.TryWrite(new JSInvocation(
-            identifier, cancellationToken, args, DateTime.UtcNow.Ticks
+        _jsInvocationQueue.Writer.TryWrite(new(
+            invocation.Identifier,
+            invocation.CancellationToken,
+            invocation.Args,
+            DateTime.UtcNow
         ));
     }
 
@@ -131,9 +133,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                         invocation.CancellationToken
                     );
 
-                    var elapsed = TimeSpan.FromTicks(
-                        DateTime.UtcNow.Ticks - invocation.CreatedAtTicks
-                    );
+                    var elapsed = DateTime.UtcNow - invocation.CreatedAt;
                     var remainingDelay = _liveViewJSInteropOptions
                         .DefaultDelayForInvocationForward
                         - elapsed;

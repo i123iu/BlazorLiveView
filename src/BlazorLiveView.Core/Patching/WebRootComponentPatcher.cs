@@ -6,7 +6,6 @@ using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -32,7 +31,6 @@ internal sealed class WebRootComponentPatcher : IPatcher
         _patchExceptionHandler = patchExceptionHandler;
     }
 
-    [ExcludeFromCodeCoverage]
     public void Patch(Harmony harmony)
     {
         harmony.Patch(

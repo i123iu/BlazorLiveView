@@ -30,7 +30,6 @@ internal sealed class ComponentStatePatcher : IPatcher
         _patchExceptionHandler = patchExceptionHandler;
     }
 
-    [ExcludeFromCodeCoverage]
     public void Patch(Harmony harmony)
     {
         harmony.Patch(

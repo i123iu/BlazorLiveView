@@ -3,7 +3,6 @@ using BlazorLiveView.Core.Components;
 using BlazorLiveView.Core.RenderTree;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.RenderTree;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace BlazorLiveView.Core.Tests.RenderTree;
 
@@ -18,7 +17,6 @@ public class RenderTreeMirrorTranslatorTests
     {
         List<RenderTreeFrame> translated = new();
         RenderTreeMirrorTranslator translator = new(
-            NullLogger<RenderTreeMirrorTranslator>.Instance,
             translated,
             CIRCUIT_ID
         );

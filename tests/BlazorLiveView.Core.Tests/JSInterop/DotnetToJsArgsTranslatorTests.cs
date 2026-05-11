@@ -1,4 +1,4 @@
-﻿using BlazorLiveView.Core.JSInterop;
+﻿using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.JSInterop;

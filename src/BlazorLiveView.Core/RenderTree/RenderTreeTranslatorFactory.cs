@@ -13,7 +13,6 @@ internal sealed class RenderTreeTranslatorFactory(
     )
     {
         return new RenderTreeMirrorTranslator(
-            loggerFactory.CreateLogger<RenderTreeMirrorTranslator>(),
             result,
             circuitId
         );

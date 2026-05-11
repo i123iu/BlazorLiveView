@@ -1,5 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
@@ -23,7 +24,7 @@ internal abstract class ForwardingJSRuntimeBase(
         string identifier, object?[]? args
     )
     {
-        ForwardInvocationToMirrors(identifier, CancellationToken.None, args);
+        ForwardInvocationToMirrors(new(identifier, CancellationToken.None, args));
         return _remoteJsRuntime.Inner.InvokeAsync<TValue>(identifier, args);
     }
 
@@ -32,11 +33,11 @@ internal abstract class ForwardingJSRuntimeBase(
         string identifier, CancellationToken cancellationToken, object?[]? args
     )
     {
-        ForwardInvocationToMirrors(identifier, cancellationToken, args);
+        ForwardInvocationToMirrors(new(identifier, cancellationToken, args));
         return _remoteJsRuntime.Inner.InvokeAsync<TValue>(identifier, cancellationToken, args);
     }
 
-    private void ForwardInvocationToMirrors(string identifier, CancellationToken cancellationToken, object?[]? args)
+    private void ForwardInvocationToMirrors(DotnetToJsInvocation invocation)
     {
         if (!_remoteJsRuntime.IsInitialized)
         {
@@ -45,7 +46,7 @@ internal abstract class ForwardingJSRuntimeBase(
             return;
         }
 
-        if (!ShouldForward(identifier))
+        if (!ShouldForward(invocation.Identifier))
         {
             return;
         }
@@ -53,7 +54,7 @@ internal abstract class ForwardingJSRuntimeBase(
         ICircuit? circuit = _circuitTracker.GetCircuit(_remoteJsRuntime);
         if (circuit is null)
         {
-            if (identifier == "Blazor._internal.attachWebRendererInterop")
+            if (invocation.Identifier == "Blazor._internal.attachWebRendererInterop")
             {
                 // This is called before circuit creation and is expected.
                 return;
@@ -72,11 +73,11 @@ internal abstract class ForwardingJSRuntimeBase(
             {
                 _logger.LogDebug(
                     "Notifying about JS interop method '{Identifier}' on circuit '{CircuitId}' with args: {Args}",
-                    identifier, circuit.Id, args
+                    invocation.Identifier, circuit.Id, invocation.Args
                 );
             }
 
-            userCircuit.NotifyJSRuntimeInvoked(identifier, cancellationToken, args);
+            userCircuit.NotifyJSRuntimeInvoked(invocation);
         }
     }
 

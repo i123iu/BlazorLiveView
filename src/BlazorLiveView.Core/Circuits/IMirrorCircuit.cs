@@ -51,6 +51,7 @@ public interface IMirrorCircuit : ICircuit
     Position? CursorPosition { get; }
 
     internal void SetBlocked(MirrorCircuitBlockReason blockReason);
+
     public void NotifyWindowSizeSyncChanged(bool enabled);
     public void NotifyScrollSyncChanged(bool enabled);
     internal void NotifyMirrorCursorChanged(Position? position);

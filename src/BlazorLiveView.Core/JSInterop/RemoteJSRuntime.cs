@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
+using BlazorLiveView.Core.JSInterop.ForwardingRules;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.Extensions.Logging;
