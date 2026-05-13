@@ -155,8 +155,6 @@
     {
         IsSyncScreenSizeActive = value;
         MirrorCircuit?.NotifyWindowSizeSyncChanged(IsSyncScreenSizeActive);
-        if (!IsSyncScreenSizeActive)
-            OnIsSyncScrollPositionActiveChanged(false);
         return Task.CompletedTask;
     }
 
