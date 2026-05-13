@@ -141,7 +141,10 @@
         onScroll();
         state.lastSentX = state.currentX;
         state.lastSentY = state.currentY;
-        state.dotNetRef.invokeMethodAsync("WindowScrolled", state.currentX, state.currentY);
+        state.dotNetRef.invokeMethodAsync("WindowScrolled", 
+            state.currentX,
+            state.currentY
+        );
     };
 
     window.blazorLiveView.screen.stopScrollEvent = function () {
