@@ -6,11 +6,17 @@
 @inject ILiveViewMirrorUriBuilder MirrorUriBuilder
 @inject ICircuitTracker CircuitTracker
 
+@{
+    var widthValue = IframeSize is null ? "100%" : IframeSize.Value.x + "px";
+    var heightValue = IframeSize is null ? "100%" : IframeSize.Value.y + "px";
+}
+
 <iframe class="liveview-screen-iframe"
         @key="@_state"
         src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)"
-        width="@(IframeSize is null ? "100%" : IframeSize.Value.x + "px")"
-        height="@(IframeSize is null ? "100%" : IframeSize.Value.y + "px")" />
+        width="@(widthValue)"
+        height="@(heightValue)"
+        style="width: @widthValue !important; height: @(heightValue) !important;" />
 
 @code {
     [Parameter]
