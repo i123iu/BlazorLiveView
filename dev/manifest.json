@@ -22,7 +22,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.yml\" sourcestartlinenumber=\"1\">Marks a Blazor component (<xref href=\"Microsoft.AspNetCore.Components.IComponent\" data-throw-if-not-resolved=\"false\"></xref>) to be hidden (removed)\nwhen being translated to a mirror circuit.</p>\n"
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute.yml\" sourcestartlinenumber=\"1\">Marks a Blazor component (<xref href=\"Microsoft.AspNetCore.Components.IComponent\" data-throw-if-not-resolved=\"false\"></xref>) to be hidden (removed)\nwhen being translated to a mirror circuit. Can be used to hide sensitive\ninformation.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -428,7 +428,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "BlazorLiveView.Core.Components.LiveViewHideInMirror",
-      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Components.LiveViewHideInMirror.yml\" sourcestartlinenumber=\"1\">The contents of this component will be hidden (removed) when rendering inside\na mirror circuit. Also see <xref href=\"BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+      "Summary": "<p sourcefile=\"api/BlazorLiveView.Core.Components.LiveViewHideInMirror.yml\" sourcestartlinenumber=\"1\">The contents of this component will be hidden (removed) when rendering inside\na mirror circuit. See also <xref href=\"BlazorLiveView.Core.Attributes.LiveViewHideInMirrorAttribute\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -446,16 +446,16 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/BlazorLiveView.Core.Components.Tools.Position.yml",
+      "source_relative_path": "api/BlazorLiveView.Core.Components.Tools.Position-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/BlazorLiveView.Core.Components.Tools.Position.html"
+          "relative_path": "api/BlazorLiveView.Core.Components.Tools.Position-1.html"
         }
       },
       "version": "",
       "Uid": null,
       "IsMRef": true,
-      "Title": "BlazorLiveView.Core.Components.Tools.Position",
+      "Title": "BlazorLiveView.Core.Components.Tools.Position<T>",
       "Summary": null
     },
     {

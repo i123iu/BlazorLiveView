@@ -962,81 +962,88 @@ references:
   commentId: N:BlazorLiveView.Core.Components.Tools
   fullName: BlazorLiveView.Core.Components.Tools
   nameWithType: BlazorLiveView.Core.Components.Tools
-- uid: BlazorLiveView.Core.Components.Tools.Position
+- uid: BlazorLiveView.Core.Components.Tools.Position`1
+  name: Position<T>
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html
+  commentId: T:BlazorLiveView.Core.Components.Tools.Position`1
+  name.vb: Position(Of T)
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T)
+  nameWithType: Position<T>
+  nameWithType.vb: Position(Of T)
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.#ctor(`0,`0)
+  name: Position(T, T)
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1__ctor__0__0_
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position`1.#ctor(`0,`0)
+  name.vb: New(T, T)
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.Position(T, T)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).New(T, T)
+  nameWithType: Position<T>.Position(T, T)
+  nameWithType.vb: Position(Of T).New(T, T)
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.#ctor*
   name: Position
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html
-  commentId: T:BlazorLiveView.Core.Components.Tools.Position
-  fullName: BlazorLiveView.Core.Components.Tools.Position
-  nameWithType: Position
-- uid: BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)
-  name: Position(int, int)
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position__ctor_System_Int32_System_Int32_
-  commentId: M:BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)
-  name.vb: New(Integer, Integer)
-  fullName: BlazorLiveView.Core.Components.Tools.Position.Position(int, int)
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New(Integer, Integer)
-  nameWithType: Position.Position(int, int)
-  nameWithType.vb: Position.New(Integer, Integer)
-- uid: BlazorLiveView.Core.Components.Tools.Position.#ctor*
-  name: Position
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position__ctor_
-  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.#ctor
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1__ctor_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position`1.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: BlazorLiveView.Core.Components.Tools.Position.Position
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New
-  nameWithType: Position.Position
-  nameWithType.vb: Position.New
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name: operator +(Position, Position)
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Addition_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_
-  commentId: M:BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name.vb: +(Position, Position)
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator +(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.+(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  nameWithType: Position.operator +(Position, Position)
-  nameWithType.vb: Position.+(Position, Position)
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Addition*
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.Position
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).New
+  nameWithType: Position<T>.Position
+  nameWithType.vb: Position(Of T).New
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Addition(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name: operator +(Position<T>, Position<T>)
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Addition_BlazorLiveView_Core_Components_Tools_Position__0__BlazorLiveView_Core_Components_Tools_Position__0__
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position`1.op_Addition(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name.vb: +(Position(Of T), Position(Of T))
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator +(BlazorLiveView.Core.Components.Tools.Position<T>, BlazorLiveView.Core.Components.Tools.Position<T>)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).+(BlazorLiveView.Core.Components.Tools.Position(Of T), BlazorLiveView.Core.Components.Tools.Position(Of T))
+  nameWithType: Position<T>.operator +(Position<T>, Position<T>)
+  nameWithType.vb: Position(Of T).+(Position(Of T), Position(Of T))
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Addition*
   name: operator +
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Addition_
-  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.op_Addition
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Addition_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position`1.op_Addition
   isSpec: "True"
   name.vb: +
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator +
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.+
-  nameWithType: Position.operator +
-  nameWithType.vb: Position.+
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name: operator -(Position, Position)
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_
-  commentId: M:BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name.vb: -(Position, Position)
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator -(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.-(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  nameWithType: Position.operator -(Position, Position)
-  nameWithType.vb: Position.-(Position, Position)
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Subtraction*
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator +
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).+
+  nameWithType: Position<T>.operator +
+  nameWithType.vb: Position(Of T).+
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name: operator -(Position<T>, Position<T>)
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position__0__BlazorLiveView_Core_Components_Tools_Position__0__
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name.vb: -(Position(Of T), Position(Of T))
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator -(BlazorLiveView.Core.Components.Tools.Position<T>, BlazorLiveView.Core.Components.Tools.Position<T>)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).-(BlazorLiveView.Core.Components.Tools.Position(Of T), BlazorLiveView.Core.Components.Tools.Position(Of T))
+  nameWithType: Position<T>.operator -(Position<T>, Position<T>)
+  nameWithType.vb: Position(Of T).-(Position(Of T), Position(Of T))
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction*
   name: operator -
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_
-  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.op_Subtraction
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Subtraction_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction
   isSpec: "True"
   name.vb: '-'
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator -
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.-
-  nameWithType: Position.operator -
-  nameWithType.vb: Position.-
-- uid: BlazorLiveView.Core.Components.Tools.Position.x
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator -
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).-
+  nameWithType: Position<T>.operator -
+  nameWithType.vb: Position(Of T).-
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.x
   name: x
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_x
-  commentId: F:BlazorLiveView.Core.Components.Tools.Position.x
-  fullName: BlazorLiveView.Core.Components.Tools.Position.x
-  nameWithType: Position.x
-- uid: BlazorLiveView.Core.Components.Tools.Position.y
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_x
+  commentId: F:BlazorLiveView.Core.Components.Tools.Position`1.x
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.x
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).x
+  nameWithType: Position<T>.x
+  nameWithType.vb: Position(Of T).x
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.y
   name: y
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_y
-  commentId: F:BlazorLiveView.Core.Components.Tools.Position.y
-  fullName: BlazorLiveView.Core.Components.Tools.Position.y
-  nameWithType: Position.y
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_y
+  commentId: F:BlazorLiveView.Core.Components.Tools.Position`1.y
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.y
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).y
+  nameWithType: Position<T>.y
+  nameWithType.vb: Position(Of T).y
 - uid: BlazorLiveView.Core.Extensions
   name: BlazorLiveView.Core.Extensions
   href: api/BlazorLiveView.Core.Extensions.html
