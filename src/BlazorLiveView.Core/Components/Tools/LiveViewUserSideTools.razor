@@ -247,7 +247,7 @@
     }
 
     [JSInvokable]
-    public void WindowScrolled(int scrollX, int scrollY)
+    public void WindowScrolled(float scrollX, float scrollY)
     {
         var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         if (now - _lastWindowScrolledTime >= options.Value.ToolsUpdateIntervalMs)
@@ -293,7 +293,7 @@
         }
     }
 
-    private void OnCursorMoved(Position pos)
+    private void OnCursorMoved(Position<float> pos)
     {
         currentCircuit.AsUserCircuit()?
             .NotifyUserCursorChanged(pos);

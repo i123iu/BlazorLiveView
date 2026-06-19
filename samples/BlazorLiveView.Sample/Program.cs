@@ -18,7 +18,8 @@ public class Program
             })
             .AddLiveView(options =>
             {
-                options.ShowDebugOptions = true;
+                options.ShowDebugOptions = false;
+                options.RequireUserAgreement = false;
             })
             .InterceptIJSRuntime(options =>
             {

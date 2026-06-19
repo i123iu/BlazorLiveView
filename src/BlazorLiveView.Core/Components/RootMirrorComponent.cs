@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 namespace BlazorLiveView.Core.Components;
 
 /// <summary>
-/// Root web component for mirror circuits. 
+/// Root web component for mirror circuits.
 /// Contains one child <see cref="MirrorComponent"/>. 
 /// </summary>
 internal sealed class RootMirrorComponent(
@@ -43,7 +43,11 @@ internal sealed class RootMirrorComponent(
         mirrorCircuit.MirrorCircuitBlocked += OnMirrorCircuitBlocked;
         mirrorCircuit.SourceCircuit.CircuitStatusChanged += OnSourceCircuitStatusChanged;
         mirrorCircuit.SourceCircuit.UserPermissionChanged += OnSourceCircuitPermissionChanged;
-        mirrorCircuit.SourceCircuit.AskUserForPermission();
+        if (mirrorCircuit.SourceCircuit.MirrorPermission is null)
+        {
+            // Not allowed nor denied
+            mirrorCircuit.SourceCircuit.AskUserForPermission();
+        }
     }
 
     public void Dispose()

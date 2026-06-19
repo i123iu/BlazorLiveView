@@ -36,9 +36,9 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         // Calling .Result should be fine, since the task is created in Blazor
         // Server using `Task.FromResult` (in `CircuitHost.cs`).
         .GetAuthenticationStateAsync().Result.User;
-    public Position? WindowSize { get; private set; }
-    public Position? ScrollPosition { get; private set; }
-    public Position? UserCursorPosition { get; private set; }
+    public Position<int>? WindowSize { get; private set; }
+    public Position<float>? ScrollPosition { get; private set; }
+    public Position<float>? UserCursorPosition { get; private set; }
 
     public MirrorPermissionType? MirrorPermission
     {
@@ -123,19 +123,19 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
         JSRuntimeInvoked?.Invoke(this, invocation);
     }
 
-    public void NotifyWindowResized(Position size)
+    public void NotifyWindowResized(Position<int> size)
     {
         WindowSize = size;
         WindowResized?.Invoke(this);
     }
 
-    public void NotifyWindowScrolled(Position scroll)
+    public void NotifyWindowScrolled(Position<float> scroll)
     {
         ScrollPosition = scroll;
         WindowScrolled?.Invoke(this);
     }
 
-    public void NotifyUserCursorChanged(Position? position)
+    public void NotifyUserCursorChanged(Position<float>? position)
     {
         UserCursorPosition = position;
         UserCursorChanged?.Invoke(this);
@@ -166,11 +166,11 @@ internal sealed class UserCircuit : CircuitBase, IUserCircuit
     {
         if (!_liveViewOptions.Value.RequireUserAgreement) return;
         if (MirrorPermission is not null &&
-            MirrorPermission == IUserCircuit.MirrorPermissionType.Deny) return;
+            MirrorPermission == MirrorPermissionType.Deny) return;
         ShowUserPermissionRequest?.Invoke(this);
     }
 
-    public void NotifyUserPermissionGiven(IUserCircuit.MirrorPermissionType permission)
+    public void NotifyUserPermissionGiven(MirrorPermissionType permission)
     {
         if (MirrorPermission == permission) return;
         MirrorPermission = permission;

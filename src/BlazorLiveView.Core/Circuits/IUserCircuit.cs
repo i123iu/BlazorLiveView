@@ -64,9 +64,9 @@ public interface IUserCircuit : ICircuit
 
     string Uri { get; }
     ClaimsPrincipal User { get; }
-    Position? WindowSize { get; }
-    Position? ScrollPosition { get; }
-    Position? UserCursorPosition { get; }
+    Position<int>? WindowSize { get; }
+    Position<float>? ScrollPosition { get; }
+    Position<float>? UserCursorPosition { get; }
 
     MirrorPermissionType? MirrorPermission { get; }
 
@@ -85,9 +85,9 @@ public interface IUserCircuit : ICircuit
     internal void NotifyUriChanged();
     internal void NotifyComponentRerendered(int componentId);
     internal void NotifyJSRuntimeInvoked(DotnetToJsInvocation invocation);
-    internal void NotifyWindowResized(Position size);
-    internal void NotifyWindowScrolled(Position scroll);
-    internal void NotifyUserCursorChanged(Position? position);
+    internal void NotifyWindowResized(Position<int> size);
+    internal void NotifyWindowScrolled(Position<float> scroll);
+    internal void NotifyUserCursorChanged(Position<float>? position);
 
     void AskUserForPermission();
     internal void NotifyUserPermissionGiven(MirrorPermissionType permission);

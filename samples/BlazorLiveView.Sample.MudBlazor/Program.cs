@@ -1,5 +1,6 @@
 using BlazorLiveView.Core.Extensions;
 using BlazorLiveView.Sample.MudBlazor.Components;
+using Microsoft.AspNetCore.Components.Server;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,10 @@ builder.Services.AddMudServices();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
+    .AddInteractiveServerComponents(options =>
+    {
+        options.DetailedErrors = true;
+    })
     .AddLiveView()
     .InterceptIJSRuntime(options =>
     {

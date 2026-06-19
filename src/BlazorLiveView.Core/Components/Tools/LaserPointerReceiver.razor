@@ -13,8 +13,8 @@
 {
     private class PointerState
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         public long LastUpdateTime { get; set; }
         public bool IsVisible { get; set; }
     }
@@ -38,7 +38,7 @@
         await ValueTask.CompletedTask;
     }
 
-    public void ShowPointer(string pointerId, Position pos)
+    public void ShowPointer(string pointerId, Position<float> pos)
     {
         lock (_updateLock)
         {
@@ -149,8 +149,8 @@
         /// </summary>
         public string Action { get; set; } = "";
         public string PointerId { get; set; } = "";
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
     }
 }
 

@@ -24,7 +24,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     public bool WindowSizeSyncEnabled { get; private set; } = false;
     public bool ScrollSyncEnabled { get; private set; } = false;
     public bool LaserPointerEnabled { get; private set; } = false;
-    public Position? CursorPosition { get; private set; } = null;
+    public Position<float>? CursorPosition { get; private set; } = null;
 
     public bool IsBlocked => _blockReason != null;
     public MirrorCircuitBlockReason BlockReason => _blockReason
@@ -212,7 +212,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         PointerSyncChanged?.Invoke(this);
     }
 
-    public void NotifyMirrorCursorChanged(Position? position)
+    public void NotifyMirrorCursorChanged(Position<float>? position)
     {
         if (position != null && CursorPosition != null)
         {
