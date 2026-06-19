@@ -89,7 +89,7 @@
 
 
   <h1 id="BlazorLiveView_Core_Circuits_IUserCircuit" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit" class="text-break">
-Interface IUserCircuit  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L10"><i class="bi bi-code-slash"></i></a>
+Interface IUserCircuit  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -145,7 +145,7 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_MirrorCircuits" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits">
   MirrorCircuits
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L56"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Mirror circuits that are currently viewing this user circuit.</p>
@@ -173,18 +173,18 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
 
 
 
-  <a id="BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition_" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition*"></a>
+  <a id="BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermission_" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission*"></a>
 
-  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition">
-  ScrollPosition
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermission" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission">
+  MirrorPermission
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L71"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Position? ScrollPosition { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">IUserCircuit.MirrorPermissionType? MirrorPermission { get; }</code></pre>
   </div>
 
 
@@ -193,7 +193,38 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a>?</dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html">MirrorPermissionType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition_" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition">
+  ScrollPosition
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Position&lt;float&gt;? ScrollPosition { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>&gt;?</dt>
     <dd></dd>
   </dl>
 
@@ -208,7 +239,7 @@ Interface IUserCircuit  <a class="header-action link-secondary" title="View sour
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_SessionId" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.SessionId">
   SessionId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L63"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Special ID (additionally to the circuit ID), that uniquely identifies
@@ -242,7 +273,7 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_Uri" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.Uri">
   Uri
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L65"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -273,7 +304,7 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_User" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.User">
   User
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L66"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -304,14 +335,14 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorPosition" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition">
   UserCursorPosition
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L69"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Position? UserCursorPosition { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">Position&lt;float&gt;? UserCursorPosition { get; }</code></pre>
   </div>
 
 
@@ -320,7 +351,7 @@ a web session (one tab in a web browser; see
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a>?</dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>&gt;?</dt>
     <dd></dd>
   </dl>
 
@@ -335,14 +366,14 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_WindowSize" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize">
   WindowSize
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L67"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Position? WindowSize { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">Position&lt;int&gt;? WindowSize { get; }</code></pre>
   </div>
 
 
@@ -351,9 +382,39 @@ a web session (one tab in a web browser; see
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a>?</dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;?</dt>
     <dd></dd>
   </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="BlazorLiveView_Core_Circuits_IUserCircuit_AskUserForPermission_" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission*"></a>
+
+  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_AskUserForPermission" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission">
+  AskUserForPermission()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void AskUserForPermission()</code></pre>
+  </div>
+
+
+
+
+
 
 
 
@@ -369,14 +430,14 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_AuthenticationStateChanged" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged">
   AuthenticationStateChanged
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event IUserCircuit.AuthenticationStateChangedHandler? AuthenticationStateChanged</code></pre>
+    <pre><code class="lang-csharp hljs">event IUserCircuit.UserCircuitActionHandler? AuthenticationStateChanged</code></pre>
   </div>
 
 
@@ -386,7 +447,7 @@ a web session (one tab in a web browser; see
 
   <h4 class="section">Event Type</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.html">AuthenticationStateChangedHandler</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.html">UserCircuitActionHandler</a></dt>
     <dd></dd>
   </dl>
 
@@ -399,14 +460,14 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_SessionIdAssigned" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssigned">
   SessionIdAssigned
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L35"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event IUserCircuit.SessionIdAssignedHandler? SessionIdAssigned</code></pre>
+    <pre><code class="lang-csharp hljs">event IUserCircuit.UserCircuitActionHandler? SessionIdAssigned</code></pre>
   </div>
 
 
@@ -416,7 +477,7 @@ a web session (one tab in a web browser; see
 
   <h4 class="section">Event Type</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.html">SessionIdAssignedHandler</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.html">UserCircuitActionHandler</a></dt>
     <dd></dd>
   </dl>
 
@@ -429,14 +490,14 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_UriChanged" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.UriChanged">
   UriChanged
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event IUserCircuit.UriChangedHandler? UriChanged</code></pre>
+    <pre><code class="lang-csharp hljs">event IUserCircuit.UserCircuitActionHandler? UriChanged</code></pre>
   </div>
 
 
@@ -446,37 +507,7 @@ a web session (one tab in a web browser; see
 
   <h4 class="section">Event Type</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.html">UriChangedHandler</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorChanged" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged">
-  UserCursorChanged
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L34"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event IUserCircuit.WindowScrolledHandler? UserCursorChanged</code></pre>
-  </div>
-
-
-
-
-
-
-  <h4 class="section">Event Type</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler.html">WindowScrolledHandler</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.html">UserCircuitActionHandler</a></dt>
     <dd></dd>
   </dl>
 
@@ -489,14 +520,14 @@ a web session (one tab in a web browser; see
 
   <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_WindowResized" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.WindowResized">
   WindowResized
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L37"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event IUserCircuit.WindowResizedHandler? WindowResized</code></pre>
+    <pre><code class="lang-csharp hljs">event IUserCircuit.UserCircuitActionHandler? WindowResized</code></pre>
   </div>
 
 
@@ -506,37 +537,7 @@ a web session (one tab in a web browser; see
 
   <h4 class="section">Event Type</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler.html">WindowResizedHandler</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-  <h3 id="BlazorLiveView_Core_Circuits_IUserCircuit_WindowScrolled" data-uid="BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled">
-  WindowScrolled
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Circuits/IUserCircuit.cs/#L31"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event IUserCircuit.WindowScrolledHandler? WindowScrolled</code></pre>
-  </div>
-
-
-
-
-
-
-  <h4 class="section">Event Type</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler.html">WindowScrolledHandler</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.html">IUserCircuit</a>.<a class="xref" href="BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.html">UserCircuitActionHandler</a></dt>
     <dd></dd>
   </dl>
 

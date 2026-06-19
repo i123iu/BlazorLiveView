@@ -362,18 +362,25 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
   nameWithType: IUserCircuit.AnyMirrorCircuitCursorPositionChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  name: AskUserForPermission()
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AskUserForPermission
+  commentId: M:BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission()
+  nameWithType: IUserCircuit.AskUserForPermission()
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission*
+  name: AskUserForPermission
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AskUserForPermission_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AskUserForPermission
+  nameWithType: IUserCircuit.AskUserForPermission
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
   name: AuthenticationStateChanged
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_AuthenticationStateChanged
   commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChanged
   nameWithType: IUserCircuit.AuthenticationStateChanged
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler
-  name: IUserCircuit.AuthenticationStateChangedHandler
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.AuthenticationStateChangedHandler
-  nameWithType: IUserCircuit.AuthenticationStateChangedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler
   name: IUserCircuit.ComponentRerenderedHandler
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.ComponentRerenderedHandler.html
@@ -411,6 +418,37 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorCircuits
   nameWithType: IUserCircuit.MirrorCircuits
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  name: MirrorPermission
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermission
+  commentId: P:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  nameWithType: IUserCircuit.MirrorPermission
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission*
+  name: MirrorPermission
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermission_
+  commentId: Overload:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermission
+  nameWithType: IUserCircuit.MirrorPermission
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType
+  name: IUserCircuit.MirrorPermissionType
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType
+  nameWithType: IUserCircuit.MirrorPermissionType
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Allow
+  name: Allow
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermissionType_Allow
+  commentId: F:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Allow
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Allow
+  nameWithType: IUserCircuit.MirrorPermissionType.Allow
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Deny
+  name: Deny
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.html#BlazorLiveView_Core_Circuits_IUserCircuit_MirrorPermissionType_Deny
+  commentId: F:BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Deny
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.MirrorPermissionType.Deny
+  nameWithType: IUserCircuit.MirrorPermissionType.Deny
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.ScrollPosition
   name: ScrollPosition
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_ScrollPosition
@@ -443,12 +481,6 @@ references:
   commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssigned
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssigned
   nameWithType: IUserCircuit.SessionIdAssigned
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
-  name: IUserCircuit.SessionIdAssignedHandler
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.SessionIdAssignedHandler
-  nameWithType: IUserCircuit.SessionIdAssignedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.Uri
   name: Uri
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_Uri
@@ -468,12 +500,6 @@ references:
   commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.UriChanged
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UriChanged
   nameWithType: IUserCircuit.UriChanged
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler
-  name: IUserCircuit.UriChangedHandler
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UriChangedHandler
-  nameWithType: IUserCircuit.UriChangedHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.User
   name: User
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_User
@@ -487,18 +513,12 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.User
   nameWithType: IUserCircuit.User
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged
-  name: UserCursorChanged
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorChanged
-  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChanged
-  nameWithType: IUserCircuit.UserCursorChanged
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler
-  name: IUserCircuit.UserCursorChangedHandler
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorChangedHandler
-  nameWithType: IUserCircuit.UserCursorChangedHandler
+- uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler
+  name: IUserCircuit.UserCircuitActionHandler
+  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler
+  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.UserCircuitActionHandler
+  nameWithType: IUserCircuit.UserCircuitActionHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.UserCursorPosition
   name: UserCursorPosition
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_UserCursorPosition
@@ -518,24 +538,6 @@ references:
   commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.WindowResized
   fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResized
   nameWithType: IUserCircuit.WindowResized
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler
-  name: IUserCircuit.WindowResizedHandler
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowResizedHandler
-  nameWithType: IUserCircuit.WindowResizedHandler
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled
-  name: WindowScrolled
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_WindowScrolled
-  commentId: E:BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolled
-  nameWithType: IUserCircuit.WindowScrolled
-- uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler
-  name: IUserCircuit.WindowScrolledHandler
-  href: api/BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler
-  fullName: BlazorLiveView.Core.Circuits.IUserCircuit.WindowScrolledHandler
-  nameWithType: IUserCircuit.WindowScrolledHandler
 - uid: BlazorLiveView.Core.Circuits.IUserCircuit.WindowSize
   name: WindowSize
   href: api/BlazorLiveView.Core.Circuits.IUserCircuit.html#BlazorLiveView_Core_Circuits_IUserCircuit_WindowSize
@@ -651,19 +653,19 @@ references:
   commentId: T:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
   fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit
   nameWithType: ICurrentCircuit
-- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
-  name: AsLiveViewCircuit()
-  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsLiveViewCircuit
-  commentId: M:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
-  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit()
-  nameWithType: ICurrentCircuit.AsLiveViewCircuit()
-- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit*
-  name: AsLiveViewCircuit
-  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsLiveViewCircuit_
-  commentId: Overload:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsICircuit
+  name: AsICircuit()
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsICircuit
+  commentId: M:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsICircuit
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsICircuit()
+  nameWithType: ICurrentCircuit.AsICircuit()
+- uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsICircuit*
+  name: AsICircuit
+  href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsICircuit_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsICircuit
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsLiveViewCircuit
-  nameWithType: ICurrentCircuit.AsLiveViewCircuit
+  fullName: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsICircuit
+  nameWithType: ICurrentCircuit.AsICircuit
 - uid: BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.AsUserCircuit
   name: AsUserCircuit()
   href: api/BlazorLiveView.Core.Circuits.Services.ICurrentCircuit.html#BlazorLiveView_Core_Circuits_Services_ICurrentCircuit_AsUserCircuit
@@ -735,104 +737,104 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Circuits.Services.IPausedCircuitsTracker.WaitOnResume
   nameWithType: IPausedCircuitsTracker.WaitOnResume
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference
-  name: PausedCircuitReference
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html
-  commentId: T:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference
-  nameWithType: PausedCircuitReference
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor(System.Guid)
-  name: PausedCircuitReference(Guid)
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference__ctor_System_Guid_
-  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor(System.Guid)
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference
+  name: PausedSessionReference
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.PausedSessionReference
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference
+  nameWithType: PausedSessionReference
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.#ctor(System.Guid)
+  name: PausedSessionReference(Guid)
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference__ctor_System_Guid_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.#ctor(System.Guid)
   name.vb: New(Guid)
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.PausedCircuitReference(System.Guid)
-  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.New(System.Guid)
-  nameWithType: PausedCircuitReference.PausedCircuitReference(Guid)
-  nameWithType.vb: PausedCircuitReference.New(Guid)
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor*
-  name: PausedCircuitReference
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference__ctor_
-  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.#ctor
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.PausedSessionReference(System.Guid)
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.New(System.Guid)
+  nameWithType: PausedSessionReference.PausedSessionReference(Guid)
+  nameWithType.vb: PausedSessionReference.New(Guid)
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.#ctor*
+  name: PausedSessionReference
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference__ctor_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.PausedCircuitReference
-  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.New
-  nameWithType: PausedCircuitReference.PausedCircuitReference
-  nameWithType.vb: PausedCircuitReference.New
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(System.Object)
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.PausedSessionReference
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.New
+  nameWithType: PausedSessionReference.PausedSessionReference
+  nameWithType.vb: PausedSessionReference.New
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals(System.Object)
   name: Equals(object?)
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_Equals_System_Object_
-  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(System.Object)
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_Equals_System_Object_
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals(System.Object)
   name.vb: Equals(Object)
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(object?)
-  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals(Object)
-  nameWithType: PausedCircuitReference.Equals(object?)
-  nameWithType.vb: PausedCircuitReference.Equals(Object)
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals*
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals(object?)
+  fullName.vb: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals(Object)
+  nameWithType: PausedSessionReference.Equals(object?)
+  nameWithType.vb: PausedSessionReference.Equals(Object)
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals*
   name: Equals
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_Equals_
-  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_Equals_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Equals
-  nameWithType: PausedCircuitReference.Equals
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Equals
+  nameWithType: PausedSessionReference.Equals
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.GetHashCode
   name: GetHashCode()
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_GetHashCode
-  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode()
-  nameWithType: PausedCircuitReference.GetHashCode()
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode*
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_GetHashCode
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.GetHashCode
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.GetHashCode()
+  nameWithType: PausedSessionReference.GetHashCode()
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.GetHashCode*
   name: GetHashCode
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_GetHashCode_
-  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_GetHashCode_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.GetHashCode
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.GetHashCode
-  nameWithType: PausedCircuitReference.GetHashCode
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.GetHashCode
+  nameWithType: PausedSessionReference.GetHashCode
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.IsPaused
   name: IsPaused
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_IsPaused
-  commentId: P:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
-  nameWithType: PausedCircuitReference.IsPaused
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused*
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_IsPaused
+  commentId: P:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.IsPaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.IsPaused
+  nameWithType: PausedSessionReference.IsPaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.IsPaused*
   name: IsPaused
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_IsPaused_
-  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_IsPaused_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.IsPaused
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.IsPaused
-  nameWithType: PausedCircuitReference.IsPaused
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler
-  name: PausedCircuitReference.StatusChangedHandler
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler.html
-  commentId: T:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.StatusChangedHandler
-  nameWithType: PausedCircuitReference.StatusChangedHandler
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.IsPaused
+  nameWithType: PausedSessionReference.IsPaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler
+  name: PausedSessionReference.StatusChangedHandler
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler.html
+  commentId: T:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.StatusChangedHandler
+  nameWithType: PausedSessionReference.StatusChangedHandler
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.UnmarkPaused
   name: UnmarkPaused()
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_UnmarkPaused
-  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused()
-  nameWithType: PausedCircuitReference.UnmarkPaused()
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused*
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_UnmarkPaused
+  commentId: M:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.UnmarkPaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.UnmarkPaused()
+  nameWithType: PausedSessionReference.UnmarkPaused()
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.UnmarkPaused*
   name: UnmarkPaused
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_UnmarkPaused_
-  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_UnmarkPaused_
+  commentId: Overload:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.UnmarkPaused
   isSpec: "True"
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.UnmarkPaused
-  nameWithType: PausedCircuitReference.UnmarkPaused
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Unpaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.UnmarkPaused
+  nameWithType: PausedSessionReference.UnmarkPaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Unpaused
   name: Unpaused
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_Unpaused
-  commentId: E:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Unpaused
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.Unpaused
-  nameWithType: PausedCircuitReference.Unpaused
-- uid: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.circuitSessionId
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_Unpaused
+  commentId: E:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Unpaused
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.Unpaused
+  nameWithType: PausedSessionReference.Unpaused
+- uid: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.circuitSessionId
   name: circuitSessionId
-  href: api/BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.html#BlazorLiveView_Core_Circuits_Services_PausedCircuitReference_circuitSessionId
-  commentId: F:BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.circuitSessionId
-  fullName: BlazorLiveView.Core.Circuits.Services.PausedCircuitReference.circuitSessionId
-  nameWithType: PausedCircuitReference.circuitSessionId
+  href: api/BlazorLiveView.Core.Circuits.Services.PausedSessionReference.html#BlazorLiveView_Core_Circuits_Services_PausedSessionReference_circuitSessionId
+  commentId: F:BlazorLiveView.Core.Circuits.Services.PausedSessionReference.circuitSessionId
+  fullName: BlazorLiveView.Core.Circuits.Services.PausedSessionReference.circuitSessionId
+  nameWithType: PausedSessionReference.circuitSessionId
 - uid: BlazorLiveView.Core.Components
   name: BlazorLiveView.Core.Components
   href: api/BlazorLiveView.Core.Components.html
@@ -960,81 +962,88 @@ references:
   commentId: N:BlazorLiveView.Core.Components.Tools
   fullName: BlazorLiveView.Core.Components.Tools
   nameWithType: BlazorLiveView.Core.Components.Tools
-- uid: BlazorLiveView.Core.Components.Tools.Position
+- uid: BlazorLiveView.Core.Components.Tools.Position`1
+  name: Position<T>
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html
+  commentId: T:BlazorLiveView.Core.Components.Tools.Position`1
+  name.vb: Position(Of T)
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T)
+  nameWithType: Position<T>
+  nameWithType.vb: Position(Of T)
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.#ctor(`0,`0)
+  name: Position(T, T)
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1__ctor__0__0_
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position`1.#ctor(`0,`0)
+  name.vb: New(T, T)
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.Position(T, T)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).New(T, T)
+  nameWithType: Position<T>.Position(T, T)
+  nameWithType.vb: Position(Of T).New(T, T)
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.#ctor*
   name: Position
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html
-  commentId: T:BlazorLiveView.Core.Components.Tools.Position
-  fullName: BlazorLiveView.Core.Components.Tools.Position
-  nameWithType: Position
-- uid: BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)
-  name: Position(int, int)
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position__ctor_System_Int32_System_Int32_
-  commentId: M:BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)
-  name.vb: New(Integer, Integer)
-  fullName: BlazorLiveView.Core.Components.Tools.Position.Position(int, int)
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New(Integer, Integer)
-  nameWithType: Position.Position(int, int)
-  nameWithType.vb: Position.New(Integer, Integer)
-- uid: BlazorLiveView.Core.Components.Tools.Position.#ctor*
-  name: Position
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position__ctor_
-  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.#ctor
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1__ctor_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position`1.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: BlazorLiveView.Core.Components.Tools.Position.Position
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.New
-  nameWithType: Position.Position
-  nameWithType.vb: Position.New
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name: operator +(Position, Position)
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Addition_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_
-  commentId: M:BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name.vb: +(Position, Position)
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator +(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.+(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  nameWithType: Position.operator +(Position, Position)
-  nameWithType.vb: Position.+(Position, Position)
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Addition*
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.Position
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).New
+  nameWithType: Position<T>.Position
+  nameWithType.vb: Position(Of T).New
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Addition(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name: operator +(Position<T>, Position<T>)
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Addition_BlazorLiveView_Core_Components_Tools_Position__0__BlazorLiveView_Core_Components_Tools_Position__0__
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position`1.op_Addition(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name.vb: +(Position(Of T), Position(Of T))
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator +(BlazorLiveView.Core.Components.Tools.Position<T>, BlazorLiveView.Core.Components.Tools.Position<T>)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).+(BlazorLiveView.Core.Components.Tools.Position(Of T), BlazorLiveView.Core.Components.Tools.Position(Of T))
+  nameWithType: Position<T>.operator +(Position<T>, Position<T>)
+  nameWithType.vb: Position(Of T).+(Position(Of T), Position(Of T))
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Addition*
   name: operator +
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Addition_
-  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.op_Addition
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Addition_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position`1.op_Addition
   isSpec: "True"
   name.vb: +
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator +
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.+
-  nameWithType: Position.operator +
-  nameWithType.vb: Position.+
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name: operator -(Position, Position)
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_
-  commentId: M:BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)
-  name.vb: -(Position, Position)
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator -(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.-(BlazorLiveView.Core.Components.Tools.Position, BlazorLiveView.Core.Components.Tools.Position)
-  nameWithType: Position.operator -(Position, Position)
-  nameWithType.vb: Position.-(Position, Position)
-- uid: BlazorLiveView.Core.Components.Tools.Position.op_Subtraction*
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator +
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).+
+  nameWithType: Position<T>.operator +
+  nameWithType.vb: Position(Of T).+
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name: operator -(Position<T>, Position<T>)
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position__0__BlazorLiveView_Core_Components_Tools_Position__0__
+  commentId: M:BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})
+  name.vb: -(Position(Of T), Position(Of T))
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator -(BlazorLiveView.Core.Components.Tools.Position<T>, BlazorLiveView.Core.Components.Tools.Position<T>)
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).-(BlazorLiveView.Core.Components.Tools.Position(Of T), BlazorLiveView.Core.Components.Tools.Position(Of T))
+  nameWithType: Position<T>.operator -(Position<T>, Position<T>)
+  nameWithType.vb: Position(Of T).-(Position(Of T), Position(Of T))
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction*
   name: operator -
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_
-  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position.op_Subtraction
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_op_Subtraction_
+  commentId: Overload:BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction
   isSpec: "True"
   name.vb: '-'
-  fullName: BlazorLiveView.Core.Components.Tools.Position.operator -
-  fullName.vb: BlazorLiveView.Core.Components.Tools.Position.-
-  nameWithType: Position.operator -
-  nameWithType.vb: Position.-
-- uid: BlazorLiveView.Core.Components.Tools.Position.x
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.operator -
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).-
+  nameWithType: Position<T>.operator -
+  nameWithType.vb: Position(Of T).-
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.x
   name: x
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_x
-  commentId: F:BlazorLiveView.Core.Components.Tools.Position.x
-  fullName: BlazorLiveView.Core.Components.Tools.Position.x
-  nameWithType: Position.x
-- uid: BlazorLiveView.Core.Components.Tools.Position.y
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_x
+  commentId: F:BlazorLiveView.Core.Components.Tools.Position`1.x
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.x
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).x
+  nameWithType: Position<T>.x
+  nameWithType.vb: Position(Of T).x
+- uid: BlazorLiveView.Core.Components.Tools.Position`1.y
   name: y
-  href: api/BlazorLiveView.Core.Components.Tools.Position.html#BlazorLiveView_Core_Components_Tools_Position_y
-  commentId: F:BlazorLiveView.Core.Components.Tools.Position.y
-  fullName: BlazorLiveView.Core.Components.Tools.Position.y
-  nameWithType: Position.y
+  href: api/BlazorLiveView.Core.Components.Tools.Position-1.html#BlazorLiveView_Core_Components_Tools_Position_1_y
+  commentId: F:BlazorLiveView.Core.Components.Tools.Position`1.y
+  fullName: BlazorLiveView.Core.Components.Tools.Position<T>.y
+  fullName.vb: BlazorLiveView.Core.Components.Tools.Position(Of T).y
+  nameWithType: Position<T>.y
+  nameWithType.vb: Position(Of T).y
 - uid: BlazorLiveView.Core.Extensions
   name: BlazorLiveView.Core.Extensions
   href: api/BlazorLiveView.Core.Extensions.html
@@ -1107,132 +1116,321 @@ references:
   commentId: N:BlazorLiveView.Core.JSInterop
   fullName: BlazorLiveView.Core.JSInterop
   nameWithType: BlazorLiveView.Core.JSInterop
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule
-  name: ExactForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.ExactForwardingRule
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule
-  nameWithType: ExactForwardingRule
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  name: ExactForwardingRule(string, ForwardingBehavior)
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule__ctor_System_String_BlazorLiveView_Core_JSInterop_ForwardingBehavior_
-  commentId: M:BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  name.vb: New(String, ForwardingBehavior)
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.ExactForwardingRule(string, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactForwardingRule.New(String, BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  nameWithType: ExactForwardingRule.ExactForwardingRule(string, ForwardingBehavior)
-  nameWithType.vb: ExactForwardingRule.New(String, ForwardingBehavior)
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor*
-  name: ExactForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule__ctor_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.#ctor
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs
+  name: BlazorLiveView.Core.JSInterop.DotnetToJs
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.html
+  commentId: N:BlazorLiveView.Core.JSInterop.DotnetToJs
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs
+  nameWithType: BlazorLiveView.Core.JSInterop.DotnetToJs
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation
+  name: DotnetToJsInvocation
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html
+  commentId: T:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation
+  nameWithType: DotnetToJsInvocation
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.#ctor(System.String,System.Threading.CancellationToken,System.Object[])
+  name: DotnetToJsInvocation(string, CancellationToken, object?[]?)
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation__ctor_System_String_System_Threading_CancellationToken_System_Object___
+  commentId: M:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.#ctor(System.String,System.Threading.CancellationToken,System.Object[])
+  name.vb: New(String, CancellationToken, Object())
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.DotnetToJsInvocation(string, System.Threading.CancellationToken, object?[]?)
+  fullName.vb: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.New(String, System.Threading.CancellationToken, Object())
+  nameWithType: DotnetToJsInvocation.DotnetToJsInvocation(string, CancellationToken, object?[]?)
+  nameWithType.vb: DotnetToJsInvocation.New(String, CancellationToken, Object())
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.#ctor*
+  name: DotnetToJsInvocation
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.#ctor
   isSpec: "True"
   name.vb: New
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.ExactForwardingRule
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactForwardingRule.New
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.DotnetToJsInvocation
+  fullName.vb: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.New
+  nameWithType: DotnetToJsInvocation.DotnetToJsInvocation
+  nameWithType.vb: DotnetToJsInvocation.New
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Args
+  name: Args
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation_Args
+  commentId: P:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Args
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Args
+  nameWithType: DotnetToJsInvocation.Args
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Args*
+  name: Args
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation_Args_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Args
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Args
+  nameWithType: DotnetToJsInvocation.Args
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.CancellationToken
+  name: CancellationToken
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation_CancellationToken
+  commentId: P:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.CancellationToken
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.CancellationToken
+  nameWithType: DotnetToJsInvocation.CancellationToken
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.CancellationToken*
+  name: CancellationToken
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation_CancellationToken_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.CancellationToken
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.CancellationToken
+  nameWithType: DotnetToJsInvocation.CancellationToken
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Identifier
+  name: Identifier
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation_Identifier
+  commentId: P:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Identifier
+  nameWithType: DotnetToJsInvocation.Identifier
+- uid: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Identifier*
+  name: Identifier
+  href: api/BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.html#BlazorLiveView_Core_JSInterop_DotnetToJs_DotnetToJsInvocation_Identifier_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Identifier
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.DotnetToJs.DotnetToJsInvocation.Identifier
+  nameWithType: DotnetToJsInvocation.Identifier
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules
+  name: BlazorLiveView.Core.JSInterop.ForwardingRules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.html
+  commentId: N:BlazorLiveView.Core.JSInterop.ForwardingRules
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules
+  nameWithType: BlazorLiveView.Core.JSInterop.ForwardingRules
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule
+  name: ExactForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule
+  nameWithType: ExactForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
+  name: ExactForwardingRule(string, ForwardingBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule__ctor_System_String_BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.#ctor(System.String,BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
+  name.vb: New(String, ForwardingBehavior)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.ExactForwardingRule(string, BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.New(String, BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
+  nameWithType: ExactForwardingRule.ExactForwardingRule(string, ForwardingBehavior)
+  nameWithType.vb: ExactForwardingRule.New(String, ForwardingBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.#ctor*
+  name: ExactForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.ExactForwardingRule
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.New
   nameWithType: ExactForwardingRule.ExactForwardingRule
   nameWithType.vb: ExactForwardingRule.New
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.BehaviourOnMatch
   name: BehaviourOnMatch
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_BehaviourOnMatch
-  commentId: P:BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule_BehaviourOnMatch
+  commentId: P:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.BehaviourOnMatch
   nameWithType: ExactForwardingRule.BehaviourOnMatch
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch*
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.BehaviourOnMatch*
   name: BehaviourOnMatch
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_BehaviourOnMatch_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule_BehaviourOnMatch_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.BehaviourOnMatch
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.BehaviourOnMatch
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.BehaviourOnMatch
   nameWithType: ExactForwardingRule.BehaviourOnMatch
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(System.String)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour(System.String)
   name: GetForwardingBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_GetForwardingBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(System.String)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour(System.String)
   name.vb: GetForwardingBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour(String)
   nameWithType: ExactForwardingRule.GetForwardingBehaviour(string)
   nameWithType.vb: ExactForwardingRule.GetForwardingBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour*
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour*
   name: GetForwardingBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_GetForwardingBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.GetForwardingBehaviour
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.GetForwardingBehaviour
   nameWithType: ExactForwardingRule.GetForwardingBehaviour
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.Identifier
   name: Identifier
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_Identifier
-  commentId: P:BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule_Identifier
+  commentId: P:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.Identifier
   nameWithType: ExactForwardingRule.Identifier
-- uid: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier*
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.Identifier*
   name: Identifier
-  href: api/BlazorLiveView.Core.JSInterop.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ExactForwardingRule_Identifier_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ExactForwardingRule_Identifier_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.Identifier
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ExactForwardingRule.Identifier
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ExactForwardingRule.Identifier
   nameWithType: ExactForwardingRule.Identifier
-- uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior
   name: ForwardingBehavior
-  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html
-  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingBehavior
-  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior
   nameWithType: ForwardingBehavior
-- uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior.Forward
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.Forward
   name: Forward
-  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingBehavior_Forward
-  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingBehavior.Forward
-  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehavior.Forward
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehavior_Forward
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.Forward
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.Forward
   nameWithType: ForwardingBehavior.Forward
-- uid: BlazorLiveView.Core.JSInterop.ForwardingBehavior.SkipForwarding
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.SkipForwarding
   name: SkipForwarding
-  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingBehavior_SkipForwarding
-  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingBehavior.SkipForwarding
-  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehavior.SkipForwarding
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehavior_SkipForwarding
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.SkipForwarding
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior.SkipForwarding
   nameWithType: ForwardingBehavior.SkipForwarding
-- uid: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions
   name: ForwardingBehaviorExtensions
-  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html
-  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions
-  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions
   nameWithType: ForwardingBehaviorExtensions
-- uid: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
   name: ToRuleForwardingBehavior(ForwardingBehavior)
-  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_ForwardingBehaviorExtensions_ToRuleForwardingBehavior_BlazorLiveView_Core_JSInterop_ForwardingBehavior_
-  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingBehavior)
-  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingBehavior)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehaviorExtensions_ToRuleForwardingBehavior_BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehavior_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.ToRuleForwardingBehavior(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior)
   nameWithType: ForwardingBehaviorExtensions.ToRuleForwardingBehavior(ForwardingBehavior)
-- uid: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior*
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.ToRuleForwardingBehavior*
   name: ToRuleForwardingBehavior
-  href: api/BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_ForwardingBehaviorExtensions_ToRuleForwardingBehavior_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehaviorExtensions_ToRuleForwardingBehavior_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehaviorExtensions.ToRuleForwardingBehavior
   nameWithType: ForwardingBehaviorExtensions.ToRuleForwardingBehavior
-- uid: BlazorLiveView.Core.JSInterop.IForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules
+  name: ForwardingRules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules
+  nameWithType: ForwardingRules
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule})
+  name: ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules__ctor_BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingBehavior_System_Collections_Generic_List_BlazorLiveView_Core_JSInterop_ForwardingRules_IForwardingRule__
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule})
+  name.vb: New(ForwardingBehavior, List(Of IForwardingRule))
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.ForwardingRules(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior, System.Collections.Generic.List<BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule>)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.New(BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingBehavior, System.Collections.Generic.List(Of BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule))
+  nameWithType: ForwardingRules.ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
+  nameWithType.vb: ForwardingRules.New(ForwardingBehavior, List(Of IForwardingRule))
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.#ctor*
+  name: ForwardingRules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules__ctor_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.ForwardingRules
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.New
+  nameWithType: ForwardingRules.ForwardingRules
+  nameWithType.vb: ForwardingRules.New
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Default
+  name: Default
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules_Default
+  commentId: P:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Default
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Default
+  nameWithType: ForwardingRules.Default
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Default*
+  name: Default
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules_Default_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Default
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Default
+  nameWithType: ForwardingRules.Default
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior(System.String)
+  name: GetForwardingBehavior(string)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules_GetForwardingBehavior_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior(System.String)
+  name.vb: GetForwardingBehavior(String)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior(String)
+  nameWithType: ForwardingRules.GetForwardingBehavior(string)
+  nameWithType.vb: ForwardingRules.GetForwardingBehavior(String)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior*
+  name: GetForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules_GetForwardingBehavior_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.GetForwardingBehavior
+  nameWithType: ForwardingRules.GetForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Rules
+  name: Rules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules_Rules
+  commentId: P:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Rules
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Rules
+  nameWithType: ForwardingRules.Rules
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Rules*
+  name: Rules
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.html#BlazorLiveView_Core_JSInterop_ForwardingRules_ForwardingRules_Rules_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Rules
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.ForwardingRules.Rules
+  nameWithType: ForwardingRules.Rules
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule
   name: IForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.IForwardingRule
-  fullName: BlazorLiveView.Core.JSInterop.IForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule
   nameWithType: IForwardingRule
-- uid: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(System.String)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour(System.String)
   name: GetForwardingBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html#BlazorLiveView_Core_JSInterop_IForwardingRule_GetForwardingBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(System.String)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_IForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour(System.String)
   name.vb: GetForwardingBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour(String)
   nameWithType: IForwardingRule.GetForwardingBehaviour(string)
   nameWithType.vb: IForwardingRule.GetForwardingBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour*
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour*
   name: GetForwardingBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.IForwardingRule.html#BlazorLiveView_Core_JSInterop_IForwardingRule_GetForwardingBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_IForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour
   isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.IForwardingRule.GetForwardingBehaviour
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.IForwardingRule.GetForwardingBehaviour
   nameWithType: IForwardingRule.GetForwardingBehaviour
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule
+  name: MudBlazorForwardingRule
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule
+  nameWithType: MudBlazorForwardingRule
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour(System.String)
+  name: GetForwardingBehaviour(string)
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_MudBlazorForwardingRule_GetForwardingBehaviour_System_String_
+  commentId: M:BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour(System.String)
+  name.vb: GetForwardingBehaviour(String)
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour(string)
+  fullName.vb: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour(String)
+  nameWithType: MudBlazorForwardingRule.GetForwardingBehaviour(string)
+  nameWithType.vb: MudBlazorForwardingRule.GetForwardingBehaviour(String)
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour*
+  name: GetForwardingBehaviour
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.html#BlazorLiveView_Core_JSInterop_ForwardingRules_MudBlazorForwardingRule_GetForwardingBehaviour_
+  commentId: Overload:BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.MudBlazorForwardingRule.GetForwardingBehaviour
+  nameWithType: MudBlazorForwardingRule.GetForwardingBehaviour
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior
+  name: RuleForwardingBehavior
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.html
+  commentId: T:BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior
+  nameWithType: RuleForwardingBehavior
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.Forward
+  name: Forward
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingRules_RuleForwardingBehavior_Forward
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.Forward
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.Forward
+  nameWithType: RuleForwardingBehavior.Forward
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.None
+  name: None
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingRules_RuleForwardingBehavior_None
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.None
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.None
+  nameWithType: RuleForwardingBehavior.None
+- uid: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.SkipForwarding
+  name: SkipForwarding
+  href: api/BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_ForwardingRules_RuleForwardingBehavior_SkipForwarding
+  commentId: F:BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.SkipForwarding
+  fullName: BlazorLiveView.Core.JSInterop.ForwardingRules.RuleForwardingBehavior.SkipForwarding
+  nameWithType: RuleForwardingBehavior.SkipForwarding
 - uid: BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime
   name: ILiveViewJSRuntime
   href: api/BlazorLiveView.Core.JSInterop.ILiveViewJSRuntime.html
@@ -1295,125 +1493,12 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.JSInterop.LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
   nameWithType: LiveViewJSRuntimeExtensions.InvokeVoidAsyncNoMirror
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule
-  name: MudBlazorForwardingRule
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html
-  commentId: T:BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule
-  nameWithType: MudBlazorForwardingRule
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(System.String)
-  name: GetForwardingBehaviour(string)
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorForwardingRule_GetForwardingBehaviour_System_String_
-  commentId: M:BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(System.String)
-  name.vb: GetForwardingBehaviour(String)
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(string)
-  fullName.vb: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour(String)
-  nameWithType: MudBlazorForwardingRule.GetForwardingBehaviour(string)
-  nameWithType.vb: MudBlazorForwardingRule.GetForwardingBehaviour(String)
-- uid: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour*
-  name: GetForwardingBehaviour
-  href: api/BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.html#BlazorLiveView_Core_JSInterop_MudBlazorForwardingRule_GetForwardingBehaviour_
-  commentId: Overload:BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.JSInterop.MudBlazorForwardingRule.GetForwardingBehaviour
-  nameWithType: MudBlazorForwardingRule.GetForwardingBehaviour
-- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
-  name: RuleForwardingBehavior
-  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html
-  commentId: T:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
-  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior
-  nameWithType: RuleForwardingBehavior
-- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.Forward
-  name: Forward
-  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_Forward
-  commentId: F:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.Forward
-  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.Forward
-  nameWithType: RuleForwardingBehavior.Forward
-- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.None
-  name: None
-  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_None
-  commentId: F:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.None
-  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.None
-  nameWithType: RuleForwardingBehavior.None
-- uid: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.SkipForwarding
-  name: SkipForwarding
-  href: api/BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.html#BlazorLiveView_Core_JSInterop_RuleForwardingBehavior_SkipForwarding
-  commentId: F:BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.SkipForwarding
-  fullName: BlazorLiveView.Core.JSInterop.RuleForwardingBehavior.SkipForwarding
-  nameWithType: RuleForwardingBehavior.SkipForwarding
 - uid: BlazorLiveView.Core.Options
   name: BlazorLiveView.Core.Options
   href: api/BlazorLiveView.Core.Options.html
   commentId: N:BlazorLiveView.Core.Options
   fullName: BlazorLiveView.Core.Options
   nameWithType: BlazorLiveView.Core.Options
-- uid: BlazorLiveView.Core.Options.ForwardingRules
-  name: ForwardingRules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html
-  commentId: T:BlazorLiveView.Core.Options.ForwardingRules
-  fullName: BlazorLiveView.Core.Options.ForwardingRules
-  nameWithType: ForwardingRules
-- uid: BlazorLiveView.Core.Options.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
-  name: ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules__ctor_BlazorLiveView_Core_JSInterop_ForwardingBehavior_System_Collections_Generic_List_BlazorLiveView_Core_JSInterop_IForwardingRule__
-  commentId: M:BlazorLiveView.Core.Options.ForwardingRules.#ctor(BlazorLiveView.Core.JSInterop.ForwardingBehavior,System.Collections.Generic.List{BlazorLiveView.Core.JSInterop.IForwardingRule})
-  name.vb: New(ForwardingBehavior, List(Of IForwardingRule))
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.ForwardingRules(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List<BlazorLiveView.Core.JSInterop.IForwardingRule>)
-  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.New(BlazorLiveView.Core.JSInterop.ForwardingBehavior, System.Collections.Generic.List(Of BlazorLiveView.Core.JSInterop.IForwardingRule))
-  nameWithType: ForwardingRules.ForwardingRules(ForwardingBehavior, List<IForwardingRule>)
-  nameWithType.vb: ForwardingRules.New(ForwardingBehavior, List(Of IForwardingRule))
-- uid: BlazorLiveView.Core.Options.ForwardingRules.#ctor*
-  name: ForwardingRules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules__ctor_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.ForwardingRules
-  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.New
-  nameWithType: ForwardingRules.ForwardingRules
-  nameWithType.vb: ForwardingRules.New
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Default
-  name: Default
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Default
-  commentId: P:BlazorLiveView.Core.Options.ForwardingRules.Default
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Default
-  nameWithType: ForwardingRules.Default
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Default*
-  name: Default
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Default_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.Default
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Default
-  nameWithType: ForwardingRules.Default
-- uid: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(System.String)
-  name: GetForwardingBehavior(string)
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_GetForwardingBehavior_System_String_
-  commentId: M:BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(System.String)
-  name.vb: GetForwardingBehavior(String)
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(string)
-  fullName.vb: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior(String)
-  nameWithType: ForwardingRules.GetForwardingBehavior(string)
-  nameWithType.vb: ForwardingRules.GetForwardingBehavior(String)
-- uid: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior*
-  name: GetForwardingBehavior
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_GetForwardingBehavior_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.GetForwardingBehavior
-  nameWithType: ForwardingRules.GetForwardingBehavior
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Rules
-  name: Rules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Rules
-  commentId: P:BlazorLiveView.Core.Options.ForwardingRules.Rules
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Rules
-  nameWithType: ForwardingRules.Rules
-- uid: BlazorLiveView.Core.Options.ForwardingRules.Rules*
-  name: Rules
-  href: api/BlazorLiveView.Core.Options.ForwardingRules.html#BlazorLiveView_Core_Options_ForwardingRules_Rules_
-  commentId: Overload:BlazorLiveView.Core.Options.ForwardingRules.Rules
-  isSpec: "True"
-  fullName: BlazorLiveView.Core.Options.ForwardingRules.Rules
-  nameWithType: ForwardingRules.Rules
 - uid: BlazorLiveView.Core.Options.LiveViewJSInteropOptions
   name: LiveViewJSInteropOptions
   href: api/BlazorLiveView.Core.Options.LiveViewJSInteropOptions.html
@@ -1510,6 +1595,19 @@ references:
   isSpec: "True"
   fullName: BlazorLiveView.Core.Options.LiveViewOptions.MirrorUri
   nameWithType: LiveViewOptions.MirrorUri
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  name: RequireUserAgreement
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_RequireUserAgreement
+  commentId: P:BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  nameWithType: LiveViewOptions.RequireUserAgreement
+- uid: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement*
+  name: RequireUserAgreement
+  href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_RequireUserAgreement_
+  commentId: Overload:BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  isSpec: "True"
+  fullName: BlazorLiveView.Core.Options.LiveViewOptions.RequireUserAgreement
+  nameWithType: LiveViewOptions.RequireUserAgreement
 - uid: BlazorLiveView.Core.Options.LiveViewOptions.ShowDebugOptions
   name: ShowDebugOptions
   href: api/BlazorLiveView.Core.Options.LiveViewOptions.html#BlazorLiveView_Core_Options_LiveViewOptions_ShowDebugOptions

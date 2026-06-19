@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Struct Position | BlazorLiveView </title>
+      <title>Struct Position&lt;T&gt; | BlazorLiveView </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Struct Position | BlazorLiveView ">
+      <meta name="title" content="Struct Position&lt;T&gt; | BlazorLiveView ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_Components_Tools_Position.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.Components.Tools.Position%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/i123iu/BlazorLiveView/new/main/apiSpec/new?filename=BlazorLiveView_Core_Components_Tools_Position_1.md&amp;value=---%0Auid%3A%20BlazorLiveView.Core.Components.Tools.Position%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="BlazorLiveView.Core.Components.Tools.Position">
+        <article data-uid="BlazorLiveView.Core.Components.Tools.Position`1">
 
 
 
-  <h1 id="BlazorLiveView_Core_Components_Tools_Position" data-uid="BlazorLiveView.Core.Components.Tools.Position" class="text-break">
-Struct Position  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L3"><i class="bi bi-code-slash"></i></a>
+  <h1 id="BlazorLiveView_Core_Components_Tools_Position_1" data-uid="BlazorLiveView.Core.Components.Tools.Position`1" class="text-break">
+Struct Position&lt;T&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -101,11 +101,16 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public struct Position</code></pre>
+    <pre><code class="lang-csharp hljs">public struct Position&lt;T&gt; where T : struct, IAdditionOperators&lt;T, T, T&gt;, ISubtractionOperators&lt;T, T, T&gt;</code></pre>
   </div>
 
 
 
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -142,25 +147,25 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 </h2>
 
 
-  <a id="BlazorLiveView_Core_Components_Tools_Position__ctor_" data-uid="BlazorLiveView.Core.Components.Tools.Position.#ctor*"></a>
+  <a id="BlazorLiveView_Core_Components_Tools_Position_1__ctor_" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.#ctor*"></a>
 
-  <h3 id="BlazorLiveView_Core_Components_Tools_Position__ctor_System_Int32_System_Int32_" data-uid="BlazorLiveView.Core.Components.Tools.Position.#ctor(System.Int32,System.Int32)">
-  Position(int, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L3"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_Components_Tools_Position_1__ctor__0__0_" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.#ctor(`0,`0)">
+  Position(T, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Position(int x, int y)</code></pre>
+    <pre><code class="lang-csharp hljs">public Position(T x, T y)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>x</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dt><code>x</code> <span class="xref">T</span></dt>
     <dd></dd>
-    <dt><code>y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dt><code>y</code> <span class="xref">T</span></dt>
     <dd></dd>
   </dl>
 
@@ -180,16 +185,16 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 
 
 
-  <h3 id="BlazorLiveView_Core_Components_Tools_Position_x" data-uid="BlazorLiveView.Core.Components.Tools.Position.x">
+  <h3 id="BlazorLiveView_Core_Components_Tools_Position_1_x" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.x">
   x
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int x</code></pre>
+    <pre><code class="lang-csharp hljs">public T x</code></pre>
   </div>
 
 
@@ -197,7 +202,7 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dt><span class="xref">T</span></dt>
     <dd></dd>
   </dl>
 
@@ -210,16 +215,16 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 
 
 
-  <h3 id="BlazorLiveView_Core_Components_Tools_Position_y" data-uid="BlazorLiveView.Core.Components.Tools.Position.y">
+  <h3 id="BlazorLiveView_Core_Components_Tools_Position_1_y" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.y">
   y
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int y</code></pre>
+    <pre><code class="lang-csharp hljs">public T y</code></pre>
   </div>
 
 
@@ -227,7 +232,7 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 
   <h4 class="section">Field Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dt><span class="xref">T</span></dt>
     <dd></dd>
   </dl>
 
@@ -243,31 +248,31 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 </h2>
 
 
-  <a id="BlazorLiveView_Core_Components_Tools_Position_op_Addition_" data-uid="BlazorLiveView.Core.Components.Tools.Position.op_Addition*"></a>
+  <a id="BlazorLiveView_Core_Components_Tools_Position_1_op_Addition_" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.op_Addition*"></a>
 
-  <h3 id="BlazorLiveView_Core_Components_Tools_Position_op_Addition_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_" data-uid="BlazorLiveView.Core.Components.Tools.Position.op_Addition(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)">
-  operator +(Position, Position)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_Components_Tools_Position_1_op_Addition_BlazorLiveView_Core_Components_Tools_Position__0__BlazorLiveView_Core_Components_Tools_Position__0__" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.op_Addition(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})">
+  operator +(Position&lt;T&gt;, Position&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Position operator +(Position a, Position b)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Position&lt;T&gt; operator +(Position&lt;T&gt; a, Position&lt;T&gt; b)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>a</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a></dt>
+    <dt><code>a</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;T&gt;</dt>
     <dd></dd>
-    <dt><code>b</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a></dt>
+    <dt><code>b</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;T&gt;</dt>
     <dd></dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;T&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -281,31 +286,31 @@ Struct Position  <a class="header-action link-secondary" title="View source" hre
 
 
 
-  <a id="BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_" data-uid="BlazorLiveView.Core.Components.Tools.Position.op_Subtraction*"></a>
+  <a id="BlazorLiveView_Core_Components_Tools_Position_1_op_Subtraction_" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction*"></a>
 
-  <h3 id="BlazorLiveView_Core_Components_Tools_Position_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position_BlazorLiveView_Core_Components_Tools_Position_" data-uid="BlazorLiveView.Core.Components.Tools.Position.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position,BlazorLiveView.Core.Components.Tools.Position)">
-  operator -(Position, Position)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <h3 id="BlazorLiveView_Core_Components_Tools_Position_1_op_Subtraction_BlazorLiveView_Core_Components_Tools_Position__0__BlazorLiveView_Core_Components_Tools_Position__0__" data-uid="BlazorLiveView.Core.Components.Tools.Position`1.op_Subtraction(BlazorLiveView.Core.Components.Tools.Position{`0},BlazorLiveView.Core.Components.Tools.Position{`0})">
+  operator -(Position&lt;T&gt;, Position&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/i123iu/BlazorLiveView/blob/main/src/BlazorLiveView.Core/Components/Tools/Position.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Position operator -(Position a, Position b)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Position&lt;T&gt; operator -(Position&lt;T&gt; a, Position&lt;T&gt; b)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>a</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a></dt>
+    <dt><code>a</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;T&gt;</dt>
     <dd></dd>
-    <dt><code>b</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a></dt>
+    <dt><code>b</code> <a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;T&gt;</dt>
     <dd></dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position.html">Position</a></dt>
+    <dt><a class="xref" href="BlazorLiveView.Core.Components.Tools.Position-1.html">Position</a>&lt;T&gt;</dt>
     <dd></dd>
   </dl>
 
