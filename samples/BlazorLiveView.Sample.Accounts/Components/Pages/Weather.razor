@@ -1,26 +1,11 @@
 ﻿@page "/weather"
 @using BlazorLiveView.Core.Components
 
-@inject IJSRuntime JS
-
-<script>
-    window.test_function = function(text) {
-        let span = document.getElementById("test_span");
-        span.innerHTML += text;
-    }
-</script>
-
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
-<span id="test_span">ABCD</span>
-
 <p>This component demonstrates showing data.</p>
-
-<LiveViewHideInMirror>
-    This text will not be visible in mirror circuits.
-</LiveViewHideInMirror>
 
 @if (forecasts == null)
 {
@@ -75,15 +60,5 @@ else
         public int TemperatureC { get; set; }
         public string? Summary { get; set; }
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
-
-    private int jsCounter = 0;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        //if (!firstRender)
-        {
-            await JS.InvokeVoidAsync("test_function", jsCounter.ToString());
-            jsCounter++;
-        }
     }
 }

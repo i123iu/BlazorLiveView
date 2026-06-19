@@ -1,69 +1,18 @@
 ﻿@page "/counter"
 @using BlazorLiveView.Core.JSInterop
 
-@inject ILiveViewJSRuntime LiveViewJS
-@inject IJSRuntime JS
-@inject ILogger<Counter> Logger
-
-<script>
-    window.not_mirrored_function = function() {
-        alert("This function is not mirrored, because of mirroring rules.");
-    }
-    window.mirrored_function = function() {
-        alert("This function is mirrored, because of mirroring rules.");
-    }
-    window.idk = function(dotNetRef) {
-        dotNetRef.invokeMethodAsync("CallFromJS", "Hello from JS!");
-    };
-</script>
-
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
-<p role="status" @ref="x">Current count: @currentCount</p>
-
+<p role="status">Current count: @currentCount</p>
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-<br />
-<button class="btn btn-primary" @onclick="CallNotMirroredFunction">Call not_mirrored_function</button>
-<button class="btn btn-primary" @onclick="CallMirroredFunction">Call mirrored_function</button>
-<br />
-<button class="btn btn-primary" @onclick="CallIdk">Call JS function that calls back to .NET</button>
 
 @code {
-    private ElementReference x;
-
     private int currentCount = 0;
 
     private void IncrementCount()
     {
         currentCount++;
-
-        if(currentCount % 5 == 0)
-        {
-            LiveViewJS.InvokeVoidAsync("alert", $"Current count is {currentCount}");
-        }
-    }
-
-    private void CallNotMirroredFunction()
-    {
-        JS.InvokeVoidAsync("not_mirrored_function");
-    }
-
-    private void CallMirroredFunction()
-    {
-        JS.InvokeVoidAsync("mirrored_function");
-    }
-
-    private void CallIdk()
-    {
-        var dotNetRef = DotNetObjectReference.Create(this);
-        JS.InvokeVoidAsync("idk", dotNetRef);
-    }
-
-    [JSInvokable]
-    public void CallFromJS(string message)
-    {
-        Logger.LogInformation("Received message from JS: {Message}", message);
     }
 }

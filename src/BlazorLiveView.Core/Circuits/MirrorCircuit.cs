@@ -1,8 +1,7 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Options;
-using BlazorLiveView.Core.Reflection;
-using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -25,26 +24,28 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
     public bool WindowSizeSyncEnabled { get; private set; } = false;
     public bool ScrollSyncEnabled { get; private set; } = false;
     public bool LaserPointerEnabled { get; private set; } = false;
-    public Position? CursorPosition { get; private set; } = null;
+    public Position<float>? CursorPosition { get; private set; } = null;
 
     public bool IsBlocked => _blockReason != null;
     public MirrorCircuitBlockReason BlockReason => _blockReason
         ?? throw new Exception("Not blocked");
 
-    private readonly ILogger<MirrorCircuit> _logger;
+    private readonly ILogger _logger;
     private readonly IPausedCircuitsTracker _pausedCircuitsTracker;
-    private readonly IOptions<LiveViewJSInteropOptions> _liveViewJSInteropOptions;
+    private readonly LiveViewJSInteropOptions _liveViewJSInteropOptions;
+    private readonly IDotnetToJsArgsTranslator _dotnetToJsArgsTranslator;
 
-    private readonly Channel<JSInvocation> _jsInvocationQueue;
-    private readonly Task? _processingTask;
-    private readonly record struct JSInvocation(
+    private readonly Channel<DotnetToJsInvocationWithTime> _jsInvocationQueue;
+    public readonly record struct DotnetToJsInvocationWithTime(
         string Identifier,
         CancellationToken CancellationToken,
         object?[]? Args,
-        long CreatedAtTicks
+        DateTime CreatedAt
     );
 
-    private readonly CancellationTokenSource _cancellationTokenSource;
+    private readonly Task? _processingTask;
+
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
     private MirrorCircuitBlockReason? _blockReason = null;
 
     public MirrorCircuit(
@@ -54,6 +55,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         DateTime openedAt,
         bool debugView,
         IPausedCircuitsTracker pausedCircuitsTracker,
+        IDotnetToJsArgsTranslator dotnetToJsArgsTranslator,
         ILogger<MirrorCircuit> logger,
         IOptions<LiveViewJSInteropOptions> liveViewJSInteropOptions
     ) : base(circuit, openedAt, logger)
@@ -64,11 +66,11 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         State = state;
         DebugView = debugView;
         _logger = logger;
+        _dotnetToJsArgsTranslator = dotnetToJsArgsTranslator;
         _pausedCircuitsTracker = pausedCircuitsTracker;
-        _liveViewJSInteropOptions = liveViewJSInteropOptions;
-        _cancellationTokenSource = new CancellationTokenSource();
+        _liveViewJSInteropOptions = liveViewJSInteropOptions.Value;
 
-        _jsInvocationQueue = Channel.CreateUnbounded<JSInvocation>(new()
+        _jsInvocationQueue = Channel.CreateUnbounded<DotnetToJsInvocationWithTime>(new()
         {
             SingleReader = true,
             SingleWriter = false
@@ -96,16 +98,17 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
 
     private void Source_JSRuntimeInvoked(
         IUserCircuit userCircuit,
-        string identifier,
-        CancellationToken cancellationToken,
-        object?[]? args
+        DotnetToJsInvocation invocation
     )
     {
         if (_cancellationTokenSource.IsCancellationRequested) return;
         if (DebugView) return;
 
-        _jsInvocationQueue.Writer.TryWrite(new JSInvocation(
-            identifier, cancellationToken, args, DateTime.UtcNow.Ticks
+        _jsInvocationQueue.Writer.TryWrite(new(
+            invocation.Identifier,
+            invocation.CancellationToken,
+            invocation.Args,
+            DateTime.UtcNow
         ));
     }
 
@@ -115,26 +118,6 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         {
             _cancellationTokenSource.Cancel();
         }
-    }
-
-    // Source - https://stackoverflow.com/a/1075059
-    public static bool IsAssignableToGenericType(Type givenType, Type genericType)
-    {
-        var interfaceTypes = givenType.GetInterfaces();
-
-        foreach (var it in interfaceTypes)
-        {
-            if (it.IsGenericType && it.GetGenericTypeDefinition() == genericType)
-                return true;
-        }
-
-        if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType)
-            return true;
-
-        Type? baseType = givenType.BaseType;
-        if (baseType == null) return false;
-
-        return IsAssignableToGenericType(baseType, genericType);
     }
 
     private async Task ProcessInvocationsAsync(CancellationToken cancellationToken)
@@ -150,10 +133,8 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                         invocation.CancellationToken
                     );
 
-                    var elapsed = TimeSpan.FromTicks(
-                        DateTime.UtcNow.Ticks - invocation.CreatedAtTicks
-                    );
-                    var remainingDelay = _liveViewJSInteropOptions.Value
+                    var elapsed = DateTime.UtcNow - invocation.CreatedAt;
+                    var remainingDelay = _liveViewJSInteropOptions
                         .DefaultDelayForInvocationForward
                         - elapsed;
 
@@ -168,7 +149,9 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
                     object?[]? newArgs = null;
                     if (invocation.Args is not null && invocation.Args.Length > 0)
                     {
-                        newArgs = TranslateArgs(invocation.Args, invocation.Identifier);
+                        newArgs = _dotnetToJsArgsTranslator.TranslateArgs(
+                            invocation.Identifier, invocation.Args
+                        );
                     }
 
                     var jsRuntime = Circuit.CircuitHost.JSRuntime;
@@ -194,44 +177,6 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         }
         catch (OperationCanceledException)
         { }
-    }
-
-    private object?[] TranslateArgs(object?[] args, string identifier)
-    {
-        object?[] newArgs = new object?[args.Length];
-
-        for (int i = 0; i < args.Length; i++)
-        {
-            var arg = args[i];
-            if (arg == null) continue;
-
-            if (Types.IDotNetObjectReference.IsInstanceOfType(arg))
-            {
-                if (IsAssignableToGenericType(arg.GetType(), Types.DotNetObjectReferenceOfT))
-                {
-                    // An instance of DotNetObjectReference<T> contains a
-                    // reference to the original JSRuntime object. So a new
-                    // instance must be crated with the same value.
-                    var wrapper = new DotNetObjectReferenceOfTWrapper(arg);
-                    var refValue = wrapper.Value;
-                    var newRef = DotNetObjectReferenceOfTWrapper.Create(refValue);
-                    newArgs[i] = newRef.Inner;
-                }
-                else
-                {
-                    _logger.LogWarning(
-                        "When calling {Identifier}: expected argument of type {ArgType} to be of type DotNetObjectReference<T> when implements interface IDotNetObjectReference",
-                        identifier, arg.GetType().Name
-                    );
-                }
-            }
-            else
-            {
-                newArgs[i] = arg;
-            }
-        }
-
-        return newArgs;
     }
 
     public void SetBlocked(MirrorCircuitBlockReason blockReason)
@@ -267,7 +212,7 @@ internal sealed class MirrorCircuit : CircuitBase, IMirrorCircuit
         PointerSyncChanged?.Invoke(this);
     }
 
-    public void NotifyMirrorCursorChanged(Position? position)
+    public void NotifyMirrorCursorChanged(Position<float>? position)
     {
         if (position != null && CursorPosition != null)
         {

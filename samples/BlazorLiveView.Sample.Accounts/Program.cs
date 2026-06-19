@@ -2,6 +2,7 @@ using BlazorLiveView.Core.Extensions;
 using BlazorLiveView.Sample.Accounts.Components;
 using BlazorLiveView.Sample.Accounts.Components.Account;
 using BlazorLiveView.Sample.Accounts.Data;
+using BlazorLiveView.Sample.Common;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,15 @@ namespace BlazorLiveView.Sample.Accounts
                 {
                     options.ShowDebugOptions = false;
                 })
-                .InterceptIJSRuntime();
+                .InterceptIJSRuntime(options =>
+                {
+                    options.DotnetToJsForwardingRules.Rules.Add(
+                        new DebugDotnetToJsForwardingRule()
+                    );
+                    options.DotnetToJsForwardingRules.Rules.Add(
+                        new DebugDotnetToJsForwardingRule()
+                    );
+                });
 
             // Add services to the container.
             builder.Services.AddCascadingAuthenticationState();

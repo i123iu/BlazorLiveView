@@ -72,7 +72,7 @@ Rules are evaluated in the order they were added. If no rule matches, the defaul
 
 ### Calling .NET from JavaScript
 
-Calling .NET methods from JavaScript is usually done via `DotNetObjectReference`. To specify which `invokeMethodAsync` calls on this instance should be allowed, you can use the `JsToDotnetForwardingRules`. By default, all calls from .NET to JS are disallowed as they can cause unexpected behavior when invoking methods from the original user circuit. For example, a method on a component could be called once by the user and then "unexpectedly" again by the mirrored invocation.
+Calling .NET methods from JavaScript is usually done via `DotNetObjectReference`. To specify which `invokeMethodAsync` calls on this instance should be allowed, you can use the `JsToDotnetForwardingRules`. By default, all calls from JS to .NET are disallowed as they can cause unexpected behavior when invoking methods from the original user circuit. For example, a method on a component could be called once by the user and then "unexpectedly" again by the mirrored invocation.
 
 ```csharp
 builder.Services.AddRazorComponents()

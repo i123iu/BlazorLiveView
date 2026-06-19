@@ -77,5 +77,11 @@ public sealed class LiveViewOptions
     /// </summary>
     public int ToolsUpdateIntervalMs { get; set; } = 50;
 
+    /// <summary>
+    /// Whether to show a pop-up window that asks the user for permission to be
+    /// viewed.
+    /// </summary>
+    public bool RequireUserAgreement { get; set; } = true;
+
     public bool ShowDebugOptions { get; set; } = false;
 }

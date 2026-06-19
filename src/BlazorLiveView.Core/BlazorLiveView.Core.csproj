@@ -30,8 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-
 		<PackageReference Include="Lib.Harmony" />
 		<PackageReference Include="Scrutor" />
 		<PackageReference Include="Yarp.ReverseProxy" />

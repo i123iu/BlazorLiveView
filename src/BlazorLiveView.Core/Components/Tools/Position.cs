@@ -1,17 +1,20 @@
-﻿namespace BlazorLiveView.Core.Components.Tools;
+﻿using System.Numerics;
 
-public struct Position(int x, int y)
+namespace BlazorLiveView.Core.Components.Tools;
+
+public struct Position<T>(T x, T y)
+    where T : struct, IAdditionOperators<T, T, T>, ISubtractionOperators<T, T, T>
 {
-    public int x = x;
-    public int y = y;
+    public T x = x;
+    public T y = y;
 
-    public static Position operator +(Position a, Position b)
+    public static Position<T> operator +(Position<T> a, Position<T> b)
     {
-        return new Position(a.x + b.x, a.y + b.y);
+        return new Position<T>(a.x + b.x, a.y + b.y);
     }
 
-    public static Position operator -(Position a, Position b)
+    public static Position<T> operator -(Position<T> a, Position<T> b)
     {
-        return new Position(a.x - b.x, a.y - b.y);
+        return new Position<T>(a.x - b.x, a.y - b.y);
     }
 }

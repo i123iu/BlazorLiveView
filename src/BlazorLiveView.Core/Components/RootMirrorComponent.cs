@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 namespace BlazorLiveView.Core.Components;
 
 /// <summary>
-/// Root web component for mirror circuits. 
+/// Root web component for mirror circuits.
 /// Contains one child <see cref="MirrorComponent"/>. 
 /// </summary>
 internal sealed class RootMirrorComponent(
@@ -42,14 +42,22 @@ internal sealed class RootMirrorComponent(
 
         mirrorCircuit.MirrorCircuitBlocked += OnMirrorCircuitBlocked;
         mirrorCircuit.SourceCircuit.CircuitStatusChanged += OnSourceCircuitStatusChanged;
+        mirrorCircuit.SourceCircuit.UserPermissionChanged += OnSourceCircuitPermissionChanged;
+        if (mirrorCircuit.SourceCircuit.MirrorPermission is null)
+        {
+            // Not allowed nor denied
+            mirrorCircuit.SourceCircuit.AskUserForPermission();
+        }
     }
 
     public void Dispose()
     {
         if (_parameters is not null)
         {
-            _parameters.Value.mirrorCircuit.MirrorCircuitBlocked -= OnMirrorCircuitBlocked;
-            _parameters.Value.mirrorCircuit.SourceCircuit.CircuitStatusChanged -= OnSourceCircuitStatusChanged;
+            var mirrorCircuit = _parameters.Value.mirrorCircuit;
+            mirrorCircuit.MirrorCircuitBlocked -= OnMirrorCircuitBlocked;
+            mirrorCircuit.SourceCircuit.CircuitStatusChanged -= OnSourceCircuitStatusChanged;
+            mirrorCircuit.SourceCircuit.UserPermissionChanged -= OnSourceCircuitPermissionChanged;
             _parameters = null;
         }
     }
@@ -65,6 +73,16 @@ internal sealed class RootMirrorComponent(
     }
 
     private void OnSourceCircuitStatusChanged(ICircuit circuit)
+    {
+        if (_parameters is null)
+            throw new InvalidOperationException();
+        if (_parameters.Value.mirrorCircuit.SourceCircuit.Id != circuit.Id)
+            throw new InvalidOperationException();
+
+        _renderHandle.Dispatcher.InvokeAsync(Render);
+    }
+
+    private void OnSourceCircuitPermissionChanged(ICircuit circuit)
     {
         if (_parameters is null)
             throw new InvalidOperationException();
@@ -100,6 +118,19 @@ internal sealed class RootMirrorComponent(
             var blockReason = parameters.mirrorCircuit.BlockReason;
             RenderMessage(blockReason.message);
             return;
+        }
+
+        var mirrorPermission = parameters.mirrorCircuit.SourceCircuit.MirrorPermission;
+        switch (mirrorPermission)
+        {
+            case null:
+                RenderMessage("Waiting for mirror permission.");
+                return;
+            case IUserCircuit.MirrorPermissionType.Allow:
+                break;
+            case IUserCircuit.MirrorPermissionType.Deny:
+                RenderMessage("Mirror permission denied.");
+                return;
         }
 
         switch (parameters.mirrorCircuit.SourceCircuit.CircuitStatus)

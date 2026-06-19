@@ -6,11 +6,17 @@
 @inject ILiveViewMirrorUriBuilder MirrorUriBuilder
 @inject ICircuitTracker CircuitTracker
 
+@{
+    var widthValue = IframeSize is null ? "100%" : IframeSize.Value.x + "px";
+    var heightValue = IframeSize is null ? "100%" : IframeSize.Value.y + "px";
+}
+
 <iframe class="liveview-screen-iframe"
         @key="@_state"
         src="@MirrorUriBuilder.GetPathAndQuery(MirrorUri)"
-        width="@(IframeSize is null ? "100%" : IframeSize.Value.x + "px")"
-        height="@(IframeSize is null ? "100%" : IframeSize.Value.y + "px")" />
+        width="@(widthValue)"
+        height="@(heightValue)"
+        style="width: @widthValue !important; height: @(heightValue) !important;" />
 
 @code {
     [Parameter]
@@ -18,7 +24,7 @@
     public string SourceCircuitId { get; set; } = default!;
 
     [Parameter]
-    public Position? WindowSize { get; set; } = null;
+    public Position<int>? WindowSize { get; set; } = null;
 
     [Parameter]
     public bool DebugView { get; set; } = false;
@@ -27,8 +33,8 @@
     public EventCallback<IMirrorCircuit?> MirrorCircuitChanged { get; set; }
 
     private MirrorUri MirrorUri => new(SourceCircuitId, _state, DebugView);
-    private Position? IframeSize => WindowSize is null ? null
-    : (WindowSize.Value + new Position(4, 4)); // For red border width
+    private Position<int>? IframeSize => WindowSize is null ? null
+    : (WindowSize.Value + new Position<int>(4, 4)); // For red border width
 
     public IMirrorCircuit? MirrorCircuit { get; private set; }
 

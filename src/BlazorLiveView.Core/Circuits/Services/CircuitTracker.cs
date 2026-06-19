@@ -1,4 +1,5 @@
-﻿using BlazorLiveView.Core.Options;
+﻿using BlazorLiveView.Core.JSInterop.DotnetToJs;
+using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Server.Circuits;
@@ -19,13 +20,19 @@ internal sealed class CircuitTracker(
     public event ICircuitTracker.CircuitOpenedHandler? OnCircuitOpened;
     public event ICircuitTracker.CircuitClosedHandler? OnCircuitClosed;
 
-    private readonly ILogger<CircuitTracker> _logger = logger;
+    private readonly ILogger _logger = logger;
     private readonly IServiceProvider _serviceProvider = serviceProvider;
     private readonly ILoggerFactory _loggerFactory = loggerFactory;
 
     private readonly ConcurrentDictionary<string, ICircuit> _circuitsById = new();
     private readonly ConcurrentDictionary<Renderer, ICircuit> _circuitsByRenderer = new();
     private readonly ConcurrentDictionary<JSRuntime, ICircuit> _circuitsByJsRuntime = new();
+
+    /// <summary>
+    /// Clients that have sent a HTTP request to the mirror endpoint, but are not yet opened. 
+    /// </summary>
+    private readonly ConcurrentDictionary<string, PendingMirrorCircuit>
+        _pendingMirrorCircuitsById = new();
 
     private readonly struct PendingMirrorCircuit(
         IUserCircuit source,
@@ -37,11 +44,6 @@ internal sealed class CircuitTracker(
         public readonly Guid? state = state;
         public readonly bool debugView = debugView;
     }
-
-    /// <summary>
-    /// Clients that have sent a HTTP request to the mirror endpoint, but are not yet opened. 
-    /// </summary>
-    private readonly ConcurrentDictionary<string, PendingMirrorCircuit> _pendingMirrorCircuitsById = new();
 
     public ICircuit? GetCircuit(string circuitId)
     {
@@ -123,6 +125,7 @@ internal sealed class CircuitTracker(
                 DateTime.UtcNow,
                 pending.debugView,
                 _serviceProvider.GetRequiredService<IPausedCircuitsTracker>(),
+                _serviceProvider.GetRequiredService<IDotnetToJsArgsTranslator>(),
                 _loggerFactory.CreateLogger<MirrorCircuit>(),
                 _serviceProvider.GetRequiredService<IOptions<LiveViewJSInteropOptions>>()
             );
@@ -139,6 +142,7 @@ internal sealed class CircuitTracker(
                 blazorCircuit,
                 DateTime.UtcNow,
                 _serviceProvider.GetRequiredService<IPausedCircuitsTracker>(),
+                _serviceProvider.GetRequiredService<IOptions<LiveViewOptions>>(),
                 _loggerFactory.CreateLogger<UserCircuit>()
             );
         }
@@ -198,10 +202,9 @@ internal sealed class CircuitTracker(
 
         if (circuit.CircuitStatus == CircuitStatus.Down)
         {
-            // Blazor can call CircuitDown twice when closing
+            // Blazor sometimes calls CircuitDown twice when closing
             return;
         }
-
 
         if (_logger.IsEnabled(LogLevel.Debug))
         {

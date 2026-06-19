@@ -48,11 +48,12 @@ public interface IMirrorCircuit : ICircuit
     bool WindowSizeSyncEnabled { get; }
     bool ScrollSyncEnabled { get; }
     bool LaserPointerEnabled { get; }
-    Position? CursorPosition { get; }
+    Position<float>? CursorPosition { get; }
 
     internal void SetBlocked(MirrorCircuitBlockReason blockReason);
+
     public void NotifyWindowSizeSyncChanged(bool enabled);
     public void NotifyScrollSyncChanged(bool enabled);
-    internal void NotifyMirrorCursorChanged(Position? position);
+    internal void NotifyMirrorCursorChanged(Position<float>? position);
     public void NotifyLaserPointerEnabledChanged(bool enabled);
 }

@@ -1,5 +1,6 @@
 ﻿using BlazorLiveView.Core.Circuits.Services;
 using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Patching;
 using BlazorLiveView.Core.Reflection;
@@ -36,6 +37,7 @@ public static class LiveViewExtensions
             .AddSingleton<IRenderTreeTranslatorFactory, RenderTreeTranslatorFactory>()
             .AddSingleton<ILiveViewMirrorUriBuilder, LiveViewMirrorUriBuilder>()
             .AddSingleton<IPatchExceptionHandler, PatchExceptionHandler>()
+            .AddSingleton<IDotnetToJsArgsTranslator, DotnetToJsArgsTranslator>()
             .AddScoped<CircuitHandler, CurrentCircuitHandler>()
             .AddScoped<ICurrentCircuit, CurrentCircuit>()
             .AddScoped<ILiveViewJSRuntime>(sp =>

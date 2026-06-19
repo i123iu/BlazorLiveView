@@ -1,11 +1,11 @@
-﻿using BlazorLiveView.Core.Components;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace BlazorLiveView.Core.Attributes;
 
 /// <summary>
-/// Marks a Blazor component (IComponent) to be hidden (removed) when rendering
-/// inside a mirror circuit. Also see <seealso cref="LiveViewHideInMirror"/>.
+/// Marks a Blazor component (<see cref="IComponent"/>) to be hidden (removed)
+/// when being translated to a mirror circuit. Can be used to hide sensitive
+/// information.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 public class LiveViewHideInMirrorAttribute : Attribute

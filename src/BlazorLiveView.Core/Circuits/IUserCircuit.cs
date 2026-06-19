@@ -1,4 +1,5 @@
 ﻿using BlazorLiveView.Core.Components.Tools;
+using BlazorLiveView.Core.JSInterop.DotnetToJs;
 using System.Security.Claims;
 
 namespace BlazorLiveView.Core.Circuits;
@@ -9,38 +10,45 @@ namespace BlazorLiveView.Core.Circuits;
 /// </summary>
 public interface IUserCircuit : ICircuit
 {
-    public delegate void UriChangedHandler(IUserCircuit circuit);
-    event UriChangedHandler? UriChanged;
+    public delegate void UserCircuitActionHandler(
+        IUserCircuit circuit
+    );
+    public delegate void ComponentRerenderedHandler(
+        IUserCircuit circuit, int componentId
+    );
+    public delegate void JSRuntimeInvokedHandler(
+        IUserCircuit circuit, DotnetToJsInvocation invocation
+    );
+    public delegate void MirrorCircuitAddedHandler(
+        IUserCircuit circuit, IMirrorCircuit mirrorCircuit
+    );
+    public delegate void MirrorCircuitRemovedHandler(
+        IUserCircuit circuit, IMirrorCircuit mirrorCircuit
+    );
+    public delegate void AnyMirrorCircuitCursorPositionChangedHandler(
+        IUserCircuit circuit, IMirrorCircuit mirrorCircuit
+    );
 
-    public delegate void AuthenticationStateChangedHandler(IUserCircuit circuit);
-    event AuthenticationStateChangedHandler? AuthenticationStateChanged;
-
-    public delegate void ComponentRerenderedHandler(IUserCircuit circuit, int componentId);
+    public event UserCircuitActionHandler? UriChanged;
+    public event UserCircuitActionHandler? AuthenticationStateChanged;
     internal event ComponentRerenderedHandler? ComponentRerendered;
-
-    public delegate void SessionIdAssignedHandler(IUserCircuit circuit);
-    public event SessionIdAssignedHandler? SessionIdAssigned;
-
-    public delegate void JSRuntimeInvokedHandler(IUserCircuit circuit, string identifier, CancellationToken cancellationToken, object?[]? args);
+    public event UserCircuitActionHandler? SessionIdAssigned;
     internal event JSRuntimeInvokedHandler? JSRuntimeInvoked;
-
-    public delegate void WindowResizedHandler(IUserCircuit circuit);
-    event WindowResizedHandler? WindowResized;
-
-    public delegate void WindowScrolledHandler(IUserCircuit circuit);
-    event WindowScrolledHandler? WindowScrolled;
-
-    public delegate void UserCursorChangedHandler(IUserCircuit circuit);
-    event WindowScrolledHandler? UserCursorChanged;
-
-    public delegate void MirrorCircuitAddedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
+    public event UserCircuitActionHandler? WindowResized;
+    internal event UserCircuitActionHandler? WindowScrolled;
+    internal event UserCircuitActionHandler? UserCursorChanged;
     internal event MirrorCircuitAddedHandler? MirrorCircuitAdded;
-
-    public delegate void MirrorCircuitRemovedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
     internal event MirrorCircuitRemovedHandler? MirrorCircuitRemoved;
+    internal event AnyMirrorCircuitCursorPositionChangedHandler?
+        AnyMirrorCircuitCursorPositionChanged;
+    internal event UserCircuitActionHandler? UserPermissionChanged;
+    internal event UserCircuitActionHandler? ShowUserPermissionRequest;
 
-    public delegate void AnyMirrorCircuitCursorPositionChangedHandler(IUserCircuit circuit, IMirrorCircuit mirrorCircuit);
-    internal event AnyMirrorCircuitCursorPositionChangedHandler? AnyMirrorCircuitCursorPositionChanged;
+    public enum MirrorPermissionType
+    {
+        Allow,
+        Deny,
+    }
 
     /// <summary>
     /// Mirror circuits that are currently viewing this user circuit.
@@ -56,9 +64,11 @@ public interface IUserCircuit : ICircuit
 
     string Uri { get; }
     ClaimsPrincipal User { get; }
-    Position? WindowSize { get; }
-    Position? ScrollPosition { get; }
-    Position? UserCursorPosition { get; }
+    Position<int>? WindowSize { get; }
+    Position<float>? ScrollPosition { get; }
+    Position<float>? UserCursorPosition { get; }
+
+    MirrorPermissionType? MirrorPermission { get; }
 
     /// <summary>
     /// Finishes when a mirror circuit that wants to mirror this circuit
@@ -74,8 +84,11 @@ public interface IUserCircuit : ICircuit
     internal void NotifyMirrorCircuitRemoved(IMirrorCircuit mirrorCircuit);
     internal void NotifyUriChanged();
     internal void NotifyComponentRerendered(int componentId);
-    internal void NotifyJSRuntimeInvoked(string identifier, CancellationToken cancellationToken, object?[]? args);
-    internal void NotifyWindowResized(Position size);
-    internal void NotifyWindowScrolled(Position scroll);
-    internal void NotifyUserCursorChanged(Position? position);
+    internal void NotifyJSRuntimeInvoked(DotnetToJsInvocation invocation);
+    internal void NotifyWindowResized(Position<int> size);
+    internal void NotifyWindowScrolled(Position<float> scroll);
+    internal void NotifyUserCursorChanged(Position<float>? position);
+
+    void AskUserForPermission();
+    internal void NotifyUserPermissionGiven(MirrorPermissionType permission);
 }

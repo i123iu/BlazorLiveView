@@ -1,4 +1,4 @@
-﻿namespace BlazorLiveView.Core.JSInterop;
+﻿namespace BlazorLiveView.Core.JSInterop.ForwardingRules;
 
 /// <summary>
 /// A forwarding rule that matches an identifier exactly by string comparison.
@@ -16,16 +16,5 @@ public class ExactForwardingRule(
         return Identifier == identifier
             ? BehaviourOnMatch.ToRuleForwardingBehavior()
             : RuleForwardingBehavior.None;
-    }
-}
-
-public class MudBlazorForwardingRule : IForwardingRule
-{
-    public RuleForwardingBehavior GetForwardingBehaviour(string identifier)
-    {
-        // TODO: A better way to identify MudBlazor JS functions.
-        if (identifier.StartsWith("mud"))
-            return RuleForwardingBehavior.SkipForwarding;
-        return RuleForwardingBehavior.None;
     }
 }

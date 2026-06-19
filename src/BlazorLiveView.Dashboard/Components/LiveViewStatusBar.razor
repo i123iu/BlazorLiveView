@@ -70,7 +70,7 @@
 
     <div class="status-bar-item tools">
         <button class="tool-button @(IsSyncWindowSizeActive ? "tool-active" : "tool-inactive")"
-                @onclick="OnSyncWindowSizeClicked"
+                @onclick="ToggleWindowSizeSync"
                 title="Sync window size">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -78,7 +78,7 @@
             </svg>
         </button>
         <button class="tool-button @(IsSyncScrollPositionActive ? "tool-active" : "tool-inactive")"
-                @onclick="OnSyncScrollPositionClicked"
+                @onclick="ToggleScrollSync"
                 disabled="@(!IsSyncWindowSizeActive)"
                 title="Sync scroll position (also shows the user's cursor)">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
@@ -89,7 +89,7 @@
             </svg>
         </button>
         <button class="tool-button @(IsPointerActive ? "tool-active" : "tool-inactive")"
-                @onclick="OnPointerClicked"
+                @onclick="ToggleLaserPointer"
                 disabled="@(!IsSyncScrollPositionActive)"
                 title="Show your cursor to the user">
             <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor">
@@ -139,21 +139,57 @@
         SelectedCircuitIdChanged.InvokeAsync(SelectedCircuitId);
     }
 
-    private async Task OnSyncWindowSizeClicked()
+    private async Task ToggleWindowSizeSync()
     {
-        IsSyncWindowSizeActive = !IsSyncWindowSizeActive;
+        if (IsSyncWindowSizeActive)
+        {
+            // Turn off
+            if (IsSyncScrollPositionActive)
+                await ToggleScrollSync();
+            IsSyncWindowSizeActive = false;
+        }
+        else
+        {
+            // Turn on
+            IsSyncWindowSizeActive = true;
+        }
+
         await IsSyncWindowSizeActiveChanged.InvokeAsync(IsSyncWindowSizeActive);
     }
 
-    private async Task OnSyncScrollPositionClicked()
+    private async Task ToggleScrollSync()
     {
-        IsSyncScrollPositionActive = !IsSyncScrollPositionActive;
+        if (IsSyncScrollPositionActive)
+        {
+            // Turn off
+            if (IsPointerActive)
+                await ToggleLaserPointer();
+            IsSyncScrollPositionActive = false;
+        }
+        else
+        {
+            // Turn on
+            IsSyncScrollPositionActive = true;
+        }
+
         await IsSyncScrollPositionActiveChanged.InvokeAsync(IsSyncScrollPositionActive);
     }
 
-    private async Task OnPointerClicked()
+    private async Task ToggleLaserPointer()
     {
-        IsPointerActive = !IsPointerActive;
+        if (IsPointerActive)
+        {
+            // Turn off
+            IsPointerActive = false;
+        }
+        else
+        {
+            // Turn on
+            if (!IsSyncWindowSizeActive) return;
+            if (!IsSyncScrollPositionActive) return;
+            IsPointerActive = true;
+        }
+
         await IsPointerActiveChanged.InvokeAsync(IsPointerActive);
     }
 }

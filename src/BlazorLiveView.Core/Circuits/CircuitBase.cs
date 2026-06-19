@@ -16,9 +16,8 @@ internal abstract class CircuitBase(
     private CircuitStatus _circuitStatus = CircuitStatus.Open;
 
     protected CircuitWrapper Circuit { get; } = new(circuit);
-
-    public string Id { get; } = circuit.Id;
-    public DateTime OpenedAt { get; set; } = openedAt;
+    public string Id { get; private init; } = circuit.Id;
+    public DateTime OpenedAt { get; protected set; } = openedAt;
     public CircuitStatus CircuitStatus => _circuitStatus;
 
     public virtual void Dispose()
@@ -84,14 +83,16 @@ internal abstract class CircuitBase(
     private void InvalidStatusChange(CircuitStatus newStatus)
     {
         logger.LogWarning(
-            "Tried to change circuit's state state changed from {Old} to {New} (id={Id}) ",
+            "Cannot change circuit state changed " +
+            "from {Old} to {New} (id={Id})",
             _circuitStatus, newStatus, Id
         );
     }
 
     public ComponentState? GetOptionalComponentState(int componentId)
     {
-        return Circuit.CircuitHost.Renderer.GetOptionalComponentState(componentId);
+        return Circuit.CircuitHost.Renderer
+            .GetOptionalComponentState(componentId);
     }
 
     public virtual void NotifyLoaded()

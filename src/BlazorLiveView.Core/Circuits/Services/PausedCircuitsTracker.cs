@@ -7,22 +7,21 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
     private const long TIMEOUT_MS = 10_000;
 
     private readonly ICircuitTracker _circuitTracker;
-    private readonly ILogger<PausedCircuitsTracker> _logger;
+    private readonly ILogger _logger;
 
     private readonly Lock _lock = new();
 
     /// <summary>
-    /// Session IDs of circuits whose next circuit will be paused.
-    /// Access only with _lock.
+    /// Access only with <see cref="_lock"/>.
     /// </summary>
-    private readonly Dictionary<Guid, PausedCircuitReference> _usersToBePaused = new();
+    private readonly Dictionary<Guid, PausedSessionReference>
+        _sessionsToBePaused = new();
 
     /// <summary>
-    /// 
-    /// Access only with _lock.
+    /// Access only with <see cref="_lock"/>.
     /// </summary>
-    private readonly Dictionary<IUserCircuit, TaskCompletionSource> _pausedCircuits
-        = new();
+    private readonly Dictionary<IUserCircuit, TaskCompletionSource>
+        _pausedCircuits = new();
 
     public PausedCircuitsTracker(
         ICircuitTracker circuitTracker,
@@ -86,7 +85,7 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         }
     }
 
-    public PausedCircuitReference? MarkPaused(Guid circuitSessionId)
+    public PausedSessionReference? MarkPaused(Guid circuitSessionId)
     {
         lock (_lock)
         {
@@ -98,9 +97,9 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
                 );
             }
 
-            PausedCircuitReference reference = new(circuitSessionId);
+            PausedSessionReference reference = new(circuitSessionId);
             reference.Unpaused += PausedCircuitReference_UnpauseUser;
-            if (_usersToBePaused.TryAdd(circuitSessionId, reference))
+            if (_sessionsToBePaused.TryAdd(circuitSessionId, reference))
             {
                 return reference;
             }
@@ -109,7 +108,7 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
     }
 
     private void PausedCircuitReference_UnpauseUser(
-        PausedCircuitReference reference
+        PausedSessionReference reference
     )
     {
         lock (_lock)
@@ -122,7 +121,7 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
                 );
             }
             reference.Unpaused -= PausedCircuitReference_UnpauseUser;
-            _usersToBePaused.Remove(reference.circuitSessionId);
+            _sessionsToBePaused.Remove(reference.circuitSessionId);
         }
     }
 
@@ -142,16 +141,16 @@ internal class PausedCircuitsTracker : IPausedCircuitsTracker, IDisposable
         var sessionId = waitingCircuit.SessionId.Value;
 
         TaskCompletionSource tcs;
-        PausedCircuitReference reference;
+        PausedSessionReference reference;
         lock (_lock)
         {
-            if (!_usersToBePaused.Remove(sessionId, out reference!))
+            if (!_sessionsToBePaused.Remove(sessionId, out reference!))
             {
-                // This user is not paused
+                // This circuit not should be paused
                 return;
             }
 
-            // Pause this user
+            // Pause this circuit
 
             tcs = new();
             if (!_pausedCircuits.TryAdd(waitingCircuit, tcs))

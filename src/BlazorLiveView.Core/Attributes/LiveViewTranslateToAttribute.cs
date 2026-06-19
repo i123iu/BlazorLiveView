@@ -2,12 +2,17 @@
 
 namespace BlazorLiveView.Core.Attributes;
 
+/// <summary>
+/// Changes the target type of a Blazor component (<see cref="IComponent"/>)
+/// when being translated to a mirror circuit. The target will have its logic
+/// (code) run on the mirror cirucit.
+/// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 internal class LiveViewTranslateToAttribute(
     Type targetComponent
 ) : Attribute
 {
-    private Type? _targetComponent = targetComponent;
+    private readonly Type? _targetComponent = targetComponent;
 
     public static Type? GetTranslationTarget(Type componentType)
     {

@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\BlazorLiveView\BlazorLiveView.csproj" />
+		<ProjectReference Include="..\BlazorLiveView.Sample.Common\BlazorLiveView.Sample.Common.csproj" />
 		
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />

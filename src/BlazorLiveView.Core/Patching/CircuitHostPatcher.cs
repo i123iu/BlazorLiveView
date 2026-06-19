@@ -1,12 +1,13 @@
 ﻿using BlazorLiveView.Core.Circuits;
 using BlazorLiveView.Core.Circuits.Services;
-using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Core.JSInterop.ForwardingRules;
 using BlazorLiveView.Core.Options;
 using BlazorLiveView.Core.Reflection;
 using BlazorLiveView.Core.Reflection.Wrappers;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorLiveView.Core.Patching;
 
@@ -34,6 +35,7 @@ internal sealed class CircuitHostPatcher : IPatcher
         _patchExceptionHandler = patchExceptionHandler;
     }
 
+    [ExcludeFromCodeCoverage]
     public void Patch(Harmony harmony)
     {
         harmony.Patch(

@@ -1,7 +1,6 @@
 using BlazorLiveView.Core.Extensions;
-using BlazorLiveView.Core.JSInterop;
+using BlazorLiveView.Sample.Common;
 using BlazorLiveView.Sample.Components;
-using BlazorLiveView.Sample.Components.Pages;
 
 namespace BlazorLiveView.Sample;
 
@@ -19,18 +18,17 @@ public class Program
             })
             .AddLiveView(options =>
             {
-                options.ShowDebugOptions = true;
+                options.ShowDebugOptions = false;
+                options.RequireUserAgreement = false;
             })
             .InterceptIJSRuntime(options =>
             {
-                options.DotnetToJsForwardingRules.Default = ForwardingBehavior.Forward;
-                options.DotnetToJsForwardingRules.Rules.Add(new ExactForwardingRule(
-                    "not_mirrored_function", ForwardingBehavior.SkipForwarding
-                ));
-
-                options.JsToDotnetForwardingRules.Rules.Add(new ExactForwardingRule(
-                    nameof(Counter.CallFromJS), ForwardingBehavior.Forward
-                ));
+                options.DotnetToJsForwardingRules.Rules.Add(
+                    new DebugDotnetToJsForwardingRule()
+                );
+                options.DotnetToJsForwardingRules.Rules.Add(
+                    new DebugDotnetToJsForwardingRule()
+                );
             });
 
         var app = builder.Build();

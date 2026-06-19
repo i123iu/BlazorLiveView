@@ -2,6 +2,11 @@
 
 namespace BlazorLiveView.Core.Circuits.Services;
 
+/// <summary>
+/// Used to mark sessions (circuits that track their web browser tab) to be
+/// paused the next time they are reloaded (refreshed). This can allow mirror
+/// circuit to fully load when they are being created.
+/// </summary>
 public interface IPausedCircuitsTracker
 {
     /// <summary>
@@ -9,7 +14,7 @@ public interface IPausedCircuitsTracker
     /// reloaded (refreshed). It will be resumed when a mirror circuit loads
     /// and resumes it by calling <see cref="MirrorCircuitLoaded"/>.
     /// </summary>
-    PausedCircuitReference? MarkPaused(Guid circuitSessionId);
+    PausedSessionReference? MarkPaused(Guid circuitSessionId);
 
     /// <summary>
     /// All user circuits (their <see cref="LiveViewWaitOnMirror"/> components)
@@ -23,11 +28,11 @@ public interface IPausedCircuitsTracker
     void MirrorCircuitLoaded(IMirrorCircuit mirrorCircuit);
 }
 
-public class PausedCircuitReference(
+public class PausedSessionReference(
     Guid circuitSessionId
 )
 {
-    public delegate void StatusChangedHandler(PausedCircuitReference reference);
+    public delegate void StatusChangedHandler(PausedSessionReference reference);
     public event StatusChangedHandler? Unpaused;
 
     public readonly Guid circuitSessionId = circuitSessionId;
@@ -46,7 +51,7 @@ public class PausedCircuitReference(
     public override bool Equals(object? obj)
     {
         if (obj == null) return false;
-        if (obj is not PausedCircuitReference other) return false;
+        if (obj is not PausedSessionReference other) return false;
         return circuitSessionId == other.circuitSessionId;
     }
 }

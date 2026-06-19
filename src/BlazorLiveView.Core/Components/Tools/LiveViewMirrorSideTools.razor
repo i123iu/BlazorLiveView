@@ -92,7 +92,16 @@
 
     private void SourceCircuit_WindowScrolled(IUserCircuit source)
     {
-        _ = Scroll(source);
+        try
+        {
+            _ = Scroll(source);
+        }
+        catch(Exception e)
+        {
+            logger.LogError(e,
+                "Error scrolling when user circuit scrolled"
+            );
+        }
     }
 
     private ValueTask Scroll(IUserCircuit source)
@@ -122,7 +131,7 @@
         }
     }
 
-    private void OnCursorMoved(Position pos)
+    private void OnCursorMoved(Position<float> pos)
     {
         _mirrorCircuit.NotifyMirrorCursorChanged(pos);
     }
